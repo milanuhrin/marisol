@@ -1,0 +1,12 @@
+{
+  "watch": ["server.js", "api", "routes"],
+  "ignore": ["src/", "public/", "node_modules/", "*.log"],
+  "ext": "js,json",
+  "exec": "node server.js",
+  "env": {
+    "NODE_ENV": "development",
+    "PORT": "5001"
+  },
+  "delay": "2000",
+  "verbose": true
+}
