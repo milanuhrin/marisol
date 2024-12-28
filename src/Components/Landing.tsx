@@ -37,8 +37,6 @@ export const Landing = (props: Props) => {
       }
     }
   `);
-  // eslint-disable-next-line no-console
-  console.log('Debugging data:', data);
 
   const images = [
     getImage(data.image1),
@@ -47,22 +45,14 @@ export const Landing = (props: Props) => {
     getImage(data.image4),
   ].filter(Boolean);
 
-  // eslint-disable-next-line no-console
-  console.log('Processed images array:', images);
-
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Image rotation logic
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => {
-        const newIndex = (prevIndex + 1) % images.length;
-        // eslint-disable-next-line no-console
-        console.log('Switching to image index:', newIndex);
-        return newIndex;
-      });
-    }, 8000); // Change image every 8 seconds
-  
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 7000); // Total duration: 7 seconds (5s display + 2s transition)
+
     return () => clearInterval(interval);
   }, [images.length]);
 
@@ -80,12 +70,14 @@ export const Landing = (props: Props) => {
           {images.map((image, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0 }}
+              initial={{ opacity: 0, scale: 1 }}
               animate={{
                 opacity: currentImageIndex === index ? 1 : 0,
+                scale: currentImageIndex === index ? 1.1 : 1, // Scale up slightly for zooming effect
               }}
               transition={{
-                duration: 2, // 2 seconds fade transition
+                opacity: { duration: 2 }, // Transition duration
+                scale: { duration: 7, ease: 'linear' }, // Continuous zoom
               }}
               className="absolute inset-0 w-full h-full flex justify-center items-center"
             >
