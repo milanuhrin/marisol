@@ -1,1 +1,16 @@
+# Ignore node modules
 node_modules
+
+# Ignore cache directories
+.cache/
+.parcel-cache/
+.DS_Store
+
+# Ignore temporary files
+*.tmp
+*.lock
+*.log
+
+# Ignore build artifacts
+dist/
+build/
