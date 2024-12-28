@@ -51,7 +51,7 @@ export const Landing = (props: Props) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 7000); // Total duration: 7 seconds (5s display + 2s transition)
+    }, 5000); // Total duration: 5 seconds (3s display + 2s transition)
 
     return () => clearInterval(interval);
   }, [images.length]);
@@ -64,6 +64,7 @@ export const Landing = (props: Props) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
+        id='home'
       >
         {/* Image container */}
         <div className="absolute inset-0 w-full h-[90vh] z-0 overflow-hidden">
@@ -73,7 +74,7 @@ export const Landing = (props: Props) => {
               initial={{ opacity: 0, scale: 1 }}
               animate={{
                 opacity: currentImageIndex === index ? 1 : 0,
-                scale: currentImageIndex === index ? 1.1 : 1, // Scale up slightly for zooming effect
+                scale: currentImageIndex === index ? 1.15 : 1, // Scale up slightly for zooming effect
               }}
               transition={{
                 opacity: { duration: 2 }, // Transition duration

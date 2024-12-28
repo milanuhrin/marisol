@@ -35,7 +35,6 @@ export const menuItems = [
   {
     name: 'Domov',
     link: '#home',
-    icon: faClipboard,
   },
   {
     name: 'O apartmáne',
@@ -44,7 +43,7 @@ export const menuItems = [
   },
   {
     name: 'Galéria',
-    link: '#galery',
+    link: '#gallery',
     icon: faAddressCard,
   },
   {
@@ -58,6 +57,5 @@ export const menuItems = [
   {
     name: 'Kontakt',
     link: '#contact',
-    icon: faUserGraduate,
   },
 ];

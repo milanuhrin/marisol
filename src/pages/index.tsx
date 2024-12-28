@@ -15,6 +15,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import About from 'Components/About';
 import Availability from 'Components/Availability';
 import Gallery from 'Components/Gallery';
+import Pricelist from 'Components/Pricelist'
 
 
 const IndexPage = () => {
@@ -88,6 +89,8 @@ const IndexPage = () => {
       </main>
 
       <Gallery/>
+
+      <Pricelist/>
       
       <Availability/>
       

@@ -9,7 +9,7 @@ const Gallery = () => {
     <TitleText>Galéria</TitleText>
     </div>
 
-    <div className={`$ text-justify text-base font-medium leading-6 text-gray-500 px-48`}>
+    <div className={`$ text-center text-base font-medium leading-6 text-gray-500 px-48`}>
     Gallery placeholder
     </div>
     </div>
