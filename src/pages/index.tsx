@@ -14,6 +14,8 @@ import '../../global.css';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import About from 'Components/About';
 import Availability from 'Components/Availability';
+import Gallery from 'Components/Gallery';
+
 
 const IndexPage = () => {
   let width = 0;
@@ -85,8 +87,10 @@ const IndexPage = () => {
         )}
       </main>
 
+      <Gallery/>
+      
       <Availability/>
-
+      
       <Footer />
 
       {/* Fixed round Phone button */}
