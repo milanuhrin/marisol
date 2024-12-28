@@ -50,34 +50,14 @@ export const menuItems = [
   {
     name: 'Cenník',
     link: '#pricelist',
-    icon: faPhone,
+  },
+  {
+    name: 'Dostupnosť',
+    link: '#availability',
   },
   {
     name: 'Kontakt',
     link: '#contact',
     icon: faUserGraduate,
-  },
-];
-
-export const aaa = [
-  {
-    name: 'Služby',
-    link: '#experience',
-    icon: faClipboard,
-  },
-  {
-    name: 'O mne',
-    link: '#aboutMe',
-    // icon: faAddressCard,
-  },
-  {
-    name: 'Kontakt',
-    link: '#contact',
-    // icon: faPhone,
-  },
-  {
-    name: 'Vzdelanie',
-    link: '#education',
-    // icon: faUserGraduate,
   },
 ];
