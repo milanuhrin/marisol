@@ -85,193 +85,179 @@ const Availability = () => {
     <div id="availability" className="text-center py-8">
       <div className="py-8" style={{ marginTop: '8rem' }}>
         <TitleText>Dostupnosť</TitleText>
+
+        {/* Add space between title and calendar */}
+        <div style={{ marginBottom: '2rem' }}></div>
+
+        {/* Calendar Wrapper */}
         <div
-          className="calendar-container"
           style={{
             display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '30px',
-            width: 'fit-content',
-            margin: '0 auto',
-            backgroundColor: '#ffffff',
-            padding: '1rem',
-            borderRadius: '10px',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+            justifyContent: 'center',
+            gap: '20px',
+            marginBottom: '2rem', // Add space between calendar and legend
           }}
         >
-          <div
-            className="calendar-wrapper"
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              gap: '30px',
-            }}
-          >
-            {[calendarDaysCurrent, calendarDaysNext].map((calendarDays, index) => {
-              const month = index === 0 ? currentMonth : nextMonth;
-              const year = index === 0 ? currentYear : nextMonthYear;
-              const isLeftCalendar = index === 0;
+          {[calendarDaysCurrent, calendarDaysNext].map((calendarDays, index) => {
+            const month = index === 0 ? currentMonth : nextMonth;
+            const year = index === 0 ? currentYear : nextMonthYear;
+            const isLeftCalendar = index === 0;
 
-              return (
+            return (
+              <div
+                key={index}
+                style={{
+                  backgroundColor: '#f9f9f9',
+                  padding: '1rem',
+                  borderRadius: '10px',
+                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                }}
+              >
+                {/* Header with Arrows */}
                 <div
-                  key={index}
-                  className="calendar"
                   style={{
-                    backgroundColor: '#f9f9f9',
-                    padding: '1rem',
-                    borderRadius: '10px',
-                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    fontWeight: 'bold',
+                    fontSize: '1.2rem',
+                    marginBottom: '1rem',
+                    position: 'relative',
                   }}
                 >
-                  {/* Header with Modern Arrows */}
-                  <div
-                    className="calendar-header"
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      fontWeight: 'bold',
-                      fontSize: '1.2rem',
-                      marginBottom: '1rem',
-                      position: 'relative',
-                    }}
-                  >
-                    {isLeftCalendar && (
-                      <button
-                        onClick={() => changeMonth('prev')}
-                        style={{
-                          position: 'absolute',
-                          left: '0',
-                          background: 'none',
-                          border: 'none',
-                          fontSize: '1.5rem',
-                          color: '#1A202C',
-                          cursor: 'pointer',
-                        }}
-                      >
-                        &#10094;
-                      </button>
-                    )}
-                    <span>{months[month]} {year}</span>
-                    {!isLeftCalendar && (
-                      <button
-                        onClick={() => changeMonth('next')}
-                        style={{
-                          position: 'absolute',
-                          right: '0',
-                          background: 'none',
-                          border: 'none',
-                          fontSize: '1.5rem',
-                          color: '#1A202C',
-                          cursor: 'pointer',
-                        }}
-                      >
-                        &#10095;
-                      </button>
-                    )}
-                  </div>
-
-                  {/* Day Grid */}
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(7, 1fr)',
-                      gap: '3px',
-                    }}
-                  >
-                    {daysOfWeek.map((day, index) => (
-                      <div
-                        key={index}
-                        style={{
-                          fontSize: '0.9rem',
-                          fontWeight: 'bold',
-                          textAlign: 'center',
-                        }}
-                      >
-                        {day}
-                      </div>
-                    ))}
-                    {calendarDays.map((day, dayIndex) =>
-                      day ? (
-                        <div
-                          key={dayIndex}
-                          style={{
-                            height: '50px',
-                            width: '50px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            borderRadius: '3px',
-                            textAlign: 'center',
-                            backgroundColor: day.isReserved
-                              ? '#f8d7da'
-                              : day.isPast
-                              ? '#d3d3d3'
-                              : '#b3d9ff',
-                            color: day.isReserved
-                              ? '#721c24'
-                              : day.isPast
-                              ? '#6c757d'
-                              : '#0b5394',
-                            textDecoration: day.isPast ? 'line-through' : 'none',
-                          }}
-                        >
-                          {day.day}
-                        </div>
-                      ) : (
-                        <div key={dayIndex}></div>
-                      )
-                    )}
-                  </div>
+                  {isLeftCalendar && (
+                    <button
+                      onClick={() => changeMonth('prev')}
+                      style={{
+                        position: 'absolute',
+                        left: '0',
+                        background: 'none',
+                        border: 'none',
+                        fontSize: '1.5rem',
+                        color: '#1A202C',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      &#10094;
+                    </button>
+                  )}
+                  <span>{months[month]} {year}</span>
+                  {!isLeftCalendar && (
+                    <button
+                      onClick={() => changeMonth('next')}
+                      style={{
+                        position: 'absolute',
+                        right: '0',
+                        background: 'none',
+                        border: 'none',
+                        fontSize: '1.5rem',
+                        color: '#1A202C',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      &#10095;
+                    </button>
+                  )}
                 </div>
-              );
-            })}
-          </div>
 
-          {/* Legend */}
-          <div
-            className={`text-justify text-base font-medium leading-6 text-gray-500 px-48`}
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '1rem',
-              alignItems: 'center',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <div
-                style={{
-                  width: '20px',
-                  height: '20px',
-                  backgroundColor: '#d3d3d3',
-                  borderRadius: '1px',
-                }}
-              ></div>
-              <span>minulosť</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <div
-                style={{
-                  width: '20px',
-                  height: '20px',
-                  backgroundColor: '#f8d7da',
-                  borderRadius: '1px',
-                }}
-              ></div>
-              <span>obsadený</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <div
-                style={{
-                  width: '20px',
-                  height: '20px',
-                  backgroundColor: '#b3d9ff',
-                  borderRadius: '1px',
-                }}
-              ></div>
-              <span>voľný</span>
-            </div>
+                {/* Day Grid */}
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(7, 1fr)',
+                    gap: '3px',
+                  }}
+                >
+                  {daysOfWeek.map((day, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        fontSize: '0.9rem',
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                      }}
+                    >
+                      {day}
+                    </div>
+                  ))}
+                  {calendarDays.map((day, dayIndex) =>
+                    day ? (
+                      <div
+                        key={dayIndex}
+                        style={{
+                          height: '50px',
+                          width: '50px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          borderRadius: '3px',
+                          textAlign: 'center',
+                          backgroundColor: day.isReserved
+                            ? '#f8d7da'
+                            : day.isPast
+                            ? '#d3d3d3'
+                            : '#b3d9ff',
+                          color: day.isReserved
+                            ? '#721c24'
+                            : day.isPast
+                            ? '#6c757d'
+                            : '#0b5394',
+                          textDecoration: day.isPast ? 'line-through' : 'none',
+                        }}
+                      >
+                        {day.day}
+                      </div>
+                    ) : (
+                      <div key={dayIndex}></div>
+                    )
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Legend */}
+        <div
+          className={`text-justify text-base font-medium leading-6 text-gray-500`}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '1rem',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div
+              style={{
+                width: '20px',
+                height: '20px',
+                backgroundColor: '#d3d3d3',
+                borderRadius: '1px',
+              }}
+            ></div>
+            <span>minulosť</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div
+              style={{
+                width: '20px',
+                height: '20px',
+                backgroundColor: '#f8d7da',
+                borderRadius: '1px',
+              }}
+            ></div>
+            <span>obsadený</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div
+              style={{
+                width: '20px',
+                height: '20px',
+                backgroundColor: '#b3d9ff',
+                borderRadius: '1px',
+              }}
+            ></div>
+            <span>voľný</span>
           </div>
         </div>
       </div>
