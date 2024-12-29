@@ -24,6 +24,7 @@ const images = [
   '/images/gallery/19_4579.jpg',
   '/images/gallery/20_2588.jpg',
   '/images/gallery/21_4456.jpg',
+  '/images/gallery/22_4447.jpg',
   '/images/gallery/23_2511.jpg',
   '/images/gallery/24_2516.jpg',
   '/images/gallery/25_2530.jpg',
