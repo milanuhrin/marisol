@@ -8,7 +8,6 @@ const Pricelist = () => {
     <div className="py-8">
     <TitleText>Cenník</TitleText>
     </div>
-
     <div className={`$text-center text-base font-medium leading-6 text-gray-500 px-48`}>
     Pricelist placeholder
     </div>

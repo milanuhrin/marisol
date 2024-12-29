@@ -45,7 +45,7 @@ const Availability = () => {
   };
 
   // Generate calendar days for a given month and year
-  const generateCalendarDays = (month, year) => {
+  const generateCalendarDays = (month: number, year: number) => {
     const days = [];
     const today = new Date().toISOString().split('T')[0];
     const firstDayOfMonth = new Date(year, month, 1).getDay();

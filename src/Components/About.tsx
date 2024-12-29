@@ -8,7 +8,6 @@ const About = () => {
     <div className="py-8">
     <TitleText>O apartmáne Marisol</TitleText>
     </div>
-
     <div className={`$ text-justify text-base font-medium leading-6 text-gray-500 px-48`}>
         Nachádza sa v meste Torrevieja, 35 minút autom od letiska Alicante v Španielsku. Apartmán má
         kapacitu max 5 hostí. Má 2 spálne, 1 kúpeľňu, obývačku spojenú s kuchyňou a slnečnú
