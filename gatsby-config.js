@@ -1,10 +1,10 @@
 module.exports = {
   siteMetadata: {
     title: 'Marisol Apartment',
-    siteUrl: 'https://ladenie-klavirov.sk',
-    titleTemplate: '%s · Marisol Apartmenv',
-    description: 'Marisol Apartmen',
-    image: '/milan-fb.jpg',
+    description: 'Marisol Apartment',
+    titleTemplate: "%s | Marisol Apartment",
+    siteUrl: 'https://apartmanspanielsko.sk',
+    image: "/default-image.jpg"
   },
   plugins: [
     `gatsby-plugin-fontawesome-css`,
@@ -44,4 +44,4 @@ module.exports = {
       __key: 'images',
     },
   ],
-};
+}
