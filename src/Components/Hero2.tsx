@@ -113,14 +113,6 @@ export const Hero2 = (props: Props) => {
         </motion.div>
 
         <SectionDividerSharp fill="#fafdfd" />
-        {/* Section: Availability Calendar
-            <div id="pricelist" className="text-center py-8">
-          <TitleText>Cenník a dostupnosť apartmánu</TitleText>
-          <div className="availability-calendar-container">
-            Placeholder for the availability calendar
-            <p className="text-gray-500">Kalendár dostupnosti bude pridaný neskôr.</p>
-          </div> 
-        </div> */}
       </section>
       
   );
