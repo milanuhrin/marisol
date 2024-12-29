@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { TitleText } from './TitleText';
 
 export const Footer = () => {
@@ -38,17 +39,41 @@ export const Footer = () => {
     }
   };
 
+  // Motion Variants
+  const footerContainerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1 } },
+  };
+
+  const footerItemVariants = {
+    hover: { scale: 1.05 },
+  };
+
   return (
-    <footer
+    <motion.footer
       id="contact"
       className="bg-silver relative flex w-full flex-col items-center justify-center gap-[2rem] py-10 sm:gap-[2rem] sm:py-[2.5rem]"
+      initial="hidden"
+      animate="visible"
+      variants={footerContainerVariants}
     >
-      <TitleText>Kontakt</TitleText>
+      {/* Title */}
+      <motion.div className="py-8" variants={footerContainerVariants}>
+        <TitleText>Kontakt</TitleText>
+      </motion.div>
 
       {/* Row with Contact Form and Map */}
-      <div className="flex flex-col sm:flex-row justify-center w-full max-w-6xl gap-8">
+      <motion.div
+        className="flex flex-col sm:flex-row justify-center w-full max-w-6xl gap-8"
+        style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}
+        variants={footerContainerVariants}
+      >
         {/* Contact Form */}
-        <div className="flex-1 flex flex-col justify-between bg-white p-6 rounded-lg shadow-md">
+        <motion.div
+          className="flex-1 flex flex-col justify-between bg-white p-6 rounded-lg shadow-md"
+          variants={footerItemVariants}
+          whileHover="hover"
+        >
           <h3 className="text-lg font-medium text-gray-700 text-center mb-4">
             Kontaktný formulár
           </h3>
@@ -103,20 +128,26 @@ export const Footer = () => {
                 style={{ textAlign: 'left' }}
               ></textarea>
             </div>
-            <button
+            <motion.button
               type="submit"
               className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Poslať
-            </button>
+            </motion.button>
           </form>
           {formStatus && (
             <p className="mt-4 text-sm text-center text-gray-600">{formStatus}</p>
           )}
-        </div>
+        </motion.div>
 
         {/* Map Section */}
-        <div className="flex-1 bg-white p-6 rounded-lg shadow-md">
+        <motion.div
+          className="flex-1 bg-white p-6 rounded-lg shadow-md"
+          variants={footerItemVariants}
+          whileHover="hover"
+        >
           <h3 className="text-lg font-medium text-gray-700 text-center mb-4">
             Lokalita apartmánu
           </h3>
@@ -132,14 +163,21 @@ export const Footer = () => {
               loading="lazy"
             ></iframe>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Contact Info */}
-      <div className="w-full max-w-4xl mt-6 text-center">
+      <motion.div
+        className="w-full max-w-4xl mt-6 text-center"
+        variants={footerContainerVariants}
+      >
         <div className="flex items-center justify-center space-x-8 text-xl text-gray-700">
           {/* Phone */}
-          <div className="flex items-center space-x-2">
+          <motion.div
+            className="flex items-center space-x-2"
+            variants={footerItemVariants}
+            whileHover={{ scale: 1.1 }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -151,9 +189,13 @@ export const Footer = () => {
               <path d="M6.62 10.79a15.09 15.09 0 006.57 6.57l2.2-2.2a1 1 0 011.05-.25 11.38 11.38 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A18 18 0 013 5a1 1 0 011-1h3.33a1 1 0 011 1 11.38 11.38 0 00.57 3.58 1 1 0 01-.25 1.05z"></path>
             </svg>
             <span>0902 217 449</span>
-          </div>
+          </motion.div>
           {/* Email */}
-          <div className="flex items-center space-x-2">
+          <motion.div
+            className="flex items-center space-x-2"
+            variants={footerItemVariants}
+            whileHover={{ scale: 1.1 }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -165,9 +207,9 @@ export const Footer = () => {
               <path d="M22 6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6zM4 6h16v2.5l-8 5-8-5V6zm0 4l7.35 4.59a1 1 0 001.3 0L20 10v8H4v-8z"></path>
             </svg>
             <span>apartmanspanielsko@gmail.com</span>
-          </div>
+          </motion.div>
         </div>
-      </div>
-    </footer>
+      </motion.div>
+    </motion.footer>
   );
 };
