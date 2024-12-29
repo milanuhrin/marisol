@@ -6,19 +6,59 @@ const images = [
   '/images/gallery/01_4559.jpg',
   '/images/gallery/02_4382.jpg',
   '/images/gallery/03_4555.jpg',
+  '/images/gallery/04_2639.jpg',
+  '/images/gallery/05_2643.jpg',
+  '/images/gallery/06_4553.jpg',
+  '/images/gallery/07_4552.jpg',
+  '/images/gallery/08_4640.jpg',
+  '/images/gallery/09_4645.jpg',
+  '/images/gallery/10_4681.jpg',
+  '/images/gallery/11_4634.jpg',
+  '/images/gallery/12_4636.jpg',
+  '/images/gallery/13_4522.jpg',
+  '/images/gallery/14_4665.jpg',
+  '/images/gallery/15_4594.jpg',
+  '/images/gallery/16_4599.jpg',
+  '/images/gallery/17_4612.jpg',
+  '/images/gallery/18_4572.jpg',
+  '/images/gallery/19_4579.jpg',
+  '/images/gallery/20_2588.jpg',
+  '/images/gallery/21_4456.jpg',
+  '/images/gallery/23_2511.jpg',
+  '/images/gallery/24_2516.jpg',
+  '/images/gallery/25_2530.jpg',
+  '/images/gallery/26_2548.jpg',
+  '/images/gallery/27_2541.jpg',
+  '/images/gallery/28_4481.jpg',
+  '/images/gallery/29_4537.jpg',
+  '/images/gallery/31_4442.jpg',
+  '/images/gallery/32_4449.jpg',
+  '/images/gallery/33_4734.jpg',
+  '/images/gallery/34_4579.jpg',
+  '/images/gallery/35_4696.jpg',
+  '/images/gallery/36_7997.jpg',
+  '/images/gallery/37_2598.jpg',
+  '/images/gallery/38_2612.jpg',
+  '/images/gallery/39_2619.jpg',
+  '/images/gallery/40_2629.jpg',
+  '/images/gallery/41_2636.jpg',
+  '/images/gallery/42_4392.jpg',
+  '/images/gallery/43_4404.jpg',
 ];
 
 const Gallery: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
-  // Automatically change images every 3 seconds
+  // Automatically change images every 3 seconds (only when fullscreen is not active)
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+    if (!isOpen) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      }, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [isOpen]); // Run effect when isOpen changes
 
   const openLightbox = (index: number) => {
     setCurrentIndex(index);
@@ -49,7 +89,7 @@ const Gallery: React.FC = () => {
           >
             <img src={image} alt="" className="gallery-image" />
             <div className="gallery-overlay">
-              <span className="fullscreen-icon">🔍 Fullscreen</span>
+              <span className="fullscreen-icon">🔍 Zväčšiť</span>
             </div>
           </div>
         ))}
