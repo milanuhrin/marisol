@@ -31,6 +31,7 @@ const images = [
   '/images/gallery/27_2541.jpg',
   '/images/gallery/28_4481.jpg',
   '/images/gallery/29_4537.jpg',
+  '/images/gallery/30_4547.jpg',
   '/images/gallery/31_4442.jpg',
   '/images/gallery/32_4449.jpg',
   '/images/gallery/33_4734.jpg',

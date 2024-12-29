@@ -23,13 +23,13 @@ export const MobileNav = (props: Props) => {
       initial={false}
       animate={isMenuOpen ? 'open' : 'closed'}
     >
-      {/* Logo */}
+      {/* Logo
       <StaticImage
         src="../../../images/logo-darkGrey.png"
         alt="logo"
         className=" max-w-[4rem]"
         placeholder="none"
-      />
+      /> */}
       {/* MenuIconToggle */}
       <MenuIconToggle toggle={() => setIsMenuOpen(!isMenuOpen)} />
       {/* Sidebard Background Container */}
