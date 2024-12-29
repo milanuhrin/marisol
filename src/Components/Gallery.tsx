@@ -115,7 +115,7 @@ const Gallery: React.FC = () => {
                 ref={index === currentIndex ? imgRef : null} // Reference the current image
               />
               <div className="gallery-overlay">
-                <span className="fullscreen-icon">🔍 Fullscreen</span>
+                <span className="fullscreen-icon">🔍 Zvačšiť</span>
               </div>
             </div>
           ))}
