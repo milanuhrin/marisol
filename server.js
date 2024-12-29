@@ -1,48 +1,53 @@
+require('dotenv').config();
 const express = require('express');
 const nodemailer = require('nodemailer');
-const cors = require('cors'); // Import cors
+const cors = require('cors');
 
-// Create an instance of the Express app
 const app = express();
 
-// Middleware to enable CORS
-app.use(cors());
+// Middleware
+app.use(cors()); // Enable CORS
+app.use(express.json()); // Parse JSON request bodies
 
-// Middleware to parse JSON request bodies
-app.use(express.json());
-
-// Route to handle email sending
+// POST /api/send-email Route
 app.post('/api/send-email', async (req, res) => {
   console.log('Request body:', req.body);
+
   const { name, email, message } = req.body;
 
+  // Validate input
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: 'All fields are required.' });
+  }
+
+  // Create a transporter
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'apartmanspanielsko@gmail.com', // Replace with your Gmail
-      pass: 'ztadoylltoyxukvx', // Replace with your Gmail app password
+      user: process.env.GMAIL_USER, // Your Gmail user from .env
+      pass: process.env.GMAIL_PASS, // Your Gmail password or app password from .env
     },
   });
 
   const mailOptions = {
     from: `"${name}" <${email}>`,
-    to: 'apartmanspanielsko@gmail.com',
-    subject: `Nová správa od ${name}`,
+    to: 'apartmanspanielsko@gmail.com', // Your receiving email address
+    subject: `New message from ${name}`,
     text: message,
   };
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully:', info.response);
-    res.status(200).send('Správa bola úspešne odoslaná.');
+    console.log('Email sent:', info.response);
+    res.status(200).json({ success: 'Email sent successfully.' });
   } catch (error) {
     console.error('Error sending email:', error);
-    res.status(500).send('Nepodarilo sa odoslať správu.');
+    res.status(500).json({ error: 'Failed to send email.' });
   }
 });
 
 // Start the server
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

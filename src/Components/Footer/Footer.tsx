@@ -11,16 +11,16 @@ export const Footer = () => {
 
   const [formStatus, setFormStatus] = useState('');
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('/api/send-email', {
+      const response = await fetch('http://localhost:5001/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
