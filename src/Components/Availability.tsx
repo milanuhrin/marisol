@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import { TitleText } from './export';
 
 const Availability = () => {
-  const reservedDates = ['2024-12-25', '2024-12-26', '2024-12-27'];
+  const reservedDates = [
+    '2024-12-25',
+    '2024-12-26',
+    '2024-12-27',
+    '2025-01-30',
+    '2025-01-31',
+  ];
 
-  // Slovak months and days
   const months = [
     'Január',
     'Február',
@@ -19,13 +24,13 @@ const Availability = () => {
     'November',
     'December',
   ];
-  const daysOfWeek = ['PO', 'UT', 'ST', 'ŠT', 'PI', 'SO', 'NE'];
+  const daysOfWeek = ['Po', 'Ut', 'St', 'Št', 'Pi', 'So', 'Ne'];
 
-  // State for current month and year
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
-  // Handle month navigation
+  const today = new Date().toISOString().split('T')[0];
+
   const changeMonth = (direction: 'prev' | 'next') => {
     if (direction === 'prev') {
       if (currentMonth === 0) {
@@ -44,22 +49,17 @@ const Availability = () => {
     }
   };
 
-  // Generate calendar days for a given month and year
   const generateCalendarDays = (month: number, year: number) => {
     const days = [];
-    const today = new Date().toISOString().split('T')[0];
     const firstDayOfMonth = new Date(year, month, 1).getDay();
     const lastDayOfMonth = new Date(year, month + 1, 0).getDate();
 
-    // Calculate offset for the first day (PO is day 1 in Slovak calendar)
     const offset = (firstDayOfMonth + 6) % 7;
 
-    // Fill empty days before the first day of the month
     for (let i = 0; i < offset; i++) {
       days.push(null);
     }
 
-    // Fill actual days
     for (let day = 1; day <= lastDayOfMonth; day++) {
       const dateObj = new Date(year, month, day);
       const dateString = dateObj.toISOString().split('T')[0];
@@ -69,13 +69,13 @@ const Availability = () => {
         day,
         isReserved: reservedDates.includes(dateString),
         isToday: dateString === today,
+        isPast: dateString < today,
       });
     }
 
     return days;
   };
 
-  // Generate data for current and next month
   const calendarDaysCurrent = generateCalendarDays(currentMonth, currentYear);
   const nextMonth = (currentMonth + 1) % 12;
   const nextMonthYear = currentMonth === 11 ? currentYear + 1 : currentYear;
@@ -83,78 +83,194 @@ const Availability = () => {
 
   return (
     <div id="availability" className="text-center py-8">
-      <div className="py-8">
+      <div className="py-8" style={{ marginTop: '8rem' }}>
         <TitleText>Dostupnosť</TitleText>
-        <div className="calendar-container" style={{ display: 'flex', justifyContent: 'space-between', gap: '2rem' }}>
-          {/* Left Month */}
-          <div className="calendar">
-            <div className="calendar-header" style={{ display: 'flex', alignItems: 'center' }}>
-              <button
-                onClick={() => changeMonth('prev')}
-                style={{ background: 'none', border: 'none', fontSize: '1.5rem', color: 'black', cursor: 'pointer' }}
-              >
-                &#9664;
-              </button>
-              <span style={{ marginLeft: '1rem' }}>
-                {months[currentMonth]} {currentYear}
-              </span>
-            </div>
-            <div className="calendar-grid">
-              {daysOfWeek.map((day, index) => (
-                <div key={index} className="calendar-day-header">
-                  {day}
-                </div>
-              ))}
-              {calendarDaysCurrent.map((day, index) =>
-                day ? (
+        <div
+          className="calendar-container"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '30px',
+            width: 'fit-content',
+            margin: '0 auto',
+            backgroundColor: '#ffffff',
+            padding: '1rem',
+            borderRadius: '10px',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          }}
+        >
+          <div
+            className="calendar-wrapper"
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              gap: '30px',
+            }}
+          >
+            {[calendarDaysCurrent, calendarDaysNext].map((calendarDays, index) => {
+              const month = index === 0 ? currentMonth : nextMonth;
+              const year = index === 0 ? currentYear : nextMonthYear;
+              const isLeftCalendar = index === 0;
+
+              return (
+                <div
+                  key={index}
+                  className="calendar"
+                  style={{
+                    backgroundColor: '#f9f9f9',
+                    padding: '1rem',
+                    borderRadius: '10px',
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                  }}
+                >
+                  {/* Header with Modern Arrows */}
                   <div
-                    key={index}
-                    className={`calendar-day 
-                      ${day.isReserved ? 'reserved' : 'available'} 
-                      ${day.isToday ? 'today' : ''}`}
+                    className="calendar-header"
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      fontWeight: 'bold',
+                      fontSize: '1.2rem',
+                      marginBottom: '1rem',
+                      position: 'relative',
+                    }}
                   >
-                    {day.day}
+                    {isLeftCalendar && (
+                      <button
+                        onClick={() => changeMonth('prev')}
+                        style={{
+                          position: 'absolute',
+                          left: '0',
+                          background: 'none',
+                          border: 'none',
+                          fontSize: '1.5rem',
+                          color: '#1A202C',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        &#10094;
+                      </button>
+                    )}
+                    <span>{months[month]} {year}</span>
+                    {!isLeftCalendar && (
+                      <button
+                        onClick={() => changeMonth('next')}
+                        style={{
+                          position: 'absolute',
+                          right: '0',
+                          background: 'none',
+                          border: 'none',
+                          fontSize: '1.5rem',
+                          color: '#1A202C',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        &#10095;
+                      </button>
+                    )}
                   </div>
-                ) : (
-                  <div key={index} className="calendar-day empty"></div>
-                )
-              )}
-            </div>
+
+                  {/* Day Grid */}
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(7, 1fr)',
+                      gap: '3px',
+                    }}
+                  >
+                    {daysOfWeek.map((day, index) => (
+                      <div
+                        key={index}
+                        style={{
+                          fontSize: '0.9rem',
+                          fontWeight: 'bold',
+                          textAlign: 'center',
+                        }}
+                      >
+                        {day}
+                      </div>
+                    ))}
+                    {calendarDays.map((day, dayIndex) =>
+                      day ? (
+                        <div
+                          key={dayIndex}
+                          style={{
+                            height: '50px',
+                            width: '50px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            borderRadius: '3px',
+                            textAlign: 'center',
+                            backgroundColor: day.isReserved
+                              ? '#f8d7da'
+                              : day.isPast
+                              ? '#d3d3d3'
+                              : '#b3d9ff',
+                            color: day.isReserved
+                              ? '#721c24'
+                              : day.isPast
+                              ? '#6c757d'
+                              : '#0b5394',
+                            textDecoration: day.isPast ? 'line-through' : 'none',
+                          }}
+                        >
+                          {day.day}
+                        </div>
+                      ) : (
+                        <div key={dayIndex}></div>
+                      )
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
-          {/* Right Month */}
-          <div className="calendar">
-            <div className="calendar-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <span style={{ marginRight: '1rem' }}>
-                {months[nextMonth]} {nextMonthYear}
-              </span>
-              <button
-                onClick={() => changeMonth('next')}
-                style={{ background: 'none', border: 'none', fontSize: '1.5rem', color: 'black', cursor: 'pointer' }}
-              >
-                &#9654;
-              </button>
+          {/* Legend */}
+          <div
+            className={`text-justify text-base font-medium leading-6 text-gray-500 px-48`}
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '1rem',
+              alignItems: 'center',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <div
+                style={{
+                  width: '20px',
+                  height: '20px',
+                  backgroundColor: '#d3d3d3',
+                  borderRadius: '1px',
+                }}
+              ></div>
+              <span>minulosť</span>
             </div>
-            <div className="calendar-grid">
-              {daysOfWeek.map((day, index) => (
-                <div key={index} className="calendar-day-header">
-                  {day}
-                </div>
-              ))}
-              {calendarDaysNext.map((day, index) =>
-                day ? (
-                  <div
-                    key={index}
-                    className={`calendar-day 
-                      ${day.isReserved ? 'reserved' : 'available'} 
-                      ${day.isToday ? 'today' : ''}`}
-                  >
-                    {day.day}
-                  </div>
-                ) : (
-                  <div key={index} className="calendar-day empty"></div>
-                )
-              )}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <div
+                style={{
+                  width: '20px',
+                  height: '20px',
+                  backgroundColor: '#f8d7da',
+                  borderRadius: '1px',
+                }}
+              ></div>
+              <span>obsadený</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <div
+                style={{
+                  width: '20px',
+                  height: '20px',
+                  backgroundColor: '#b3d9ff',
+                  borderRadius: '1px',
+                }}
+              ></div>
+              <span>voľný</span>
             </div>
           </div>
         </div>
