@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { TitleText } from './export';
 
 const Availability = () => {
@@ -81,8 +82,21 @@ const Availability = () => {
   const nextMonthYear = currentMonth === 11 ? currentYear + 1 : currentYear;
   const calendarDaysNext = generateCalendarDays(nextMonth, nextMonthYear);
 
+  // Motion variants
+  const calendarVariants = {
+    offscreen: { opacity: 0, y: 100 },
+    onscreen: { opacity: 1, y: 0, transition: { type: 'spring', bounce: 0.4, duration: 1 } },
+  };
+
   return (
-    <div id="availability" className="text-center py-8">
+    <motion.div
+      id="availability"
+      className="text-center py-8"
+      initial="offscreen"
+      whileInView="onscreen"
+      viewport={{ once: true, amount: 0.5 }}
+      variants={calendarVariants}
+    >
       <div className="py-8" style={{ marginTop: '8rem' }}>
         <TitleText>Dostupnosť</TitleText>
 
@@ -90,13 +104,17 @@ const Availability = () => {
         <div style={{ marginBottom: '2rem' }}></div>
 
         {/* Calendar Wrapper */}
-        <div
+        <motion.div
           style={{
             display: 'flex',
             justifyContent: 'center',
             gap: '20px',
-            marginBottom: '2rem', // Add space between calendar and legend
+            marginBottom: '2rem',
           }}
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={calendarVariants}
         >
           {[calendarDaysCurrent, calendarDaysNext].map((calendarDays, index) => {
             const month = index === 0 ? currentMonth : nextMonth;
@@ -104,7 +122,7 @@ const Availability = () => {
             const isLeftCalendar = index === 0;
 
             return (
-              <div
+              <motion.div
                 key={index}
                 style={{
                   backgroundColor: '#f9f9f9',
@@ -112,6 +130,10 @@ const Availability = () => {
                   borderRadius: '10px',
                   boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
                 }}
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true }}
+                variants={calendarVariants}
               >
                 {/* Header with Arrows */}
                 <div
@@ -182,7 +204,7 @@ const Availability = () => {
                   ))}
                   {calendarDays.map((day, dayIndex) =>
                     day ? (
-                      <div
+                      <motion.div
                         key={dayIndex}
                         style={{
                           height: '50px',
@@ -204,27 +226,32 @@ const Availability = () => {
                             : '#0b5394',
                           textDecoration: day.isPast ? 'line-through' : 'none',
                         }}
+                        whileHover={{ scale: 1.08 }}
                       >
                         {day.day}
-                      </div>
+                      </motion.div>
                     ) : (
                       <div key={dayIndex}></div>
                     )
                   )}
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Legend */}
-        <div
+        <motion.div
           className={`text-justify text-base font-medium leading-6 text-gray-500`}
           style={{
             display: 'flex',
             justifyContent: 'center',
             gap: '1rem',
           }}
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true }}
+          variants={calendarVariants}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <div
@@ -259,9 +286,9 @@ const Availability = () => {
             ></div>
             <span>voľný</span>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
