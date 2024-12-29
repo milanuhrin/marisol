@@ -27,58 +27,22 @@
 /* Gallery container */
 .gallery-container {
   position: relative;
-  width: 65%;
-  height: 600px; /* Fixed height */
   margin: 0 auto;
   overflow: hidden;
-  border-radius: 30px;
+  border-radius: 30px; /* Rounded edges */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #000; /* Add background for better contrast */
-}
-
-/* Gallery container */
-.gallery-container {
-  position: relative;
-  width: 60%; /* Adjusted width */
-  height: 600px; /* Fixed height */
-  margin: 0 auto;
-  overflow: hidden;
-  border-radius: 30px;
-  background-color: #fff; /* White background */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-  transition: transform 0.3s ease-in-out;
-  cursor: pointer;
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-}
-
-/* Gallery container */
-.gallery-container {
-  position: relative;
-  width: 60%; /* Adjusted width */
-  height: 600px; /* Fixed height */
-  margin: 0 auto;
-  overflow: hidden;
-  border-radius: 30px;
-  background-color: #fff; /* White background */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-  transition: transform 0.3s ease-in-out;
+  transition: width 0.5s ease-in-out, transform 0.3s ease-in-out;
   cursor: pointer;
   display: flex;
   justify-content: center; /* Center images horizontally */
   align-items: center; /* Center images vertically */
+  background-color: #fff; /* White background */
 }
 
 /* Gallery item */
 .gallery-item {
   position: absolute;
-  width: 100%;
+  width: auto;
   height: 100%;
   opacity: 0;
   transition: opacity 1s ease-in-out;
@@ -89,14 +53,14 @@
   z-index: 1;
 }
 
-/* Gallery images - ensure full visibility and proper centering */
+/* Gallery images */
 .gallery-image {
-  max-width: 105%; /* Ensure the image fits horizontally */
-  max-height: 100%; /* Ensure the image fits vertically */
-  margin: auto; /* Center the image */
-  display: block; /* Ensure the image respects the container's flexbox alignment */
+  max-height: 100%;
+  max-width: 100%; /* Dynamic width */
   object-fit: contain; /* Prevent cropping */
   object-position: center; /* Center the image */
+  margin: 0 auto;
+  display: block;
   transition: transform 0.3s ease-in-out;
 }
 

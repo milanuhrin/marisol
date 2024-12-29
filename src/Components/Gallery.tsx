@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
-
+import { TitleText } from './export'; 
 const images = [
   '/images/gallery/01_4559.jpg',
   '/images/gallery/02_4382.jpg',
@@ -31,7 +31,6 @@ const images = [
   '/images/gallery/27_2541.jpg',
   '/images/gallery/28_4481.jpg',
   '/images/gallery/29_4537.jpg',
-  '/images/gallery/30_4547.jpg',
   '/images/gallery/31_4442.jpg',
   '/images/gallery/32_4449.jpg',
   '/images/gallery/33_4734.jpg',
@@ -50,6 +49,8 @@ const images = [
 const Gallery: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const [containerWidth, setContainerWidth] = useState('auto'); // Dynamic width for the container
+  const imgRef = useRef<HTMLImageElement>(null);
 
   // Automatically change images every 3 seconds (only when fullscreen is not active)
   useEffect(() => {
@@ -59,7 +60,19 @@ const Gallery: React.FC = () => {
       }, 3000);
       return () => clearInterval(interval);
     }
-  }, [isOpen]); // Run effect when isOpen changes
+  }, [isOpen]);
+
+  // Adjust container width dynamically based on the image's aspect ratio
+  useEffect(() => {
+    const adjustContainerWidth = () => {
+      if (imgRef.current) {
+        const img = imgRef.current;
+        const aspectRatio = img.naturalWidth / img.naturalHeight;
+        setContainerWidth(`${600 * aspectRatio}px`); // Height is fixed at 600px
+      }
+    };
+    adjustContainerWidth();
+  }, [currentIndex]);
 
   const openLightbox = (index: number) => {
     setCurrentIndex(index);
@@ -76,24 +89,37 @@ const Gallery: React.FC = () => {
   return (
     <div id="gallery" className="text-center py-8">
       <div className="py-8">
-        <h2 className="text-2xl font-bold">Galéria</h2>
+        <TitleText>Galéria</TitleText>
       </div>
 
-      <div className="gallery-container">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`gallery-item ${
-              index === currentIndex ? 'active' : ''
-            }`}
-            onClick={() => openLightbox(index)}
-          >
-            <img src={image} alt="" className="gallery-image" />
-            <div className="gallery-overlay">
-              <span className="fullscreen-icon">🔍 Zväčšiť</span>
+      <div className={`text-center text-base font-medium leading-6 text-gray-500`}>
+        <div
+          className="gallery-container"
+          style={{
+            width: containerWidth,
+            height: '600px', // Fixed height
+          }}
+        >
+          {images.map((image, index) => (
+            <div
+              key={index}
+              className={`gallery-item ${
+                index === currentIndex ? 'active' : ''
+              }`}
+              onClick={() => openLightbox(index)}
+            >
+              <img
+                src={image}
+                alt=""
+                className="gallery-image"
+                ref={index === currentIndex ? imgRef : null} // Reference the current image
+              />
+              <div className="gallery-overlay">
+                <span className="fullscreen-icon">🔍 Fullscreen</span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Full-screen Lightbox */}
