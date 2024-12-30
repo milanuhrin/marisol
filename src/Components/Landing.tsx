@@ -12,7 +12,7 @@ interface Props {
 export const Landing = (props: Props) => {
   const { containerStyles } = props;
 
-  // Fetch images from the gallery
+  // Fetch images and logo from the gallery
   const data = useStaticQuery(graphql`
     query {
       image1: file(relativePath: { eq: "landing/landing_01_o_1hmk9fog21b1i1r9u1mggbi1equ2j.jpeg" }) {
@@ -35,6 +35,11 @@ export const Landing = (props: Props) => {
           gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
         }
       }
+      logo: file(relativePath: { eq: "landing/marisol_logo.png" }) {
+        childImageSharp {
+          gatsbyImageData(placeholder: BLURRED, layout: FIXED, width: 150)
+        }
+      }
     }
   `);
 
@@ -44,6 +49,8 @@ export const Landing = (props: Props) => {
     getImage(data.image3),
     getImage(data.image4),
   ].filter(Boolean);
+
+  const logo = getImage(data.logo);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -86,12 +93,23 @@ export const Landing = (props: Props) => {
                 <GatsbyImage
                   image={image}
                   alt={`Landing background image ${index + 1}`}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-cover"
                 />
               )}
             </motion.div>
           ))}
         </div>
+
+        {/* Logo */}
+        {logo && (
+          <div className="absolute top-10 left-10 z-50">
+            <GatsbyImage
+              image={logo}
+              alt="Logo"
+              className="w-auto h-auto" // Adjust styles as needed
+            />
+          </div>
+        )}
 
         {/* Divider */}
         <div className="absolute bottom-[10%] left-0 w-full h-[100px] z-30 pointer-events-none">
