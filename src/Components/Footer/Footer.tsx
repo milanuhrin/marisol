@@ -122,7 +122,7 @@ export const Footer = () => {
                 placeholder="Dobrý deň, mali by sme záujem o apartmán v nasledujúcich termínoch:"
                 value={formData.message}
                 onChange={handleInputChange}
-                rows="5"
+                rows={5}
                 className="w-full rounded-md border border-gray-300 bg-gray-50 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3"
                 required
                 style={{ textAlign: 'left' }}

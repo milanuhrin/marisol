@@ -7,6 +7,7 @@ const Availability = () => {
     '2024-12-25',
     '2024-12-26',
     '2024-12-27',
+    '2025-01-29',
     '2025-01-30',
     '2025-01-31',
   ];
@@ -54,26 +55,30 @@ const Availability = () => {
     const days = [];
     const firstDayOfMonth = new Date(year, month, 1).getDay();
     const lastDayOfMonth = new Date(year, month + 1, 0).getDate();
-
+  
     const offset = (firstDayOfMonth + 6) % 7;
-
+  
     for (let i = 0; i < offset; i++) {
       days.push(null);
     }
-
+  
     for (let day = 1; day <= lastDayOfMonth; day++) {
       const dateObj = new Date(year, month, day);
-      const dateString = dateObj.toISOString().split('T')[0];
-
+      const dateString = dateObj.toLocaleDateString('sv-SE'); // Format: yyyy-MM-dd
+  
+      const isPast = dateString < today;
+      const isReserved = reservedDates.includes(dateString);
+  
       days.push({
         date: dateString,
         day,
-        isReserved: reservedDates.includes(dateString),
+        isReserved,
         isToday: dateString === today,
-        isPast: dateString < today,
+        isPast,
+        isReservedPast: isReserved && isPast, // New condition
       });
     }
-
+  
     return days;
   };
 
@@ -214,17 +219,21 @@ const Availability = () => {
                           justifyContent: 'center',
                           borderRadius: '3px',
                           textAlign: 'center',
-                          backgroundColor: day.isReserved
-                            ? '#f8d7da'
+                          backgroundColor: day.isReservedPast
+                            ? '#d3d3d3' // Gray for reserved in the past
+                            : day.isReserved
+                            ? '#f8d7da' // Red for reserved
                             : day.isPast
-                            ? '#d3d3d3'
-                            : '#b3d9ff',
-                          color: day.isReserved
-                            ? '#721c24'
+                            ? '#d3d3d3' // Gray for past
+                            : '#d4edda', // Green for available
+                          color: day.isReservedPast
+                            ? '#6c757d' // Dark gray for reserved in the past
+                            : day.isReserved
+                            ? '#721c24' // Dark red for reserved
                             : day.isPast
-                            ? '#6c757d'
-                            : '#0b5394',
-                          textDecoration: day.isPast ? 'line-through' : 'none',
+                            ? '#6c757d' // Dark gray for past
+                            : '#155724', // Dark green for available
+                          textDecoration: day.isPast ? 'line-through' : 'none', // Strikethrough for past days
                         }}
                         whileHover={{ scale: 1.08 }}
                       >
@@ -280,7 +289,7 @@ const Availability = () => {
               style={{
                 width: '20px',
                 height: '20px',
-                backgroundColor: '#b3d9ff',
+                backgroundColor: '#d4edda',
                 borderRadius: '1px',
               }}
             ></div>
