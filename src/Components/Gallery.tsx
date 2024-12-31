@@ -3,7 +3,6 @@ import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import { TitleText } from './export';
 
-// Dynamically import images
 const images = Array.from({ length: 43 }, (_, i) =>
   require(`../images/gallery/${String(i + 1).padStart(2, '0')}_${[
     '4559',
@@ -55,20 +54,21 @@ const images = Array.from({ length: 43 }, (_, i) =>
 const Gallery: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
-  const [containerStyle, setContainerStyle] = useState({ width: 'auto', height: '600px' }); // Dynamic width and height
+  const [containerStyle, setContainerStyle] = useState({ width: 'auto', height: '600px' });
   const imgRef = useRef<HTMLImageElement>(null);
 
-  // Automatically change images every 3 seconds (only when fullscreen is not active)
   useEffect(() => {
     if (!isOpen) {
       const interval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
       }, 3000);
+
       return () => clearInterval(interval);
     }
+
+    return undefined;
   }, [isOpen]);
 
-  // Update container size in sync with image change
   const updateContainerSize = () => {
     if (imgRef.current) {
       const img = imgRef.current;
@@ -89,9 +89,7 @@ const Gallery: React.FC = () => {
   const closeLightbox = () => setIsOpen(false);
 
   const moveToNext = () => setCurrentIndex((currentIndex + 1) % images.length);
-
-  const moveToPrev = () =>
-    setCurrentIndex((currentIndex - 1 + images.length) % images.length);
+  const moveToPrev = () => setCurrentIndex((currentIndex - 1 + images.length) % images.length);
 
   return (
     <div id="gallery" className="text-center py-8">
@@ -99,39 +97,30 @@ const Gallery: React.FC = () => {
         <TitleText>Galéria</TitleText>
       </div>
 
-      <div
-        className={`text-center text-base font-medium leading-6 text-gray-500`}
-      >
-        <div
-          className="gallery-container"
-          style={{
-            ...containerStyle,
-          }}
-        >
-          {images.map((image, index) => (
-            <div
-              key={index}
-              className={`gallery-item ${
-                index === currentIndex ? 'active' : ''
-              }`}
-              onClick={() => openLightbox(index)}
-            >
-              <img
-                src={image}
-                alt=""
-                className="gallery-image"
-                ref={index === currentIndex ? imgRef : null} // Reference the current image
-                onLoad={updateContainerSize} // Ensure size updates when the image loads
-              />
-              <div className="gallery-overlay">
-                <span className="fullscreen-icon">🔍 Zvačšiť</span>
+      <div className="gallery-container" style={{ ...containerStyle }}>
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`gallery-item ${index === currentIndex ? 'active' : ''}`}
+            onClick={() => openLightbox(index)}
+          >
+            <img
+              src={image}
+              alt=""
+              className="gallery-image"
+              ref={index === currentIndex ? imgRef : null}
+              onLoad={updateContainerSize}
+            />
+            <div className="gallery-overlay">
+              <div className="fullscreen-icon">
+                <i className="fa fa-search-plus" aria-hidden="true"></i>
+                <span>Zväčšiť</span>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
 
-      {/* Full-screen Lightbox */}
       {isOpen && (
         <Lightbox
           mainSrc={images[currentIndex]}
