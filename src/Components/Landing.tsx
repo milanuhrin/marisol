@@ -15,7 +15,7 @@ export const Landing = (props: Props) => {
   // Fetch images and logo from the gallery
   const data = useStaticQuery(graphql`
     query {
-      image1: file(relativePath: { eq: "landing/landing_01_o_1hmk9fog21b1i1r9u1mggbi1equ2j.jpeg" }) {
+      image1: file(relativePath: { eq: "landing/landing_01_dron.jpg" }) {
         childImageSharp {
           gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
         }
