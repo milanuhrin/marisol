@@ -1,58 +1,61 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
-import { TitleText } from './export'; 
-import { motion } from 'framer-motion';
-const images = [
-  '/images/gallery/01_4559.jpg',
-  '/images/gallery/02_4382.jpg',
-  '/images/gallery/03_4555.jpg',
-  '/images/gallery/04_2639.jpg',
-  '/images/gallery/05_2643.jpg',
-  '/images/gallery/06_4553.jpg',
-  '/images/gallery/07_4552.jpg',
-  '/images/gallery/08_4640.jpg',
-  '/images/gallery/09_4645.jpg',
-  '/images/gallery/10_4681.jpg',
-  '/images/gallery/11_4634.jpg',
-  '/images/gallery/12_4636.jpg',
-  '/images/gallery/13_4522.jpg',
-  '/images/gallery/14_4665.jpg',
-  '/images/gallery/15_4594.jpg',
-  '/images/gallery/16_4599.jpg',
-  '/images/gallery/17_4612.jpg',
-  '/images/gallery/18_4572.jpg',
-  '/images/gallery/19_4579.jpg',
-  '/images/gallery/20_2588.jpg',
-  '/images/gallery/21_4456.jpg',
-  '/images/gallery/22_4447.jpg',
-  '/images/gallery/23_2511.jpg',
-  '/images/gallery/24_2516.jpg',
-  '/images/gallery/25_2530.jpg',
-  '/images/gallery/26_2548.jpg',
-  '/images/gallery/27_2541.jpg',
-  '/images/gallery/28_4481.jpg',
-  '/images/gallery/29_4537.jpg',
-  '/images/gallery/30_4547.jpg',
-  '/images/gallery/31_4442.jpg',
-  '/images/gallery/32_4449.jpg',
-  '/images/gallery/33_4734.jpg',
-  '/images/gallery/34_4579.jpg',
-  '/images/gallery/35_4696.jpg',
-  '/images/gallery/36_7997.jpg',
-  '/images/gallery/37_2598.jpg',
-  '/images/gallery/38_2612.jpg',
-  '/images/gallery/39_2619.jpg',
-  '/images/gallery/40_2629.jpg',
-  '/images/gallery/41_2636.jpg',
-  '/images/gallery/42_4392.jpg',
-  '/images/gallery/43_4404.jpg',
-];
+import { TitleText } from './export';
+
+// Dynamically import images
+const images = Array.from({ length: 43 }, (_, i) =>
+  require(`../images/gallery/${String(i + 1).padStart(2, '0')}_${[
+    '4559',
+    '4382',
+    '4555',
+    '2639',
+    '2643',
+    '4553',
+    '4552',
+    '4640',
+    '4645',
+    '4681',
+    '4634',
+    '4636',
+    '4522',
+    '4665',
+    '4594',
+    '4599',
+    '4612',
+    '4572',
+    '4579',
+    '2588',
+    '4456',
+    '4447',
+    '2511',
+    '2516',
+    '2530',
+    '2548',
+    '2541',
+    '4481',
+    '4537',
+    '4547',
+    '4442',
+    '4449',
+    '4734',
+    '4579',
+    '4696',
+    '7997',
+    '2598',
+    '2612',
+    '2619',
+    '2629',
+    '2636',
+    '4392',
+    '4404',
+  ][i]}.jpg`).default
+);
 
 const Gallery: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
-  const [containerWidth, setContainerWidth] = useState('auto'); // Dynamic width for the container
+  const [containerStyle, setContainerStyle] = useState({ width: 'auto', height: '600px' }); // Dynamic width and height
   const imgRef = useRef<HTMLImageElement>(null);
 
   // Automatically change images every 3 seconds (only when fullscreen is not active)
@@ -65,16 +68,17 @@ const Gallery: React.FC = () => {
     }
   }, [isOpen]);
 
-  // Adjust container width dynamically based on the image's aspect ratio
+  // Update container size in sync with image change
+  const updateContainerSize = () => {
+    if (imgRef.current) {
+      const img = imgRef.current;
+      const aspectRatio = img.naturalWidth / img.naturalHeight;
+      setContainerStyle({ width: `${600 * aspectRatio}px`, height: '600px' });
+    }
+  };
+
   useEffect(() => {
-    const adjustContainerWidth = () => {
-      if (imgRef.current) {
-        const img = imgRef.current;
-        const aspectRatio = img.naturalWidth / img.naturalHeight;
-        setContainerWidth(`${600 * aspectRatio}px`); // Height is fixed at 600px
-      }
-    };
-    adjustContainerWidth();
+    updateContainerSize();
   }, [currentIndex]);
 
   const openLightbox = (index: number) => {
@@ -90,17 +94,18 @@ const Gallery: React.FC = () => {
     setCurrentIndex((currentIndex - 1 + images.length) % images.length);
 
   return (
-    <motion.div id="gallery" className="text-center py-8">
+    <div id="gallery" className="text-center py-8">
       <div className="py-8">
         <TitleText>Galéria</TitleText>
       </div>
 
-      <motion.div className={`text-center text-base font-medium leading-6 text-gray-500`}>
+      <div
+        className={`text-center text-base font-medium leading-6 text-gray-500`}
+      >
         <div
           className="gallery-container"
           style={{
-            width: containerWidth,
-            height: '600px', // Fixed height
+            ...containerStyle,
           }}
         >
           {images.map((image, index) => (
@@ -116,6 +121,7 @@ const Gallery: React.FC = () => {
                 alt=""
                 className="gallery-image"
                 ref={index === currentIndex ? imgRef : null} // Reference the current image
+                onLoad={updateContainerSize} // Ensure size updates when the image loads
               />
               <div className="gallery-overlay">
                 <span className="fullscreen-icon">🔍 Zvačšiť</span>
@@ -123,7 +129,7 @@ const Gallery: React.FC = () => {
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       {/* Full-screen Lightbox */}
       {isOpen && (
@@ -136,7 +142,7 @@ const Gallery: React.FC = () => {
           onMoveNextRequest={moveToNext}
         />
       )}
-    </motion.div>
+    </div>
   );
 };
 
