@@ -37,7 +37,7 @@ export const Landing = (props: Props) => {
       }
       logo: file(relativePath: { eq: "landing/marisol_logo.png" }) {
         childImageSharp {
-          gatsbyImageData(placeholder: BLURRED, layout: FIXED, width: 150)
+          gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
         }
       }
     }
@@ -102,13 +102,14 @@ export const Landing = (props: Props) => {
 
         {/* Logo */}
         {logo && (
-          <div className="absolute top-10 left-10 z-50">
-            <GatsbyImage
-              image={logo}
-              alt="Logo"
-              className="w-auto h-auto" // Adjust styles as needed
-            />
-          </div>
+          <div className="absolute transform -translate-y-1/2 z-50"
+          style={{ top: '35%', right: '10%' }}>
+          <GatsbyImage
+            image={logo}
+            alt="Logo"
+            className="w-40 md:w-80 lg:w-144"
+          />
+        </div>
         )}
 
         {/* Divider */}
