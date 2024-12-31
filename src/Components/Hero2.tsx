@@ -82,7 +82,7 @@ export const Hero2 = (props: Props) => {
           viewport={{ margin: '400px', once: true }}
           variants={cardVariants}
         >
-          <h2 className="text-xl font-bold">Vlastnosti apartmánu Marisol</h2>
+          <h2 className="text-xl font-bold">Čo ponúka apartmán Marisol</h2>
           <ul
             className={`${ulStyles} flex flex-col gap-6 self-center justify-self-center sm:grid sm:grid-cols-2`}
           >

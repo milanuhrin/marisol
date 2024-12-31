@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import { TitleText } from './export'; 
+import { motion } from 'framer-motion';
 const images = [
   '/images/gallery/01_4559.jpg',
   '/images/gallery/02_4382.jpg',
@@ -89,12 +90,12 @@ const Gallery: React.FC = () => {
     setCurrentIndex((currentIndex - 1 + images.length) % images.length);
 
   return (
-    <div id="gallery" className="text-center py-8">
+    <motion.div id="gallery" className="text-center py-8">
       <div className="py-8">
         <TitleText>Galéria</TitleText>
       </div>
 
-      <div className={`text-center text-base font-medium leading-6 text-gray-500`}>
+      <motion.div className={`text-center text-base font-medium leading-6 text-gray-500`}>
         <div
           className="gallery-container"
           style={{
@@ -122,7 +123,7 @@ const Gallery: React.FC = () => {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Full-screen Lightbox */}
       {isOpen && (
@@ -135,7 +136,7 @@ const Gallery: React.FC = () => {
           onMoveNextRequest={moveToNext}
         />
       )}
-    </div>
+    </motion.div>
   );
 };
 

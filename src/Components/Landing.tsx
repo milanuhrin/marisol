@@ -30,7 +30,7 @@ export const Landing = (props: Props) => {
           gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
         }
       }
-      image4: file(relativePath: { eq: "landing/landing_04_IMG_7995.jpg" }) {
+      image4: file(relativePath: { eq: "landing/landing_04_lamata_beach.jpg" }) {
         childImageSharp {
           gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
         }
@@ -103,11 +103,11 @@ export const Landing = (props: Props) => {
         {/* Logo */}
         {logo && (
           <div className="absolute transform -translate-y-1/2 z-50"
-          style={{ top: '35%', right: '10%' }}>
+          style={{ top: '50%', right: '8%' }}>
           <GatsbyImage
             image={logo}
             alt="Logo"
-            className="w-40 md:w-80 lg:w-144"
+            className="w-60 md:w-96 lg:w-144"
           />
         </div>
         )}

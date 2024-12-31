@@ -75,7 +75,7 @@ export const Footer = () => {
           whileHover="hover"
         >
           <h3 className="text-lg font-medium text-gray-700 text-center mb-4">
-            Kontaktný formulár
+            Napíšte nám
           </h3>
           <form onSubmit={handleSubmit} className="flex flex-col gap-6 h-full">
             {/* Meno and Email Row */}
@@ -149,7 +149,7 @@ export const Footer = () => {
           whileHover="hover"
         >
           <h3 className="text-lg font-medium text-gray-700 text-center mb-4">
-            Lokalita apartmánu
+            Poloha apartmánu
           </h3>
           <div className="w-full rounded-lg overflow-hidden" style={{ height: '300px' }}>
             <iframe
