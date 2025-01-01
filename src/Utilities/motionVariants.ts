@@ -87,3 +87,13 @@ export const appear = (ease = 'easeOut', delay = 0, duration = 0.3) => ({
       },
    },
 })
+
+export const sectionVariants = {
+   offscreen: { opacity: 0, y: 100 },
+   onscreen: { opacity: 1, y: 0, transition: { type: 'spring', bounce: 0.4, duration: 1 } },
+ }
+
+export const footerVariants = {
+   hidden: { opacity: 0, y: 100 },
+   visible: { opacity: 1, y: 0, transition: { type: 'spring', bounce: 0.4, duration: 1 } },
+};

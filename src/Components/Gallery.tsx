@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import { motion } from 'framer-motion';
 import { TitleText } from './export';
 import { SectionDividerWaveOneSide } from 'svg/SectionDividerWaveOneSide';
-
+import { sectionVariants } from 'Utilities/motionVariants'; // Import motion variants
 
 const images = Array.from({ length: 43 }, (_, i) =>
   require(`../images/gallery/${String(i + 1).padStart(2, '0')}_${[
@@ -67,7 +68,6 @@ const Gallery: React.FC = () => {
 
       return () => clearInterval(interval);
     }
-
     return undefined;
   }, [isOpen]);
 
@@ -94,50 +94,59 @@ const Gallery: React.FC = () => {
   const moveToPrev = () => setCurrentIndex((currentIndex - 1 + images.length) % images.length);
 
   return (
-    <div id="gallery" className="relative text-center py-8">
-      <div className="py-8">
-        <TitleText>Galéria</TitleText>
-      </div>
-
-      <div className="gallery-container" style={{ ...containerStyle }}>
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`gallery-item ${index === currentIndex ? 'active' : ''}`}
-            onClick={() => openLightbox(index)}
-          >
-            <img
-              src={image}
-              alt=""
-              className="gallery-image"
-              ref={index === currentIndex ? imgRef : null}
-              onLoad={updateContainerSize}
-            />
-          </div>
-        ))}
-
-        {/* Overlay with magnifier and text */}
-        <div className="gallery-overlay">
-          <div className="fullscreen-icon">
-            <i className="fa fa-search-plus" aria-hidden="true"></i> {/* Magnifier icon */}
-            <span>Zväčšiť</span> {/* Text */}
-          </div>
-        </div>
-      </div>
-
-      {isOpen && (
-        <Lightbox
-          mainSrc={images[currentIndex]}
-          nextSrc={images[(currentIndex + 1) % images.length]}
-          prevSrc={images[(currentIndex - 1 + images.length) % images.length]}
-          onCloseRequest={closeLightbox}
-          onMovePrevRequest={moveToPrev}
-          onMoveNextRequest={moveToNext}
-        />
-      )}
-
-      {/* Add divider */}
+    <div id="gallery" className="relative">
+      <div className="absolute w-full top-0">
       <SectionDividerWaveOneSide fill="#f0f0f0" />
+      </div>
+      {/* Apply motion to all dynamic elements */}
+      <motion.section
+        className="relative text-center py-8"
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: false, amount: 0.5 }}
+        variants={sectionVariants}
+      >
+        {/* Title */}
+        <motion.div className="py-8">
+          <TitleText>Galéria</TitleText>
+        </motion.div>
+
+        {/* Gallery Container */}
+        <motion.div
+          className="gallery-container"
+          style={{ ...containerStyle }}
+        >
+          {images.map((image, index) => (
+            <div
+              key={index}
+              className={`gallery-item ${index === currentIndex ? 'active' : ''}`}
+              onClick={() => openLightbox(index)}
+            >
+              <img
+                src={image}
+                alt=""
+                className="gallery-image"
+                ref={index === currentIndex ? imgRef : null}
+                onLoad={updateContainerSize}
+              />
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Lightbox */}
+        {isOpen && (
+          <Lightbox
+            mainSrc={images[currentIndex]}
+            nextSrc={images[(currentIndex + 1) % images.length]}
+            prevSrc={images[(currentIndex - 1 + images.length) % images.length]}
+            onCloseRequest={closeLightbox}
+            onMovePrevRequest={moveToPrev}
+            onMoveNextRequest={moveToNext}
+          />
+        )}
+      </motion.section>
+
+      {/* Static Divider */}
     </div>
   );
 };

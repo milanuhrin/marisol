@@ -61,7 +61,7 @@ const About = () => {
                 key={i}
                 initial="offscreen"
                 whileInView="onscreen"
-                viewport={{ margin: '60px', once: true }}
+                viewport={{ margin: '60px', once: false }}
                 whileHover={{ scale: 1.08 }}
                 variants={{
                   ...cardVariants,
@@ -84,7 +84,7 @@ const About = () => {
             className="z-10 flex flex-col gap-[3.5rem] sm:col-start-2 sm:row-start-1 sm:self-center sm:justify-self-center"
             initial="offscreen"
             whileInView="onscreen"
-            viewport={{ margin: '400px', once: true }}
+            viewport={{ margin: '400px', once: false }}
             variants={cardVariants}
           >
             <h2 className="text-xl font-bold">Čo ponúka apartmán Marisol</h2>

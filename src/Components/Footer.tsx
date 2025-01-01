@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { TitleText } from './TitleText';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { sectionVariants } from 'Utilities/motionVariants'; // Import the footer variants
 
 export const Footer = () => {
   const [formData, setFormData] = useState({
@@ -42,49 +40,40 @@ export const Footer = () => {
     }
   };
 
-  // Motion Variants
-  const footerContainerVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 1 } },
-  };
-
-  const footerItemVariants = {
-    hover: { scale: 1.05 },
-  };
-
-  const width =
-    typeof window !== 'undefined' ? window.innerWidth : 0; // Check window width for responsive behavior
-
   return (
     <motion.footer
       id="contact"
       className="bg-silver relative flex w-full flex-col items-center justify-center gap-[2rem] py-10 sm:gap-[2rem] sm:py-[2.5rem]"
-      initial="hidden"
-      animate="visible"
-      variants={footerContainerVariants}
+      initial="offscreen"
+      whileInView="onscreen"
+      viewport={{ once: false, amount: 0.5 }}
+      variants={sectionVariants} // Use imported footer variants
     >
       {/* Title */}
-      <motion.div className="py-8" variants={footerContainerVariants}>
+      <motion.div
+        className="py-8"
+        style={{ marginTop: '8rem' }}
+        variants={sectionVariants} // Use the same variants
+      >
         <TitleText>Kontakt</TitleText>
       </motion.div>
 
-      {/* Row with Contact Form and Map */}
+      {/* Contact Form and Map */}
       <motion.div
         className="flex flex-col sm:flex-row justify-center w-full max-w-6xl gap-8"
-        style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}
-        variants={footerContainerVariants}
+        style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}
+        variants={sectionVariants} // Apply to this section
       >
         {/* Contact Form */}
         <motion.div
           className="flex-1 flex flex-col justify-between bg-white p-6 rounded-lg shadow-md"
-          variants={footerItemVariants}
-          whileHover="hover"
+          variants={sectionVariants}
+          whileHover={{ scale: 1.05 }}
         >
           <h3 className="text-lg font-medium text-gray-700 text-center mb-4">
             Napíšte nám
           </h3>
           <form onSubmit={handleSubmit} className="flex flex-col gap-6 h-full">
-            {/* Meno and Email Row */}
             <div className="flex gap-4">
               <div className="flex flex-col w-1/2">
                 <label
@@ -123,7 +112,6 @@ export const Footer = () => {
                 />
               </div>
             </div>
-            {/* Správa Field */}
             <div className="flex flex-col">
               <label
                 htmlFor="message"
@@ -160,8 +148,8 @@ export const Footer = () => {
         {/* Map Section */}
         <motion.div
           className="flex-1 bg-white p-6 rounded-lg shadow-md"
-          variants={footerItemVariants}
-          whileHover="hover"
+          variants={sectionVariants}
+          whileHover={{ scale: 1.05 }}
         >
           <h3 className="text-lg font-medium text-gray-700 text-center mb-4">
             Poloha apartmánu
@@ -181,16 +169,14 @@ export const Footer = () => {
         </motion.div>
       </motion.div>
 
-      {/* Contact Info */}
+      {/* Email Section */}
       <motion.div
         className="w-full max-w-4xl mt-6 text-center"
-        variants={footerContainerVariants}
+        variants={sectionVariants}
       >
         <div className="flex items-center justify-center space-x-8 text-xl text-gray-700">
-          {/* Email */}
           <motion.div
             className="flex items-center space-x-2"
-            variants={footerItemVariants}
             whileHover={{ scale: 1.1 }}
           >
             <svg

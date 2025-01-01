@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { TitleText } from './export';
+import { sectionVariants } from 'Utilities/motionVariants'; // Import the footer variants
+
 
 const Availability = () => {
   const reservedDates = [
@@ -87,20 +89,15 @@ const Availability = () => {
   const nextMonthYear = currentMonth === 11 ? currentYear + 1 : currentYear;
   const calendarDaysNext = generateCalendarDays(nextMonth, nextMonthYear);
 
-  // Motion variants
-  const calendarVariants = {
-    offscreen: { opacity: 0, y: 100 },
-    onscreen: { opacity: 1, y: 0, transition: { type: 'spring', bounce: 0.4, duration: 1 } },
-  };
 
   return (
-    <motion.div
+    <motion.section
       id="availability"
       className="text-center py-8"
       initial="offscreen"
       whileInView="onscreen"
-      viewport={{ once: true, amount: 0.5 }}
-      variants={calendarVariants}
+      viewport={{ once: false, amount: 0.5 }}
+      variants={sectionVariants}
     >
       <div className="py-8" style={{ marginTop: '8rem' }}>
         <TitleText>Dostupnosť</TitleText>
@@ -118,8 +115,8 @@ const Availability = () => {
           }}
           initial="offscreen"
           whileInView="onscreen"
-          viewport={{ once: true, amount: 0.5 }}
-          variants={calendarVariants}
+          viewport={{ once: false, amount: 0.5 }}
+          variants={sectionVariants}
         >
           {[calendarDaysCurrent, calendarDaysNext].map((calendarDays, index) => {
             const month = index === 0 ? currentMonth : nextMonth;
@@ -137,8 +134,8 @@ const Availability = () => {
                 }}
                 initial="offscreen"
                 whileInView="onscreen"
-                viewport={{ once: true }}
-                variants={calendarVariants}
+                viewport={{ once: false, amount: 0.5 }}
+                variants={sectionVariants}
               >
                 {/* Header with Arrows */}
                 <div
@@ -259,8 +256,8 @@ const Availability = () => {
           }}
           initial="offscreen"
           whileInView="onscreen"
-          viewport={{ once: true }}
-          variants={calendarVariants}
+          viewport={{ once: false, amount: 0.5 }}
+          variants={sectionVariants}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <div
@@ -297,7 +294,7 @@ const Availability = () => {
           </div>
         </motion.div>
       </div>
-    </motion.div>
+    </motion.section>
   );
 };
 
