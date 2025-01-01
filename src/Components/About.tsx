@@ -37,11 +37,11 @@ const About = () => {
   const hero2Images = data.hero2.edges.map((edge) => getImage(edge.node));
 
   return (
-    <section id="about" className="text-center py-8 bg-gradient-to-b from-white to-[#fdffe6]">
+    <section id="about" className="text-center py-8 bg-gradient-to-b from-white to-[#e6f6ff]">
       <div className="py-8">
         <TitleText>O apartmáne Marisol</TitleText>
       </div>
-      <div className="px-48 text-justify text-base font-medium leading-6 text-gray-500">
+      <div className="px-48 text-justify text-base font-medium leading-6 text-gray-500 mb-4">
         Krásny východ slnka nad morom, príjemná dovolenková atmosféra či voňavá káva na terase - to
         všetko môžete zažiť u nás, v apartmáne Marisol. Nachádza sa v jednej z najobľúbenejších
         lokalít mesta Torrevieja, blízko známeho mesta Alicante v Španielsku. Vedľa parku a tiež
@@ -96,7 +96,7 @@ const About = () => {
                   } flex sm:ml-0 lg:mt-0`}
                   key={i}
                 >
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-100 text-green-800">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-300 text-green-800">
                     <svg
                       className="h-4 w-4"
                       viewBox="0 0 20 20"
@@ -121,7 +121,7 @@ const About = () => {
         
       )}
     {/* Add divider */}
-    <SectionDividerWaveOneSide fill="#f0f0f0" />
+    <SectionDividerWaveOneSide fill="#e6f6ff" />
     </section>
   );
 };
