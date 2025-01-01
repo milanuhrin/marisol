@@ -8,7 +8,7 @@ export const SectionDividerWaveOneSide = ({
    fill?: string
 }) => {
    return (
-      <motion.div className='custom-shape-divider-bottom-1643362097 z-0 '>
+      <motion.div className='wave-divider-top-down z-0 '>
          <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 1200 120'

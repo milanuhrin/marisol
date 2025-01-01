@@ -6,6 +6,7 @@ import { TitleText } from './export';
 import { SectionDividerSharp } from 'svg/SectionDividerSharp';
 import { hero2ImageLayouts, hero2Items } from 'Utilities/Data';
 import { cardVariants } from 'Utilities/motionVariants';
+import { SectionDividerWaveOneSide } from 'svg/SectionDividerWaveOneSide';
 
 const About = () => {
   // Fetch images using GraphQL query
@@ -36,7 +37,7 @@ const About = () => {
   const hero2Images = data.hero2.edges.map((edge) => getImage(edge.node));
 
   return (
-    <section id="about" className="text-center py-8 bg-gradient-to-b from-white to-[#f0f0f0]">
+    <section id="about" className="text-center py-8 bg-gradient-to-b from-white to-[#fdffe6]">
       <div className="py-8">
         <TitleText>O apartmáne Marisol</TitleText>
       </div>
@@ -115,8 +116,12 @@ const About = () => {
               ))}
             </ul>
           </motion.div>
+        
         </div>
+        
       )}
+    {/* Add divider */}
+    <SectionDividerWaveOneSide fill="#f0f0f0" />
     </section>
   );
 };

@@ -118,25 +118,26 @@
 
 
 /* druhy obly */
-.custom-shape-divider-bottom-1643362097 {
+/* Divider styles */
+.wave-divider-top-down {
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   width: 100%;
-  overflow: hidden;
+  overflow: visible; /* Allow SVG to overflow if necessary */
   line-height: 0;
-  transform: rotate(180deg);
+  transform: none;
 }
 
-.custom-shape-divider-bottom-1643362097 svg {
+.wave-divider-top-down svg {
   position: relative;
   display: block;
-  width: calc(165% + 1.3px);
-  height: 442px;
+  width: 100%; /* Use full width of container */
+  height: 60px; /* Adjust height to fit layout */
 }
 
-.custom-shape-divider-bottom-1643362097 .shape-fill {
-  fill: #ffffff;
+.wave-divider-top-down .shape-fill {
+  fill:#fdffe6; /* Match the desired background color */
 }
 
 /* DALSI SIKMI */
@@ -147,7 +148,7 @@
   width: 100%;
   overflow: hidden;
   line-height: 0;
-  transform: rotate(180deg);
+  transform: none;
 }
 
 .custom-shape-divider-bottom-1643366277 svg {
@@ -158,7 +159,9 @@
 }
 
 .custom-shape-divider-bottom-1643366277 .shape-fill {
-  fill: #ffffff;
+  fill: #f0f0f0; /* Update fill color */
+  stroke: black; /* Optional: add a border for debugging */
+  stroke-width: 1px;
 }
 
 .calendar {

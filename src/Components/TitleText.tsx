@@ -9,7 +9,7 @@ export const TitleText = ({
 }) => {
   return (
     <h1
-      className={`${headerStyle} from-snakeGr1 to-snakeGr2 bg-gradient-to-r -mt-12 bg-clip-text text-3xl font-extrabold text-transparent`}
+      className={`${headerStyle} from-snakeGr1 to-snakeGr2 bg-gradient-to-r bg-clip-text text-3xl font-extrabold text-transparent`}
     >
       {children}
     </h1>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import { TitleText } from './export';
+import { SectionDividerWaveOneSide } from 'svg/SectionDividerWaveOneSide';
 
 
 const images = Array.from({ length: 43 }, (_, i) =>
@@ -93,7 +94,7 @@ const Gallery: React.FC = () => {
   const moveToPrev = () => setCurrentIndex((currentIndex - 1 + images.length) % images.length);
 
   return (
-    <div id="gallery" className="text-center py-8">
+    <div id="gallery" className="relative text-center py-8">
       <div className="py-8">
         <TitleText>Galéria</TitleText>
       </div>
@@ -134,6 +135,9 @@ const Gallery: React.FC = () => {
           onMoveNextRequest={moveToNext}
         />
       )}
+
+      {/* Add divider */}
+      <SectionDividerWaveOneSide fill="#f0f0f0" />
     </div>
   );
 };
