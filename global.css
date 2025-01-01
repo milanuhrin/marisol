@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer components {
   .padding-X-2-18rem {
     @apply px-[2rem] sm:px-[3.5rem] lg:px-[8rem] xl:px-[13rem] 2xl:px-[18rem];

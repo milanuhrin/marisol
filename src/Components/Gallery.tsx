@@ -3,6 +3,7 @@ import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import { TitleText } from './export';
 
+
 const images = Array.from({ length: 43 }, (_, i) =>
   require(`../images/gallery/${String(i + 1).padStart(2, '0')}_${[
     '4559',
@@ -111,14 +112,16 @@ const Gallery: React.FC = () => {
               ref={index === currentIndex ? imgRef : null}
               onLoad={updateContainerSize}
             />
-            <div className="gallery-overlay">
-              <div className="fullscreen-icon">
-                <i className="fa fa-search-plus" aria-hidden="true"></i>
-                <span>Zväčšiť</span>
-              </div>
-            </div>
           </div>
         ))}
+
+        {/* Overlay with magnifier and text */}
+        <div className="gallery-overlay">
+          <div className="fullscreen-icon">
+            <i className="fa fa-search-plus" aria-hidden="true"></i> {/* Magnifier icon */}
+            <span>Zväčšiť</span> {/* Text */}
+          </div>
+        </div>
       </div>
 
       {isOpen && (

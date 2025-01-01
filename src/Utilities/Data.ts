@@ -6,10 +6,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export const hero2Items = [
-  'Hudobné školy',
-  'Profesionálni hudobníci',
-  'Rekreační amatéri',
-  'Oprava mechaniky',
+  'Klimatizácia',
+  'Internet',
+  'Pracovný stôl',
+  'Netflix',
 ];
 
 export const hero2ImageLayouts = [
@@ -19,11 +19,11 @@ export const hero2ImageLayouts = [
   },
   {
     alt: 'Obyvacka',
-    class: ' w-[100%] self-end col-span-6 ',
+    class: ' w-[140%] self-end col-span-6 ',
   },
   {
     alt: 'Terasa',
-    class: ' w-[100%] col-span-5 justify-self-end',
+    class: ' w-[150%] col-span-5 justify-self-end',
   },
   {
     alt: 'Spalna',
