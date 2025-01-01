@@ -44,8 +44,8 @@ const About = () => {
         variants={cardVariants}
         className="py-8"
       >
-        <TitleText>O apartmáne Marisol</TitleText>
-        <div className="px-28 text-justify text-base font-medium leading-6 text-gray-500 mb-4">
+        <TitleText headerStyle="-mt-20">O apartmáne Marisol</TitleText>        
+        <div className="px-28 text-justify text-base font-medium leading-6 text-gray-500 mb-4 mt-8">
           Krásny východ slnka nad morom, príjemná dovolenková atmosféra či voňavá káva na terase - to
           všetko môžete zažiť u nás, v apartmáne Marisol. Nachádza sa v jednej z najobľúbenejších
           lokalít mesta Torrevieja, blízko známeho mesta Alicante v Španielsku. Vedľa parku a tiež
@@ -67,7 +67,7 @@ const About = () => {
           className="relative flex max-w-full flex-col sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:items-center sm:justify-center gap-8"
         >
           {/* Images Section */}
-          <div className="z-10 grid max-w-[33rem] grid-cols-12 grid-rows-2 gap-4 justify-self-center sm:col-start-1 sm:row-start-1">
+          <div className="z-10 grid max-w-[33rem] grid-cols-12 grid-rows-2 gap-4 justify-self-center  sm:col-start-1 sm:row-start-1">
             {hero2ImageLayouts.map((item, i) => (
               <motion.div
                 key={i}
