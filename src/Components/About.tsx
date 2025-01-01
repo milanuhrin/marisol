@@ -36,25 +36,36 @@ const About = () => {
 
   return (
     <section id="about" className="text-center py-8 bg-gradient-to-b from-white to-[#e6f6ff]">
-      {/* Title */}
-      <div className="py-8">
+      {/* Title with Text */}
+      <motion.div
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ amount: 0.1, once: false }}
+        variants={cardVariants}
+        className="py-8"
+      >
         <TitleText>O apartmáne Marisol</TitleText>
-      </div>
+        <div className="px-28 text-justify text-base font-medium leading-6 text-gray-500 mb-4">
+          Krásny východ slnka nad morom, príjemná dovolenková atmosféra či voňavá káva na terase - to
+          všetko môžete zažiť u nás, v apartmáne Marisol. Nachádza sa v jednej z najobľúbenejších
+          lokalít mesta Torrevieja, blízko známeho mesta Alicante v Španielsku. Vedľa parku a tiež
+          historického bodu mesta Torre del Moro. Mimo ruchu centra mesta a zároveň na krok od
+          reštaurácií, supermarketu, lekárne, autobusovej zastávky, no najmä dlhej piesočnej pláže La
+          Mata, ktorá je každoročne ocenená modrou vlajkou. Nezameniteľná liečivá mikroklíma, športové
+          vyžitie i večerná zábava sú predpokladom pre prežitie nezabudnuteľnej dovolenky, či už pre
+          páry, alebo rodiny.
+        </div>
+      </motion.div>
 
-      {/* Long Text */}
-      <div className="px-28 text-justify text-base font-medium leading-6 text-gray-500 mb-4">
-        Krásny východ slnka nad morom, príjemná dovolenková atmosféra či voňavá káva na terase - to
-        všetko môžete zažiť u nás, v apartmáne Marisol. Nachádza sa v jednej z najobľúbenejších
-        lokalít mesta Torrevieja, blízko známeho mesta Alicante v Španielsku. Vedľa parku a tiež
-        historického bodu mesta Torre del Moro. Mimo ruchu centra mesta a zároveň na krok od
-        reštaurácií, supermarketu, lekárne, autobusovej zastávky, no najmä dlhej piesočnej pláže La
-        Mata, ktorá je každoročne ocenená modrou vlajkou. Nezameniteľná liečivá mikroklíma, športové
-        vyžitie i večerná zábava sú predpokladom pre prežitie nezabudnuteľnej dovolenky, či už pre
-        páry, alebo rodiny.
-      </div>
-
+      {/* 4 Images + Section Beside */}
       {hero2Images.length >= 4 && (
-        <div className="relative flex max-w-full flex-col sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:items-center sm:justify-center padding-X-2-18rem gap-3o5-6rem">
+        <motion.div
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: false }}
+          variants={cardVariants}
+          className="relative flex max-w-full flex-col sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:items-center sm:justify-center gap-8"
+        >
           {/* Images Section */}
           <div className="z-10 grid max-w-[33rem] grid-cols-12 grid-rows-2 gap-4 justify-self-center sm:col-start-1 sm:row-start-1">
             {hero2ImageLayouts.map((item, i) => (
@@ -62,7 +73,7 @@ const About = () => {
                 key={i}
                 initial="offscreen"
                 whileInView="onscreen"
-                viewport={{ margin: '60px', once: false }}
+                viewport={{ amount: 0.1, once: false }}
                 whileHover={{ scale: 1.08 }}
                 variants={{
                   ...cardVariants,
@@ -80,15 +91,14 @@ const About = () => {
             ))}
           </div>
 
-          {/* New Icon-Based Section */}
+          {/* Icon-Based Section */}
           <motion.div
             className="z-10 flex flex-col gap-8 sm:col-start-2 sm:row-start-1 sm:self-center sm:justify-self-center"
             initial="offscreen"
             whileInView="onscreen"
-            viewport={{ margin: '400px', once: false }}
+            viewport={{ amount: 0.1, once: false }}
             variants={cardVariants}
           >
-            {/* <h2 className="text-xl font-bold">Apartmán ponúka</h2> */}
             <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-x-6 sm:text-left mt-4 ">
               {[
                 { icon: '👤', text: '5 ľudí' },
@@ -107,11 +117,18 @@ const About = () => {
               ))}
             </ul>
           </motion.div>
-        </div>
+        </motion.div>
       )}
-      {/* Amenities Section */}
-      <div className="py-8">
-        <h2 className="text-xl font-bold pl-6 lg:pl-12">Vybavenie Apartmánu</h2>
+
+      {/* Vybavenie Apartmánu */}
+      <motion.div
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ amount: 0.1, once: false }}
+        variants={cardVariants}
+        className="py-8"
+      >
+        <h2 className="text-xl font-bold pl-6 lg:pl-12 mt-8">Vybavenie Apartmánu</h2>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:grid-cols-3 sm:gap-x-6 pl-32 mt-8 lg:mt-12 sm:text-left">
           {[
             'Klimatizácia',
@@ -135,10 +152,16 @@ const About = () => {
             </li>
           ))}
         </ul>
-      </div>
+      </motion.div>
 
-      {/* Amenities Section */}
-      <div className="py-8">
+      {/* Podmienky */}
+      <motion.div
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ amount: 0.1, once: false }}
+        variants={cardVariants}
+        className="py-8"
+      >
         <h2 className="text-xl font-bold pl-6 lg:pl-12">Podmienky</h2>
         <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 pl-32 mt-8 lg:mt-12">
           {[
@@ -155,7 +178,7 @@ const About = () => {
             </li>
           ))}
         </ul>
-      </div>
+      </motion.div>
 
       {/* Add Divider */}
       <SectionDividerWaveOneSide fill="#e6f6ff" />
