@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
-import { TitleText } from '../TitleText';
+import { TitleText } from './TitleText';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export const Footer = () => {
@@ -187,24 +187,6 @@ export const Footer = () => {
         variants={footerContainerVariants}
       >
         <div className="flex items-center justify-center space-x-8 text-xl text-gray-700">
-          {/* Phone */}
-          <motion.div
-            className="flex items-center space-x-2"
-            variants={footerItemVariants}
-            whileHover={{ scale: 1.1 }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              className="text-gray-700"
-            >
-              <path d="M6.62 10.79a15.09 15.09 0 006.57 6.57l2.2-2.2a1 1 0 011.05-.25 11.38 11.38 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A18 18 0 013 5a1 1 0 011-1h3.33a1 1 0 011 1 11.38 11.38 0 00.57 3.58 1 1 0 01-.25 1.05z"></path>
-            </svg>
-            <span>0902 217 449</span>
-          </motion.div>
           {/* Email */}
           <motion.div
             className="flex items-center space-x-2"
@@ -225,20 +207,6 @@ export const Footer = () => {
           </motion.div>
         </div>
       </motion.div>
-
-      {/* Fixed Phone Button */}
-      {width < 640 && (
-        <div
-          onClick={() => window.open('tel:+421905405802', '_self')}
-          className="fixed bottom-5 right-5 z-50 flex h-[4rem] w-[4rem] items-center justify-center rounded-full bg-[#dfe4ed]"
-        >
-          <FontAwesomeIcon
-            size="lg"
-            className="flex text-[#17303b]"
-            icon={faPhone as IconProp}
-          />
-        </div>
-      )}
     </motion.footer>
   );
 };

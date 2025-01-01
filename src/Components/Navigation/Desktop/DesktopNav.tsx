@@ -4,6 +4,8 @@ import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { menuItems } from 'Utilities/Data'
 import { container, desktopMenuItems } from 'Utilities/motionVariants'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesomeIcon
+import { faClipboard, faAddressCard, faPhone } from '@fortawesome/free-solid-svg-icons'; // Import icons
 
 interface Props {}
 
@@ -28,14 +30,21 @@ export const DesktopNav = (props: Props) => {
             </motion.li> */}
 
             {menuItems.map((item, i) => (
-               <motion.li
-                  className='text-silver'
-                  variants={desktopMenuItems}
-                  key={i}>
+            <motion.li
+               className="text-silver hover:font-bold hover:text-lg cursor-pointer transition duration-300"
+               variants={desktopMenuItems}
+               key={i}
+               onClick={item.action || undefined}
+            >
+               {item.icon && <FontAwesomeIcon icon={item.icon} className="mr-2" />}
+               {item.action ? (
+                  <span aria-label={item.name}>{item.name}</span>
+               ) : (
                   <Link to={item.link} aria-label={item.name}>
-                     {item.name}
+                  {item.name}
                   </Link>
-               </motion.li>
+               )}
+            </motion.li>
             ))}
          </motion.ul>
       </>

@@ -1,5 +1,5 @@
 export * from 'Components/AnimOnScroll';
-export * from 'Components/Footer/Footer';
+export * from 'Components/Footer';
 export * from 'Components/Hero2';
 export * from 'Components/Landing';
 export * from 'Components/Navigation/Navigation';

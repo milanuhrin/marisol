@@ -19,11 +19,11 @@ export const hero2ImageLayouts = [
   },
   {
     alt: 'Obyvacka',
-    class: ' w-[140%] self-end col-span-6 ',
+    class: ' w-[80%] self-end col-span-6 ',
   },
   {
     alt: 'Terasa',
-    class: ' w-[150%] col-span-5 justify-self-end',
+    class: ' w-[100%] col-span-5 justify-self-end',
   },
   {
     alt: 'Spalna',
@@ -39,12 +39,10 @@ export const menuItems = [
   {
     name: 'O apartmáne',
     link: '#about',
-    icon: faClipboard,
   },
   {
     name: 'Galéria',
     link: '#gallery',
-    icon: faAddressCard,
   },
   {
     name: 'Cenník',
@@ -57,5 +55,12 @@ export const menuItems = [
   {
     name: 'Kontakt',
     link: '#contact',
+  },
+  {
+    name: '+421 902 217 449',
+    icon: faPhone,
+    action: () => {
+      window.location.href = 'tel:+421902217449';
+    },
   },
 ];
