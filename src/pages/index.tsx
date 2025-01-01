@@ -24,28 +24,12 @@ const IndexPage = () => {
   return (
     <>
       <SEO />
-      <Landing containerStyles="" />
+      <Landing />
       <About />
-      <main id="mainContent" className="flex flex-col">
-        <Gallery />
-        <Pricelist />
-        <Availability />
-      </main>
+      <Gallery />
+      <Pricelist />
+      <Availability />
       <Footer />
-
-      {/* Fixed round Phone button */}
-      {width < 640 && (
-        <div
-          onClick={() => window.open('tel:+421905405802', '_self')}
-          className="fixed bottom-5 right-5 z-50 flex h-[4rem] w-[4rem] items-center justify-center rounded-full bg-[#dfe4ed]"
-        >
-          <FontAwesomeIcon
-            size="lg"
-            className="flex text-[#17303b]"
-            icon={faPhone as IconProp}
-          />
-        </div>
-      )}
     </>
   );
 };

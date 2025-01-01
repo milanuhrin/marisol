@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { TitleText } from './TitleText';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export const Footer = () => {
   const [formData, setFormData] = useState({
@@ -11,12 +14,12 @@ export const Footer = () => {
 
   const [formStatus, setFormStatus] = useState('');
 
-  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
+  const handleInputChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
     try {
@@ -48,6 +51,9 @@ export const Footer = () => {
   const footerItemVariants = {
     hover: { scale: 1.05 },
   };
+
+  const width =
+    typeof window !== 'undefined' ? window.innerWidth : 0; // Check window width for responsive behavior
 
   return (
     <motion.footer
@@ -81,7 +87,10 @@ export const Footer = () => {
             {/* Meno and Email Row */}
             <div className="flex gap-4">
               <div className="flex flex-col w-1/2">
-                <label htmlFor="name" className="text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="name"
+                  className="text-sm font-medium text-gray-700 mb-2"
+                >
                   Meno
                 </label>
                 <input
@@ -96,7 +105,10 @@ export const Footer = () => {
                 />
               </div>
               <div className="flex flex-col w-1/2">
-                <label htmlFor="email" className="text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="email"
+                  className="text-sm font-medium text-gray-700 mb-2"
+                >
                   Email
                 </label>
                 <input
@@ -113,7 +125,10 @@ export const Footer = () => {
             </div>
             {/* Správa Field */}
             <div className="flex flex-col">
-              <label htmlFor="message" className="text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="message"
+                className="text-sm font-medium text-gray-700 mb-2"
+              >
                 Správa
               </label>
               <textarea
@@ -210,6 +225,20 @@ export const Footer = () => {
           </motion.div>
         </div>
       </motion.div>
+
+      {/* Fixed Phone Button */}
+      {width < 640 && (
+        <div
+          onClick={() => window.open('tel:+421905405802', '_self')}
+          className="fixed bottom-5 right-5 z-50 flex h-[4rem] w-[4rem] items-center justify-center rounded-full bg-[#dfe4ed]"
+        >
+          <FontAwesomeIcon
+            size="lg"
+            className="flex text-[#17303b]"
+            icon={faPhone as IconProp}
+          />
+        </div>
+      )}
     </motion.footer>
   );
 };
