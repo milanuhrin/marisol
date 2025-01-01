@@ -3,13 +3,11 @@ import { motion } from 'framer-motion';
 import { graphql, useStaticQuery } from 'gatsby';
 import { getImage, GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import { TitleText } from './export';
-import { SectionDividerSharp } from 'svg/SectionDividerSharp';
+import { SectionDividerWaveOneSide } from 'svg/SectionDividerWaveOneSide';
 import { hero2ImageLayouts, hero2Items } from 'Utilities/Data';
 import { cardVariants } from 'Utilities/motionVariants';
-import { SectionDividerWaveOneSide } from 'svg/SectionDividerWaveOneSide';
 
 const About = () => {
-  // Fetch images using GraphQL query
   const data: {
     hero2: {
       edges: {
@@ -38,10 +36,13 @@ const About = () => {
 
   return (
     <section id="about" className="text-center py-8 bg-gradient-to-b from-white to-[#e6f6ff]">
+      {/* Title */}
       <div className="py-8">
         <TitleText>O apartmáne Marisol</TitleText>
       </div>
-      <div className="px-48 text-justify text-base font-medium leading-6 text-gray-500 mb-4">
+
+      {/* Long Text */}
+      <div className="px-28 text-justify text-base font-medium leading-6 text-gray-500 mb-4">
         Krásny východ slnka nad morom, príjemná dovolenková atmosféra či voňavá káva na terase - to
         všetko môžete zažiť u nás, v apartmáne Marisol. Nachádza sa v jednej z najobľúbenejších
         lokalít mesta Torrevieja, blízko známeho mesta Alicante v Španielsku. Vedľa parku a tiež
@@ -53,8 +54,8 @@ const About = () => {
       </div>
 
       {hero2Images.length >= 4 && (
-        <div className="padding-X-2-18rem gap-3o5-6rem relative flex max-w-full flex-col sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:items-center sm:justify-center">
-          {/* Images */}
+        <div className="relative flex max-w-full flex-col sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:items-center sm:justify-center padding-X-2-18rem gap-3o5-6rem">
+          {/* Images Section */}
           <div className="z-10 grid max-w-[33rem] grid-cols-12 grid-rows-2 gap-4 justify-self-center sm:col-start-1 sm:row-start-1">
             {hero2ImageLayouts.map((item, i) => (
               <motion.div
@@ -71,57 +72,93 @@ const About = () => {
               >
                 <GatsbyImage
                   imgClassName="rounded-lg w-auto block object-cover"
-                  className="block w-auto rounded-lg shadow-xl"
-                  image={hero2Images[i]!} // Non-null assertion
+                  className="block w-auto rounded-lg shadow-xl mt-4"
+                  image={hero2Images[i]!}
                   alt={`Gallery image ${i + 1}`}
                 />
               </motion.div>
             ))}
           </div>
 
-          {/* Features */}
+          {/* New Icon-Based Section */}
           <motion.div
-            className="z-10 flex flex-col gap-[3.5rem] sm:col-start-2 sm:row-start-1 sm:self-center sm:justify-self-center"
+            className="z-10 flex flex-col gap-8 sm:col-start-2 sm:row-start-1 sm:self-center sm:justify-self-center"
             initial="offscreen"
             whileInView="onscreen"
             viewport={{ margin: '400px', once: false }}
             variants={cardVariants}
           >
-            <h2 className="text-xl font-bold">Čo ponúka apartmán Marisol</h2>
-            <ul className="flex flex-col gap-6 self-center justify-self-center sm:grid sm:grid-cols-2">
-              {hero2Items.map((name, i) => (
-                <li
-                  className={`${
-                    i % 2 === 1 ? 'ml-[1.5rem]' : ''
-                  } flex sm:ml-0 lg:mt-0`}
-                  key={i}
-                >
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-300 text-green-800">
-                    <svg
-                      className="h-4 w-4"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a 1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                  </span>
-                  <span className="ml-4 text-base font-medium leading-6 text-gray-500">
-                    {name}
-                  </span>
+            {/* <h2 className="text-xl font-bold">Apartmán ponúka</h2> */}
+            <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-x-6 sm:text-left mt-4 ">
+              {[
+                { icon: '👤', text: '5 ľudí' },
+                { icon: '🛌', text: '2 spálne' },
+                { icon: '🍹', text: 'terasa' },
+                { icon: '🛁', text: '1 kúpeľňa' },
+                { icon: '🏊', text: 'bazén' },
+                { icon: '✈️', text: 'letisko 35 min autom' },
+                { icon: '🏖️', text: 'pláž 10 min pešo' },
+                { icon: '🍽️', text: 'reštaurácie 5 min pešo' },
+              ].map((item, index) => (
+                <li key={index} className="flex items-center gap-6 text-base font-medium text-gray-500">
+                  <span className="text-lg">{item.icon}</span>
+                  <span>{item.text}</span>
                 </li>
               ))}
             </ul>
           </motion.div>
-        
         </div>
-        
       )}
-    {/* Add divider */}
-    <SectionDividerWaveOneSide fill="#e6f6ff" />
+      {/* Amenities Section */}
+      <div className="py-8">
+        <h2 className="text-xl font-bold pl-6 lg:pl-12">Vybavenie Apartmánu</h2>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:grid-cols-3 sm:gap-x-6 pl-32 mt-8 lg:mt-12 sm:text-left">
+          {[
+            'Klimatizácia',
+            'Internet',
+            'Pracovný stôl',
+            'Netflix',
+            'Kávovar',
+            'Práčka',
+            'Sušička',
+            'Varná doska',
+            'Chladnička',
+            'Mikrovlnka',
+            'Rýchlovarná kanvica',
+            'Žehlička',
+            'Televízor',
+            'Parkovanie',
+          ].map((amenity, index) => (
+            <li key={index} className="flex items-center gap-4 text-base font-medium text-gray-500">
+              <span className="text-sm">✔</span>
+              <span>{amenity}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Amenities Section */}
+      <div className="py-8">
+        <h2 className="text-xl font-bold pl-6 lg:pl-12">Podmienky</h2>
+        <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 pl-32 mt-8 lg:mt-12">
+          {[
+            { text: 'Fajčenie', icon: '🚫' },
+            { text: 'Párty', icon: '🚫' },
+            { text: 'Domáce zvieratá', icon: '🚫' },
+            'Deti',
+          ].map((amenity, index) => (
+            <li key={index} className="flex items-center gap-4 text-base font-medium text-gray-500">
+              <span className="text-sm">
+                {typeof amenity === 'object' ? amenity.icon : '✔'}
+              </span>
+              <span>{typeof amenity === 'object' ? amenity.text : amenity}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Add Divider */}
+      <SectionDividerWaveOneSide fill="#e6f6ff" />
     </section>
   );
 };
