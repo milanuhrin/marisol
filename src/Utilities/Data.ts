@@ -18,15 +18,15 @@ export const hero2ImageLayouts = [
     class: 'w-[100%] self-end col-span-6 object-contain ',
   },
   {
+    alt: 'Spalna',
+    class: ' w-[79%] self-end col-span-6 ',
+  },
+  {
     alt: 'Obyvacka',
-    class: ' w-[80%] self-end col-span-6 ',
+    class: ' w-[80%] col-span-5 justify-self-end',
   },
   {
     alt: 'Terasa',
-    class: ' w-[100%] col-span-5 justify-self-end',
-  },
-  {
-    alt: 'Spalna',
     class: 'w-[100%] col-span-6',
   },
 ];

@@ -43,7 +43,7 @@ export const Footer = () => {
   return (
     <motion.footer
       id="contact"
-      className="bg-silver relative flex w-full flex-col items-center justify-center gap-[2rem] py-10 sm:gap-[2rem] sm:py-[2.5rem]"
+      className="bg-silver relative flex w-full flex-col items-center justify-center gap-[3rem] py-10 sm:gap-[2rem] sm:py-[3rem]"
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: false, amount: 0.5 }}
@@ -61,7 +61,7 @@ export const Footer = () => {
       {/* Contact Form and Map */}
       <motion.div
         className="flex flex-col sm:flex-row justify-center w-full max-w-6xl gap-8"
-        style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}
+        style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '2rem' }}
         variants={sectionVariants} // Apply to this section
       >
         {/* Contact Form */}
