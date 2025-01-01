@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { hero2ImageLayouts, hero2Items } from 'Utilities/Data';
 import { SectionDividerSharp } from 'svg/SectionDividerSharp';
 import { cardVariants } from 'Utilities/motionVariants';
-import { TitleText } from './Footer/TitleText';
+import { TitleText } from './TitleText';
 
 
 interface Props {

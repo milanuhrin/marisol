@@ -117,7 +117,6 @@ const About = () => {
           </motion.div>
         </div>
       )}
-      <SectionDividerSharp fill="#fafdfd" />
     </section>
   );
 };

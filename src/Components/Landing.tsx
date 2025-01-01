@@ -113,7 +113,7 @@ export const Landing = (props: Props) => {
         )}
 
         {/* Divider */}
-        <div className="absolute bottom-[10%] left-0 w-full h-[100px] z-30 pointer-events-none">
+        <div className="absolute bottom-[10%] left-0 w-full h-[30px] z-30 pointer-events-none">
           <SectionDivider fill="white" />
         </div>
       </motion.section>

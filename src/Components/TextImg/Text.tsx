@@ -1,5 +1,5 @@
 import React from 'react';
-import { TitleText } from '../Footer/TitleText';
+import { TitleText } from '../TitleText';
 interface Props {
   paragraphText?: string | React.ReactElement;
   paragraphStyle?: string;

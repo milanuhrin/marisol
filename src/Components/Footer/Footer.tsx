@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
-import { TitleText } from './TitleText';
+import { TitleText } from '../TitleText';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export const Footer = () => {
