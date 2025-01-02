@@ -141,6 +141,7 @@ const About = () => {
         </motion.div>
       )}
 
+
       {/* Vybavenie Apartmánu */}
       <motion.div
         initial="offscreen"
@@ -149,59 +150,112 @@ const About = () => {
         variants={cardVariants}
         className="py-8"
       >
-        <h2 className="text-xl font-bold pl-6 lg:pl-12 mt-8">Vybavenie Apartmánu</h2>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:grid-cols-3 sm:gap-x-6 pl-32 mt-8 lg:mt-12 sm:text-left">
-          {[
-            'Klimatizácia', 
-            'Televízor',
-            'Internet',
-            'Netflix',
-            'Kávovar',
-            'Elektrická rúra',
-            'Mikrovlnka',
-            'Varná doska',
-            'Chladnička',
-            'Varná kanvica',
-            'Práčka',
-            'Pracovné miesto',
-            'Posteľná bielizeň',
-            'Uteráky',
-            'Detská postieľka',
-            'Detská stolička',
-            'Hračky a hry',
-          ].map((amenity, index) => (
-            <li key={index} className="flex items-center gap-4 text-base font-medium text-gray-500">
-              <span className="text-sm">✔</span>
-              <span>{amenity}</span>
-            </li>
-          ))}
-        </ul>
-      </motion.div>
+        <h2 className="text-xl font-bold text-center mb-8">Vybavenie apartmánu a podmienky</h2>
 
-      {/* Podmienky */}
-      <motion.div
-        initial="offscreen"
-        whileInView="onscreen"
-        viewport={{ amount: 0.1, once: false }}
-        variants={cardVariants}
-        className="py-8"
-      >
-        <h2 className="text-xl font-bold pl-6 lg:pl-12">Podmienky</h2>
-        <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 pl-32 mt-8 lg:mt-12">
-          {[
-            { text: 'Fajčenie', icon: '🚫' },
-            { text: 'Párty', icon: '🚫' },
-            { text: 'Domáce zvieratá', icon: '🚫' },
-            'Deti',
-          ].map((amenity, index) => (
-            <li key={index} className="flex items-center gap-4 text-base font-medium text-gray-500">
-              <span className="text-sm">
-                {typeof amenity === 'object' ? amenity.icon : '✔'}
-              </span>
-              <span>{typeof amenity === 'object' ? amenity.text : amenity}</span>
-            </li>
-          ))}
-        </ul>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 lg:px-12">
+          {/* Kuchyňa */}
+          <div className="p-6 border rounded-lg shadow-lg bg-gray-50 w-full">
+            <h3 className="text-lg font-semibold mb-4 text-gray-700">Kuchyňa</h3>
+            <ul className="space-y-3">
+              {[
+                'Chladnička',
+                'Mikrovlnka',
+                'Elektrická rúra',
+                'Varná doska',
+                'Kávovar',
+                'Varná kanvica',
+                'Detská stolička',
+                'Práčka',
+              ].map((item, index) => (
+                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-600">
+                  <span className="text-sm text-blue-800">✔</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Kúpeľňa */}
+          <div className="p-6 border rounded-lg shadow-lg bg-gray-50 w-full">
+            <h3 className="text-lg font-semibold mb-4 text-gray-700">Kúpeľňa</h3>
+            <ul className="space-y-3">
+              {[
+                'Internet - WiFi',
+                'Umývadlo so skrinkou',
+                'Zrkadlo',
+                'Skrinka stojaca',
+                'Uteráky',
+              ].map((item, index) => (
+                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-600">
+                  <span className="text-sm text-blue-800">✔</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Obývačka */}
+          <div className="p-6 border rounded-lg shadow-lg bg-gray-50 w-full">
+            <h3 className="text-lg font-semibold mb-4 text-gray-700">Obývačka</h3>
+            <ul className="space-y-3">
+              {[
+                'Televízor', 
+                'Klimatizácia', 
+                'Netflix', 
+                'Terasa', 
+                'Hračky a hry',].map((item, index) => (
+                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-600">
+                  <span className="text-sm text-blue-800">✔</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Spálňa */}
+          <div className="p-6 border rounded-lg shadow-lg bg-gray-50 w-full">
+            <h3 className="text-lg font-semibold mb-4 text-gray-700">Spálňa</h3>
+            <ul className="space-y-3">
+              {['Manželská posteľ', 'Nočné stolíky', 'Šatník', 'Detská postieľka', 'Posteľná bielizeň'].map((item, index) => (
+                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-600">
+                  <span className="text-sm text-blue-800">✔</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Izba */}
+          <div className="p-6 border rounded-lg shadow-lg bg-gray-50 w-full">
+            <h3 className="text-lg font-semibold mb-4 text-gray-700">Izba</h3>
+            <ul className="space-y-3">
+              {['Dve postele', 'Nočný stolík', 'Šatník', 'Pracovné miesto', 'Posteľná bielizeň',].map((item, index) => (
+                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-600">
+                  <span className="text-sm text-blue-800">✔</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* Ostatné */}
+          <div className="p-6 border rounded-lg shadow-lg bg-gray-50 w-full">
+            <h3 className="text-lg font-semibold mb-4 text-gray-700">Ostatné</h3>
+            <ul className="space-y-3">
+              {[
+                { text: 'Internet - WiFi', icon: '✔' },
+                { text: 'Deti', icon: '✔' },
+                { text: 'Domáce zvieratá', icon: '🚫' },
+                { text: 'Fajčenie', icon: '🚫' },
+                { text: 'Párty', icon: '🚫' },
+              ].map((item, index) => (
+                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-600">
+                  <span className={`text-sm ${item.icon === '✔' ? 'text-blue-800' : ''}`}>{item.icon}</span>
+                  <span>{item.text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </motion.div>
 
       {/* Aktivity Subsection */}
