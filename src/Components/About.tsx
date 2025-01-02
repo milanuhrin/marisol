@@ -152,20 +152,23 @@ const About = () => {
         <h2 className="text-xl font-bold pl-6 lg:pl-12 mt-8">Vybavenie Apartmánu</h2>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:grid-cols-3 sm:gap-x-6 pl-32 mt-8 lg:mt-12 sm:text-left">
           {[
-            'Klimatizácia',
+            'Klimatizácia', 
+            'Televízor',
             'Internet',
-            'Pracovný stôl',
             'Netflix',
             'Kávovar',
-            'Práčka',
-            'Sušička',
+            'Elektrická rúra',
+            'Mikrovlnka',
             'Varná doska',
             'Chladnička',
-            'Mikrovlnka',
-            'Rýchlovarná kanvica',
-            'Žehlička',
-            'Televízor',
-            'Parkovanie',
+            'Varná kanvica',
+            'Práčka',
+            'Pracovné miesto',
+            'Posteľná bielizeň',
+            'Uteráky',
+            'Detská postieľka',
+            'Detská stolička',
+            'Hračky a hry',
           ].map((amenity, index) => (
             <li key={index} className="flex items-center gap-4 text-base font-medium text-gray-500">
               <span className="text-sm">✔</span>
