@@ -99,7 +99,7 @@ const Availability = () => {
       viewport={{ once: false, amount: 0.5 }}
       variants={sectionVariants}
     >
-      <div className="py-8" style={{ marginTop: '8rem' }}>
+      <div className="py-8" style={{ marginTop: '4rem' }}>
         <TitleText>Dostupnosť</TitleText>
 
         {/* Add space between title and calendar */}

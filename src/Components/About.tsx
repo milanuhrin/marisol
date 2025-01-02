@@ -4,7 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { getImage, GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import { TitleText } from './export';
 import { SectionDividerWaveOneSide } from 'svg/SectionDividerWaveOneSide';
-import { hero2ImageLayouts, hero2Items } from 'Utilities/Data';
+import { hero2ImageLayouts } from 'Utilities/Data';
 import { cardVariants } from 'Utilities/motionVariants';
 
 const About = () => {
@@ -12,6 +12,16 @@ const About = () => {
     hero2: {
       edges: {
         node: {
+          childImageSharp: {
+            gatsbyImageData: IGatsbyImageData;
+          };
+        };
+      }[];
+    };
+    activities: {
+      edges: {
+        node: {
+          relativePath: string;
           childImageSharp: {
             gatsbyImageData: IGatsbyImageData;
           };
@@ -29,10 +39,24 @@ const About = () => {
           }
         }
       }
+      activities: allFile(filter: { relativePath: { regex: "/activities/.*\\.(jpg|png)$/" } }) {
+        edges {
+          node {
+            relativePath
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED)
+            }
+          }
+        }
+      }
     }
   `);
 
   const hero2Images = data.hero2.edges.map((edge) => getImage(edge.node));
+  const activityImages = data.activities.edges.reduce((acc, edge) => {
+    acc[edge.node.relativePath.split('/').pop()!] = getImage(edge.node);
+    return acc;
+  }, {} as Record<string, IGatsbyImageData | undefined>);
 
   return (
     <section id="about" className="text-center py-8 bg-gradient-to-b from-white to-[#e6f6ff]">
@@ -40,11 +64,11 @@ const About = () => {
       <motion.div
         initial="offscreen"
         whileInView="onscreen"
-        viewport={{ amount:0, once: false }}
+        viewport={{ amount: 0, once: false }}
         variants={cardVariants}
         className="py-8"
       >
-        <TitleText>O apartmáne Marisol</TitleText>        
+        <TitleText>O apartmáne Marisol</TitleText>
         <div className="px-28 text-justify text-base font-medium leading-6 text-gray-500 mb-4 mt-8">
           Krásny východ slnka nad morom, príjemná dovolenková atmosféra či voňavá káva na terase - to
           všetko môžete zažiť u nás, v apartmáne Marisol. Nachádza sa v jednej z najobľúbenejších
@@ -62,18 +86,16 @@ const About = () => {
         <motion.div
           initial="offscreen"
           whileInView="onscreen"
-          // viewport={{ amount:0, once: false }}
           variants={cardVariants}
           className="relative flex max-w-full flex-col sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:items-center sm:justify-center gap-8"
         >
           {/* Images Section */}
-          <div className="z-10 grid max-w-[33rem] grid-cols-12 grid-rows-2 gap-4 justify-self-center  sm:col-start-1 sm:row-start-1">
+          <div className="z-10 grid max-w-[33rem] grid-cols-12 grid-rows-2 gap-4 justify-self-center sm:col-start-1 sm:row-start-1">
             {hero2ImageLayouts.map((item, i) => (
               <motion.div
                 key={i}
                 initial="offscreen"
                 whileInView="onscreen"
-                viewport={{ amount:0, once: false }}
                 whileHover={{ scale: 1.08 }}
                 variants={{
                   ...cardVariants,
@@ -96,7 +118,6 @@ const About = () => {
             className="z-10 flex flex-col gap-8 sm:col-start-2 sm:row-start-1 sm:self-center sm:justify-self-center"
             initial="offscreen"
             whileInView="onscreen"
-            viewport={{ amount:0, once: false }}
             variants={cardVariants}
           >
             <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-x-6 sm:text-left mt-4 ">
@@ -179,6 +200,40 @@ const About = () => {
           ))}
         </ul>
       </motion.div>
+
+      {/* Aktivity Subsection */}
+      <div className="py-8 mx-6 sm:mx-12 lg:mx-20">
+        <h2 className="text-xl font-bold pl-20 text-center">Aktivity</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mt-8">
+          {[
+            { title: 'Bazén', image: 'pool.png', description: 'Užite si relaxáciu v modernom bazéne.' },
+            { title: 'Pláž', image: 'beach.jpg', description: 'Piesočná pláž je len pár krokov od apartmánu.' },
+            { title: 'Soľné jazerá', image: 'salt-lakes.png', description: 'Navštívte nádherné liečivé soľné jazerá.' },
+            { title: 'Wakepark', image: 'wakepark.png', description: 'Zažite adrenalín na vode v modernom wakeparku.' },
+            { title: 'Golf', image: 'golf.png', description: 'Zahrajte si golf na profesionálnych ihriskách.' },
+            { title: 'Beh a bicyklovanie', image: 'running-cycling.jpg', description: 'Beh či cyklistika v krásnom prostredí.' },
+            { title: 'Safari Elche', image: 'safari.png', description: 'Objavte exotické zvieratá v Safari Elche.' },
+            { title: 'Aquapark', image: 'aquapark.jpg', description: 'Zábava a tobogány v aquaparku.' },
+            { title: 'Trhy', image: 'market.png', description: 'Navštívte miestne trhy plné tradičných produktov.' },
+            { title: 'Historické miesta', image: 'historical-places.jpg', description: 'História v blízkych historických miestach.' },
+          ].map((activity, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md transition-transform hover:scale-105"
+            >
+              <div className="w-32 h-32">
+                <GatsbyImage
+                  image={activityImages[activity.image]!}
+                  alt={activity.title}
+                  className="w-full h-full object-cover rounded-lg"
+                />
+              </div>
+              <h3 className="mt-4 text-lg font-bold">{activity.title}</h3>
+              <p className="mt-2 text-sm text-gray-500">{activity.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Add Divider */}
       <SectionDividerWaveOneSide fill="#e6f6ff" />

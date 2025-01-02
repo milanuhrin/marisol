@@ -11,19 +11,61 @@ const Pricelist = () => {
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: false, amount: 0.5 }}
-      variants={sectionVariants} // Apply motion variants
+      variants={sectionVariants}
     >
       {/* Title */}
-      <motion.div className="py-8" variants={sectionVariants}>
-        <TitleText>Cenník</TitleText>
+      <motion.div variants={sectionVariants}>
+        <TitleText>Cenník na rok 2025</TitleText>
       </motion.div>
 
-      {/* Text */}
+      {/* Table */}
       <motion.div
-        className="text-center text-base font-medium leading-6 text-gray-500 px-48"
+        className="overflow-x-auto sm:overflow-x-hidden px-4 sm:px-6 lg:px-8 mt-8"
         variants={sectionVariants}
       >
-        Pricelist placeholder
+        <div className="max-w-lg mx-auto lg:max-w-[700px] border border-gray-300 rounded-lg shadow-lg overflow-hidden">
+          <table className="w-full border-collapse text-gray-500">
+            <thead className="bg-blue-300 text-white">
+              <tr>
+                <th className="py-4 px-4 text-sm sm:text-base">Obdobie</th>
+                <th className="py-4 px-4 text-sm sm:text-base">Cena za noc</th>
+                <th className="py-4 px-4 text-sm sm:text-base">7+ nocí</th>
+                <th className="py-4 px-4 text-sm sm:text-base">30+ nocí</th>
+                <th className="py-4 px-4 text-sm sm:text-base">Odvoz z/na letisko</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b">
+                <td className="py-4 px-4 text-sm sm:text-base">Január – Marec</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">200 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">180 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">150 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">100 €</td>
+              </tr>
+              <tr className="border-b">
+                <td className="py-4 px-4 text-sm sm:text-base">Apríl – Jún</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">250 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">230 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">220 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">100 €</td>
+              </tr>
+              <tr className="border-b">
+                <td className="py-4 px-4 text-sm sm:text-base">Júl – September</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">300 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">280 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">260 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">100 €</td>
+              </tr>
+              <tr>
+                <td className="py-4 px-4 text-sm sm:text-base">Október – December</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">200 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">180 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">150 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">100 €</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </motion.div>
     </motion.section>
   );
