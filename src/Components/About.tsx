@@ -205,9 +205,9 @@ const About = () => {
       </motion.div>
 
       {/* Aktivity Subsection */}
-      <div className="py-8 mx-6 sm:mx-12 lg:mx-20">
-        <h2 className="text-xl font-bold pl-20 text-center">Aktivity</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
+      <div className="py-8">
+        <h2 className="text-xl font-bold text-center ">Aktivity</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8 mx-6 sm:mx-12 lg:mx-20 ">
           {[
             { title: 'Bazén', image: 'pool.png', description: 'Užite si relaxáciu v modernom bazéne.' },
             { title: 'Pláž', image: 'beach.jpg', description: 'Piesočná pláž je kúsok od apartmánu.' },
