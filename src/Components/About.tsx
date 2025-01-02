@@ -39,7 +39,7 @@ const About = () => {
           }
         }
       }
-      activities: allFile(filter: { relativePath: { regex: "/activities/.*\\.(jpg|png)$/" } }) {
+      activities: allFile(filter: { relativePath: { regex: "/activities/.*\\.(jpg|jpeg|png)$/" } }) {
         edges {
           node {
             relativePath
@@ -207,18 +207,20 @@ const About = () => {
       {/* Aktivity Subsection */}
       <div className="py-8 mx-6 sm:mx-12 lg:mx-20">
         <h2 className="text-xl font-bold pl-20 text-center">Aktivity</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
           {[
             { title: 'Bazén', image: 'pool.png', description: 'Užite si relaxáciu v modernom bazéne.' },
-            { title: 'Pláž', image: 'beach.jpg', description: 'Piesočná pláž je len pár krokov od apartmánu.' },
-            { title: 'Soľné jazerá', image: 'salt-lakes.png', description: 'Navštívte nádherné liečivé soľné jazerá.' },
+            { title: 'Pláž', image: 'beach.jpg', description: 'Piesočná pláž je kúsok od apartmánu.' },
+            { title: 'Soľné jazerá', image: 'salt-lakes.jpg', description: 'Navštívte liečivé soľné jazerá.' },
+            { title: 'Trhy', image: 'market.png', description: 'Navštívte miestne trhy plné tradičných produktov.' },
             { title: 'Wakepark', image: 'wakepark.png', description: 'Zažite adrenalín na vode v modernom wakeparku.' },
             { title: 'Golf', image: 'golf.png', description: 'Zahrajte si golf na profesionálnych ihriskách.' },
-            { title: 'Beh a bicyklovanie', image: 'running-cycling.jpg', description: 'Beh či cyklistika v krásnom prostredí.' },
+            { title: 'Beh a bicyklovanie', image: 'running.png', description: 'Beh či cyklistika v krásnom prostredí.' },
+            { title: 'Parasailing', image: 'parasailing.png', description: 'Zažite nezabudnuteľný adrenalínový zážitok z lietania nad morom.' },
             { title: 'Safari Elche', image: 'safari.png', description: 'Objavte exotické zvieratá v Safari Elche.' },
-            { title: 'Aquapark', image: 'aquapark.jpg', description: 'Zábava a tobogány v aquaparku.' },
-            { title: 'Trhy', image: 'market.png', description: 'Navštívte miestne trhy plné tradičných produktov.' },
-            { title: 'Historické miesta', image: 'historical-places.jpg', description: 'História v blízkych historických miestach.' },
+            { title: 'Požičovňa lodí', image: 'boat-rental.png', description: 'Preskúmajte pobrežie a okolitý oceán vlastným tempom s prenajatou loďou.' },
+            { title: 'Aquapark', image: 'aquapark.png', description: 'Zábava a tobogány v aquaparku.' },
+            { title: 'Historické miesta', image: 'old-town.png', description: 'História v blízkych historických miestach.' },
           ].map((activity, index) => (
             <div
               key={index}
