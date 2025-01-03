@@ -53,13 +53,12 @@ export const Footer = () => {
         className="relative flex w-full flex-col items-center justify-center gap-[3rem] py-10 sm:gap-[2rem] sm:py-[3rem]"
         initial="offscreen"
         whileInView="onscreen"
-        viewport={{ once: false, amount: 0.01 }}
+        viewport={{ once: true, amount: 0.01 }}
         variants={sectionVariants}
       >
         {/* Title */}
         <motion.div
           className="py-8"
-          style={{ marginTop: '4rem' }}
           variants={sectionVariants}
         >
           <TitleText>Kontakt</TitleText>
@@ -179,6 +178,30 @@ export const Footer = () => {
               ></iframe>
             </div>
           </motion.div>
+        </motion.div>
+        {/* Email Section */}
+        <motion.div
+          className="w-full max-w-4xl mt-6 text-center"
+          variants={sectionVariants}
+        >
+          <div className="flex items-center justify-center space-x-8 text-xl text-gray-700">
+            <motion.div
+              className="flex items-center space-x-2"
+              whileHover={{ scale: 1.1 }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                className="text-gray-700"
+              >
+                <path d="M22 6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6zM4 6h16v2.5l-8 5-8-5V6zm0 4l7.35 4.59a1 1 0 001.3 0L20 10v8H4v-8z"></path>
+              </svg>
+              <span>apartmanspanielsko@gmail.com</span>
+            </motion.div>
+          </div>
         </motion.div>
       </motion.footer>
     </div>

@@ -19,7 +19,7 @@ export const hero2ImageLayouts = [
   },
   {
     alt: 'Spalna',
-    class: ' w-[78%] self-end col-span-6 ',
+    class: ' w-[79%] self-end col-span-6 ',
   },
   {
     alt: 'Obyvacka',

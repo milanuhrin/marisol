@@ -103,7 +103,8 @@ const Gallery: React.FC = () => {
         className="relative text-center py-8"
         initial="offscreen"
         whileInView="onscreen"
-        viewport={{ once: true, amount: 0.5 }}
+        exit="exit"
+        viewport={{ once: true, amount: 0.01 }}
         variants={sectionVariants}
       >
         {/* Title */}

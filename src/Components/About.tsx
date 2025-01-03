@@ -64,7 +64,7 @@ const About = () => {
       <motion.div
         initial="offscreen"
         whileInView="onscreen"
-        viewport={{ amount: 0, once: false }}
+        viewport={{ amount: 0, once: true }}
         variants={cardVariants}
         className="py-8"
       >
@@ -90,7 +90,7 @@ const About = () => {
           className="relative flex max-w-full flex-col sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:items-center sm:justify-center gap-8"
         >
           {/* Images Section */}
-          <div className="z-10 grid max-w-[33rem] grid-cols-12 grid-rows-2 gap-4 justify-self-center sm:col-start-1 sm:row-start-1">
+          <div className="z-10 grid max-w-[33rem] grid-cols-12 grid-rows-2 gap-4 pl:20 justify-self-center sm:col-start-1 sm:row-start-1">
             {hero2ImageLayouts.map((item, i) => (
               <motion.div
                 key={i}
@@ -147,13 +147,14 @@ const About = () => {
 
       {/* Vybavenie Apartmánu */}
       <motion.div
-        initial="offscreen"
-        whileInView="onscreen"
-        viewport={{ amount: 0.1, once: false }}
-        variants={cardVariants}
-        className="py-8"
+      className="py-8"
+      initial="offscreen"
+      whileInView="onscreen"
+      viewport={{ amount: 0.1, once: true }}
+      variants={cardVariants}
+        
       >
-        <h2 className="text-xl font-bold text-center mb-8">Vybavenie apartmánu a podmienky</h2>
+        <h2 className="text-xl font-bold text-center mb-8 mt-4">Vybavenie apartmánu a podmienky</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 lg:px-12">
           {/* Kuchyňa */}

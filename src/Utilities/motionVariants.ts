@@ -52,7 +52,7 @@ export const mobileMenuItems = {
 
 export const cardVariants = {
    offscreen: {
-      y: 400,
+      y: 100,
       opacity: 0,
    },
    onscreen: {

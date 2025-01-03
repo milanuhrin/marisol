@@ -10,8 +10,7 @@ const Pricelist = () => {
       className="text-center py-8"
       initial="offscreen"
       whileInView="onscreen"
-      exit="exit"
-      viewport={{ once: false, amount: 0.01 }}
+      viewport={{ once: true, amount: 0.01 }}
       variants={sectionVariants}
     >
       {/* Title */}
@@ -30,21 +29,28 @@ const Pricelist = () => {
               <tr>
                 <th className="py-4 px-4 text-sm sm:text-base">Obdobie</th>
                 <th className="py-4 px-4 text-sm sm:text-base">Cena za noc</th>
-                <th className="py-4 px-4 text-sm sm:text-base">7+ nocí</th>
+                <th className="py-4 px-4 text-sm sm:text-base">10+ nocí</th>
                 <th className="py-4 px-4 text-sm sm:text-base">30+ nocí</th>
-                <th className="py-4 px-4 text-sm sm:text-base">Odvoz z/na letisko</th>
+                <th className="py-4 px-4 text-sm sm:text-base">Odvoz</th>
               </tr>
             </thead>
             <tbody>
               <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base">Január – Marec</td>
+                <td className="py-4 px-4 text-sm sm:text-base">Január – Apríl</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">200 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">180 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">150 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">100 €</td>
               </tr>
               <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base">Apríl – Jún</td>
+                <td className="py-4 px-4 text-sm sm:text-base">Máj</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">250 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">230 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">220 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">100 €</td>
+              </tr>
+              <tr className="border-b">
+                <td className="py-4 px-4 text-sm sm:text-base">Jún</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">250 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">230 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">220 €</td>
