@@ -114,25 +114,28 @@ const About = () => {
           </div>
 
           {/* Icon-Based Section */}
+          {/* Icon-Based Section */}
           <motion.div
             className="z-10 flex flex-col gap-8 sm:col-start-2 sm:row-start-1 sm:self-center sm:justify-self-center"
             initial="offscreen"
             whileInView="onscreen"
             variants={cardVariants}
           >
-            <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-x-6 sm:text-left mt-4 ">
+            <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-x-4 sm:text-left mt-4">
               {[
-                { icon: '👤', text: '5 ľudí' },
-                { icon: '🛌', text: '2 spálne' },
-                { icon: '🍹', text: 'terasa' },
-                { icon: '🛁', text: '1 kúpeľňa' },
-                { icon: '🏊', text: 'bazén' },
-                { icon: '✈️', text: 'letisko 35 min autom' },
-                { icon: '🏖️', text: 'pláž 10 min pešo' },
-                { icon: '🍽️', text: 'reštaurácie 5 min pešo' },
+                { icon: 'fa-user', text: '5 osôb' },
+                { icon: 'fa-bed', text: '2 spálne' },
+                { icon: 'fa-cocktail', text: 'presklená terasa' },
+                { icon: 'fa-bath', text: '1 kúpeľňa' },
+                { icon: 'fa-swimming-pool', text: 'bazén' },
+                { icon: 'fa-plane', text: 'letisko 35 min autom' },
+                { icon: 'fa-umbrella-beach', text: 'pláž 10 min pešo' },
+                { icon: 'fa-utensils', text: 'reštaurácie 5 min pešo' },
               ].map((item, index) => (
                 <li key={index} className="flex items-center gap-6 text-base font-medium text-gray-500">
-                  <span className="text-lg">{item.icon}</span>
+                  <span className="text-lg">
+                    <i className={`fas ${item.icon}`}></i>
+                  </span>
                   <span>{item.text}</span>
                 </li>
               ))}
@@ -261,24 +264,24 @@ const About = () => {
       {/* Aktivity Subsection */}
       <div className="py-8">
         <h2 className="text-xl font-bold text-center ">Aktivity</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8 mx-6 sm:mx-12 lg:mx-20 ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8 mx-6 sm:mx-12 lg:mx-20">
           {[
-            { title: 'Bazén', image: 'pool.png', description: 'Užite si relaxáciu v modernom bazéne.' },
-            { title: 'Pláž', image: 'beach.jpg', description: 'Piesočná pláž je kúsok od apartmánu.' },
-            { title: 'Soľné jazerá', image: 'salt-lakes.jpg', description: 'Navštívte liečivé soľné jazerá.' },
-            { title: 'Trhy', image: 'market.png', description: 'Navštívte miestne trhy plné tradičných produktov.' },
-            { title: 'Wakepark', image: 'wakepark.png', description: 'Zažite adrenalín na vode v modernom wakeparku.' },
-            { title: 'Golf', image: 'golf.png', description: 'Zahrajte si golf na profesionálnych ihriskách.' },
-            { title: 'Beh a bicyklovanie', image: 'running.png', description: 'Beh či cyklistika v krásnom prostredí.' },
+            { title: 'Bazén', image: 'pool.png', description: 'Okúpte sa v spoločnom bazéne po celý rok. Je priamo pred apartmánom. Pozostáva z dvoch častí - pre dospelých aj pre deti.' },
+            { title: 'Pláž', image: 'beach.jpg', description: 'V blízkosti apartmánu nájdete niekoľko pekných piesočnatých pláží, no určite najobľúbenejšou je pláž La Mata, ktorá získava každý rok modrú vlajku. Je široká a dlhá, tiahne sa až do vedľajšieho mesta. ' },
+            { title: 'Soľné jazerá', image: 'salt-lakes.jpg', description: 'Európsky unikát, ružové soľné jazerá, ktoré lákajú fotografov, no najmä vytvárajú ozdravnú mimroklímu, ktorú len tak niekde nenájdete. V minulosti dostalo mesto vďaka nim aj ocenenie WHO. Nezabudnite si odfotiť plameniaky, postávajúce priamo v jazerách.' },
+            { title: 'Trhy', image: 'market.png', description: 'Obľúbenou atrakciou pre turistov i domácich sú jednoznačne pouličné trhy, ktoré sa konajú pravidelne, v konkrétny deň v týždni v jednotlivých častiach mesta. Kúpite tam najmä čerstvé ovocie a zeleninu, lokálne jedlá, ale i oblečenie.' },
+            { title: 'Wakepark', image: 'wakepark.png', description: 'Pre milovníkov vodných športov je moderný wakepark Mosquito ideálnou voľbou. Nachádza sa len 6 km od apartmánu.' },
+            { title: 'Golf', image: 'golf.png', description: 'V okruhu 15km od apartmánu nájdete viac ako desiatku kvalitných golfových ihrísk. Vyskúšajte napríklad obľúbený Greenlands sport club, bude sa vám páčiť.' },
+            { title: 'Beh a bicyklovanie', image: 'running.png', description: 'Ak aj vy milujete beh, prechádzky, či byciklovanie, môžte vyraziť ešte pred raňajkami, na ktorúkoľvek stranu. Odporúčame však najmä krásny Molino Park na piesočných dunách, chodníky pri skalných útesoch, či pokojne jógu v susednom Torre Del Moro parku.' },
             { title: 'Parasailing', image: 'parasailing.png', description: 'Zažite nezabudnuteľný adrenalínový zážitok z lietania nad morom.' },
-            { title: 'Safari Elche', image: 'safari.png', description: 'Objavte exotické zvieratá v Safari Elche.' },
+            { title: 'Safari Elche', image: 'safari.png', description: 'S deťmi, či bez nich, vyrazte do ZOO Safari Elche, ktoré sa nachádza 30 minút autom od apartmánu. O program budete mať postarané.' },
             { title: 'Požičovňa lodí', image: 'boat-rental.png', description: 'Preskúmajte pobrežie a okolitý oceán vlastným tempom s prenajatou loďou.' },
-            { title: 'Aquapark', image: 'aquapark.png', description: 'Zábava a tobogány v aquaparku.' },
-            { title: 'Historické miesta', image: 'old-town.png', description: 'História v blízkych historických miestach.' },
+            { title: 'Aquapark', image: 'aquapark.png', description: 'Strávte aj celý deň v aquaparku Aquopolis Torrevieja. Je otvorený v letných mesiacoch a ponúka zábavu i relax. Nachádza sa 4 km od apartmánu.' },
+            { title: 'Historické miesta', image: 'old-town.png', description: 'Torrevieja bola v minulosti rybárska dedina, ktorá mnohopočetne narástla vďaka ťažbe soli. Svoje meno získala po starobylej strážnej veži, ktorú nájdete priamo v susednom Torre del Moro parku. Určite vás však potešia večerné prechádzky centrom Torreviejy, kde sa vám zapáči niekoľko historických miest.' },
           ].map((activity, index) => (
             <div
               key={index}
-              className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md transition-transform hover:scale-105"
+              className="flex flex-col items-center text-justify p-4 bg-white rounded-lg shadow-md transition-transform hover:scale-105"
             >
               <div className="w-32 h-32">
                 <GatsbyImage

@@ -96,7 +96,8 @@ const Availability = () => {
       className="text-center py-8"
       initial="offscreen"
       whileInView="onscreen"
-      viewport={{ once: false, amount: 0.5 }}
+      exit="exit"
+      viewport={{ once: false, amount: 0.01 }}
       variants={sectionVariants}
     >
       <div className="py-8" style={{ marginTop: '4rem' }}>
@@ -115,7 +116,8 @@ const Availability = () => {
           }}
           initial="offscreen"
           whileInView="onscreen"
-          viewport={{ once: false, amount: 0.5 }}
+          exit="exit"
+          viewport={{ once: false, amount: 0.01 }}
           variants={sectionVariants}
         >
           {[calendarDaysCurrent, calendarDaysNext].map((calendarDays, index) => {
@@ -134,7 +136,8 @@ const Availability = () => {
                 }}
                 initial="offscreen"
                 whileInView="onscreen"
-                viewport={{ once: false, amount: 0.5 }}
+                exit="exit"
+                viewport={{ once: false, amount: 0.01 }}
                 variants={sectionVariants}
               >
                 {/* Header with Arrows */}
@@ -256,7 +259,8 @@ const Availability = () => {
           }}
           initial="offscreen"
           whileInView="onscreen"
-          viewport={{ once: false, amount: 0.5 }}
+          exit="exit"
+          viewport={{ once: false, amount: 0.01 }}
           variants={sectionVariants}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>

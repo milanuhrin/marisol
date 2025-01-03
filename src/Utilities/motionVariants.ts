@@ -90,8 +90,16 @@ export const appear = (ease = 'easeOut', delay = 0, duration = 0.3) => ({
 
 export const sectionVariants = {
    offscreen: { opacity: 0, y: 100 },
-   onscreen: { opacity: 1, y: 0, transition: { type: 'spring', bounce: 0.4, duration: 1 } },
- }
+   onscreen: {
+     opacity: 1,
+     y: 0,
+     transition: { type: 'spring', bounce: 0.5, duration: 1 },
+   },
+   exit: {
+     y: 0, // Prevent vertical bouncing during exit
+     transition: { type: 'tween', duration: 0.2 }, // Smooth fade out
+   },
+ };
 
 export const footerVariants = {
    hidden: { opacity: 0, y: 100 },
