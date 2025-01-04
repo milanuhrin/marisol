@@ -133,7 +133,7 @@ const About = () => {
                 { icon: 'fa-utensils', text: 'reštaurácie 5 min pešo' },
               ].map((item, index) => (
                 <li key={index} className="flex items-center gap-6 text-base font-medium text-gray-500">
-                  <span className="text-lg">
+                  <span className=" text-transparent bg-clip-text from-snakeGr1 to-snakeGr2 bg-gradient-to-r">
                     <i className={`fas ${item.icon}`}></i>
                   </span>
                   <span>{item.text}</span>
@@ -171,8 +171,8 @@ const About = () => {
                 'Detská stolička',
                 'Práčka',
               ].map((item, index) => (
-                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-600">
-                  <span className="text-sm text-blue-800">✔</span>
+                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-500">
+                  <span className="text-sm text-gray-700">✔</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -190,8 +190,8 @@ const About = () => {
                 'Skrinka stojaca',
                 'Uteráky',
               ].map((item, index) => (
-                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-600">
-                  <span className="text-sm text-blue-800">✔</span>
+                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-500">
+                  <span className="text-sm text-gray-700">✔</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -208,8 +208,8 @@ const About = () => {
                 'Netflix', 
                 'Terasa', 
                 'Hračky a hry',].map((item, index) => (
-                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-600">
-                  <span className="text-sm text-blue-800">✔</span>
+                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-500">
+                  <span className="text-sm text-gray-700">✔</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -221,8 +221,8 @@ const About = () => {
             <h3 className="text-lg font-semibold mb-4 text-gray-700">Spálňa</h3>
             <ul className="space-y-3">
               {['Manželská posteľ', 'Nočné stolíky', 'Šatník', 'Detská postieľka', 'Posteľná bielizeň'].map((item, index) => (
-                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-600">
-                  <span className="text-sm text-blue-800">✔</span>
+                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-500">
+                  <span className="text-sm text-gray-700">✔</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -234,8 +234,8 @@ const About = () => {
             <h3 className="text-lg font-semibold mb-4 text-gray-700">Izba</h3>
             <ul className="space-y-3">
               {['Dve postele', 'Nočný stolík', 'Šatník', 'Pracovné miesto', 'Posteľná bielizeň',].map((item, index) => (
-                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-600">
-                  <span className="text-sm text-blue-800">✔</span>
+                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-500">
+                  <span className="text-sm text-gray-700">✔</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -252,8 +252,8 @@ const About = () => {
                 { text: 'Fajčenie', icon: '🚫' },
                 { text: 'Párty', icon: '🚫' },
               ].map((item, index) => (
-                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-600">
-                  <span className={`text-sm ${item.icon === '✔' ? 'text-blue-800' : ''}`}>{item.icon}</span>
+                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-500">
+                  <span className={`text-sm ${item.icon === '✔' ? 'text-gray-700' : ''}`}>{item.icon}</span>
                   <span>{item.text}</span>
                 </li>
               ))}
@@ -264,8 +264,8 @@ const About = () => {
 
       {/* Aktivity Subsection */}
       <div className="py-8">
-        <h2 className="text-xl font-bold text-center ">Aktivity</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8 mx-6 sm:mx-12 lg:mx-20">
+        <h2 className="text-xl font-bold text-center ">Aktivity a atrakcie</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8 mx-6 sm:mx-12 lg:mx-20 ">
           {[
             { title: 'Bazén', image: 'pool.png', description: 'Okúpte sa v spoločnom bazéne po celý rok. Je priamo pred apartmánom. Pozostáva z dvoch častí - pre dospelých aj pre deti.' },
             { title: 'Pláž', image: 'beach.jpg', description: 'V blízkosti apartmánu nájdete niekoľko pekných piesočnatých pláží, no určite najobľúbenejšou je pláž La Mata, ktorá získava každý rok modrú vlajku. Je široká a dlhá, tiahne sa až do vedľajšieho mesta. ' },
@@ -291,7 +291,7 @@ const About = () => {
                   className="w-full h-full object-cover rounded-lg"
                 />
               </div>
-              <h3 className="mt-4 text-lg font-bold">{activity.title}</h3>
+              <h3 className="mt-4 text-lg font-bold text-gray-700">{activity.title}</h3>
               <p className="mt-2 text-sm text-gray-500">{activity.description}</p>
             </div>
           ))}
