@@ -16,4 +16,4 @@ dist/
 build/
 
 # Exclude Gatsby's page-data files
-public/page-data/
+public/

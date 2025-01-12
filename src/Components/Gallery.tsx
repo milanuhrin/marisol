@@ -96,9 +96,8 @@ const Gallery: React.FC = () => {
   return (
     <div id="gallery" className="relative">
       <div className="absolute w-full top-0">
-      <SectionDividerWaveOneSide fill="#f0f0f0" />
+        <SectionDividerWaveOneSide fill="#f0f0f0" />
       </div>
-      {/* Apply motion to all dynamic elements */}
       <motion.section
         className="relative text-center py-8"
         initial="offscreen"
@@ -114,14 +113,19 @@ const Gallery: React.FC = () => {
 
         {/* Gallery Container */}
         <motion.div
-          className="gallery-container"
+          className="gallery-container relative"
           style={{ ...containerStyle }}
+          initial="offscreen"
+          animate="onscreen"
+          variants={sectionVariants}
         >
           {images.map((image, index) => (
-            <div
+            <motion.div
               key={index}
               className={`gallery-item ${index === currentIndex ? 'active' : ''}`}
               onClick={() => openLightbox(index)}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
             >
               <img
                 src={image}
@@ -130,15 +134,21 @@ const Gallery: React.FC = () => {
                 ref={index === currentIndex ? imgRef : null}
                 onLoad={updateContainerSize}
               />
-            </div>
+              {/* Overlay with magnifier and text */}
+              {index === currentIndex && (
+                <motion.div
+                  className="gallery-overlay absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 cursor-pointer"
+                  whileHover={{ opacity: 1 }}
+                  onClick={() => openLightbox(index)}
+                >
+                  <div className="text-white flex items-center gap-2">
+                    <i className="fa fa-search-plus text-xl" aria-hidden="true"></i>
+                    <span className="text-2xl font-bold">Zväčšiť</span>
+                  </div>
+                </motion.div>
+              )}
+            </motion.div>
           ))}
-          {/* Overlay with magnifier and text */}
-          <div className="gallery-overlay absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 cursor-pointer">
-            <div className="text-white flex items-center gap-2">
-              <i className="fa fa-search-plus text-xl" aria-hidden="true"></i> {/* Magnifier icon */}
-              <span className="text-2xl font-bold">Zväčšiť</span>
-            </div>
-          </div>
         </motion.div>
 
         {/* Lightbox */}
@@ -153,8 +163,6 @@ const Gallery: React.FC = () => {
           />
         )}
       </motion.section>
-
-      {/* Static Divider */}
     </div>
   );
 };

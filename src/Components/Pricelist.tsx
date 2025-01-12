@@ -28,61 +28,69 @@ const Pricelist = () => {
             <thead className="bg-blue-300 text-white">
               <tr>
                 <th className="py-4 px-4 text-sm sm:text-base">Obdobie</th>
-                <th className="py-4 px-4 text-sm sm:text-base">Cena za noc</th>
+                <th className="py-4 px-4 text-sm sm:text-base">
+                  Cena za noc
+                  <br />
+                  <span className="text-xs">(min. 3 noci)</span>
+                </th>
                 <th className="py-4 px-4 text-sm sm:text-base">10+ nocí</th>
                 <th className="py-4 px-4 text-sm sm:text-base">30+ nocí</th>
-                <th className="py-4 px-4 text-sm sm:text-base">Odvoz</th>
+                <th className="py-4 px-4 text-sm sm:text-base">
+                  Odvoz
+                  <br />
+                  <span className="text-xs">(jedna cesta)</span>
+                </th>
               </tr>
             </thead>
             <tbody>
               <tr className="border-b">
                 <td className="py-4 px-4 text-sm sm:text-base">Január – Apríl</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">50 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">45 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">40 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">100 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">35 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
               </tr>
               <tr className="border-b">
                 <td className="py-4 px-4 text-sm sm:text-base">Máj</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">60 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">55 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">50 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">100 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
               </tr>
               <tr className="border-b">
                 <td className="py-4 px-4 text-sm sm:text-base">Jún</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">70 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">95 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">100 €</td>
               </tr>
               <tr className="border-b">
                 <td className="py-4 px-4 text-sm sm:text-base">Júl – August</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">90 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">80 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">100 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">125 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">115 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
               </tr>
               <tr className="border-b">
                 <td className="py-4 px-4 text-sm sm:text-base">September</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">70 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">95 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">100 €</td>
               </tr>
               <tr className="border-b">
                 <td className="py-4 px-4 text-sm sm:text-base">Október</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">60 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">55 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">50 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">100 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
               </tr>
               <tr>
                 <td className="py-4 px-4 text-sm sm:text-base">November – December</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">50 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">45 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">40 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">100 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">35 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
               </tr>
             </tbody>
           </table>

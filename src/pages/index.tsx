@@ -12,6 +12,8 @@ import About from 'Components/About';
 import Availability from 'Components/Availability';
 import Gallery from 'Components/Gallery';
 import Pricelist from 'Components/Pricelist';
+import Reservation from 'Components/Reservation';
+
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const IndexPage = () => {
@@ -29,6 +31,7 @@ const IndexPage = () => {
       <Gallery />
       <Pricelist />
       <Availability />
+      <Reservation />
       <Footer />
     </>
   );
