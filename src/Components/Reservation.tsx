@@ -77,7 +77,7 @@ const Reservation = () => {
     >
       <div className="py-8">
         {/* Title with consistent styling */}
-        <TitleText>Rezervácia</TitleText>
+        <TitleText>Predbežná rezervácia</TitleText>
 
         {/* Add space between the title and form */}
         <div style={{ marginBottom: '2rem' }}></div>

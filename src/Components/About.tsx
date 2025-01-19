@@ -156,20 +156,19 @@ const About = () => {
       >
         <h2 className="text-xl font-bold text-center mb-8 mt-4">Vybavenie apartmánu a podmienky</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 lg:px-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-6 lg:px-12">
           {/* Kuchyňa */}
           <div className="p-6 border rounded-lg shadow-lg bg-gray-50 w-full">
-            <h3 className="text-lg font-semibold mb-4 text-gray-700">Kuchyňa</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-700">2 spálne</h3>
             <ul className="space-y-3">
               {[
-                'Chladnička',
-                'Mikrovlnka',
-                'Elektrická rúra',
-                'Varná doska',
-                'Kávovar',
-                'Varná kanvica',
-                'Detská stolička',
-                'Práčka',
+                'manželská posteľ',
+                '2x jednolôžková posteľ',
+                'skrine a nábytok',
+                'pracovné miesto',
+                'posteľné prádlo',
+                'vešiaky',
+                'televízor / Netflix'
               ].map((item, index) => (
                 <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-500">
                   <span className="text-sm text-gray-700">✔</span>
@@ -184,11 +183,13 @@ const About = () => {
             <h3 className="text-lg font-semibold mb-4 text-gray-700">Kúpeľňa</h3>
             <ul className="space-y-3">
               {[
-                'Internet - WiFi',
-                'Umývadlo so skrinkou',
-                'Zrkadlo',
-                'Skrinka stojaca',
-                'Uteráky',
+                'sprchový kút',
+                'wc a umývadlo',
+                'kúpeľňový nábytok',
+                'fén',
+                'sprchový gél',
+                'tekuté mydlo',
+                'uteráky',
               ].map((item, index) => (
                 <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-500">
                   <span className="text-sm text-gray-700">✔</span>
@@ -200,14 +201,20 @@ const About = () => {
 
           {/* Obývačka */}
           <div className="p-6 border rounded-lg shadow-lg bg-gray-50 w-full">
-            <h3 className="text-lg font-semibold mb-4 text-gray-700">Obývačka</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-700">Kuchyňa</h3>
             <ul className="space-y-3">
               {[
-                'Televízor', 
-                'Klimatizácia', 
-                'Netflix', 
-                'Terasa', 
-                'Hračky a hry',].map((item, index) => (
+                'chladnička', 
+                'elektrická rúra', 
+                'mikrovlnka', 
+                'varná doska', 
+                'práčka',
+                'príbory a taniere',
+                'poháre',
+                'hrnce',
+                'kávovar',
+                'varná kanvica'
+              ].map((item, index) => (
                 <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-500">
                   <span className="text-sm text-gray-700">✔</span>
                   <span>{item}</span>
@@ -218,43 +225,18 @@ const About = () => {
 
           {/* Spálňa */}
           <div className="p-6 border rounded-lg shadow-lg bg-gray-50 w-full">
-            <h3 className="text-lg font-semibold mb-4 text-gray-700">Spálňa</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-700">Obývačka</h3>
             <ul className="space-y-3">
-              {['Manželská posteľ', 'Nočné stolíky', 'Šatník', 'Detská postieľka', 'Posteľná bielizeň'].map((item, index) => (
+              {['rozkladacia pohovka',
+               'kreslá',
+                'konferenčné stolíky',
+                'barový stôl',
+                'knižnica a knihy',
+                'televízor / Netflix'
+                ].map((item, index) => (
                 <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-500">
                   <span className="text-sm text-gray-700">✔</span>
                   <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Izba */}
-          <div className="p-6 border rounded-lg shadow-lg bg-gray-50 w-full">
-            <h3 className="text-lg font-semibold mb-4 text-gray-700">Izba</h3>
-            <ul className="space-y-3">
-              {['Dve postele', 'Nočný stolík', 'Šatník', 'Pracovné miesto', 'Posteľná bielizeň',].map((item, index) => (
-                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-500">
-                  <span className="text-sm text-gray-700">✔</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          {/* Ostatné */}
-          <div className="p-6 border rounded-lg shadow-lg bg-gray-50 w-full">
-            <h3 className="text-lg font-semibold mb-4 text-gray-700">Ostatné</h3>
-            <ul className="space-y-3">
-              {[
-                { text: 'Internet - WiFi', icon: '✔' },
-                { text: 'Deti', icon: '✔' },
-                { text: 'Domáce zvieratá', icon: '🚫' },
-                { text: 'Fajčenie', icon: '🚫' },
-                { text: 'Párty', icon: '🚫' },
-              ].map((item, index) => (
-                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-500">
-                  <span className={`text-sm ${item.icon === '✔' ? 'text-gray-700' : ''}`}>{item.icon}</span>
-                  <span>{item.text}</span>
                 </li>
               ))}
             </ul>
