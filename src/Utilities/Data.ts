@@ -53,6 +53,10 @@ export const menuItems = [
     link: '#availability',
   },
   {
+    name: 'Rezervácia',
+    link: '#reservation',
+  },
+  {
     name: 'Kontakt',
     link: '#contact',
   },

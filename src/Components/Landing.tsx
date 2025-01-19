@@ -35,7 +35,7 @@ export const Landing = (props: Props) => {
           gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
         }
       }
-      logo: file(relativePath: { eq: "landing/marisol_logo.png" }) {
+      logo: file(relativePath: { eq: "landing/marisolseaview_logo.png" }) {
         childImageSharp {
           gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
         }

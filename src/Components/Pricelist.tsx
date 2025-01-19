@@ -20,12 +20,12 @@ const Pricelist = () => {
 
       {/* Table */}
       <motion.div
-        className="overflow-x-auto sm:overflow-x-hidden px-4 sm:px-6 lg:px-8 mt-8"
+        className="overflow-x-auto sm:overflow-x-hidden px-4 sm:px-6 lg:px-8 mt-8 "
         variants={sectionVariants}
       >
         <div className="max-w-lg mx-auto lg:max-w-[700px] border border-gray-300 rounded-lg shadow-lg overflow-hidden">
           <table className="w-full border-collapse text-gray-500">
-            <thead className="bg-blue-300 text-white">
+            <thead className="bg-blue-500 text-white">
               <tr>
                 <th className="py-4 px-4 text-sm sm:text-base">Obdobie</th>
                 <th className="py-4 px-4 text-sm sm:text-base">
