@@ -75,9 +75,29 @@ const Gallery: React.FC = () => {
     if (imgRef.current) {
       const img = imgRef.current;
       const aspectRatio = img.naturalWidth / img.naturalHeight;
-      setContainerStyle({ width: `${600 * aspectRatio}px`, height: '600px' });
+
+      if (window.innerWidth <= 768) {
+        // For small screens
+        setContainerStyle({ width: '400px', height: `${400 / aspectRatio}px` });
+      } else {
+        // For larger screens
+        setContainerStyle({ width: `${600 * aspectRatio}px`, height: '600px' });
+      }
     }
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      updateContainerSize();
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Call once to set initial size
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     updateContainerSize();
@@ -95,7 +115,7 @@ const Gallery: React.FC = () => {
 
   return (
     <div id="gallery" className="relative">
-      <div className=" absolute w-full top-0">
+      <div className="absolute w-full top-0">
         <SectionDividerWaveOneSide fill="#f0f0f0" />
       </div>
       <motion.section
