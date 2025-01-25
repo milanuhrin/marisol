@@ -331,7 +331,7 @@ const About = () => {
     {/* Add Benefits Section */}
     <motion.div className="py-8">
         <h2 className="text-xl font-bold text-center mb-8 ">Ponúkame nasledovné benefity</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 px-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 px-12">
           {benefits.map((benefit, index) => (
             <div key={index} className="flex items-center space-x-4">
               <i className={`fas ${benefit.icon} text-cyan-500 text-2xl`}></i>
