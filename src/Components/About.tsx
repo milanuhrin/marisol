@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { graphql, useStaticQuery } from 'gatsby';
 import { getImage, GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
@@ -8,6 +8,8 @@ import { hero2ImageLayouts } from 'Utilities/Data';
 import { cardVariants } from 'Utilities/motionVariants';
 
 const About = () => {
+  const [activeTab, setActiveTab] = useState(0); // Added state for active tab
+
   const data: {
     hero2: {
       edges: {
@@ -19,6 +21,16 @@ const About = () => {
       }[];
     };
     activities: {
+      edges: {
+        node: {
+          relativePath: string;
+          childImageSharp: {
+            gatsbyImageData: IGatsbyImageData;
+          };
+        };
+      }[];
+    };
+    features: {
       edges: {
         node: {
           relativePath: string;
@@ -49,6 +61,16 @@ const About = () => {
           }
         }
       }
+      features: allFile(filter: { relativePath: { regex: "/features/.*\\.(jpg|jpeg|png)$/" } }) {
+        edges {
+          node {
+            relativePath
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED)
+            }
+          }
+        }
+      }
     }
   `);
 
@@ -57,9 +79,109 @@ const About = () => {
     acc[edge.node.relativePath.split('/').pop()!] = getImage(edge.node);
     return acc;
   }, {} as Record<string, IGatsbyImageData | undefined>);
+  const featuresImages = data.features.edges.reduce((acc, edge) => {
+    acc[edge.node.relativePath.split('/').pop()!] = getImage(edge.node);
+    return acc;
+  }, {} as Record<string, IGatsbyImageData | undefined>);
+
+  const benefits = [
+    { icon: 'fa-water', text: 'Výhľad na more' },
+    { icon: 'fa-lock', text: 'Uzavretý areál' },
+    { icon: 'fa-glass-cheers', text: 'Presklená terasa' },
+    { icon: 'fa-sun', text: 'Otvorená terasa' },
+    { icon: 'fa-utensils', text: 'Jedálenský stôl' },
+    { icon: 'fa-parking', text: 'Parkovanie zdarma' },
+    { icon: 'fa-wifi', text: 'Internet' },
+    { icon: 'fa-wind', text: 'Klimatizácia/kúrenie' },
+    { icon: 'fa-baby', text: 'Detská postieľka' },
+    { icon: 'fa-chair', text: 'Detská stolička' },
+    { icon: 'fa-puzzle-piece', text: 'Hračky' },
+    { icon: 'fa-dice', text: 'Spoločenské hry' },
+    { icon: 'fa-tshirt', text: 'Žehlička' },
+    { icon: 'fa-wind', text: 'Sušiak' },
+    { icon: 'fa-broom', text: 'Vysávač' },
+  ];
+
+  const apartmentConditions = [
+    { label: 'Check-in', value: '15:00' },
+    { label: 'Check-out', value: '11:00' },
+    { label: 'Záloha', value: '20% pri potvrdení rezervácie' },
+    { label: 'Doplatok', value: '80% 14 dní pred pobytom' },
+    { label: 'Domáce zvieratá', value: '🚫' },
+    { label: 'Fajčenie', value: '🚫' },
+    { label: 'Párty', value: '🚫' },
+    { label: 'Bezbariérový prístup', value: '🚫' },
+  ];
+
+  const sections = [
+    {
+      title: "Spálňa",
+      image: featuresImages["spalna1.jpg"], // Replace with the actual image path
+      features: [
+        "manželská posteľ",
+        "skrine a nábytok",
+        "posteľné prádlo",
+        "vešiaky",
+        "televízor / Netflix",
+      ],
+    },
+    {
+    title: "Detská izba",
+    image: featuresImages["spalna2.jpg"], // Replace with the actual image path
+    features: [
+      "2x jednolôžková posteľ",
+      "skrine a nábytok",
+      "pracovné miesto",
+      "posteľné prádlo",
+      "vešiaky",    ],
+    },
+    {
+      title: "Kúpeľňa",
+      image: featuresImages["kupelna.jpg"], // Replace with the actual image path
+      features: [
+        "sprchový kút",
+        "wc a umývadlo",
+        "kúpeľňový nábytok",
+        "fén",
+        "sprchový gél",
+        "tekuté mydlo",
+        "uteráky",
+      ],
+    },
+    {
+      title: "Kuchyňa",
+      image: featuresImages["kuchyna.jpg"], // Replace with the actual image path
+      features: [
+          "chladnička",
+          "elektrická rúra",
+          "mikrovlnka",
+          "varná doska",
+          "práčka",
+          "príbory a taniere",
+          "poháre",
+          "hrnce",
+          "kávovar",
+          "varná kanvica",
+      ],
+    },
+    {
+      title: "Obývačka",
+      image: featuresImages["obyvacka.jpg"], // Replace with the actual image path
+      features: [
+        "rozkladacia pohovka",
+        "kreslá",
+        "konferenčné stolíky",
+        "barový stôl",
+        "knižnica a knihy",
+        "televízor / Netflix",
+      ],
+    },
+  ];
+
+
 
   return (
-    <section id="about" className="text-center py-8 bg-gradient-to-b from-white to-[#e6f6ff]">
+    <section id="about" className="text-center py-8 bg-gradient-to-b from-white to-[#e6f6ff] max-w-screen-lg mx-auto">
       {/* Title with Text */}
       <motion.div
         initial="offscreen"
@@ -69,7 +191,7 @@ const About = () => {
         className="py-8"
       >
         <TitleText>O apartmáne Marisol</TitleText>
-        <div className="px-28 text-justify text-base font-medium leading-6 text-gray-500 mb-4 mt-8">
+        <div className="px-12 lg:px-28 text-justify text-base font-medium leading-6 text-gray-500 mb-4 mt-8">
           Krásny východ slnka nad morom, príjemná dovolenková atmosféra či voňavá káva na terase - to
           všetko môžete zažiť u nás, v apartmáne Marisol. Nachádza sa v jednej z najobľúbenejších
           lokalít mesta Torrevieja, blízko známeho mesta Alicante v Španielsku. Vedľa parku a tiež
@@ -114,14 +236,13 @@ const About = () => {
           </div>
 
           {/* Icon-Based Section */}
-          {/* Icon-Based Section */}
           <motion.div
             className="z-10 flex flex-col gap-8 sm:col-start-2 sm:row-start-1 sm:self-center sm:justify-self-center"
             initial="offscreen"
             whileInView="onscreen"
             variants={cardVariants}
           >
-            <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-x-4 sm:text-left mt-4">
+            <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:px-12 sm:gap-x-1 sm:text-left mt-4">
               {[
                 { icon: 'fa-user', text: '5 osôb' },
                 { icon: 'fa-bed', text: '2 spálne' },
@@ -145,109 +266,98 @@ const About = () => {
       )}
 
 
-      {/* Vybavenie Apartmánu */}
+      {/* Updated Vybavenie Apartmánu Section */}
       <motion.div
-      className="py-8"
+      className="py-8 max-w-screen-lg mx-auto"
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ amount: 0.1, once: true }}
       variants={cardVariants}
-        
-      >
-        <h2 className="text-xl font-bold text-center mb-8 mt-4">Vybavenie apartmánu a podmienky</h2>
+    >
+      <h2 className="text-xl font-bold text-center mb-8 mt-8">Vybavenie apartmánu a podmienky</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-6 lg:px-12">
-          {/* Kuchyňa */}
-          <div className="p-6 border rounded-lg shadow-lg bg-gray-50 w-full">
-            <h3 className="text-lg font-semibold mb-4 text-gray-700">2 spálne</h3>
-            <ul className="space-y-3">
-              {[
-                'manželská posteľ',
-                '2x jednolôžková posteľ',
-                'skrine a nábytok',
-                'pracovné miesto',
-                'posteľné prádlo',
-                'vešiaky',
-                'televízor / Netflix'
-              ].map((item, index) => (
-                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-500">
-                  <span className="text-sm text-gray-700">✔</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+      {/* Add Gray Line Above */}
+      <div className="border-b border-gray-300 mb-6 px-4 sm:px-28"></div>
 
-          {/* Kúpeľňa */}
-          <div className="p-6 border rounded-lg shadow-lg bg-gray-50 w-full">
-            <h3 className="text-lg font-semibold mb-4 text-gray-700">Kúpeľňa</h3>
-            <ul className="space-y-3">
-              {[
-                'sprchový kút',
-                'wc a umývadlo',
-                'kúpeľňový nábytok',
-                'fén',
-                'sprchový gél',
-                'tekuté mydlo',
-                'uteráky',
-              ].map((item, index) => (
-                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-500">
-                  <span className="text-sm text-gray-700">✔</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+      {/* Tabs */}
+      <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:justify-center sm:space-x-8 border-b pb-4 mb-6 px-4 sm:px-28">
+        {sections.map((section, index) => (
+          <button
+            key={index}
+            onClick={() => setActiveTab(index)}
+            className={`font-bold text-l ${
+              activeTab === index
+                ? "text-cyan-500"
+                : "text-gray-700"
+            }`}
+          >
+            {section.title}
+          </button>
+        ))}
+      </div>
 
-          {/* Obývačka */}
-          <div className="p-6 border rounded-lg shadow-lg bg-gray-50 w-full">
-            <h3 className="text-lg font-semibold mb-4 text-gray-700">Kuchyňa</h3>
-            <ul className="space-y-3">
-              {[
-                'chladnička', 
-                'elektrická rúra', 
-                'mikrovlnka', 
-                'varná doska', 
-                'práčka',
-                'príbory a taniere',
-                'poháre',
-                'hrnce',
-                'kávovar',
-                'varná kanvica'
-              ].map((item, index) => (
-                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-500">
-                  <span className="text-sm text-gray-700">✔</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Spálňa */}
-          <div className="p-6 border rounded-lg shadow-lg bg-gray-50 w-full">
-            <h3 className="text-lg font-semibold mb-4 text-gray-700">Obývačka</h3>
-            <ul className="space-y-3">
-              {['rozkladacia pohovka',
-               'kreslá',
-                'konferenčné stolíky',
-                'barový stôl',
-                'knižnica a knihy',
-                'televízor / Netflix'
-                ].map((item, index) => (
-                <li key={index} className="flex items-center gap-2 text-sm font-normal text-gray-500">
-                  <span className="text-sm text-gray-700">✔</span>
-                  <span>{item}</span>
+      {/* Content */}
+      <div className="grid grid-cols-1 gap-6 sm:gap-8 sm:grid-cols-2 px-16 sm:px-28">
+        <div>
+          <h3 className="text-xl font-bold mb-4">{sections[activeTab].title}</h3>
+          <div className="pl-3 sm:pl-0">
+            <ul className="space-y-3 text-gray-600">
+              {sections[activeTab].features.map((feature, index) => (
+                <li key={index} className="flex items-center gap-2">
+                  <i className="fas fa-check text-black text-xl"></i>
+                  {feature}
                 </li>
               ))}
             </ul>
           </div>
         </div>
+
+        <div className="flex justify-center items-center">
+          {sections[activeTab].image ? (
+            <GatsbyImage
+              image={sections[activeTab].image!}
+              alt={sections[activeTab].title}
+              className="rounded-lg shadow-lg object-cover sm:w-full"
+            />
+          ) : (
+            <p>No image available</p>
+          )}
+        </div>
+      </div>
+
+      {/* Add Gray Line Below */}
+      <div className="border-b border-gray-300 w-full mt-6 px-4 sm:px-28"></div>
+    </motion.div>
+    {/* Add Benefits Section */}
+    <motion.div className="py-8">
+        <h2 className="text-xl font-bold text-center mb-8 ">Benefity apartmánu</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 px-12">
+          {benefits.map((benefit, index) => (
+            <div key={index} className="flex items-center space-x-4">
+              <i className={`fas ${benefit.icon} text-cyan-500 text-2xl`}></i>
+              <span className="text-gray-700 font-medium">{benefit.text}</span>
+            </div>
+          ))}
+        </div>
       </motion.div>
 
-      {/* Aktivity Subsection */}
-      <div className="py-8">
+      {/* Apartment Conditions */}
+      <motion.div className="py-8">
+        <h2 className="text-xl font-bold text-center mb-8">Podmienky apartmánu</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-12">
+          {apartmentConditions.map((condition, index) => (
+            <div key={index} className="flex justify-between text-gray-600">
+              <span className="font-bold">{condition.label}:</span>
+              <span>{condition.value}</span>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+    {/* Aktivity Subsection */}
+      <div className="py-8 max-w-screen-lg mx-auto">
         <h2 className="text-xl font-bold text-center ">Aktivity a atrakcie</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8 mx-6 sm:mx-12 lg:mx-20 ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-8 mx-6 sm:mx-12 lg:mx-20 ">
           {[
             { title: 'Bazén', image: 'pool.png', description: 'Okúpte sa v spoločnom bazéne po celý rok. Je priamo pred apartmánom. Pozostáva z dvoch častí - pre dospelých aj pre deti.' },
             { title: 'Pláž', image: 'beach.jpg', description: 'V blízkosti apartmánu nájdete niekoľko pekných piesočnatých pláží, no určite najobľúbenejšou je pláž La Mata, ktorá získava každý rok modrú vlajku. Je široká a dlhá, tiahne sa až do vedľajšieho mesta. ' },
