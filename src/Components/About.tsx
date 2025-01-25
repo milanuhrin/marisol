@@ -351,19 +351,19 @@ const About = () => {
     <div className="flex flex-col space-y-2">
       <div className="flex sm:flex-row sm:items-center">
         <span className="font-bold text-gray-700 w-1/2 text-left">Check-in:</span>
-        <span className="text-gray-600 w-1/22 text-left">15:00</span>
+        <span className="text-gray-600 text-left">15:00</span>
       </div>
       <div className="flex sm:flex-row sm:items-center">
         <span className="font-bold text-gray-700 w-1/2 text-left">Check-out:</span>
-        <span className="text-gray-600 w-1/22 text-left">11:00</span>
+        <span className="text-gray-600 text-left">11:00</span>
       </div>
       <div className="flex sm:flex-row sm:items-center">
         <span className="font-bold text-gray-700 w-1/2 text-left">Záloha:</span>
-        <span className="text-gray-600 w-1/22 text-left">20% pri potvrdení rezervácie</span>
+        <span className="text-gray-600 text-left">20% pri potvrdení rezervácie</span>
       </div>
       <div className="flex sm:flex-row sm:items-center">
         <span className="font-bold text-gray-700 w-1/2 text-left">Doplatok:</span>
-        <span className="text-gray-600 w-1/2 text-left">80% 14 dní pred pobytom</span>
+        <span className="text-gray-600 text-left">80% 14 dní pred pobytom</span>
       </div>
     </div>
 
