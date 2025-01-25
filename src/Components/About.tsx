@@ -103,7 +103,7 @@ const About = () => {
   ];
 
   const apartmentConditions = [
-    { label: 'Check-in', value: '15:00' },
+    { label: '≈', value: '15:00' },
     { label: 'Check-out', value: '11:00' },
     { label: 'Záloha', value: '20% pri potvrdení rezervácie' },
     { label: 'Doplatok', value: '80% 14 dní pred pobytom' },
@@ -341,19 +341,53 @@ const About = () => {
         </div>
       </motion.div>
 
-      {/* Apartment Conditions */}
-      <motion.div className="py-8">
-        <h2 className="text-xl font-bold text-center mb-8">Naše podmienky</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-12">
-          {apartmentConditions.map((condition, index) => (
-            <div key={index} className="flex justify-between text-gray-600">
-              <span className="font-bold">{condition.label}:</span>
-              <span>{condition.value}</span>
-            </div>
-          ))}
-        </div>
-      </motion.div>
+{/* Apartment Conditions */}
+<motion.div className="py-8 max-w-screen-lg mx-auto">
+  <h2 className="text-xl font-bold text-center mb-8">Naše podmienky</h2>
 
+  {/* Responsive Grid */}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 px-12">
+    {/* Left Column */}
+    <div className="flex flex-col space-y-2">
+      <div className="flex sm:flex-row sm:items-center">
+        <span className="font-bold text-gray-700 w-1/2 text-left">Check-in:</span>
+        <span className="text-gray-600 w-1/22 text-left">15:00</span>
+      </div>
+      <div className="flex sm:flex-row sm:items-center">
+        <span className="font-bold text-gray-700 w-1/2 text-left">Check-out:</span>
+        <span className="text-gray-600 w-1/22 text-left">11:00</span>
+      </div>
+      <div className="flex sm:flex-row sm:items-center">
+        <span className="font-bold text-gray-700 w-1/2 text-left">Záloha:</span>
+        <span className="text-gray-600 w-1/22 text-left">20% pri potvrdení rezervácie</span>
+      </div>
+      <div className="flex sm:flex-row sm:items-center">
+        <span className="font-bold text-gray-700 w-1/2 text-left">Doplatok:</span>
+        <span className="text-gray-600 w-1/2 text-left">80% 14 dní pred pobytom</span>
+      </div>
+    </div>
+
+    {/* Right Column */}
+    <div className="flex flex-col space-y-2">
+      <div className="flex sm:flex-row sm:items-center">
+        <span className="font-bold text-gray-700 w-1/2 text-left">Domáce zvieratá:</span>
+        <span className="text-red-600 w-1/2 text-left">🚫</span>
+      </div>
+      <div className="flex sm:flex-row sm:items-center">
+        <span className="font-bold text-gray-700 w-1/2 text-left">Fajčenie:</span>
+        <span className="text-red-600 w-1/2 text-left">🚫</span>
+      </div>
+      <div className="flex sm:flex-row sm:items-center">
+        <span className="font-bold text-gray-700 w-1/2 text-left">Párty:</span>
+        <span className="text-red-600 w-1/2 text-left">🚫</span>
+      </div>
+      <div className="flex sm:flex-row sm:items-center">
+        <span className="font-bold text-gray-700 w-1/2 text-left">Bezbariérový prístup:</span>
+        <span className="text-red-600 w-1/2 text-left">🚫</span>
+      </div>
+    </div>
+  </div>
+</motion.div>
     {/* Aktivity Subsection */}
       <div className="py-8 max-w-screen-lg mx-auto">
         <h2 className="text-xl font-bold text-center ">Aktivity a atrakcie</h2>
