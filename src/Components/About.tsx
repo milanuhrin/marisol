@@ -116,7 +116,7 @@ const About = () => {
   const sections = [
     {
       title: "Spálňa",
-      image: featuresImages["spalna1.jpg"], // Replace with the actual image path
+      image: featuresImages["spalna1.jpg"],
       features: [
         "manželská posteľ",
         "skrine a nábytok",
@@ -127,7 +127,7 @@ const About = () => {
     },
     {
     title: "Detská izba",
-    image: featuresImages["spalna2.jpg"], // Replace with the actual image path
+    image: featuresImages["spalna2.jpg"],
     features: [
       "2x jednolôžková posteľ",
       "skrine a nábytok",
@@ -137,7 +137,7 @@ const About = () => {
     },
     {
       title: "Kúpeľňa",
-      image: featuresImages["kupelna.jpg"], // Replace with the actual image path
+      image: featuresImages["kupelna.jpg"],
       features: [
         "sprchový kút",
         "wc a umývadlo",
@@ -150,7 +150,7 @@ const About = () => {
     },
     {
       title: "Kuchyňa",
-      image: featuresImages["kuchyna.jpg"], // Replace with the actual image path
+      image: featuresImages["kuchyna.jpg"],
       features: [
           "chladnička",
           "elektrická rúra",
@@ -212,7 +212,7 @@ const About = () => {
           className="relative flex max-w-full flex-col sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:items-center sm:justify-center gap-8"
         >
           {/* Images Section */}
-          <div className="z-10 grid max-w-[33rem] grid-cols-12 grid-rows-2 gap-4 pl:20 justify-self-center sm:col-start-1 sm:row-start-1">
+          <div className="z-10 grid max-w-[33rem] grid-cols-4 px-12 sm:grid-cols-12 grid-rows-2 gap-4 pl:20 justify-self-center sm:col-start-1 sm:row-start-1">
             {hero2ImageLayouts.map((item, i) => (
               <motion.div
                 key={i}
@@ -242,7 +242,7 @@ const About = () => {
             whileInView="onscreen"
             variants={cardVariants}
           >
-            <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:px-12 sm:gap-x-1 sm:text-left mt-4">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-8 px-12 sm:gap-x-4 sm:text-left mt-4">
               {[
                 { icon: 'fa-user', text: '5 osôb' },
                 { icon: 'fa-bed', text: '2 spálne' },
@@ -274,7 +274,7 @@ const About = () => {
       viewport={{ amount: 0.1, once: true }}
       variants={cardVariants}
     >
-      <h2 className="text-xl font-bold text-center mb-8 mt-8">Vybavenie apartmánu a podmienky</h2>
+      <h2 className="text-xl font-bold text-center mb-8 mt-8">Vybavenie apartmánu</h2>
 
       {/* Add Gray Line Above */}
       <div className="border-b border-gray-300 mb-6 px-4 sm:px-28"></div>
@@ -330,7 +330,7 @@ const About = () => {
     </motion.div>
     {/* Add Benefits Section */}
     <motion.div className="py-8">
-        <h2 className="text-xl font-bold text-center mb-8 ">Benefity apartmánu</h2>
+        <h2 className="text-xl font-bold text-center mb-8 ">Ponúkame nasledovné benefity</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 px-12">
           {benefits.map((benefit, index) => (
             <div key={index} className="flex items-center space-x-4">
@@ -343,7 +343,7 @@ const About = () => {
 
       {/* Apartment Conditions */}
       <motion.div className="py-8">
-        <h2 className="text-xl font-bold text-center mb-8">Podmienky apartmánu</h2>
+        <h2 className="text-xl font-bold text-center mb-8">Naše podmienky</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-12">
           {apartmentConditions.map((condition, index) => (
             <div key={index} className="flex justify-between text-gray-600">

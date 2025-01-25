@@ -95,7 +95,7 @@ const Gallery: React.FC = () => {
 
   return (
     <div id="gallery" className="relative">
-      <div className="absolute w-full top-0">
+      <div className=" absolute w-full top-0">
         <SectionDividerWaveOneSide fill="#f0f0f0" />
       </div>
       <motion.section
