@@ -25,7 +25,7 @@ const Pricelist = () => {
       >
         <div className="max-w-lg mx-auto lg:max-w-[700px] border border-gray-300 rounded-lg shadow-lg overflow-hidden">
           <table className="w-full border-collapse text-gray-500">
-            <thead className="bg-blue-500 text-white">
+            <thead className="bg-cyan-500 text-white">
               <tr>
                 <th className="py-4 px-4 text-sm sm:text-base">Obdobie</th>
                 <th className="py-4 px-4 text-sm sm:text-base">

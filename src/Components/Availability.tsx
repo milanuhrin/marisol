@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { TitleText } from './export';
 import { sectionVariants } from 'Utilities/motionVariants'; // Import the footer variants
 
-
 const Availability = () => {
   const reservedDates = [
     '2024-12-25',
@@ -12,6 +11,10 @@ const Availability = () => {
     '2025-01-29',
     '2025-01-30',
     '2025-01-31',
+    '2025-02-03',
+    '2025-02-04',
+    '2025-02-05',
+
   ];
 
   const months = [
@@ -35,7 +38,7 @@ const Availability = () => {
 
   const today = new Date().toISOString().split('T')[0];
 
-  const changeMonth = (direction: 'prev' | 'next') => {
+  const changeMonth = (direction: string) => {
     if (direction === 'prev') {
       if (currentMonth === 0) {
         setCurrentMonth(11);
@@ -57,30 +60,30 @@ const Availability = () => {
     const days = [];
     const firstDayOfMonth = new Date(year, month, 1).getDay();
     const lastDayOfMonth = new Date(year, month + 1, 0).getDate();
-  
+
     const offset = (firstDayOfMonth + 6) % 7;
-  
+
     for (let i = 0; i < offset; i++) {
       days.push(null);
     }
-  
+
     for (let day = 1; day <= lastDayOfMonth; day++) {
       const dateObj = new Date(year, month, day);
       const dateString = dateObj.toLocaleDateString('sv-SE'); // Format: yyyy-MM-dd
-  
+
       const isPast = dateString < today;
       const isReserved = reservedDates.includes(dateString);
-  
+
       days.push({
         date: dateString,
         day,
         isReserved,
         isToday: dateString === today,
         isPast,
-        isReservedPast: isReserved && isPast, // New condition
+        isReservedPast: isReserved && isPast,
       });
     }
-  
+
     return days;
   };
 
@@ -88,7 +91,6 @@ const Availability = () => {
   const nextMonth = (currentMonth + 1) % 12;
   const nextMonthYear = currentMonth === 11 ? currentYear + 1 : currentYear;
   const calendarDaysNext = generateCalendarDays(nextMonth, nextMonthYear);
-
 
   return (
     <motion.section
@@ -107,12 +109,7 @@ const Availability = () => {
 
         {/* Calendar Wrapper */}
         <motion.div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '20px',
-            marginBottom: '2rem',
-          }}
+          className="calendar-wrapper"
           initial="offscreen"
           whileInView="onscreen"
           exit="exit"
@@ -127,12 +124,7 @@ const Availability = () => {
             return (
               <motion.div
                 key={index}
-                style={{
-                  backgroundColor: '#f9f9f9',
-                  padding: '1rem',
-                  borderRadius: '10px',
-                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                }}
+                className="calendar-container"
                 initial="offscreen"
                 whileInView="onscreen"
                 exit="exit"
@@ -140,29 +132,11 @@ const Availability = () => {
                 variants={sectionVariants}
               >
                 {/* Header with Arrows */}
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    fontWeight: 'bold',
-                    fontSize: '1.2rem',
-                    marginBottom: '1rem',
-                    position: 'relative',
-                  }}
-                >
+                <div className="calendar-header">
                   {isLeftCalendar && (
                     <button
                       onClick={() => changeMonth('prev')}
-                      style={{
-                        position: 'absolute',
-                        left: '0',
-                        background: 'none',
-                        border: 'none',
-                        fontSize: '1.5rem',
-                        color: '#1A202C',
-                        cursor: 'pointer',
-                      }}
+                      className="arrow-btn left-arrow"
                     >
                       &#10094;
                     </button>
@@ -171,15 +145,7 @@ const Availability = () => {
                   {!isLeftCalendar && (
                     <button
                       onClick={() => changeMonth('next')}
-                      style={{
-                        position: 'absolute',
-                        right: '0',
-                        background: 'none',
-                        border: 'none',
-                        fontSize: '1.5rem',
-                        color: '#1A202C',
-                        cursor: 'pointer',
-                      }}
+                      className="arrow-btn right-arrow"
                     >
                       &#10095;
                     </button>
@@ -187,22 +153,9 @@ const Availability = () => {
                 </div>
 
                 {/* Day Grid */}
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(7, 1fr)',
-                    gap: '3px',
-                  }}
-                >
+                <div className="day-grid">
                   {daysOfWeek.map((day, index) => (
-                    <div
-                      key={index}
-                      style={{
-                        fontSize: '0.9rem',
-                        fontWeight: 'bold',
-                        textAlign: 'center',
-                      }}
-                    >
+                    <div key={index} className="day-name">
                       {day}
                     </div>
                   ))}
@@ -210,30 +163,15 @@ const Availability = () => {
                     day ? (
                       <motion.div
                         key={dayIndex}
-                        style={{
-                          height: '50px',
-                          width: '50px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          borderRadius: '3px',
-                          textAlign: 'center',
-                          backgroundColor: day.isReservedPast
-                            ? '#d3d3d3' // Gray for reserved in the past
+                        className={`calendar-day ${
+                          day.isReservedPast
+                            ? 'reserved-past'
                             : day.isReserved
-                            ? '#f8d7da' // Red for reserved
+                            ? 'reserved'
                             : day.isPast
-                            ? '#d3d3d3' // Gray for past
-                            : '#d4edda', // Green for available
-                          color: day.isReservedPast
-                            ? '#6c757d' // Dark gray for reserved in the past
-                            : day.isReserved
-                            ? '#721c24' // Dark red for reserved
-                            : day.isPast
-                            ? '#6c757d' // Dark gray for past
-                            : '#155724', // Dark green for available
-                          textDecoration: day.isPast ? 'line-through' : 'none', // Strikethrough for past days
-                        }}
+                            ? 'past'
+                            : 'available'
+                        }`}
                         whileHover={{ scale: 1.08 }}
                       >
                         {day.day}
@@ -250,53 +188,171 @@ const Availability = () => {
 
         {/* Legend */}
         <motion.div
-          className={`text-justify text-base font-medium leading-6 text-gray-500`}
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '1rem',
-          }}
+          className="legend"
           initial="offscreen"
           whileInView="onscreen"
           exit="exit"
           viewport={{ once: true, amount: 0.01 }}
           variants={sectionVariants}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <div
-              style={{
-                width: '20px',
-                height: '20px',
-                backgroundColor: '#d3d3d3',
-                borderRadius: '1px',
-              }}
-            ></div>
+          <div className="legend-item">
+            <div className="legend-box past-box"></div>
             <span>minulosť</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <div
-              style={{
-                width: '20px',
-                height: '20px',
-                backgroundColor: '#f8d7da',
-                borderRadius: '1px',
-              }}
-            ></div>
+          <div className="legend-item">
+            <div className="legend-box reserved-box"></div>
             <span>obsadený</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <div
-              style={{
-                width: '20px',
-                height: '20px',
-                backgroundColor: '#d4edda',
-                borderRadius: '1px',
-              }}
-            ></div>
+          <div className="legend-item">
+            <div className="legend-box available-box"></div>
             <span>voľný</span>
           </div>
         </motion.div>
       </div>
+
+      {/* Add CSS styling */}
+      <style>{`
+        .calendar-wrapper {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-bottom: 2rem;
+        }
+
+        .calendar-container {
+          background-color: #f9f9f9;
+          padding: 1rem;
+          border-radius: 10px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-header {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: bold;
+          font-size: 1.2rem;
+          margin-bottom: 1rem;
+          position: relative;
+        }
+
+        .arrow-btn {
+          position: absolute;
+          background: none;
+          border: none;
+          font-size: 1.5rem;
+          cursor: pointer;
+        }
+
+        .left-arrow {
+          left: 0;
+        }
+
+        .right-arrow {
+          right: 0;
+        }
+
+        .day-grid {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          gap: 3px;
+        }
+
+        .calendar-day {
+          height: 50px;
+          width: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 3px;
+          text-align: center;
+        }
+
+        .reserved-past {
+          background-color: #d3d3d3;
+          color: #6c757d;
+          text-decoration: line-through;
+        }
+
+        .reserved {
+          background-color: #f8d7da;
+          color: #721c24;
+        }
+
+        .past {
+          background-color: #d3d3d3;
+          color: #6c757d;
+          text-decoration: line-through;
+        }
+
+        .available {
+          background-color: #d4edda;
+          color: #155724;
+        }
+
+        .legend {
+          display: flex;
+          justify-content: center;
+          gap: 1rem;
+        }
+
+        .legend-item {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .legend-box {
+          width: 20px;
+          height: 20px;
+          border-radius: 1px;
+        }
+
+        .past-box {
+          background-color: #d3d3d3;
+        }
+
+        .reserved-box {
+          background-color: #f8d7da;
+        }
+
+        .available-box {
+          background-color: #d4edda;
+        }
+
+        @media (max-width: 768px) {
+      .calendar-wrapper {
+        flex-direction: column;
+        gap: 10px;
+        margin: 1rem 0; /* Add margin on smaller screens */
+      }
+
+      .calendar-container {
+        padding: 0.8rem; /* Reduce padding on smaller screens */
+      }
+
+      .calendar-header {
+        font-size: 1rem; /* Adjust font size */
+      }
+
+      .day-grid {
+        gap: 2px; /* Reduce the gap between days */
+      }
+
+      .calendar-day {
+        height: 40px; /* Adjust day box size */
+        width: 40px;
+      }
+
+      .legend {
+        gap: 0.5rem; /* Adjust spacing in legend */
+      }
+
+      .legend-item {
+        font-size: 0.85rem; /* Adjust text size in legend */
+      }
+    }
+  `}</style>
     </motion.section>
   );
 };
