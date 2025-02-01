@@ -6,6 +6,7 @@ import { TitleText } from './export';
 import { SectionDividerWaveOneSide } from 'svg/SectionDividerWaveOneSide';
 import { hero2ImageLayouts } from 'Utilities/Data';
 import { cardVariants } from 'Utilities/motionVariants';
+import { useMediaQuery } from "react-responsive";
 
 const About = () => {
   const [activeTab, setActiveTab] = useState(0); // Added state for active tab
@@ -84,23 +85,47 @@ const About = () => {
     return acc;
   }, {} as Record<string, IGatsbyImageData | undefined>);
 
-  const benefits = [
-    { icon: 'fa-water', text: 'Výhľad na more' },
-    { icon: 'fa-lock', text: 'Uzavretý areál' },
-    { icon: 'fa-glass-cheers', text: 'Presklená terasa' },
-    { icon: 'fa-sun', text: 'Otvorená terasa' },
-    { icon: 'fa-utensils', text: 'Jedálenský stôl' },
-    { icon: 'fa-parking', text: 'Parkovanie zdarma' },
-    { icon: 'fa-wifi', text: 'Internet' },
-    { icon: 'fa-wind', text: 'Klimatizácia/kúrenie' },
-    { icon: 'fa-baby', text: 'Detská postieľka' },
-    { icon: 'fa-chair', text: 'Detská stolička' },
-    { icon: 'fa-puzzle-piece', text: 'Hračky' },
-    { icon: 'fa-dice', text: 'Spoločenské hry' },
-    { icon: 'fa-tshirt', text: 'Žehlička' },
-    { icon: 'fa-wind', text: 'Sušiak' },
-    { icon: 'fa-broom', text: 'Vysávač' },
+  const isLargeScreen = useMediaQuery({ minWidth: 1024 });
+  
+  const largeScreenBenefits = [
+      { icon: "fa-water", text: "Výhľad na more" },
+      { icon: "fa-parking", text: "Parkovanie zdarma" },
+      { icon: "fa-snowflake", text: "Klimatizácia/kúrenie" },
+      { icon: "fa-baby", text: "Detská postieľka" },
+      { icon: "fa-glass-cheers", text: "Presklená terasa" },
+      { icon: "fa-lock", text: "Uzavretý areál" },
+      { icon: "fa-tshirt", text: "Žehlička" },
+      { icon: "fa-chair", text: "Detská stolička" },
+      { icon: "fa-sun", text: "Otvorená terasa" },
+      { icon: "fa-wifi", text: "Internet/Netflix" },
+      { icon: "fa-wind", text: "Sušiak" },
+      { icon: "fa-puzzle-piece", text: "Hračky" },
+      { icon: "fa-utensils", text: "Jedálenský stôl" },
+      { icon: "fa-desktop", text: "Pracovné miesto" },
+      { icon: "fa-broom", text: "Vysávač" },
+      { icon: "fa-dice", text: "Spoločenské hry" },
   ];
+  
+  const smallScreenBenefits = [
+      { icon: "fa-water", text: "Výhľad na more" },
+      { icon: "fa-snowflake", text: "Klimatizácia/kúrenie" },
+      { icon: "fa-glass-cheers", text: "Presklená terasa" },
+      { icon: "fa-tshirt", text: "Žehlička" },
+      { icon: "fa-sun", text: "Otvorená terasa" },
+      { icon: "fa-wind", text: "Sušiak" },
+      { icon: "fa-utensils", text: "Jedálenský stôl" },
+      { icon: "fa-broom", text: "Vysávač" },
+      { icon: "fa-parking", text: "Parkovanie zdarma" },
+      { icon: "fa-baby", text: "Detská postieľka" },
+      { icon: "fa-lock", text: "Uzavretý areál" },
+      { icon: "fa-chair", text: "Detská stolička" },
+      { icon: "fa-wifi", text: "Internet/Netflix" },
+      { icon: "fa-puzzle-piece", text: "Hračky" },
+      { icon: "fa-desktop", text: "Pracovné miesto" },
+      { icon: "fa-dice", text: "Spoločenské hry" },
+  ];
+
+  const benefits = isLargeScreen ? largeScreenBenefits : smallScreenBenefits;
 
   const apartmentConditions = [
     { label: '≈', value: '15:00' },
@@ -331,7 +356,7 @@ const About = () => {
     {/* Add Benefits Section */}
     <motion.div className="py-8">
         <h2 className="text-xl font-bold text-center mb-8 ">Ponúkame nasledovné benefity</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 px-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 px-12">
           {benefits.map((benefit, index) => (
             <div key={index} className="flex items-center space-x-4">
               <i className={`fas ${benefit.icon} text-cyan-500 text-2xl`}></i>
