@@ -6,7 +6,7 @@ import { sectionVariants } from 'Utilities/motionVariants'; // Import motion var
 
 export const Contact = () => {
   return (
-    <section className="relative bg-[#e6f6ff]">
+    <section className="relative bg-[#e6f6ff] max-w-screen-lg mx-auto">
       {/* Section Divider at the top */}
       <div className="absolute w-full top-0 transform rotate-180 z-10">
         <SectionDividerWaveOneSide fill="#e6f6ff" />

@@ -24,14 +24,14 @@ app.post('/api/send-email', async (req, res) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.GMAIL_USER, // Your Gmail user from .env
-      pass: process.env.GMAIL_PASS, // Your Gmail password or app password from .env
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS,
     },
   });
 
   const mailOptions = {
     from: `"${name}" <${email}>`,
-    to: 'apartmanspanielsko@gmail.com', // Your receiving email address
+    to: 'apartmanspanielsko@gmail.com', 
     subject: `New message from ${name}`,
     text: message,
   };
