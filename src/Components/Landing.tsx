@@ -1,8 +1,6 @@
 import { SectionDivider } from 'Components/export';
 import { motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import { getImage, GatsbyImage } from 'gatsby-plugin-image';
 import { Navigation } from './Navigation/Navigation';
 
 interface Props {
@@ -12,56 +10,31 @@ interface Props {
 export const Landing = (props: Props) => {
   const { containerStyles } = props;
 
-  // Fetch images and logo from the gallery
-  const data = useStaticQuery(graphql`
-    query {
-      image1: file(relativePath: { eq: "landing/landing_01_dron.jpg" }) {
-        childImageSharp {
-          gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
-        }
-      }
-      image2: file(relativePath: { eq: "landing/landing_02_DSC_4418.jpg" }) {
-        childImageSharp {
-          gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
-        }
-      }
-      image3: file(relativePath: { eq: "landing/landing_03_IMG_4476.jpg" }) {
-        childImageSharp {
-          gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
-        }
-      }
-      image4: file(relativePath: { eq: "landing/landing_04_lamata_beach.jpg" }) {
-        childImageSharp {
-          gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
-        }
-      }
-      logo: file(relativePath: { eq: "landing/marisolseaview_logo.png" }) {
-        childImageSharp {
-          gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
-        }
-      }
-    }
-  `);
-
+  // Store images in S3 (CloudFront URLs)
   const images = [
-    getImage(data.image1),
-    getImage(data.image2),
-    getImage(data.image3),
-    getImage(data.image4),
-  ].filter(Boolean);
+    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_01.jpg",
+    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_02.jpg",
+    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_03.jpg",
+    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_04.jpg",
+    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_05.jpg"
+  ];
 
-  const logo = getImage(data.logo);
+  const logo = "https://dznnrbng6qb50.cloudfront.net/images/landing/logo.png";
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Image rotation logic
+  // Prefetch the next image
   useEffect(() => {
+    const nextIndex = (currentImageIndex + 1) % images.length;
+    const nextImage = new Image();
+    nextImage.src = images[nextIndex];
+
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000); // Total duration: 5 seconds (3s display + 2s transition)
+    }, 5000); // Rotate images every 5 seconds
 
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [currentImageIndex, images.length]);
 
   return (
     <>
@@ -70,7 +43,10 @@ export const Landing = (props: Props) => {
         className={`${containerStyles} relative z-10 w-full h-screen`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 2 }}
+        transition={{
+          opacity: { duration: 1 },
+          scale: { duration: 5, ease: 'linear' },
+        }}
         id='home'
       >
         {/* Image container */}
@@ -81,35 +57,35 @@ export const Landing = (props: Props) => {
               initial={{ opacity: 0, scale: 1 }}
               animate={{
                 opacity: currentImageIndex === index ? 1 : 0,
-                scale: currentImageIndex === index ? 1.15 : 1, // Scale up slightly for zooming effect
+                scale: currentImageIndex === index ? 1.15 : 1, // Zoom effect
               }}
               transition={{
-                opacity: { duration: 2 }, // Transition duration
-                scale: { duration: 7, ease: 'linear' }, // Continuous zoom
+                opacity: { duration: 2 },
+                scale: { duration: 7, ease: 'linear' },
               }}
               className="absolute inset-0 w-full h-full flex justify-center items-center"
             >
-              {image && (
-                <GatsbyImage
-                  image={image}
-                  alt={`Landing background image ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              )}
+              {/* Lazy Load Image */}
+              <img
+                src={image}
+                alt={`Landing background ${index + 1}`}
+                className="w-full h-full object-cover"
+                loading={currentImageIndex === index ? "eager" : "lazy"}
+              />
             </motion.div>
           ))}
         </div>
 
         {/* Logo */}
         {logo && (
-          <div className="absolute transform -translate-y-1/2 z-50"
-          style={{ top: '50%', right: '8%' }}>
-          <GatsbyImage
-            image={logo}
-            alt="Logo"
-            className="w-60 md:w-96 lg:w-144"
-          />
-        </div>
+          <div className="absolute transform -translate-y-1/2 z-50" style={{ top: '50%', right: '8%' }}>
+            <img
+              src={logo}
+              alt="Logo"
+              className="w-60 md:w-96 lg:w-144"
+              loading="lazy"
+            />
+          </div>
         )}
 
         {/* Divider */}
