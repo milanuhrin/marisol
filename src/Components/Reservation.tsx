@@ -13,7 +13,9 @@ const Reservation = () => {
     guests: 1,
     message: '',
   });
+
   const [formStatus, setFormStatus] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // 🔵 Add loading state
 
   const handleInputChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
@@ -27,27 +29,35 @@ const Reservation = () => {
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    setIsLoading(true); // 🔵 Show loading indicator
 
     try {
       const formattedCheckIn = formatDate(formData.checkIn);
       const formattedCheckOut = formatDate(formData.checkOut);
       const fullName = `${formData.firstName} ${formData.lastName}`;
 
-      const response = await fetch('http://localhost:5001/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          name: fullName,
-          subject: 'Rezervácia apartmánu',
-          message: `Dobrý deň,\n\nMám záujem o rezerváciu apartmánu:\n\nMeno a priezvisko: ${fullName}\nEmail: ${formData.email}\nCheck-in: ${formattedCheckIn}\nCheck-out: ${formattedCheckOut}\nPočet hostí: ${formData.guests}\n\nSpráva:\n${formData.message}`,
-        }),
-      });
+      const response = await fetch(
+        'https://8jwwggkrye.execute-api.us-east-1.amazonaws.com/prod/send-email',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...formData,
+            name: fullName,
+            subject: 'Rezervácia apartmánu',
+            message: `Dobrý deň,\n\nMám záujem o rezerváciu apartmánu:\n\nMeno a priezvisko: ${fullName}\nEmail: ${formData.email}\nCheck-in: ${formattedCheckIn}\nCheck-out: ${formattedCheckOut}\nPočet hostí: ${formData.guests}\n\nSpráva:\n${formData.message}`,
+          }),
+        }
+      );
+
+      const responseData = await response.json(); // 🔵 Parse response
 
       if (response.ok) {
-        setFormStatus('Rezervácia bola úspešne odoslaná.\n Počkajte, prosím, na potvrdenie rezervácie.');
+        setFormStatus(
+          `✅ Rezervácia bola úspešne odoslaná. Počkajte, prosím, na potvrdenie.`
+        );
         setFormData({
           firstName: '',
           lastName: '',
@@ -58,11 +68,14 @@ const Reservation = () => {
           message: '',
         });
       } else {
-        setFormStatus('Nepodarilo sa odoslať rezerváciu. Skúste znova.');
+        // 🔵 Show API error message if available
+        setFormStatus(`❌ Chyba: ${responseData.error || 'Skúste znova.'}`);
       }
     } catch (error) {
       console.error('Error sending reservation email:', error);
-      setFormStatus('Nepodarilo sa odoslať rezerváciu. Skúste znova.');
+      setFormStatus('❌ Nepodarilo sa odoslať rezerváciu. Skontrolujte pripojenie.');
+    } finally {
+      setIsLoading(false); // 🔵 Hide loading indicator
     }
   };
 
@@ -93,7 +106,9 @@ const Reservation = () => {
             {/* Row 1: First Name and Last Name */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-left font-medium text-gray-700">Meno</label>
+                <label className="block text-sm text-left font-medium text-gray-700">
+                  Meno
+                </label>
                 <input
                   type="text"
                   name="firstName"
@@ -104,7 +119,9 @@ const Reservation = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm text-left font-medium text-gray-700">Priezvisko</label>
+                <label className="block text-sm text-left font-medium text-gray-700">
+                  Priezvisko
+                </label>
                 <input
                   type="text"
                   name="lastName"
@@ -119,7 +136,9 @@ const Reservation = () => {
             {/* Row 2: Email and Počet hostí */}
             <div className="grid grid-cols-4 gap-4">
               <div className="col-span-3">
-                <label className="block text-sm text-left font-medium text-gray-700">Email</label>
+                <label className="block text-sm text-left font-medium text-gray-700">
+                  Email
+                </label>
                 <input
                   type="email"
                   name="email"
@@ -130,7 +149,9 @@ const Reservation = () => {
                 />
               </div>
               <div className="col-span-1">
-                <label className="block text-sm text-left font-medium text-gray-700">Počet hostí</label>
+                <label className="block text-sm text-left font-medium text-gray-700">
+                  Počet hostí
+                </label>
                 <input
                   type="number"
                   name="guests"
@@ -146,7 +167,9 @@ const Reservation = () => {
             {/* Row 3: Check-in and Check-out */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-left font-medium text-gray-700">Check-in</label>
+                <label className="block text-sm text-left font-medium text-gray-700">
+                  Check-in
+                </label>
                 <input
                   type="date"
                   name="checkIn"
@@ -157,7 +180,9 @@ const Reservation = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm text-left font-medium text-gray-700">Check-out</label>
+                <label className="block text-sm text-left font-medium text-gray-700">
+                  Check-out
+                </label>
                 <input
                   type="date"
                   name="checkOut"
@@ -169,29 +194,16 @@ const Reservation = () => {
               </div>
             </div>
 
-            {/* Row 4: Message */}
-            <div>
-              <label className="block text-sm text-left font-medium text-gray-700">Správa</label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleInputChange}
-                placeholder="Napíšte akékoľvek ďalšie informácie alebo otázky k rezervácii..."
-                rows={4}
-                className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm"
-              ></textarea>
-            </div>
-
             <button
               type="submit"
               className="w-full bg-cyan-500 text-white py-2 px-4 rounded-md hover:bg-cyan-600 transition"
+              disabled={isLoading}
             >
-              Rezervovať
+              {isLoading ? 'Odosielanie...' : 'Rezervovať'}
             </button>
           </form>
-          {formStatus && (
-            <p className="mt-4 text-sm text-center text-gray-600">{formStatus}</p>
-          )}
+
+          {formStatus && <p className="mt-4 text-sm text-center text-gray-600">{formStatus}</p>}
         </motion.div>
       </div>
     </motion.section>
