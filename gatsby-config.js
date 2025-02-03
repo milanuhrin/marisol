@@ -14,10 +14,10 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-s3',
       options: {
-        bucketName: 'marisol-web',
+        bucketName: 'marisol-wepage',
         protocol: "https",
         hostname: "marisol.sk",
-        cloudfrontDistributionId: 'E4MR97Q6D6NQY',
+        cloudfrontDistributionId: 'E255DY8HXE81HK',
       },
     },
     {
