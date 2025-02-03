@@ -3,7 +3,7 @@ module.exports = {
     title: 'Marisol Apartment',
     description: 'Marisol Apartment',
     titleTemplate: "%s | Marisol Apartment",
-    siteUrl: 'https://apartmanspanielsko.sk',
+    siteUrl: 'https://marisol.sk',
     image: "/default-image.jpg"
   },
   plugins: [
@@ -14,7 +14,10 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-s3',
       options: {
-        bucketName: 'tatiho-stranka',
+        bucketName: 'marisol-web',
+        protocol: "https",
+        hostname: "marisol.sk",
+        cloudfrontDistributionId: 'E4MR97Q6D6NQY',
       },
     },
     {

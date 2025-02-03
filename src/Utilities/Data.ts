@@ -15,11 +15,11 @@ export const hero2Items = [
 export const hero2ImageLayouts = [
   {
     alt: 'Detska',
-    class: 'w-[102%] self-end col-span-6 object-contain ',
+    class: 'w-[100%] self-end col-span-6 object-contain ',
   },
   {
     alt: 'Spalna',
-    class: ' w-[79%] self-end col-span-6 ',
+    class: ' w-[130%] self-end col-span-4 ',
   },
   {
     alt: 'Obyvacka',
@@ -27,7 +27,7 @@ export const hero2ImageLayouts = [
   },
   {
     alt: 'Terasa',
-    class: 'w-[99%] col-span-6',
+    class: 'w-[100%] col-span-6',
   },
 ];
 

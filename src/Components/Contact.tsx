@@ -6,7 +6,7 @@ import { sectionVariants } from 'Utilities/motionVariants'; // Import motion var
 
 export const Contact = () => {
   return (
-    <section className="relative bg-[#e6f6ff] max-w-screen-lg mx-auto">
+    <section className="relative bg-[#e6f6ff]">
       {/* Section Divider at the top */}
       <div className="absolute w-full top-0 transform rotate-180 z-10">
         <SectionDividerWaveOneSide fill="#e6f6ff" />
@@ -28,7 +28,7 @@ export const Contact = () => {
 
         {/* Google Map Section */}
         <motion.div
-          className="w-full max-w-screen-lg bg-white p-6 rounded-lg shadow-md mx-auto"
+          className="w-full bg-white p-6 rounded-lg shadow-md max-w-screen-lg mx-auto"
           variants={sectionVariants}
         >
           <h3 className="text-lg font-medium text-gray-700 text-center mb-4">

@@ -206,7 +206,7 @@ const About = () => {
 
 
   return (
-    <section id="about" className="text-center py-8 bg-gradient-to-b from-white to-[#e6f6ff] max-w-screen-lg mx-auto">
+    <section id="about" className="text-center py-8 bg-gradient-to-b from-white to-[#e6f6ff] ">
       {/* Title with Text */}
       <motion.div
         initial="offscreen"
@@ -216,7 +216,7 @@ const About = () => {
         className="py-8"
       >
         <TitleText>O apartmáne Marisol</TitleText>
-        <div className="px-12 lg:px-28 text-justify text-base font-medium leading-6 text-gray-500 mb-4 mt-8">
+        <div className="px-12 lg:px-28 text-justify text-base font-medium leading-6 text-gray-500 mb-4 mt-8 max-w-screen-lg mx-auto">
           Krásny východ slnka nad morom, príjemná dovolenková atmosféra či voňavá káva na terase - to
           všetko môžete zažiť u nás, v apartmáne Marisol. Nachádza sa v jednej z najobľúbenejších
           lokalít mesta Torrevieja, blízko známeho mesta Alicante v Španielsku. Vedľa parku a tiež
@@ -234,10 +234,10 @@ const About = () => {
           initial="offscreen"
           whileInView="onscreen"
           variants={cardVariants}
-          className="relative flex max-w-full flex-col sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:items-center sm:justify-center gap-8"
+          className="relative flex flex-col sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:items-center sm:justify-center gap-8 max-w-screen-lg mx-auto"
         >
           {/* Images Section */}
-          <div className="z-10 grid max-w-[33rem] grid-cols-4 px-12 sm:grid-cols-12 grid-rows-2 gap-4 pl:20 justify-self-center sm:col-start-1 sm:row-start-1">
+          <div className="z-10 grid max-w-[40] grid-cols-4 px-12 sm:grid-cols-12 grid-rows-2 gap-4 pl:12 justify-self-center sm:col-start-1 sm:row-start-1 mx-auto">
             {hero2ImageLayouts.map((item, i) => (
               <motion.div
                 key={i}
@@ -262,12 +262,12 @@ const About = () => {
 
           {/* Icon-Based Section */}
           <motion.div
-            className="z-10 flex flex-col gap-8 sm:col-start-2 sm:row-start-1 sm:self-center sm:justify-self-center"
+            className="z-10 flex flex-col gap-8 sm:col-start-2 sm:row-start-1 sm:self-center sm:justify-self-center max-w-screen-lg mx-auto"
             initial="offscreen"
             whileInView="onscreen"
             variants={cardVariants}
           >
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-8 px-12 sm:gap-x-4 sm:text-left mt-4">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-8 px-2 sm:gap-x-4 sm:text-left mt-4">
               {[
                 { icon: 'fa-user', text: '5 osôb' },
                 { icon: 'fa-bed', text: '2 spálne' },
@@ -354,7 +354,7 @@ const About = () => {
       <div className="border-b border-gray-300 w-full mt-6 px-4 sm:px-28"></div>
     </motion.div>
     {/* Add Benefits Section */}
-    <motion.div className="py-8">
+    <motion.div className="py-8 max-w-screen-lg mx-auto">
         <h2 className="text-xl font-bold text-center mb-8 ">Ponúkame nasledovné benefity</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 px-12">
           {benefits.map((benefit, index) => (

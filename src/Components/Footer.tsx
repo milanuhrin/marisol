@@ -11,7 +11,7 @@ export const Footer = () => {
       transition={{ duration: 0.5 }}
     >
       {/* Contact Info */}
-      <motion.div className="w-full max-w-4xl text-center">
+      <motion.div className="w-full text-center">
         <div className="flex flex-col items-center space-y-6 text-lg text-gray-700">
           {/* Email Address */}
           <motion.div className="flex items-center space-x-2" whileHover={{ scale: 1.1 }}>
@@ -29,7 +29,7 @@ export const Footer = () => {
           </motion.div>
 
           {/* Address */}
-          <motion.div className="flex items-center space-x-2" whileHover={{ scale: 1.1 }}>
+          <motion.div className="flex items-center space-x-2 text-sm" whileHover={{ scale: 1.1 }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
