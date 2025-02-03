@@ -90,14 +90,14 @@ const About = () => {
   const largeScreenBenefits = [
       { icon: "fa-water", text: "Výhľad na more" },
       { icon: "fa-parking", text: "Parkovanie zdarma" },
-      { icon: "fa-snowflake", text: "Klimatizácia/kúrenie" },
+      { icon: "fa-snowflake", text: "Klimatizácia" },
       { icon: "fa-baby", text: "Detská postieľka" },
       { icon: "fa-glass-cheers", text: "Presklená terasa" },
       { icon: "fa-lock", text: "Uzavretý areál" },
       { icon: "fa-tshirt", text: "Žehlička" },
       { icon: "fa-chair", text: "Detská stolička" },
       { icon: "fa-sun", text: "Otvorená terasa" },
-      { icon: "fa-wifi", text: "Internet/Netflix" },
+      { icon: "fa-wifi", text: "Internet" },
       { icon: "fa-wind", text: "Sušiak" },
       { icon: "fa-puzzle-piece", text: "Hračky" },
       { icon: "fa-utensils", text: "Jedálenský stôl" },
@@ -140,7 +140,7 @@ const About = () => {
 
   const sections = [
     {
-      title: "Spálňa",
+      title: "Spálňa 1",
       image: featuresImages["spalna1.jpg"],
       features: [
         "manželská posteľ",
@@ -151,7 +151,7 @@ const About = () => {
       ],
     },
     {
-    title: "Detská izba",
+    title: "Spálňa 2",
     image: featuresImages["spalna2.jpg"],
     features: [
       "2x jednolôžková posteľ",
