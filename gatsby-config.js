@@ -14,7 +14,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-s3',
       options: {
-        bucketName: 'marisol-wepbage',
+        bucketName: 'marisol-webpage',
         protocol: "https",
         hostname: "marisol.sk",
         cloudfrontDistributionId: 'E255DY8HXE81HK',
