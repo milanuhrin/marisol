@@ -18,6 +18,7 @@ module.exports = {
         protocol: "https",
         hostname: "marisol.sk",
         cloudfrontDistributionId: 'E255DY8HXE81HK',
+        acl: null,
       },
     },
     {
