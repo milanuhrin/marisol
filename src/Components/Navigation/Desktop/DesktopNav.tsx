@@ -31,7 +31,7 @@ export const DesktopNav = (props: Props) => {
 
             {menuItems.map((item, i) => (
             <motion.li
-               className="text-silver hover:font-bold hover:text-lg cursor-pointer transition duration-300"
+               className="text-silver hover:font-bold hover:text-cyan-500 hover:text-lg cursor-pointer transition duration-300"
                variants={desktopMenuItems}
                key={i}
                onClick={item.action || undefined}
