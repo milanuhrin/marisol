@@ -2,18 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Admin: React.FC = () => {
-  // ✅ Ensure `useNavigate` does not break Gatsby SSR
-  const navigate = typeof window !== "undefined" ? useNavigate() : () => {};
+  const navigate = useNavigate();
   const [reservedDates, setReservedDates] = useState<string[]>([]);
   const [newDate, setNewDate] = useState<string>("");
-  const [loading, setLoading] = useState(true); // ✅ Loading state
+  const [loading, setLoading] = useState(true);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined") return; // ✅ Ensure this runs only in the browser
+    setIsClient(true); // ✅ Ensure only runs in the browser
+    if (typeof window === "undefined") return; 
 
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/login"); // ✅ Redirect to login if not authenticated
+      navigate("/login");
       return;
     }
 
@@ -30,7 +31,7 @@ const Admin: React.FC = () => {
   }, [navigate]);
 
   const addDate = async () => {
-    if (typeof window === "undefined") return;
+    if (!isClient) return;
 
     const token = localStorage.getItem("token");
     if (!token) return;
@@ -47,6 +48,8 @@ const Admin: React.FC = () => {
       console.error("❌ Failed to add reservation");
     }
   };
+
+  if (!isClient) return null; // ✅ Prevent SSR errors
 
   return (
     <div className="p-6 max-w-md mx-auto bg-white rounded-lg shadow-md">
