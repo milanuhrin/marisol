@@ -1,6 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Footer, Landing } from "Components/export";
+import { Routes, Route } from "react-router-dom";
+import { AnimOnScroll, Footer, Landing } from "Components/export";
 import "../../global.css";
 import About from "Components/About";
 import Availability from "Components/Availability";
@@ -14,10 +14,8 @@ import SEO from "Components/SEO";
 
 const IndexPage = () => {
   return (
-    <Router>
-      <SEO />
+    <>
       <Routes>
-        {/* Main Website */}
         <Route
           path="/"
           element={
@@ -33,14 +31,14 @@ const IndexPage = () => {
             </>
           }
         />
-        {/* Login Page */}
         <Route path="/login" element={<Login />} />
-        {/* Admin Page */}
         <Route path="/admin" element={<Admin />} />
       </Routes>
-    </Router>
+    </>
   );
 };
+
+// ✅ Uses Gatsby's `<Head>` API
 export const Head = () => <SEO />;
 
 export default IndexPage;

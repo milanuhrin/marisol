@@ -1,9 +1,5 @@
-import React, { ReactNode } from "react";
+import React from "react";
 
-interface WrapRootElementProps {
-  element: ReactNode;
-}
-
-export const wrapRootElement = ({ element }: WrapRootElementProps): ReactNode => {
-  return element;
+export const wrapRootElement = ({ element }: { element: React.ReactNode }) => {
+  return element; // No BrowserRouter to prevent SSR issues
 };
