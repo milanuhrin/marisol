@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { isBrowser } from "../Utilities/helpers";
 import { Footer, Landing } from "Components/export";
 import "../../global.css";
 import About from "Components/About";
@@ -8,13 +8,28 @@ import Gallery from "Components/Gallery";
 import Pricelist from "Components/Pricelist";
 import Reservation from "Components/Reservation";
 import Contact from "Components/Contact";
-import Login from "Components/Login";
-import Admin from "Components/Admin";
 import SEO from "Components/SEO";
 
+// ✅ Import Login and Admin pages
+import Login from "Components/Login";
+import Admin from "Components/Admin";
+
 const IndexPage = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true); // Runs only in the browser
+  }, []);
+
+  if (!isClient) {
+    return null; // Prevents SSR from rendering react-router
+  }
+
+  // ✅ Import react-router-dom only in the browser
+  const { BrowserRouter, Routes, Route } = require("react-router-dom");
+
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
         <Route
           path="/"
@@ -31,10 +46,11 @@ const IndexPage = () => {
             </>
           }
         />
+        {/* ✅ Make sure Login and Admin are correctly referenced */}
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<Admin />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 };
 
