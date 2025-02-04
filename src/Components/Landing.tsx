@@ -12,11 +12,11 @@ export const Landing = (props: Props) => {
 
   // Store images in S3 (CloudFront URLs)
   const images = [
-    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_01.jpg",
-    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_02.jpg",
-    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_03.jpg",
-    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_04.jpg",
-    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_05.jpg"
+    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_01.webp",
+    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_02.webp",
+    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_03.webp",
+    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_04.webp",
+    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_05.webp"
   ];
 
   const logo = "https://dznnrbng6qb50.cloudfront.net/images/landing/logo.png";
