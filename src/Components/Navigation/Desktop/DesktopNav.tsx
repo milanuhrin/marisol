@@ -30,21 +30,27 @@ export const DesktopNav = (props: Props) => {
             </motion.li> */}
 
             {menuItems.map((item, i) => (
-            <motion.li
-               className="text-silver hover:font-bold hover:text-cyan-500 hover:text-lg cursor-pointer transition duration-300"
-               variants={desktopMenuItems}
-               key={i}
-               onClick={item.action || undefined}
-            >
-               {item.icon && <FontAwesomeIcon icon={item.icon} className="mr-2" />}
-               {item.action ? (
-                  <span aria-label={item.name}>{item.name}</span>
-               ) : (
-                  <Link to={item.link} aria-label={item.name}>
-                  {item.name}
-                  </Link>
-               )}
-            </motion.li>
+               <motion.li
+                  className="text-silver hover:font-bold hover:text-cyan-500 hover:text-lg cursor-pointer transition duration-300"
+                  variants={desktopMenuItems}
+                  key={i}
+                  onClick={item.action || undefined}
+               >
+                  {item.icon && <FontAwesomeIcon icon={item.icon} className="mr-2" />}
+                  
+                  {/* ✅ Check if item.link exists before using .startsWith("/") */}
+                  {item.link && item.link.startsWith("/") ? (
+                     <Link to={item.link} aria-label={item.name}>
+                        {item.name}
+                     </Link>
+                  ) : item.link ? (
+                     <a href={item.link} aria-label={item.name}>
+                        {item.name}
+                     </a>
+                  ) : (
+                     <span aria-label={item.name}>{item.name}</span>
+                  )}
+               </motion.li>
             ))}
          </motion.ul>
       </>

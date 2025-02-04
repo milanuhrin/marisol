@@ -62,7 +62,7 @@ export const menuItems = [
   },
   {
     name: 'Prihlásenie',
-    link: '#login',
+    link: '/login',
   },
   {
     name: '+421 902 217 449',
