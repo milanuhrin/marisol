@@ -11,7 +11,6 @@ module.exports = {
     'gatsby-plugin-root-import',
     'gatsby-plugin-pnpm',
     'gatsby-plugin-postcss',
-    'gatsby-plugin-react-head',
     {
       resolve: 'gatsby-plugin-s3',
       options: {

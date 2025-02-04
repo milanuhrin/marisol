@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AnimOnScroll, Footer, Landing } from "Components/export";
-import SEO from "Components/seo.js";
+// import SEO from "Components/seo.js";
 import "../../global.css";
 import About from "Components/About";
 import Availability from "Components/Availability";
@@ -11,8 +11,9 @@ import Gallery from "Components/Gallery";
 import Pricelist from "Components/Pricelist";
 import Reservation from "Components/Reservation";
 import Contact from "Components/Contact";
-import Login from "Components/Login"; // New Login Page
-import Admin from "Components/Admin"; // New Admin Page
+import Login from "Components/Login";
+import Admin from "Components/Admin";
+import SEO from "Components/SEO"; 
 
 const IndexPage = () => {
   return (
