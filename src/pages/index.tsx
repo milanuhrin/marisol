@@ -12,7 +12,7 @@ import SEO from "Components/SEO";
 
 // ✅ Import Login and Admin pages
 import Login from "Components/Login";
-import Admin from "Components/Admin";
+import Admin from "../pages/admin";
 
 const IndexPage = () => {
   const [isClient, setIsClient] = useState(false);
