@@ -1,6 +1,7 @@
 import { CognitoUser, AuthenticationDetails, CognitoUserPool } from "amazon-cognito-identity-js";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { isBrowser } from "../Utilities/helpers";
 
 const poolData = {
   UserPoolId: "us-east-1_7ev5jSGGd",
@@ -13,7 +14,7 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const navigate = useNavigate();
+  const navigate = isBrowser() ? useNavigate() : () => {}; 
 
   const handleLogin = () => {
     const authDetails = new AuthenticationDetails({
