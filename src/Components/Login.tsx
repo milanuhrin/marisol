@@ -32,6 +32,7 @@ const Login: React.FC = () => {
       onSuccess: (session) => {
         localStorage.setItem("token", session.getIdToken().getJwtToken());
         navigate("/admin");
+        window.location.reload();
       },
       onFailure: (err) => {
         console.error("Login Error:", err);
