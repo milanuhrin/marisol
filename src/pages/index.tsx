@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { AnimOnScroll, Footer, Landing } from "Components/export";
 import "../../global.css";
@@ -10,9 +10,19 @@ import Reservation from "Components/Reservation";
 import Contact from "Components/Contact";
 import Login from "Components/Login";
 import Admin from "Components/Admin";
-import SEO from "Components/SEO"; 
+import SEO from "Components/SEO";
 
 const IndexPage = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true); // Runs only on the client
+  }, []);
+
+  if (!isClient) {
+    return null; // Prevents SSR from rendering the page
+  }
+
   return (
     <>
       <Routes>
