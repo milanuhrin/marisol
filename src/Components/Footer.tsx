@@ -25,7 +25,7 @@ export const Footer = () => {
             >
               <path d="M22 6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6zM4 6h16v2.5l-8 5-8-5V6zm0 4l7.35 4.59a1 1 0 001.3 0L20 10v8H4v-8z"></path>
             </svg>
-            <span>michaela.uhrin@gmail.com</span>
+            <span>marisol.seaview@gmail.com</span>
           </motion.div>
 
           {/* Address */}
