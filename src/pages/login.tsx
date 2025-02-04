@@ -1,12 +1,8 @@
 import React from "react";
+import Login from "Components/Login"; // Import the actual Login component
 
-const Login = () => {
-  return (
-    <div>
-      <h1>Login Page</h1>
-      <p>Enter your credentials to access the admin panel.</p>
-    </div>
-  );
+const LoginPage = () => {
+  return <Login />;
 };
 
-export default Login;
+export default LoginPage;
