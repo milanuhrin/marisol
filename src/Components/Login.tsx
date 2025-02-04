@@ -5,7 +5,7 @@ import { isBrowser } from "../Utilities/helpers";
 
 const poolData = {
   UserPoolId: "us-east-1_7ev5jSGGd",
-  ClientId: "6kr43hlcce49mfa1bt7306c54g",
+  ClientId: "2lsi9hdb7i9oet476clprm1vqe",
 };
 
 const userPool = new CognitoUserPool(poolData);
