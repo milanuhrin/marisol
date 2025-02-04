@@ -12,12 +12,17 @@ const userPool = new CognitoUserPool(poolData);
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
-
-  // 🛠️ Prevent `useNavigate` from breaking during SSR
-  const navigate = typeof window !== "undefined" ? useNavigate() : () => {};
+  const [message, setMessage] = useState<string | null>(null);
+  const navigate = useNavigate(); // ✅ Ensure `useNavigate` is properly used
 
   const handleLogin = () => {
+    setMessage(null); // Reset previous messages
+
+    if (!email || !password) {
+      setMessage("❌ Prosím zadajte email a heslo.");
+      return;
+    }
+
     const authDetails = new AuthenticationDetails({
       Username: email,
       Password: password,
@@ -31,17 +36,18 @@ const Login: React.FC = () => {
     user.authenticateUser(authDetails, {
       onSuccess: (session) => {
         localStorage.setItem("token", session.getIdToken().getJwtToken());
-        setError("✅ Prihlásenie úspešné!");
+        setMessage("✅ Prihlásenie úspešné! Presmerovanie...");
+
         setTimeout(() => {
-          navigate("/admin");
-        }, 2000); 
+          navigate("/admin"); // ✅ Redirect to Admin
+        }, 1500);
       },
       onFailure: (err) => {
         console.error("Login Error:", err);
-        setError(`Nesprávne prihlasovacie údaje: ${err.message}`);
+        setMessage(`❌ Nesprávne prihlasovacie údaje: ${err.message}`);
       },
       newPasswordRequired: (userAttributes) => {
-        delete userAttributes.email; // Fix for Cognito email error
+        delete userAttributes.email;
         delete userAttributes.email_verified;
 
         const newPassword = prompt("Zadajte nové heslo:");
@@ -54,7 +60,7 @@ const Login: React.FC = () => {
           },
           onFailure: (err) => {
             console.error("New Password Error:", err);
-            setError(`Chyba pri zmene hesla: ${err.message}`);
+            setMessage(`❌ Chyba pri zmene hesla: ${err.message}`);
           },
         });
       },
@@ -66,7 +72,12 @@ const Login: React.FC = () => {
       <div className="bg-white p-6 rounded-lg shadow-md w-96">
         <h2 className="text-xl font-semibold mb-4 text-center">Prihlásenie</h2>
 
-        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+        {/* ✅ Improved message display */}
+        {message && (
+          <p className={`text-sm text-center ${message.startsWith("✅") ? "text-green-600" : "text-red-500"}`}>
+            {message}
+          </p>
+        )}
 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
