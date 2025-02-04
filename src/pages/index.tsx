@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import { AnimOnScroll, Footer, Landing } from "Components/export";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Footer, Landing } from "Components/export";
 import "../../global.css";
 import About from "Components/About";
 import Availability from "Components/Availability";
@@ -12,20 +12,9 @@ import Login from "Components/Login";
 import Admin from "Components/Admin";
 import SEO from "Components/SEO";
 
-// ✅ Prevents SSR issues with React Router
 const IndexPage = () => {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true); // Ensures React Router only runs in the browser
-  }, []);
-
-  if (!isClient) {
-    return null; // Prevents SSR errors
-  }
-
   return (
-    <>
+    <Router>
       <Routes>
         <Route
           path="/"
@@ -45,11 +34,11 @@ const IndexPage = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<Admin />} />
       </Routes>
-    </>
+    </Router>
   );
 };
 
-// ✅ Uses Gatsby's `<Head>` API for SEO
+// ✅ Uses Gatsby's `<Head>` API
 export const Head = () => <SEO />;
 
 export default IndexPage;
