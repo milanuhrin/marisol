@@ -34,18 +34,25 @@ const Login: React.FC = () => {
         navigate("/admin");
       },
       onFailure: (err) => {
+        console.error("Login Error:", err);
         setError(`Nesprávne prihlasovacie údaje: ${err.message}`);
       },
       newPasswordRequired: (userAttributes) => {
+        // ❌ Remove attributes that cannot be modified
+        delete userAttributes.email_verified;
+    
+        // ✅ Ask the user for a new password
         const newPassword = prompt("Zadajte nové heslo:");
         if (!newPassword) return;
-
+    
+        // ✅ Send new password
         user.completeNewPasswordChallenge(newPassword, userAttributes, {
           onSuccess: (session) => {
             localStorage.setItem("token", session.getIdToken().getJwtToken());
             navigate("/admin");
           },
           onFailure: (err) => {
+            console.error("New Password Error:", err);
             setError(`Chyba pri zmene hesla: ${err.message}`);
           },
         });
