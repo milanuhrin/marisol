@@ -1,9 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AnimOnScroll, Footer, Landing } from "Components/export";
-// import SEO from "Components/seo.js";
+import { Footer, Landing } from "Components/export";
 import "../../global.css";
 import About from "Components/About";
 import Availability from "Components/Availability";
@@ -44,5 +41,6 @@ const IndexPage = () => {
     </Router>
   );
 };
+export const Head = () => <SEO />;
 
 export default IndexPage;
