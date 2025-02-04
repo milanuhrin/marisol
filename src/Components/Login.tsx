@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const poolData = {
-  UserPoolId: "64a874a8-00f1-704a-50eb-370265b7b42a",
-  ClientId: "6kr43hlcce49mfa1bt7306c54g"
+  UserPoolId: "us-east-1_7ev5jSGGd",
+  ClientId: "6kr43hlcce49mfa1bt7306c54g",
 };
 
 const userPool = new CognitoUserPool(poolData);
