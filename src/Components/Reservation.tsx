@@ -15,7 +15,7 @@ const Reservation = () => {
   });
 
   const [formStatus, setFormStatus] = useState('');
-  const [isLoading, setIsLoading] = useState(false); // 🔵 Add loading state
+  const [isLoading, setIsLoading] = useState(false); // 🔵 Show loading
 
   const handleInputChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
@@ -29,7 +29,7 @@ const Reservation = () => {
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    setIsLoading(true); // 🔵 Show loading indicator
+    setIsLoading(true);
 
     try {
       const formattedCheckIn = formatDate(formData.checkIn);
@@ -40,24 +40,19 @@ const Reservation = () => {
         'https://8jwwggkrye.execute-api.us-east-1.amazonaws.com/prod/send-email',
         {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            ...formData,
             name: fullName,
-            subject: 'Rezervácia apartmánu',
+            email: formData.email,
             message: `Dobrý deň,\n\nMám záujem o rezerváciu apartmánu:\n\nMeno a priezvisko: ${fullName}\nEmail: ${formData.email}\nCheck-in: ${formattedCheckIn}\nCheck-out: ${formattedCheckOut}\nPočet hostí: ${formData.guests}\n\nSpráva:\n${formData.message}`,
           }),
         }
       );
 
-      const responseData = await response.json(); // 🔵 Parse response
+      const responseData = await response.json();
 
       if (response.ok) {
-        setFormStatus(
-          `✅ Rezervácia bola úspešne odoslaná. Počkajte, prosím, na potvrdenie.`
-        );
+        setFormStatus(`✅ Rezervácia bola úspešne odoslaná.`);
         setFormData({
           firstName: '',
           lastName: '',
@@ -68,14 +63,13 @@ const Reservation = () => {
           message: '',
         });
       } else {
-        // 🔵 Show API error message if available
         setFormStatus(`❌ Chyba: ${responseData.error || 'Skúste znova.'}`);
       }
     } catch (error) {
       console.error('Error sending reservation email:', error);
       setFormStatus('❌ Nepodarilo sa odoslať rezerváciu. Skontrolujte pripojenie.');
     } finally {
-      setIsLoading(false); // 🔵 Hide loading indicator
+      setIsLoading(false);
     }
   };
 
@@ -89,10 +83,7 @@ const Reservation = () => {
       variants={sectionVariants}
     >
       <div className="py-8">
-        {/* Title with consistent styling */}
         <TitleText>Predbežná rezervácia</TitleText>
-
-        {/* Add space between the title and form */}
         <div style={{ marginBottom: '2rem' }}></div>
 
         <motion.div
@@ -103,12 +94,9 @@ const Reservation = () => {
           variants={sectionVariants}
         >
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Row 1: First Name and Last Name */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-left font-medium text-gray-700">
-                  Meno
-                </label>
+                <label className="block text-sm text-left font-medium text-gray-700">Meno</label>
                 <input
                   type="text"
                   name="firstName"
@@ -119,9 +107,7 @@ const Reservation = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm text-left font-medium text-gray-700">
-                  Priezvisko
-                </label>
+                <label className="block text-sm text-left font-medium text-gray-700">Priezvisko</label>
                 <input
                   type="text"
                   name="lastName"
@@ -133,12 +119,9 @@ const Reservation = () => {
               </div>
             </div>
 
-            {/* Row 2: Email and Počet hostí */}
             <div className="grid grid-cols-4 gap-4">
               <div className="col-span-3">
-                <label className="block text-sm text-left font-medium text-gray-700">
-                  Email
-                </label>
+                <label className="block text-sm text-left font-medium text-gray-700">Email</label>
                 <input
                   type="email"
                   name="email"
@@ -149,9 +132,7 @@ const Reservation = () => {
                 />
               </div>
               <div className="col-span-1">
-                <label className="block text-sm text-left font-medium text-gray-700">
-                  Počet hostí
-                </label>
+                <label className="block text-sm text-left font-medium text-gray-700">Počet hostí</label>
                 <input
                   type="number"
                   name="guests"
@@ -164,12 +145,9 @@ const Reservation = () => {
               </div>
             </div>
 
-            {/* Row 3: Check-in and Check-out */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-left font-medium text-gray-700">
-                  Check-in
-                </label>
+                <label className="block text-sm text-left font-medium text-gray-700">Check-in</label>
                 <input
                   type="date"
                   name="checkIn"
@@ -180,9 +158,7 @@ const Reservation = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm text-left font-medium text-gray-700">
-                  Check-out
-                </label>
+                <label className="block text-sm text-left font-medium text-gray-700">Check-out</label>
                 <input
                   type="date"
                   name="checkOut"
@@ -192,6 +168,18 @@ const Reservation = () => {
                   required
                 />
               </div>
+            </div>
+
+            <div>
+              <label className="block text-sm text-left font-medium text-gray-700">Správa</label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleInputChange}
+                placeholder="Napíšte akékoľvek ďalšie informácie alebo otázky k rezervácii..."
+                rows={4}
+                className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm"
+              ></textarea>
             </div>
 
             <button
