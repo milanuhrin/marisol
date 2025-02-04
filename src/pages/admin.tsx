@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Admin: React.FC = () => {
-  const navigate = useNavigate();
+  const navigate = typeof window !== "undefined" ? useNavigate() : () => {}; // Avoid error during Gatsby build
   const [reservedDates, setReservedDates] = useState<string[]>([]);
   const [newDate, setNewDate] = useState<string>("");
 
   useEffect(() => {
-    console.log("✅ Admin page loaded!"); // Debug message
+    if (typeof window === "undefined") return; // Ensure this runs only in the browser
+
+    console.log("✅ Admin page loaded!");
 
     const token = localStorage.getItem("token");
     if (!token) {
@@ -22,10 +24,13 @@ const Admin: React.FC = () => {
       .then((data) => {
         console.log("📅 Reserved dates received:", data);
         setReservedDates(data);
-      });
+      })
+      .catch((error) => console.error("❌ Error fetching reserved dates:", error));
   }, [navigate]);
 
   const addDate = async () => {
+    if (typeof window === "undefined") return; // Ensure this runs only in the browser
+
     const token = localStorage.getItem("token");
     if (!token) return;
 
