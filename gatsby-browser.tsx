@@ -1,10 +1,10 @@
 import React, { ReactNode } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
-interface WrapPageElementProps {
+interface WrapRootElementProps {
   element: ReactNode;
 }
 
-export const wrapPageElement = ({ element }: WrapPageElementProps) => {
-  return <Router>{element}</Router>;
+export const wrapRootElement = ({ element }: WrapRootElementProps): JSX.Element => {
+  return <BrowserRouter>{element}</BrowserRouter>;
 };
