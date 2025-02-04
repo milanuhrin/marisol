@@ -38,14 +38,15 @@ const Login: React.FC = () => {
         setError(`Nesprávne prihlasovacie údaje: ${err.message}`);
       },
       newPasswordRequired: (userAttributes) => {
-        // ❌ Remove attributes that cannot be modified
+        // ❌ Remove non-modifiable attributes
+        delete userAttributes.email;
         delete userAttributes.email_verified;
     
         // ✅ Ask the user for a new password
         const newPassword = prompt("Zadajte nové heslo:");
         if (!newPassword) return;
     
-        // ✅ Send new password
+        // ✅ Send new password with only modifiable attributes
         user.completeNewPasswordChallenge(newPassword, userAttributes, {
           onSuccess: (session) => {
             localStorage.setItem("token", session.getIdToken().getJwtToken());
