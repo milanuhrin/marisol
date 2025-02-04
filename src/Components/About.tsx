@@ -206,7 +206,7 @@ const About = () => {
 
 
   return (
-    <section id="about" className="text-center py-8 bg-gradient-to-b from-white to-[#e6f6ff] ">
+    <section id="about" className="text-center max-w-screen-lg mx-auto py-8 bg-gradient-to-b from-white to-[#e6f6ff] ">
       {/* Title with Text */}
       <motion.div
         initial="offscreen"
