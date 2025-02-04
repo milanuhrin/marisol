@@ -108,7 +108,7 @@ const About = () => {
   
   const smallScreenBenefits = [
       { icon: "fa-water", text: "Výhľad na more" },
-      { icon: "fa-snowflake", text: "Klimatizácia/kúrenie" },
+      { icon: "fa-snowflake", text: "Klimatizácia" },
       { icon: "fa-glass-cheers", text: "Presklená terasa" },
       { icon: "fa-tshirt", text: "Žehlička" },
       { icon: "fa-sun", text: "Otvorená terasa" },
@@ -119,7 +119,7 @@ const About = () => {
       { icon: "fa-baby", text: "Detská postieľka" },
       { icon: "fa-lock", text: "Uzavretý areál" },
       { icon: "fa-chair", text: "Detská stolička" },
-      { icon: "fa-wifi", text: "Internet/Netflix" },
+      { icon: "fa-wifi", text: "Internet" },
       { icon: "fa-puzzle-piece", text: "Hračky" },
       { icon: "fa-desktop", text: "Pracovné miesto" },
       { icon: "fa-dice", text: "Spoločenské hry" },
