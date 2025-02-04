@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Admin: React.FC = () => {
-  const navigate = useNavigate();
+  const navigate = typeof window !== "undefined" ? useNavigate() : () => {}; // Prevents SSR error
   const [reservedDates, setReservedDates] = useState<string[]>([]);
   const [newDate, setNewDate] = useState<string>("");
 
   useEffect(() => {
+    if (typeof window === "undefined") return; // Prevent SSR from running
+
     const token = localStorage.getItem("token");
     if (!token) {
       navigate("/login"); // Redirect to login if not authenticated
@@ -45,6 +47,8 @@ const Admin: React.FC = () => {
 
     setReservedDates(reservedDates.filter((d) => d !== date));
   };
+
+  if (typeof window === "undefined") return null; // Prevent SSR from rendering
 
   return (
     <div>
