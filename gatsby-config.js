@@ -20,7 +20,8 @@ module.exports = {
         hostname: "marisol.sk",
         cloudfrontDistributionId: 'E255DY8HXE81HK',
         acl: null,
-        exclude: ["images/*"],
+        exclude: ["images/*", "images/**/*"],
+        removeNonexistentObjects: false,
       },
     },
     {
