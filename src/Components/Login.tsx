@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { CognitoUser, AuthenticationDetails, CognitoUserPool } from "amazon-cognito-identity-js";
 import { useNavigate } from "react-router-dom";
 
@@ -13,13 +13,9 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const [isClient, setIsClient] = useState(false);
 
-  const navigate = useNavigate(); // ✅ Prevent SSR error by only running in useEffect
-
-  useEffect(() => {
-    setIsClient(true); // ✅ Only allow rendering in the browser
-  }, []);
+  // 🛠️ Fix: Use navigate only in the browser
+  const navigate = typeof window !== "undefined" ? useNavigate() : null;
 
   const handleLogin = () => {
     const authDetails = new AuthenticationDetails({
@@ -36,17 +32,21 @@ const Login: React.FC = () => {
       onSuccess: (session) => {
         localStorage.setItem("token", session.getIdToken().getJwtToken());
         setError("✅ Prihlásenie úspešné!");
-        
+
         setTimeout(() => {
-          if (isClient) navigate("/admin"); // ✅ Prevent SSR error
-        }, 2000); 
+          if (navigate) {
+            navigate("/admin"); // Works in the browser
+          } else {
+            window.location.href = "/admin"; // Works in Gatsby SSR
+          }
+        }, 2000);
       },
       onFailure: (err) => {
         console.error("Login Error:", err);
         setError(`Nesprávne prihlasovacie údaje: ${err.message}`);
       },
       newPasswordRequired: (userAttributes) => {
-        delete userAttributes.email;
+        delete userAttributes.email; // Fix for Cognito email error
         delete userAttributes.email_verified;
 
         const newPassword = prompt("Zadajte nové heslo:");
@@ -55,7 +55,11 @@ const Login: React.FC = () => {
         user.completeNewPasswordChallenge(newPassword, userAttributes, {
           onSuccess: (session) => {
             localStorage.setItem("token", session.getIdToken().getJwtToken());
-            if (isClient) navigate("/admin"); // ✅ Prevent SSR error
+            if (navigate) {
+              navigate("/admin");
+            } else {
+              window.location.href = "/admin";
+            }
           },
           onFailure: (err) => {
             console.error("New Password Error:", err);
@@ -65,8 +69,6 @@ const Login: React.FC = () => {
       },
     });
   };
-
-  if (!isClient) return null; // ✅ Prevent Gatsby from breaking during SSR
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
