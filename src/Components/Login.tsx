@@ -31,8 +31,10 @@ const Login: React.FC = () => {
     user.authenticateUser(authDetails, {
       onSuccess: (session) => {
         localStorage.setItem("token", session.getIdToken().getJwtToken());
-        navigate("/admin");
-        window.location.reload();
+        setError("✅ Prihlásenie úspešné!");
+        setTimeout(() => {
+          navigate("/admin");
+        }, 2000); 
       },
       onFailure: (err) => {
         console.error("Login Error:", err);
