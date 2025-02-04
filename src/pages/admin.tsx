@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { navigate } from "gatsby";
 
 const Admin: React.FC = () => {
-  const navigate = typeof window !== "undefined" ? useNavigate() : () => {}; // Prevents SSR error
   const [reservedDates, setReservedDates] = useState<string[]>([]);
   const [newDate, setNewDate] = useState<string>("");
 
   useEffect(() => {
-    if (typeof window === "undefined") return; // Prevent SSR from running
+    if (typeof window === "undefined") return;
 
     const token = localStorage.getItem("token");
     if (!token) {
@@ -20,7 +19,7 @@ const Admin: React.FC = () => {
     })
       .then((res) => res.json())
       .then((data) => setReservedDates(data));
-  }, [navigate]);
+  }, []);
 
   const addDate = async () => {
     const token = localStorage.getItem("token");
@@ -48,7 +47,7 @@ const Admin: React.FC = () => {
     setReservedDates(reservedDates.filter((d) => d !== date));
   };
 
-  if (typeof window === "undefined") return null; // Prevent SSR from rendering
+  if (typeof window === "undefined") return null;
 
   return (
     <div>
