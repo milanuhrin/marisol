@@ -6,53 +6,26 @@ import { TitleText } from './export';
 import { SectionDividerWaveOneSide } from 'svg/SectionDividerWaveOneSide';
 import { sectionVariants } from 'Utilities/motionVariants'; // Import motion variants
 
-const images = Array.from({ length: 43 }, (_, i) =>
-  require(`../images/gallery/${String(i + 1).padStart(2, '0')}_${[
-    '4559',
-    '4382',
-    '4555',
-    '2639',
-    '2643',
-    '4553',
-    '4552',
-    '4640',
-    '4645',
-    '4681',
-    '4634',
-    '4636',
-    '4522',
-    '4665',
-    '4594',
-    '4599',
-    '4612',
-    '4572',
-    '4579',
-    '2588',
-    '4456',
-    '4447',
-    '2511',
-    '2516',
-    '2530',
-    '2548',
-    '2541',
-    '4481',
-    '4537',
-    '4547',
-    '4442',
-    '4449',
-    '4734',
-    '4579',
-    '4696',
-    '7997',
-    '2598',
-    '2612',
-    '2619',
-    '2629',
-    '2636',
-    '4392',
-    '4404',
-  ][i]}.jpg`).default
-);
+// 🔹 CloudFront URL (Replace with your actual CloudFront domain)
+const IMAGE_BASE_URL = "https://dznnrbng6qb50.cloudfront.net/images/gallery"; 
+
+// 🔹 List of image filenames (Converted to WebP)
+const imageFileNames = [
+  "01_4559.webp", "02_4382.webp", "03_4555.webp", "04_2639.webp",
+  "05_2643.webp", "06_4553.webp", "07_4552.webp", "08_4640.webp",
+  "09_4645.webp", "10_4681.webp", "11_4634.webp", "12_4636.webp",
+  "13_4522.webp", "14_4665.webp", "15_4594.webp", "16_4599.webp",
+  "17_4612.webp", "18_4572.webp", "19_4579.webp", "20_2588.webp",
+  "21_4456.webp", "22_4447.webp", "23_2511.webp", "24_2516.webp",
+  "25_2530.webp", "26_2548.webp", "27_2541.webp", "28_4481.webp",
+  "29_4537.webp", "30_4547.webp", "31_4442.webp", "32_4449.webp",
+  "33_4734.webp", "34_4579.webp", "35_4696.webp", "36_7997.webp",
+  "37_2598.webp", "38_2612.webp", "39_2619.webp", "40_2629.webp",
+  "41_2636.webp", "42_4392.webp", "43_4404.webp"
+];
+
+// 🔹 Generate full URLs
+const images = imageFileNames.map(name => `${IMAGE_BASE_URL}/${name}`);
 
 const Gallery: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -68,7 +41,6 @@ const Gallery: React.FC = () => {
 
       return () => clearInterval(interval);
     }
-    return undefined;
   }, [isOpen]);
 
   const updateContainerSize = () => {
@@ -77,25 +49,19 @@ const Gallery: React.FC = () => {
       const aspectRatio = img.naturalWidth / img.naturalHeight;
 
       if (window.innerWidth <= 768) {
-        // For small screens
         setContainerStyle({ width: '400px', height: `${400 / aspectRatio}px` });
       } else {
-        // For larger screens
         setContainerStyle({ width: `${600 * aspectRatio}px`, height: '600px' });
       }
     }
   };
 
   useEffect(() => {
-    const handleResize = () => {
-      updateContainerSize();
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Call once to set initial size
+    window.addEventListener('resize', updateContainerSize);
+    updateContainerSize(); // Set initial size
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', updateContainerSize);
     };
   }, []);
 
@@ -149,10 +115,11 @@ const Gallery: React.FC = () => {
             >
               <img
                 src={image}
-                alt=""
+                alt={`Gallery Image ${index + 1}`}
                 className="gallery-image"
                 ref={index === currentIndex ? imgRef : null}
                 onLoad={updateContainerSize}
+                loading="lazy" // 🔹 Lazy loading for faster performance
               />
               {/* Overlay with magnifier and text */}
               {index === currentIndex && (
