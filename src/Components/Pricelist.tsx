@@ -7,7 +7,7 @@ const Pricelist = () => {
   return (
     <motion.section
       id="pricelist"
-      className="text-center py-8"
+      className="text-center py-8 max-w-screen-lg mx-auto"
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: true, amount: 0.01 }}
@@ -95,11 +95,11 @@ const Pricelist = () => {
 
       {/* Notes Below the Table */}
       <motion.div
-        className="text-gray-600 mt-4 px-6 text-sm sm:text-base"
+        className="max-w-lg lg:max-w-[700px] mx-auto text-gray-600 mt-4 px-4 sm:px-6 text-sm sm:text-base"
         variants={sectionVariants}
       >
-        <p className="mb-1">* Minimálny počet nocí: 3</p>
-        <p>** Cena za jednu cestu z letiska Alicante do apartmánu alebo naspäť.</p>
+        <p className="mb-1 text-left">* Minimálny počet nocí: 3</p>
+        <p className="text-left">** Cena za jednu cestu z letiska Alicante do apartmánu alebo naspäť.</p>
       </motion.div>
     </motion.section>
   );
