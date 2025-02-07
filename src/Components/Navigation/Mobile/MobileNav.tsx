@@ -49,7 +49,7 @@ export const MobileNav = (props: Props) => {
             variants={mobileMenuListItem}
             className="mb-[1rem] col-start-2 text-lg w-full font-sans top-[5rem]"
           >
-            Milan Uhrin
+            Marisol
           </motion.div>
           {/* Nav Items */}
           {menuItems.map(({ name, link, icon }, i) => (
