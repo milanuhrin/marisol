@@ -30,58 +30,58 @@ const Pricelist = () => {
                 <th className="py-4 px-4 text-sm sm:text-base">Obdobie</th>
                 <th className="py-4 px-4 text-sm sm:text-base">1 noc*</th>
                 <th className="py-4 px-4 text-sm sm:text-base">10+ nocí</th>
-                <th className="py-4 px-4 text-sm sm:text-base">30+ nocí</th>
+                {/* <th className="py-4 px-4 text-sm sm:text-base">30+ nocí</th> */}
                 <th className="py-4 px-4 text-sm sm:text-base">Odvoz**</th>
               </tr>
             </thead>
             <tbody>
               <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base">Január – Apríl</td>
+                <td className="py-4 px-4 text-sm sm:text-base font-semibold">Január – Apríl</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">35 €</td>
+                {/* <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">35 €</td> */}
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
               </tr>
               <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base">Máj</td>
+                <td className="py-4 px-4 text-sm sm:text-base font-semibold">Máj</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
+                {/* <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td> */}
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
               </tr>
               <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base">Jún</td>
+                <td className="py-4 px-4 text-sm sm:text-base font-semibold">Jún</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">95 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
+                {/* <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td> */}
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
               </tr>
               <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base">Júl – August</td>
+                <td className="py-4 px-4 text-sm sm:text-base font-semibold">Júl – August</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">125 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">115 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
+                {/* <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td> */}
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
               </tr>
               <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base">September</td>
+                <td className="py-4 px-4 text-sm sm:text-base font-semibold">September</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">95 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
+                {/* <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td> */}
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
               </tr>
               <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base">Október</td>
+                <td className="py-4 px-4 text-sm sm:text-base font-semibold">Október</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
+                {/* <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td> */}
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
               </tr>
               <tr>
-                <td className="py-4 px-4 text-sm sm:text-base">November – December</td>
+                <td className="py-4 px-4 text-sm sm:text-base font-semibold">November – December</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">35 €</td>
+                {/* <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">35 €</td> */}
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
               </tr>
             </tbody>
