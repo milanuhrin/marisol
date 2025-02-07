@@ -20,25 +20,21 @@ const Pricelist = () => {
 
       {/* Table */}
       <motion.div
-        className="overflow-x-auto sm:overflow-x-hidden px-4 sm:px-6 lg:px-8 mt-8 "
+        className="overflow-x-auto sm:overflow-x-hidden px-4 sm:px-6 lg:px-8 mt-8"
         variants={sectionVariants}
       >
         <div className="max-w-lg mx-auto lg:max-w-[700px] border border-gray-300 rounded-lg shadow-lg overflow-hidden">
           <table className="w-full border-collapse text-gray-500">
             <thead className="bg-cyan-500 text-white">
               <tr>
-                <th className="py-4 px-4 text-sm sm:text-base">Obdobie</th>
-                <th className="py-4 px-4 text-sm sm:text-base">
-                  Cena za noc
-                  <br />
-                  <span className="text-xs">(min. 3 noci)</span>
+                <th className="py-4 px-6 text-sm sm:text-base">Obdobie</th>
+                <th className="py-4 px-6 text-sm sm:text-base">
+                  1 noc*
                 </th>
-                <th className="py-4 px-4 text-sm sm:text-base">10+ nocí</th>
-                <th className="py-4 px-4 text-sm sm:text-base">30+ nocí</th>
-                <th className="py-4 px-4 text-sm sm:text-base">
-                  Odvoz
-                  <br />
-                  <span className="text-xs">(jedna cesta)</span>
+                <th className="py-4 px-6 text-sm sm:text-base">10+ nocí</th>
+                <th className="py-4 px-6 text-sm sm:text-base">30+ nocí</th>
+                <th className="py-4 px-6 text-sm sm:text-base">
+                  Odvoz**
                 </th>
               </tr>
             </thead>
@@ -95,6 +91,15 @@ const Pricelist = () => {
             </tbody>
           </table>
         </div>
+      </motion.div>
+
+      {/* Notes Below the Table */}
+      <motion.div
+        className="text-gray-600 mt-4 px-6 text-sm sm:text-base"
+        variants={sectionVariants}
+      >
+        <p className="mb-1">* Minimálny počet nocí: 3</p>
+        <p>** Cena za jednu cestu z letiska Alicante do apartmánu alebo naspäť.</p>
       </motion.div>
     </motion.section>
   );

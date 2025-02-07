@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Amazon Cognito Authentication</title>
+</head>
+<body>
+    <h1>Amazon Cognito User Pool Demo</h1>
+
+    <% if (isAuthenticated) { %>
+        <div>
+            <h2>Welcome, <%= userInfo.username || userInfo.email %></h2>
+            <a href="/admin">Go to Admin Panel</a>
+            <a href="/logout">Logout</a>
+        </div>
+    <% } else { %>
+        <p>Please log in to continue.</p>
+        <a href="/login">Login</a>
+    <% } %>
+</body>
+</html>

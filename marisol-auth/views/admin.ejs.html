@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <h2>Welcome, <%= userInfo.username || userInfo.email %></h2>
+    <p>Here are your details:</p>
+    <pre><%= JSON.stringify(userInfo, null, 4) %></pre>
+    <a href="/logout">Logout</a>
+</body>
+</html>
