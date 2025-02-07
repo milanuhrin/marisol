@@ -43,18 +43,20 @@ const Gallery: React.FC = () => {
     }
   }, [isOpen]);
 
-  const updateContainerSize = () => {
-    if (imgRef.current) {
-      const img = imgRef.current;
-      const aspectRatio = img.naturalWidth / img.naturalHeight;
+const updateContainerSize = () => {
+  if (imgRef.current) {
+    const img = imgRef.current;
+    const aspectRatio = img.naturalWidth / img.naturalHeight;
 
-      if (window.innerWidth <= 768) {
-        setContainerStyle({ width: '400px', height: `${400 / aspectRatio}px` });
-      } else {
-        setContainerStyle({ width: `${600 * aspectRatio}px`, height: '600px' });
-      }
+    if (window.innerWidth <= 768) {
+      // Mobile: Keep fixed height, adjust width
+      setContainerStyle({ width: '100%', height: '400px' });
+    } else {
+      // Desktop: Maintain existing behavior
+      setContainerStyle({ width: `${600 * aspectRatio}px`, height: '600px' });
     }
-  };
+  }
+};
 
   useEffect(() => {
     window.addEventListener('resize', updateContainerSize);

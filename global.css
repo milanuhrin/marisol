@@ -115,6 +115,52 @@
   gap: 8px;
   transition: transform 0.3s ease-in-out;
 }
+@media (max-width: 768px) {
+  .gallery-container {
+    height: 400px !important; /* Fixed height for mobile */
+    max-width: 100%; /* Ensure it adapts to screen width */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gallery-item img {
+    object-fit: cover; /* Ensures images don’t change layout */
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-item img {
+    object-fit: contain; /* Ensures no cropping */
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Enforce fixed height for all screens */
+.gallery-container {
+  height: 600px !important; /* Ensures same height on all devices */
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile: Set height to 400px */
+@media (max-width: 768px) {
+  .gallery-container {
+    height: 400px !important;
+  }
+}
+
+/* Ensure images fit properly inside the fixed height */
+.gallery-item img {
+  object-fit: contain; /* Keeps full image visible */
+  width: 100%;
+  height: 100%;
+}
 
 
 /* druhy obly */
