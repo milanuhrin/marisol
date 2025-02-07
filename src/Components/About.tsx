@@ -161,6 +161,18 @@ const About = () => {
       "vešiaky",    ],
     },
     {
+      title: "Obývačka",
+      image: featuresImages["obyvacka.jpg"], // Replace with the actual image path
+      features: [
+        "rozkladacia pohovka",
+        "kreslá",
+        "konferenčné stolíky",
+        "barový stôl",
+        "knižnica a knihy",
+        "televízor / Netflix",
+      ],
+    },
+    {
       title: "Kúpeľňa",
       image: featuresImages["kupelna.jpg"],
       features: [
@@ -189,18 +201,6 @@ const About = () => {
           "varná kanvica",
       ],
     },
-    {
-      title: "Obývačka",
-      image: featuresImages["obyvacka.jpg"], // Replace with the actual image path
-      features: [
-        "rozkladacia pohovka",
-        "kreslá",
-        "konferenčné stolíky",
-        "barový stôl",
-        "knižnica a knihy",
-        "televízor / Netflix",
-      ],
-    },
   ];
 
 
@@ -216,7 +216,17 @@ const About = () => {
         className="py-8"
       >
         <TitleText>O apartmáne Marisol</TitleText>
-        <div className="px-12 lg:px-28 text-justify text-base font-medium leading-6 text-gray-500 mb-4 mt-8 max-w-screen-lg mx-auto">
+      </motion.div>
+
+      {/* Section Beside (Without Images) */}
+      <motion.div
+        initial="offscreen"
+        whileInView="onscreen"
+        variants={cardVariants}
+        className="relative top-4 flex flex-col sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:items-center sm:justify-center gap-8 max-w-screen-lg mx-auto"
+      >
+        {/* Replaced Images with Text */}
+        <div className="z-10 text-lg text-gray-500 text-justify sm:col-start-1 sm:row-start-1 mx-auto">
           Krásny východ slnka nad morom, príjemná dovolenková atmosféra či voňavá káva na terase - to
           všetko môžete zažiť u nás, v apartmáne Marisol. Nachádza sa v jednej z najobľúbenejších
           lokalít mesta Torrevieja, blízko známeho mesta Alicante v Španielsku. Vedľa parku a tiež
@@ -226,70 +236,35 @@ const About = () => {
           vyžitie i večerná zábava sú predpokladom pre prežitie nezabudnuteľnej dovolenky, či už pre
           páry, alebo rodiny.
         </div>
-      </motion.div>
 
-      {/* 4 Images + Section Beside */}
-      {hero2Images.length >= 4 && (
+        {/* Icon-Based Section */}
         <motion.div
+          className="z-10 flex flex-col gap-8 sm:col-start-2 sm:row-start-1 sm:self-center sm:justify-self-center max-w-screen-lg mx-auto"
           initial="offscreen"
           whileInView="onscreen"
           variants={cardVariants}
-          className="relative flex flex-col sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:items-center sm:justify-center gap-8 max-w-screen-lg mx-auto"
         >
-          {/* Images Section */}
-          <div className="z-10 grid max-w-[40] grid-cols-4 px-12 sm:grid-cols-12 grid-rows-2 gap-4 pl:12 justify-self-center sm:col-start-1 sm:row-start-1 mx-auto">
-            {hero2ImageLayouts.map((item, i) => (
-              <motion.div
-                key={i}
-                initial="offscreen"
-                whileInView="onscreen"
-                whileHover={{ scale: 1.08 }}
-                variants={{
-                  ...cardVariants,
-                  offscreen: { y: 150 },
-                }}
-                className={`z-20 h-auto w-auto rounded-lg object-cover ${item.class}`}
-              >
-                <GatsbyImage
-                  imgClassName="rounded-lg w-auto block object-cover"
-                  className="block w-auto rounded-lg shadow-xl mt-4"
-                  image={hero2Images[i]!}
-                  alt={`Gallery image ${i + 1}`}
-                />
-              </motion.div>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-16 px-8 sm:gap-x-4 sm:text-left mt-4">
+            {[
+              { icon: 'fa-user', text: '5 osôb' },
+              { icon: 'fa-bed', text: '2 spálne' },
+              { icon: 'fa-cocktail', text: 'presklená terasa' },
+              { icon: 'fa-bath', text: '1 kúpeľňa' },
+              { icon: 'fa-swimming-pool', text: 'bazén' },
+              { icon: 'fa-plane', text: 'letisko 35 min autom' },
+              { icon: 'fa-umbrella-beach', text: 'pláž 10 min pešo' },
+              { icon: 'fa-utensils', text: 'reštaurácie 5 min pešo' },
+            ].map((item, index) => (
+              <li key={index} className="flex items-center gap-6 text-base font-medium text-gray-500">
+                <span className="text-transparent bg-clip-text from-snakeGr1 to-snakeGr2 bg-gradient-to-r">
+                  <i className={`fas ${item.icon}`}></i>
+                </span>
+                <span>{item.text}</span>
+              </li>
             ))}
-          </div>
-
-          {/* Icon-Based Section */}
-          <motion.div
-            className="z-10 flex flex-col gap-8 sm:col-start-2 sm:row-start-1 sm:self-center sm:justify-self-center max-w-screen-lg mx-auto"
-            initial="offscreen"
-            whileInView="onscreen"
-            variants={cardVariants}
-          >
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-8 px-2 sm:gap-x-4 sm:text-left mt-4">
-              {[
-                { icon: 'fa-user', text: '5 osôb' },
-                { icon: 'fa-bed', text: '2 spálne' },
-                { icon: 'fa-cocktail', text: 'presklená terasa' },
-                { icon: 'fa-bath', text: '1 kúpeľňa' },
-                { icon: 'fa-swimming-pool', text: 'bazén' },
-                { icon: 'fa-plane', text: 'letisko 35 min autom' },
-                { icon: 'fa-umbrella-beach', text: 'pláž 10 min pešo' },
-                { icon: 'fa-utensils', text: 'reštaurácie 5 min pešo' },
-              ].map((item, index) => (
-                <li key={index} className="flex items-center gap-6 text-base font-medium text-gray-500">
-                  <span className=" text-transparent bg-clip-text from-snakeGr1 to-snakeGr2 bg-gradient-to-r">
-                    <i className={`fas ${item.icon}`}></i>
-                  </span>
-                  <span>{item.text}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+          </ul>
         </motion.div>
-      )}
-
+      </motion.div>
 
       {/* Updated Vybavenie Apartmánu Section */}
       <motion.div
