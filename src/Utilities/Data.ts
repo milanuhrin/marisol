@@ -61,10 +61,6 @@ export const menuItems = [
     link: '#contact',
   },
   {
-    name: 'Prihlásenie',
-    link: '/login',
-  },
-  {
     name: '+421 902 217 449',
     icon: faPhone,
     action: () => {
