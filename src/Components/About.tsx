@@ -359,42 +359,32 @@ const About = () => {
   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 px-12">
     {/* Left Column */}
     <div className="flex flex-col space-y-2">
-      <div className="flex sm:flex-row sm:items-center">
-        <span className="font-bold text-gray-700 w-1/2 text-left">Check-in:</span>
-        <span className="text-gray-600 text-left">15:00</span>
-      </div>
-      <div className="flex sm:flex-row sm:items-center">
-        <span className="font-bold text-gray-700 w-1/2 text-left">Check-out:</span>
-        <span className="text-gray-600 text-left">11:00</span>
-      </div>
-      <div className="flex sm:flex-row sm:items-center">
-        <span className="font-bold text-gray-700 w-1/2 text-left">Záloha:</span>
-        <span className="text-gray-600 text-left">20% pri potvrdení rezervácie</span>
-      </div>
-      <div className="flex sm:flex-row sm:items-center">
-        <span className="font-bold text-gray-700 w-1/2 text-left">Doplatok:</span>
-        <span className="text-gray-600 text-left">80% 14 dní pred pobytom</span>
-      </div>
+      {[
+        { label: "Check-in:", value: "15:00" },
+        { label: "Check-out:", value: "11:00" },
+        { label: "Záloha:", value: "20% pri potvrdení rezervácie" },
+        { label: "Doplatok:", value: "80% 14 dní pred pobytom" }
+      ].map((item, index) => (
+        <div key={index} className="flex justify-between w-full">
+          <span className="font-bold text-gray-700 w-1/3 text-left">{item.label}</span>
+          <span className="text-gray-600 w-2/3 text-left">{item.value}</span>
+        </div>
+      ))}
     </div>
 
     {/* Right Column */}
     <div className="flex flex-col space-y-2">
-      <div className="flex sm:flex-row sm:items-center">
-        <span className="font-bold text-gray-700 w-1/2 text-left">Domáce zvieratá:</span>
-        <span className="text-red-600 w-1/2 text-left">🚫</span>
-      </div>
-      <div className="flex sm:flex-row sm:items-center">
-        <span className="font-bold text-gray-700 w-1/2 text-left">Fajčenie:</span>
-        <span className="text-red-600 w-1/2 text-left">🚫</span>
-      </div>
-      <div className="flex sm:flex-row sm:items-center">
-        <span className="font-bold text-gray-700 w-1/2 text-left">Párty:</span>
-        <span className="text-red-600 w-1/2 text-left">🚫</span>
-      </div>
-      <div className="flex sm:flex-row sm:items-center">
-        <span className="font-bold text-gray-700 w-1/2 text-left">Bezbariérový prístup:</span>
-        <span className="text-red-600 w-1/2 text-left">🚫</span>
-      </div>
+      {[
+        { label: "Domáce zvieratá:", value: "🚫" },
+        { label: "Fajčenie:", value: "🚫" },
+        { label: "Párty:", value: "🚫" },
+        { label: "Bezbariérový prístup:", value: "🚫" }
+      ].map((item, index) => (
+        <div key={index} className="flex justify-between w-full">
+          <span className="font-bold text-gray-700 w-1/3 text-left">{item.label}</span>
+          <span className="text-red-600 w-2/3 text-left">{item.value}</span>
+        </div>
+      ))}
     </div>
   </div>
 </motion.div>
