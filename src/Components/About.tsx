@@ -310,10 +310,10 @@ const About = () => {
           <button
             key={index}
             onClick={() => setActiveTab(index)}
-            className={`font-bold text-l ${
+            className={`font-bold text-l px-4 py-2 rounded-lg transition-all duration-300 ${
               activeTab === index
-                ? "text-cyan-500"
-                : "text-gray-700"
+                ? "text-white bg-cyan-500 shadow-lg"
+                : "text-gray-700 hover:text-cyan-500 hover:bg-gray-200"
             }`}
           >
             {section.title}
