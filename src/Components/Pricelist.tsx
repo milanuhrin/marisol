@@ -93,7 +93,7 @@ const Pricelist = () => {
         className="max-w-lg lg:max-w-[700px] mx-auto text-gray-600 mt-4 px-4 sm:px-6 text-sm sm:text-base"
         variants={sectionVariants}
       >
-        <p className="mb-1 text-left">* Minimálny počet nocí: 3</p>
+        <p className="mb-1 text-left">* Apartmán je možné rezervovať na minimálne 3 noci.</p>
         <p className="text-left">** Cena za jednu cestu z letiska Alicante do apartmánu alebo naspäť.</p>
       </motion.div>
     </motion.section>
