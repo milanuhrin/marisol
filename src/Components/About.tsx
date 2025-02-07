@@ -226,7 +226,7 @@ const About = () => {
         className="relative top-4 flex flex-col sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:items-center sm:justify-center gap-8 max-w-screen-lg mx-auto"
       >
         {/* Replaced Images with Text */}
-        <div className="z-10 text-lg text-gray-500 text-justify sm:col-start-1 sm:row-start-1 mx-auto">
+        <div className="z-10 px-6 text-lg text-gray-500 text-justify sm:col-start-1 sm:row-start-1 mx-auto">
           Krásny východ slnka nad morom, príjemná dovolenková atmosféra či voňavá káva na terase - to
           všetko môžete zažiť u nás, v apartmáne Marisol. Nachádza sa v jednej z najobľúbenejších
           lokalít mesta Torrevieja, blízko známeho mesta Alicante v Španielsku. Vedľa parku a tiež
@@ -268,7 +268,7 @@ const About = () => {
 
       {/* Updated Vybavenie Apartmánu Section */}
       <motion.div
-      className="py-8 max-w-screen-lg mx-auto"
+      className="top-8 py-8 max-w-screen-lg mx-auto"
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ amount: 0.1, once: true }}
