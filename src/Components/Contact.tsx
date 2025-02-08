@@ -24,7 +24,7 @@ export const Contact = () => {
         variants={sectionVariants}
       >
         {/* Title with consistent styling */}
-        <div className="py-8">
+        <div className="relative py-8 sm:py-4 sm:mt-[-20px] sm:relative sm:-top-4">
           <TitleText>Kontakt</TitleText>
         </div>
 
