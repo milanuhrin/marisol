@@ -4,16 +4,16 @@ module.exports = {
     description: 'Apartmán s výhľadom na more',
     titleTemplate: "%s | Marisol Apartment",
     siteUrl: 'https://marisol.sk',
-    image: "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_01.jpg"
+    image: "/images/landing_01.jpg"
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sitemap',
     `gatsby-plugin-fontawesome-css`,
     'gatsby-plugin-root-import',
     'gatsby-plugin-pnpm',
     'gatsby-plugin-postcss',
     'gatsby-plugin-image',
-    'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-s3',
       options: {
