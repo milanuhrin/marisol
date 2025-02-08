@@ -23,34 +23,36 @@ export const MobileNav = (props: Props) => {
       initial={false}
       animate={isMenuOpen ? 'open' : 'closed'}
     >
-      {/* Logo
-      <StaticImage
-        src="../../../images/logo-darkGrey.png"
-        alt="logo"
-        className=" max-w-[4rem]"
-        placeholder="none"
-      /> */}
       {/* MenuIconToggle */}
       <MenuIconToggle toggle={() => setIsMenuOpen(!isMenuOpen)} />
-      {/* Sidebard Background Container */}
+      
+      {/* Sidebar Background Container */}
       <motion.div
         className={
           'absolute inset-y-0 text-gmailSilverText right-0 z-[20] flex h-[1000px] w-[250px] items-start bg-gradient-to-br from-[#242424] to-[#373737]'
         }
         variants={sidebarVariants}
       >
-        {/* GRID */}
+        {/* Logo - Positioned Higher */}
         <motion.div
-          className=" ml-[2rem] grid grid-cols-1  gap-x-[1rem] gap-y-[2rem] absolute top-[5.5rem]   z-50 "
+          className="absolute top-[1.5rem] left-1/2 transform -translate-x-1/2"
+          variants={mobileMenuListItem}
+        >
+          <img
+            src="https://dznnrbng6qb50.cloudfront.net/images/landing/logo.png"
+            alt="Marisol Logo"
+            className="w-[60px] h-auto"
+          />
+        </motion.div>
+
+        {/* Line Divider */}
+        <motion.div className="absolute border-b-[1px] border-gmailGreyText top-[5rem] h-[2rem] w-full" />
+
+        {/* Menu Items Grid */}
+        <motion.div
+          className="ml-[2rem] grid grid-cols-1 gap-x-[1rem] gap-y-[2rem] absolute top-[8rem] z-50"
           variants={mobileMenuItems}
         >
-          {/* Title */}
-          <motion.div
-            variants={mobileMenuListItem}
-            className="mb-[1rem] col-start-2 text-lg w-full font-sans top-[5rem]"
-          >
-            Marisol
-          </motion.div>
           {/* Nav Items */}
           {menuItems.map(({ name, link, icon }, i) => (
             <MobileNavItem
@@ -62,8 +64,6 @@ export const MobileNav = (props: Props) => {
             />
           ))}
         </motion.div>
-        {/* line divider */}
-        <motion.div className="absolute border-b-[1px] border-gmailGreyText  top-[6rem] h-[2rem] w-full" />
       </motion.div>
     </motion.div>
   );
