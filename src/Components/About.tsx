@@ -366,7 +366,7 @@ const About = () => {
         { label: "Doplatok:", value: "80% 14 dní pred pobytom" }
       ].map((item, index) => (
         <div key={index} className="flex justify-between w-full">
-          <span className="font-bold text-gray-700 w-1/3 text-left">{item.label}</span>
+          <span className="font-bold text-gray-700 w-1/3 text-left ">{item.label}</span>
           <span className="text-gray-600 w-2/3 text-left">{item.value}</span>
         </div>
       ))}
@@ -382,7 +382,7 @@ const About = () => {
       ].map((item, index) => (
         <div key={index} className="flex justify-between w-full">
           <span className="font-bold text-gray-700 w-1/3 text-left">{item.label}</span>
-          <span className="text-red-600 w-2/3 text-left">{item.value}</span>
+          <span className="text-red-600 w-2/3 text-left pl-20 sm:pl-0">{item.value}</span>
         </div>
       ))}
     </div>
