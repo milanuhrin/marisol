@@ -35,6 +35,11 @@ const IndexPage = () => {
           path="/"
           element={
             <>
+            <SEO
+              title="Marisol Seaview Apartment"
+              description="Apartmán s výhľadom na more"
+              image="https://dznnrbng6qb50.cloudfront.net/images/landing/landing_01.webp"
+            />
               <Landing />
               <About />
               <Gallery />

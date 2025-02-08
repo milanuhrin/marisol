@@ -1,10 +1,10 @@
 module.exports = {
   siteMetadata: {
-    title: 'Marisol Apartment',
-    description: 'Marisol Apartment',
+    title: 'Marisol Seaview Apartment',
+    description: 'Apartmán s výhľadom na more',
     titleTemplate: "%s | Marisol Apartment",
     siteUrl: 'https://marisol.sk',
-    image: "/default-image.jpg"
+    image: "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_01.webp"
   },
   plugins: [
     `gatsby-plugin-fontawesome-css`,
