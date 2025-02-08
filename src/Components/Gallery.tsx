@@ -12,7 +12,7 @@ const IMAGE_BASE_URL = "https://dznnrbng6qb50.cloudfront.net/images/gallery";
 // 🔹 List of image filenames (Converted to WebP)
 const imageFileNames = [
   "01_4559.webp", "02_4382.webp", "03_4555.webp", "04_2639.webp",
-  "05_2643.webp", "06_4553.webp", "07_4552.webp", "08_4640.webp",
+  "05_2643.webp", "07_4552.webp", "08_4640.webp",
   "09_4645.webp", "10_4681.webp", "11_4634.webp", "12_4636.webp",
   "13_4522.webp", "14_4665.webp", "15_4594.webp", "16_4599.webp",
   "17_4612.webp", "18_4572.webp", "19_4579.webp", "20_2588.webp",
