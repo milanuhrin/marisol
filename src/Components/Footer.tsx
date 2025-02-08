@@ -13,7 +13,7 @@ export const Footer = () => {
       {/* Contact Info */}
       <motion.div className="w-full text-center">
         <div className="flex flex-col items-center space-y-6 text-lg text-gray-700">
-          {/* Facebook Logo */}
+          {/* Facebook Link */}
           <motion.a
             href="https://www.facebook.com/profile.php?id=61572969472888"
             target="_blank"
@@ -25,13 +25,34 @@ export const Footer = () => {
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
               viewBox="0 0 24 24"
-              width="32"
-              height="32"
+              width="30"
+              height="30"
               className="text-blue-600"
             >
-              <path d="M22 12.1C22 6.5 17.5 2 12 2S2 6.5 2 12.1c0 4.8 3.4 8.8 7.8 9.8V14H7v-2h2.8v-1.6c0-2.7 1.5-4.2 3.9-4.2 1.1 0 2.3.2 2.3.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6V12H17l-.5 2h-2.3v8c4.4-1 7.8-5 7.8-9.9z" />
+              <path d="M22 12a10 10 0 10-11.5 9.95v-7.05H7.9V12h2.6V9.6c0-2.6 1.6-4 3.9-4 1.1 0 2 .1 2.3.1v2.5h-1.6c-1.3 0-1.6.6-1.6 1.5V12h2.7l-.4 2.9h-2.3v7.05A10 10 0 0022 12z"></path>
             </svg>
-            <span className="text-lg font-semibold">Sledujte nás na Facebooku</span>
+            <span className="text-blue-600 font-semibold">Sledujte nás na Facebooku</span>
+          </motion.a>
+
+          {/* Instagram Link */}
+          <motion.a
+            href="https://www.instagram.com/marisol_seaview_apartment/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-2"
+            whileHover={{ scale: 1.1 }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              width="30"
+              height="30"
+              className="text-pink-600"
+            >
+              <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm0 2h10c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3zm10 1a1 1 0 00-1 1 1 1 0 002 0c0-.6-.4-1-1-1zm-5 2a5 5 0 100 10 5 5 0 000-10zm0 2c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3z"></path>
+            </svg>
+            <span className="text-pink-600 font-semibold">Sledujte nás na Instagrame</span>
           </motion.a>
 
           {/* Email Address */}
