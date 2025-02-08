@@ -18,20 +18,22 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Function to handle menu toggle safely
+  // Function to toggle the menu safely
   const handleMenuToggle = (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevents event bubbling
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Close menu when clicking outside
+  // Function to close menu when clicking outside, but ignore inputs
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
 
-      // If clicking inside the menu or toggle button, do nothing
+      // ✅ Ignore clicks inside input, textarea, or inside the menu itself
       if (
-        menuRef.current?.contains(target) || 
+        target.closest("input") ||
+        target.closest("textarea") ||
+        menuRef.current?.contains(target) ||
         toggleButtonRef.current?.contains(target)
       ) {
         return;
@@ -43,7 +45,7 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
 
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+  }, [setIsMenuOpen]);
 
   return (
     <motion.div
@@ -52,7 +54,7 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
       animate={isMenuOpen ? 'open' : 'closed'}
     >
       {/* Menu Toggle Button */}
-      <button ref={toggleButtonRef}>
+      <button ref={toggleButtonRef} onClick={handleMenuToggle}>
         <MenuIconToggle toggle={handleMenuToggle} />
       </button>
 
