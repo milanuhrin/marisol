@@ -44,18 +44,18 @@ export const MobileNav = (props: Props) => {
           className=" ml-[2rem] grid grid-cols-1  gap-x-[1rem] gap-y-[2rem] absolute top-[5.5rem]   z-50 "
           variants={mobileMenuItems}
         >
-          {/* Title */}
-          <motion.div
+          {/* Logo */}
+          <motion.img
+            src="https://dznnrbng6qb50.cloudfront.net/images/landing/logo.png"
+            alt="Marisol Logo"
+            className="mb-[1rem] col-start-2 w-[100px] h-auto"
             variants={mobileMenuListItem}
-            className="mb-[1rem] col-start-2 text-lg w-full font-sans top-[5rem]"
-          >
-            Marisol
-          </motion.div>
+          />
           {/* Nav Items */}
           {menuItems.map(({ name, link, icon }, i) => (
             <MobileNavItem
               toggle={() => setIsMenuOpen(!isMenuOpen)}
-              link={link}
+              link={link ?? ''}
               name={name}
               icon={icon}
               key={i}
