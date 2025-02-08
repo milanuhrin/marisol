@@ -377,7 +377,7 @@ const About = () => {
       {[
         { label: "Domáce zvieratá:", value: "🚫" },
         { label: "Fajčenie:", value: "🚫" },
-        { label: "Párty:", value: "🚫" },
+        // { label: "Párty:", value: "🚫" },
         { label: "Bezbariérový prístup:", value: "🚫" }
       ].map((item, index) => (
         <div key={index} className="flex justify-between w-full">
