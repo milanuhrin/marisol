@@ -131,15 +131,17 @@ const Reservation = () => {
                   required
                 />
               </div>
-              <div className="col-span-1">
-                <label className="block text-sm text-left font-medium text-gray-700">Počet hostí</label>
+              <div className="col-span-1 flex flex-col">
+                <label className="block text-sm text-left font-medium text-gray-700 whitespace-nowrap">
+                  Počet hostí
+                </label>
                 <input
                   type="number"
                   name="guests"
                   value={formData.guests}
                   onChange={handleInputChange}
                   min="1"
-                  className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                  className="mt-1 p-2 border border-gray-300 rounded-md text-center min-w-[80px]"
                   required
                 />
               </div>
