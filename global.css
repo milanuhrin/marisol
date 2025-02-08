@@ -20,19 +20,23 @@
     @apply gap-[2.5rem];
   }
 }
-input, textarea {
-  background-color: white !important; /* Force white background */
-}
 
-input[type="date"] {
-  appearance: none; /* Remove browser-specific styling */
-  background-color: white !important;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
 
-input:focus, textarea:focus {
-  background-color: white !important;
+@media (max-width: 640px) { /* Apply changes only for mobile */
+  /* Adjust email and Počet hostí fields within the same row */
+  .grid.grid-cols-4 {
+    display: grid;
+    grid-template-columns: 3fr 1fr; /* Email takes 75%, Počet hostí takes 25% */
+    gap: 0.5rem; /* Space between fields */
+  }
+
+  input[name="email"] {
+    width: 100%; /* Fill its column */
+  }
+
+  input[name="guests"] {
+    width: 100%; /* Fill its column */
+  }
 }
 
 .landingBackground {
