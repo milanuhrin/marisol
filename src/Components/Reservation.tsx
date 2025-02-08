@@ -155,7 +155,7 @@ const Reservation = () => {
                   name="checkIn"
                   value={formData.checkIn}
                   onChange={handleInputChange}
-                  className="mt-1 p-2 w-full h-10 border border-gray-300 rounded-md bg-white text-gray-900"
+                  className="mt-1 p-2 w-full h-10 border border-gray-300 rounded-md bg-white text-gray-900 appearance-none"
                   required
                 />
               </div>
@@ -166,12 +166,12 @@ const Reservation = () => {
                   name="checkOut"
                   value={formData.checkOut}
                   onChange={handleInputChange}
-                  className="mt-1 p-2 w-full h-10 border border-gray-300 rounded-md bg-white text-gray-900"
+                  className="mt-1 p-2 w-full h-10 border border-gray-300 rounded-md bg-white text-gray-900 appearance-none"
                   required
                 />
               </div>
             </div>
-
+            
             <div>
               <label className="block text-sm text-left font-medium text-gray-700">Správa</label>
               <textarea
@@ -180,7 +180,7 @@ const Reservation = () => {
                 onChange={handleInputChange}
                 placeholder="Napíšte akékoľvek ďalšie informácie alebo otázky k rezervácii..."
                 rows={4}
-                className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm"
+                className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm text-gray-900 bg-white resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500"
               ></textarea>
             </div>
 
