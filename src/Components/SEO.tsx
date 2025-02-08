@@ -27,7 +27,7 @@ const SEO = ({ title, description, image, article }: { title?: string; descripti
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
-    image: image ? image : `${siteUrl}${defaultImage}`,
+    image: image?.startsWith("http") ? image : `${siteUrl}${image || defaultImage}`,
     url: siteUrl,
   };
 
