@@ -171,13 +171,14 @@ const Reservation = () => {
                 />
               </div>
             </div>
-            
+
             <div>
               <label className="block text-sm text-left font-medium text-gray-700">Správa</label>
               <textarea
                 name="message"
                 value={formData.message}
                 onChange={handleInputChange}
+                onFocus={(e) => e.stopPropagation()} // 🔴 Stops event bubbling to the menu
                 placeholder="Napíšte akékoľvek ďalšie informácie alebo otázky k rezervácii..."
                 rows={4}
                 className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm text-gray-900 bg-white resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500"
