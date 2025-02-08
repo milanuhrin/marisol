@@ -1,6 +1,5 @@
 import { MenuIconToggle } from 'Components/Navigation/Mobile/MenuIconToggle';
 import { motion } from 'framer-motion';
-import { StaticImage } from 'gatsby-plugin-image';
 import React from 'react';
 import { menuItems } from 'Utilities/Data';
 import {
@@ -23,47 +22,42 @@ export const MobileNav = (props: Props) => {
       initial={false}
       animate={isMenuOpen ? 'open' : 'closed'}
     >
-      {/* Logo
-      <StaticImage
-        src="../../../images/logo-darkGrey.png"
-        alt="logo"
-        className=" max-w-[4rem]"
-        placeholder="none"
-      /> */}
-      {/* MenuIconToggle */}
-      <MenuIconToggle toggle={() => setIsMenuOpen(!isMenuOpen)} />
-      {/* Sidebard Background Container */}
+      {/* Logo - Left Side */}
+      <motion.img
+        src="https://dznnrbng6qb50.cloudfront.net/images/landing/logo.png"
+        alt="Marisol Logo"
+        className="w-[120px] h-auto"
+      />
+
+      {/* MenuIconToggle - Right Side */}
+      <MenuIconToggle toggle={() => setIsMenuOpen(!isMenuOpen)} className="ml-auto" />
+
+      {/* Sidebar Background Container */}
       <motion.div
         className={
           'absolute inset-y-0 text-gmailSilverText right-0 z-[20] flex h-[1000px] w-[250px] items-start bg-gradient-to-br from-[#242424] to-[#373737]'
         }
         variants={sidebarVariants}
       >
-        {/* GRID */}
+        {/* Line Divider */}
+        <motion.div className="absolute border-b-[1px] border-gmailGreyText top-[5rem] h-[2rem] w-full" />
+
+        {/* GRID for Menu Items */}
         <motion.div
-          className=" ml-[2rem] grid grid-cols-1  gap-x-[1rem] gap-y-[2rem] absolute top-[5.5rem]   z-50 "
+          className="ml-[2rem] grid grid-cols-1 gap-x-[1rem] gap-y-[2rem] absolute top-[6.5rem] z-50"
           variants={mobileMenuItems}
         >
-          {/* Logo */}
-          <motion.img
-            src="https://dznnrbng6qb50.cloudfront.net/images/landing/logo.png"
-            alt="Marisol Logo"
-            className="mb-[1rem] col-start-2 w-[100px] h-auto"
-            variants={mobileMenuListItem}
-          />
           {/* Nav Items */}
           {menuItems.map(({ name, link, icon }, i) => (
             <MobileNavItem
               toggle={() => setIsMenuOpen(!isMenuOpen)}
-              link={link ?? ''}
+              link={link ?? ''} // ✅ Fix TypeScript error
               name={name}
               icon={icon}
               key={i}
             />
           ))}
         </motion.div>
-        {/* line divider */}
-        <motion.div className="absolute border-b-[1px] border-gmailGreyText  top-[6rem] h-[2rem] w-full" />
       </motion.div>
     </motion.div>
   );
