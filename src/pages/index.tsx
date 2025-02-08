@@ -29,33 +29,30 @@ const IndexPage = () => {
   const { BrowserRouter, Routes, Route } = require("react-router-dom");
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-            <SEO
-              title="Marisol Seaview Apartment"
-              description="Apartmán s výhľadom na more"
-              image="https://dznnrbng6qb50.cloudfront.net/images/landing/landing_01.webp"
-            />
-              <Landing />
-              <About />
-              <Gallery />
-              <Pricelist />
-              <Availability />
-              <Reservation />
-              <Contact />
-              <Footer />
-            </>
-          }
-        />
-        {/* ✅ Make sure Login and Admin are correctly referenced */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<Admin />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <SEO />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Landing />
+                <About />
+                <Gallery />
+                <Pricelist />
+                <Availability />
+                <Reservation />
+                <Contact />
+                <Footer />
+              </>
+            }
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/admin" element={<Admin />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 };
 

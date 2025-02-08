@@ -28,7 +28,7 @@ const SEO = ({ title, description, image, article }: { title?: string; descripti
     title: title || defaultTitle,
     description: description || defaultDescription,
     image: `${siteUrl}${image || defaultImage}`,
-    url: `${siteUrl}`,
+    url: siteUrl,
   };
 
   return (
@@ -36,11 +36,22 @@ const SEO = ({ title, description, image, article }: { title?: string; descripti
       <title>{seo.title}</title>
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
+
+      {/* Open Graph meta tags */}
       <meta property="og:url" content={seo.url} />
       {article && <meta property="og:type" content="article" />}
+      <meta property="og:type" content="website" />
       <meta property="og:title" content={seo.title} />
       <meta property="og:description" content={seo.description} />
       <meta property="og:image" content={seo.image} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+
+      {/* Twitter meta tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={seo.title} />
+      <meta name="twitter:description" content={seo.description} />
+      <meta name="twitter:image" content={seo.image} />
     </>
   );
 };
