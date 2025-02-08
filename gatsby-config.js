@@ -32,7 +32,10 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
-        trackingId: 'G-QLGH6XXEYR',
+        trackingId: 'G-3FPGJMG229',
+        gtagConfig: {
+          anonymize_ip: true,
+        }
       },
     },
     {
