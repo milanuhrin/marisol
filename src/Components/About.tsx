@@ -365,9 +365,9 @@ const About = () => {
         { label: "Záloha:", value: "20% pri potvrdení rezervácie" },
         { label: "Doplatok:", value: "80% 14 dní pred pobytom" }
       ].map((item, index) => (
-        <div key={index} className="flex justify-between w-full">
-          <span className="font-bold text-gray-700 w-1/3 text-left">{item.label}</span>
-          <span className="text-gray-600 w-2/3 text-left">{item.value}</span>
+        <div key={index} className="flex w-full">
+          <span className="font-bold text-gray-700 w-1/2 sm:w-1/3 text-left">{item.label}</span>
+          <span className="text-gray-600 w-1/2 sm:w-2/3 text-left pl-8 sm:pl-0">{item.value}</span>
         </div>
       ))}
     </div>
@@ -380,14 +380,15 @@ const About = () => {
         { label: "Párty:", value: "🚫" },
         { label: "Bezbariérový prístup:", value: "🚫" }
       ].map((item, index) => (
-        <div key={index} className="flex justify-between w-full">
-          <span className="font-bold text-gray-700 w-1/3 text-left">{item.label}</span>
-          <span className="text-red-600 w-2/3 text-left">{item.value}</span>
+        <div key={index} className="flex w-full">
+          <span className="font-bold text-gray-700 w-1/2 sm:w-1/3 text-left">{item.label}</span>
+          <span className="text-red-600 w-1/2 sm:w-2/3 text-left pl-8 sm:pl-0">{item.value}</span>
         </div>
       ))}
     </div>
   </div>
 </motion.div>
+
     {/* Aktivity Subsection */}
       <div className="py-8 max-w-screen-lg mx-auto">
         <h2 className="text-xl font-bold text-center ">Aktivity a atrakcie</h2>
