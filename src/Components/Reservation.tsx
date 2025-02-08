@@ -30,12 +30,12 @@ const Reservation = () => {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setIsLoading(true);
-
+  
     try {
       const formattedCheckIn = formatDate(formData.checkIn);
       const formattedCheckOut = formatDate(formData.checkOut);
       const fullName = `${formData.firstName} ${formData.lastName}`;
-
+  
       const response = await fetch(
         'https://8jwwggkrye.execute-api.us-east-1.amazonaws.com/prod/send-email',
         {
@@ -48,9 +48,11 @@ const Reservation = () => {
           }),
         }
       );
-
+  
       const responseData = await response.json();
-
+      console.log("🔵 API Response Data:", responseData); // 🔍 Debug response
+      console.log("🔵 Response Status:", response.status); // 🔍 Debug status code
+  
       if (response.ok) {
         setFormStatus(`✅ Rezervácia bola úspešne odoslaná.`);
         setFormData({
@@ -66,7 +68,7 @@ const Reservation = () => {
         setFormStatus(`❌ Chyba: ${responseData.error || 'Skúste znova.'}`);
       }
     } catch (error) {
-      console.error('Error sending reservation email:', error);
+      console.error('🚨 Error sending reservation email:', error);
       setFormStatus('❌ Nepodarilo sa odoslať rezerváciu. Skontrolujte pripojenie.');
     } finally {
       setIsLoading(false);
