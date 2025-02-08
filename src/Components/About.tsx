@@ -161,6 +161,18 @@ const About = () => {
       "vešiaky",    ],
     },
     {
+      title: "Obývačka",
+      image: featuresImages["obyvacka.jpg"], // Replace with the actual image path
+      features: [
+        "rozkladacia pohovka",
+        "kreslá",
+        "konferenčné stolíky",
+        "barový stôl",
+        "knižnica a knihy",
+        "televízor / Netflix",
+      ],
+    },
+    {
       title: "Kúpeľňa",
       image: featuresImages["kupelna.jpg"],
       features: [
@@ -187,18 +199,6 @@ const About = () => {
           "hrnce",
           "kávovar",
           "varná kanvica",
-      ],
-    },
-    {
-      title: "Obývačka",
-      image: featuresImages["obyvacka.jpg"], // Replace with the actual image path
-      features: [
-        "rozkladacia pohovka",
-        "kreslá",
-        "konferenčné stolíky",
-        "barový stôl",
-        "knižnica a knihy",
-        "televízor / Netflix",
       ],
     },
   ];
