@@ -21,6 +21,17 @@
   }
 }
 
+.section-divider-svg {
+  width: 100%;
+  height: 80px; /* Default height */
+}
+
+@media (max-width: 768px) {
+  .section-divider-svg {
+    height: 50px; /* Reduced height on mobile */
+  }
+}
+
 input, textarea {
   font-size: 16px !important;
 }

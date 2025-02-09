@@ -1,22 +1,22 @@
-import React from 'react';
-import '../../global.css';
-import { motion } from 'framer-motion';
+import React from 'react'
+import '../../global.css'
+import { motion } from 'framer-motion'
 
 export const SectionDividerWaveOneSide = ({ fill = 'white' }: { fill?: string }) => {
-  return (
-    <motion.div className="relative w-full">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1200 120"
-        preserveAspectRatio="none"
-        className="w-full h-[40px] md:h-[50px] lg:h-[70px] xl:h-[90px]"
-      >
-        <path
-          d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-          className="shape-fill"
-          fill={fill}
-        />
-      </svg>
-    </motion.div>
-  );
-};
+   return (
+      <motion.div className="wave-divider-top-down z-0">
+         <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 100" // Reduced height for mobile
+            preserveAspectRatio="none"
+            className="section-divider-svg"
+         >
+            <path
+               d="M321.39,40.44c58-8,114.16-20.13,172-30.86C575.78,0,661.58,0.99,743.84,18.33C823.78,34,906.67,58,985.66,72.83c70.05,14.48,146.53,18.09,214.34,3V0H0V20.35A600.21,600.21,0,0,0,321.39,40.44Z"
+               className="shape-fill"
+               fill={fill}
+            />
+         </svg>
+      </motion.div>
+   )
+}
