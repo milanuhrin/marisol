@@ -5,12 +5,12 @@ interface WrapRootElementProps {
   element: ReactNode;
 }
 
-// Function to remove fbclid from the URL
+// Function to remove `fbclid` from URL
 const removeFbclid = () => {
   if (typeof window !== "undefined") {
     const url = new URL(window.location.href);
     if (url.searchParams.has("fbclid")) {
-      url.searchParams.delete("fbclid"); // Remove the fbclid parameter
+      url.searchParams.delete("fbclid"); // Remove fbclid parameter
       window.history.replaceState({}, document.title, url.pathname + url.search);
     }
   }
@@ -18,7 +18,7 @@ const removeFbclid = () => {
 
 export const wrapRootElement = ({ element }: WrapRootElementProps) => {
   useEffect(() => {
-    removeFbclid();
+    removeFbclid(); // ✅ Remove `fbclid` on page load
   }, []);
 
   return <BrowserRouter>{element}</BrowserRouter>;
