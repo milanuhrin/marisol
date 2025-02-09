@@ -49,7 +49,7 @@ export const menuItems = [
     link: '#pricelist',
   },
   {
-    name: 'Dostupnosť',
+    name: 'Obsadenosť',
     link: '#availability',
   },
   {
