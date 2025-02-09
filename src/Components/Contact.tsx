@@ -25,7 +25,7 @@ export const Contact = () => {
       >
         {/* Title with consistent styling */}
         <div className="relative py-8 sm:py-4 sm:mt-[-20px] sm:relative sm:-top-4">
-          <TitleText>Kontakt</TitleText>
+          <TitleText>Napíšte nám</TitleText>
         </div>
 
         {/* Google Map Section */}

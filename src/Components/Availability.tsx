@@ -187,7 +187,7 @@ const Availability = () => {
       variants={sectionVariants}
     >
       <div className="py-8">
-        <TitleText>Dostupnosť</TitleText>
+        <TitleText>Obsadenosť</TitleText>
 
         {/* Add space between title and calendar */}
         <div style={{ marginBottom: '2rem' }}></div>
