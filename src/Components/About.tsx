@@ -353,7 +353,7 @@ const About = () => {
 
 {/* Apartment Conditions */}
 <motion.div className="py-8 max-w-screen-lg mx-auto">
-  <h2 className="text-xl font-bold text-center mb-8">Naše podmienky</h2>
+  <h2 className="text-xl font-bold text-center mb-8">Ďalšie informácie</h2>
 
   {/* Responsive Grid */}
   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 px-12">
@@ -381,8 +381,8 @@ const About = () => {
         { label: "Bezbariérový prístup:", value: "🚫" }
       ].map((item, index) => (
         <div key={index} className="flex justify-between w-full">
-          <span className="font-bold text-gray-700 w-1/3 text-left">{item.label}</span>
-          <span className="text-red-600 w-2/3 text-left pl-20 sm:pl-0">{item.value}</span>
+          <span className="font-bold text-gray-700 w-1/2 text-left">{item.label}</span>
+          <span className="text-red-600 w-1/2 text-left pl-20 sm:pl-0">{item.value}</span>
         </div>
       ))}
     </div>
