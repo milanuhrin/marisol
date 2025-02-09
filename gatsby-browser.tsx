@@ -1,11 +1,11 @@
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 interface WrapRootElementProps {
   element: ReactNode;
 }
 
-// Function to remove `fbclid` from URL
+// ✅ Function to remove `fbclid` from URL before rendering the page
 const removeFbclid = () => {
   if (typeof window !== "undefined") {
     const url = new URL(window.location.href);
@@ -16,10 +16,11 @@ const removeFbclid = () => {
   }
 };
 
-export const wrapRootElement = ({ element }: WrapRootElementProps) => {
-  useEffect(() => {
-    removeFbclid(); // ✅ Remove `fbclid` on page load
-  }, []);
+// ✅ Call the function immediately on the client-side
+if (typeof window !== "undefined") {
+  removeFbclid();
+}
 
-  return <BrowserRouter>{element}</BrowserRouter>;
-};
+export const wrapRootElement = ({ element }: WrapRootElementProps) => (
+  <BrowserRouter>{element}</BrowserRouter>
+);
