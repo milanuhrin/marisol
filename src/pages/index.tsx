@@ -10,10 +10,6 @@ import Reservation from "Components/Reservation";
 import Contact from "Components/Contact";
 import SEO from "Components/SEO";
 
-// ✅ Import Login and Admin pages
-import Login from "Components/Login";
-import Admin from "../pages/admin";
-
 const IndexPage = () => {
   const [isClient, setIsClient] = useState(false);
 
@@ -48,8 +44,6 @@ const IndexPage = () => {
               </>
             }
           />
-          <Route path="/login" element={<Login />} />
-          <Route path="/admin" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </>
