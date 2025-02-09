@@ -356,7 +356,7 @@ const About = () => {
   <h2 className="text-xl font-bold text-center mb-8">Ďalšie informácie</h2>
 
   {/* Responsive Grid */}
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 px-12">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 px-4">
     {/* Left Column */}
     <div className="flex flex-col space-y-2">
       {[
