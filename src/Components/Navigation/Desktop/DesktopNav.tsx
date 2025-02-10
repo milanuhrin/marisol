@@ -42,18 +42,18 @@ export const DesktopNav = (props: Props) => {
             ))}
 
            {/* ✅ Clickable Logo on the RIGHT SIDE Redirects to AWS Cognito Login */}
-            <motion.li className='ml-auto' variants={desktopMenuItems}>
-               <a 
-                  aria-label='Login Page' 
-                  href="https://marisol-admin.auth.eu-west-1.amazoncognito.com/login?client_id=211t8eala91e9pcrhr548o0mc9&response_type=code&scope=email+openid&redirect_uri=https://marisol.sk/admin"
-               >
-                  <img
-                     src="https://dznnrbng6qb50.cloudfront.net/images/landing/marisol_favicon_white.png"
-                     alt="Marisol Logo"
-                     className="h-10 w-auto"
-                  />
-               </a>
-            </motion.li>
+           <motion.li className='ml-auto' variants={desktopMenuItems}>
+            <a 
+               aria-label='Login Page' 
+               href="https://marisol-admin.auth.eu-west-1.amazoncognito.com/login?client_id=211t8eala91e9pcrhr548o0mc9&response_type=code&scope=email+openid&redirect_uri=https://marisol.sk/admin"
+            >
+               <img
+                  src="/images/landing/marisol_favicon_white.png"
+                  alt="Marisol Logo"
+                  className="h-10 w-auto"
+               />
+            </a>
+         </motion.li>
          </motion.ul>
       </>
    )
