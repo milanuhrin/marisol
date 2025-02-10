@@ -66,16 +66,21 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
         }`}
         variants={sidebarVariants}
       >
-        {/* Logo - Positioned Higher */}
+        {/* ✅ Clickable Logo Redirects to Cognito Login */}
         <motion.div
-          className="absolute top-[1.5rem] left-1/2 transform -translate-x-1/2"
+          className="absolute top-[1.5rem] left-1/2 transform -translate-x-1/2 cursor-pointer"
           variants={mobileMenuListItem}
         >
-          <img
-            src="https://dznnrbng6qb50.cloudfront.net/images/landing/logo.png"
-            alt="Marisol Logo"
-            className="w-[60px] h-auto"
-          />
+          <a
+            href="https://marisol-admin.auth.us-east-1.amazoncognito.com/login?client_id=211t8eala91e9pcrhr548o0mc9&response_type=code&scope=email+openid+profile&redirect_uri=https://marisol.sk/admin"
+            aria-label="Login Page"
+          >
+            <img
+              src="https://dznnrbng6qb50.cloudfront.net/images/landing/logo.png"
+              alt="Marisol Logo"
+              className="w-[60px] h-auto"
+            />
+          </a>
         </motion.div>
 
         {/* Line Divider */}
