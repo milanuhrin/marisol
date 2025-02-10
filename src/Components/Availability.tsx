@@ -1,106 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { TitleText } from './export';
 import { sectionVariants } from 'Utilities/motionVariants'; // Import the footer variants
 
+const API_URL = "https://9de4pwfk8e.execute-api.us-east-1.amazonaws.com/dev/availability"; // Backend API
+
 const Availability = () => {
-  const reservedDates = [
-    '2024-12-25',
-    '2024-12-26',
-    '2024-12-27',
-    '2025-01-29',
-    '2025-01-30',
-    '2025-01-31',
-    '2025-02-03',
-    '2025-02-04',
-    '2025-02-05',
-    '2025-02-06',
-    '2025-02-07',
-    '2025-02-08',
-    '2025-02-11',
-    '2025-02-12',
-    '2025-02-13',
-    '2025-02-14',
-    '2025-02-15',
-    '2025-02-16',
-    '2025-03-09',
-    '2025-03-10',
-    '2025-03-11',
-    '2025-03-12',
-    '2025-03-13',
-    '2025-03-14',
-    '2025-03-15',
-    '2025-03-16',
-    '2025-03-17',
-    '2025-03-18',
-    '2025-03-19',
-    '2025-03-20',
-    '2025-03-21',
-    '2025-03-22',
-    '2025-03-23',
-    '2025-03-24',
-    '2025-03-25',
-    '2025-03-26',
-    '2025-03-27',
-    '2025-03-28',
-    '2025-03-29',
-    '2025-03-30',
-    '2025-03-31',
-    '2025-04-01',
-    '2025-04-02',
-    '2025-04-03',
-    '2025-04-04',
-    '2025-04-05',
-    '2025-04-06',
-    '2025-04-07',
-    '2025-04-08',
-    '2025-04-09',
-    '2025-04-10',
-    '2025-04-11',
-    '2025-04-12',
-    '2025-04-13',
-    '2025-04-14',
-    '2025-04-15',
-    '2025-04-19',
-    '2025-04-20',
-    '2025-04-21',
-    '2025-04-22',
-    '2025-04-23',
-    '2025-04-24',
-    '2025-05-21',
-    '2025-05-22',
-    '2025-05-23',
-    '2025-05-24',
-    '2025-05-25',
-    '2025-05-26',
-    '2025-05-27',
-    '2025-05-28',
-    '2025-07-06',
-    '2025-07-07',
-    '2025-07-08',
-    '2025-07-09',
-    '2025-07-10',
-    '2025-07-11',
-    '2025-07-12',
-    '2025-07-13',
-    '2025-07-14',
-    '2025-07-15',
-    '2025-07-16',
-    '2025-07-17',
-    '2025-07-18',
-    '2025-07-19',
-    '2025-07-20',
-    '2025-07-21',
-    '2025-07-22',
-    '2025-07-23',
-    '2025-07-24',
-    '2025-07-25',
-    '2025-07-26',
-    '2025-07-27',
+  const [reservedDates, setReservedDates] = useState<string[]>([]);
 
+  useEffect(() => {
+    const fetchReservedDates = async () => {
+      try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
 
+        if (data.success && data.availability) {
+          const dates = data.availability.map((item: { date: any; }) => item.date);
+          setReservedDates(dates); // Store in state
+        } else {
+          console.error("🚨 Unexpected API response:", data);
+        }
+      } catch (error) {
+        console.error("❌ Error fetching reserved dates:", error);
+      }
+    };
 
-  ];
+    fetchReservedDates();
+  }, []);
 
   const months = [
     'Január',
