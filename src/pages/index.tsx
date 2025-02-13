@@ -13,11 +13,12 @@ import { AuthProvider } from "react-oidc-context";
 
 // ✅ AWS Cognito Auth Config
 const cognitoAuthConfig = {
-  authority: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_bWl19uFe0", // Replace with your correct User Pool ID
-  client_id: "7ha456rvc4bc7c7ve527eqrpie", // Replace with your actual Cognito App Client ID
-  redirect_uri: "https://marisol.sk/admin",
+  authority: "https://marisol.auth.us-east-1.amazoncognito.com",
+  // client_id: "7ha456rvc4bc7c7ve527eqrpie", // Replace with your actual Cognito App Client ID
+  client_id: "hrdsud6flksjbei479jcadat0",
+  redirect_uri: "https://main.d39j8o309sk3xb.amplifyapp.com/",
   response_type: "code",
-  scope: "email openid phone",
+  scope: "email openid profile",
 };
 
 const IndexPage = () => {
