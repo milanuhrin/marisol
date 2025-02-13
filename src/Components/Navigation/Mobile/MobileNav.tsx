@@ -70,17 +70,15 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
         <motion.div
           className="absolute top-[1.5rem] left-1/2 transform -translate-x-1/2 cursor-pointer"
           variants={mobileMenuListItem}
+          onClick={() => {
+            window.location.href = "https://marisol.auth.us-east-1.amazoncognito.com/login?client_id=hrdsud6flksjbei479jcadat0&response_type=code&scope=email+openid+profile&redirect_uri=https://main.d39j8o309sk3xb.amplifyapp.com/";
+          }}
         >
-          <a
-            href="https://marisol.auth.us-east-1.amazoncognito.com/login?client_id=hrdsud6flksjbei479jcadat0&response_type=code&scope=email+openid+profile&redirect_uri=https://main.d39j8o309sk3xb.amplifyapp.com/"
-            aria-label="Login Page"
-          >
-            <img
-              src="https://dznnrbng6qb50.cloudfront.net/images/landing/logo.png"
-              alt="Marisol Logo"
-              className="w-[60px] h-auto"
-            />
-          </a>
+          <img
+            src="https://dznnrbng6qb50.cloudfront.net/images/landing/logo.png"
+            alt="Marisol Logo"
+            className="w-[60px] h-auto"
+          />
         </motion.div>
 
         {/* Line Divider */}
