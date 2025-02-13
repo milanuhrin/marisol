@@ -9,32 +9,16 @@ import Pricelist from "Components/Pricelist";
 import Reservation from "Components/Reservation";
 import Contact from "Components/Contact";
 import SEO from "Components/SEO";
-import { AuthProvider, useAuth } from "react-oidc-context";
+import { AuthProvider } from "react-oidc-context";
 
-// ✅ AWS Cognito Auth Config (Fixed)
+// ✅ AWS Cognito Auth Config
 const cognitoAuthConfig = {
-  authority: "https://marisol.auth.us-east-1.amazoncognito.com", // ✅ Correct Cognito Hosted UI domain
-  // client_id: "7ha456rvc4bc7c7ve527eqrpie", // ✅ Correct App Client ID
+  authority: "https://marisol.auth.us-east-1.amazoncognito.com",
+  // client_id: "7ha456rvc4bc7c7ve527eqrpie", // Replace with your actual Cognito App Client ID
   client_id: "hrdsud6flksjbei479jcadat0",
-  redirect_uri: "https://main.d39j8o309sk3xb.amplifyapp.com/", // ✅ Matches Cognito Allowed Callback URLs
+  redirect_uri: "https://main.d39j8o309sk3xb.amplifyapp.com/",
   response_type: "code",
-  scope: "email openid profile", // ✅ Matches Cognito Scopes
-};
-
-// ✅ Function to Automatically Refresh Authentication
-const AuthHandler = () => {
-  const auth = useAuth();
-
-  useEffect(() => {
-    if (!auth.isAuthenticated) {
-      console.log("🔄 Not authenticated, redirecting to login...");
-      auth.signinRedirect();
-    } else {
-      console.log("✅ User is authenticated:", auth.user);
-    }
-  }, [auth]);
-
-  return null;
+  scope: "email openid profile",
 };
 
 const IndexPage = () => {
@@ -53,7 +37,6 @@ const IndexPage = () => {
 
   return (
     <AuthProvider {...cognitoAuthConfig}>
-      <AuthHandler />
       <>
         <SEO />
         <BrowserRouter>
