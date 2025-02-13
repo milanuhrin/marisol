@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 interface WrapRootElementProps {
@@ -16,11 +16,31 @@ const removeFbclid = () => {
   }
 };
 
-// ✅ Call the function immediately on the client-side
+// ✅ Function to scroll to a section based on the hash (#availability, etc.)
+const scrollToHash = () => {
+  if (typeof window !== "undefined" && window.location.hash) {
+    const hash = window.location.hash.replace("#", ""); // Get hash without #
+    const targetElement = document.getElementById(hash);
+
+    if (targetElement) {
+      setTimeout(() => {
+        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100); // Small delay to ensure the element exists
+    }
+  }
+};
+
+// ✅ Run these functions on client-side only
 if (typeof window !== "undefined") {
   removeFbclid();
+  scrollToHash(); // Ensure it runs on initial page load
 }
 
-export const wrapRootElement = ({ element }: WrapRootElementProps) => (
-  <BrowserRouter>{element}</BrowserRouter>
-);
+// ✅ Wrap the entire app inside BrowserRouter
+export const wrapRootElement = ({ element }: WrapRootElementProps) => {
+  useEffect(() => {
+    scrollToHash(); // Run on navigation
+  }, []);
+
+  return <BrowserRouter>{element}</BrowserRouter>;
+};
