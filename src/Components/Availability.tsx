@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { TitleText } from './export';
 import { sectionVariants } from 'Utilities/motionVariants'; // Import the footer variants
 
-const API_URL = "https://9de4pwfk8e.execute-api.us-east-1.amazonaws.com/dev/availability"; // Backend API
+const API_URL = "https://eb8ya8rtoc.execute-api.us-east-1.amazonaws.com/main/availability"; // Backend API
 
 const Availability = () => {
   const [reservedDates, setReservedDates] = useState<string[]>([]);
