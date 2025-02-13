@@ -16,31 +16,32 @@ const removeFbclid = () => {
   }
 };
 
-// ✅ Function to scroll to a section based on the hash (#availability, etc.)
+// ✅ Function to scroll to the correct section if a hash exists
 const scrollToHash = () => {
   if (typeof window !== "undefined" && window.location.hash) {
-    const hash = window.location.hash.replace("#", ""); // Get hash without #
-    const targetElement = document.getElementById(hash);
-
-    if (targetElement) {
-      setTimeout(() => {
+    setTimeout(() => {
+      const hash = window.location.hash.replace("#", ""); // Get the ID without #
+      const targetElement = document.getElementById(hash);
+      if (targetElement) {
         targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100); // Small delay to ensure the element exists
-    }
+      }
+    }, 300); // Small delay to allow Gatsby to render the element
   }
 };
 
-// ✅ Run these functions on client-side only
-if (typeof window !== "undefined") {
-  removeFbclid();
-  scrollToHash(); // Ensure it runs on initial page load
-}
-
-// ✅ Wrap the entire app inside BrowserRouter
-export const wrapRootElement = ({ element }: WrapRootElementProps) => {
+// ✅ React component to handle effects (fixing the white screen issue)
+const AppWrapper: React.FC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => {
-    scrollToHash(); // Run on navigation
-  }, []);
+    removeFbclid();
+    scrollToHash();
+  }, []); // Run on mount
 
-  return <BrowserRouter>{element}</BrowserRouter>;
+  return <>{children}</>;
 };
+
+// ✅ Wrap Gatsby's root element inside BrowserRouter + AppWrapper
+export const wrapRootElement = ({ element }: WrapRootElementProps) => (
+  <BrowserRouter>
+    <AppWrapper>{element}</AppWrapper>
+  </BrowserRouter>
+);
