@@ -72,7 +72,7 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
           variants={mobileMenuListItem}
         >
           <a
-            href="https://marisol-admin.auth.us-east-1.amazoncognito.com/login?client_id=hrdsud6flksjbei479jcadat0&response_type=code&scope=email+openid+profile&redirect_uri=https://main.d39j8o309sk3xb.amplifyapp.com"
+            href="https://marisol.auth.us-east-1.amazoncognito.com/login?client_id=hrdsud6flksjbei479jcadat0&response_type=code&scope=email+openid+profile&redirect_uri=https://main.d39j8o309sk3xb.amplifyapp.com"
             aria-label="Login Page"
           >
             <img
