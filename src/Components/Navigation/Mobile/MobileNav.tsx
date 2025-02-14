@@ -71,7 +71,9 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
           className="absolute top-[1.5rem] left-1/2 transform -translate-x-1/2 cursor-pointer"
           variants={mobileMenuListItem}
           onClick={() => {
-            window.location.href = "https://marisol.auth.us-east-1.amazoncognito.com/login?client_id=hrdsud6flksjbei479jcadat0&response_type=code&scope=email+openid+profile&redirect_uri=https://main.d39j8o309sk3xb.amplifyapp.com/";
+            // window.location.href = "https://marisol.auth.us-east-1.amazoncognito.com/login?client_id=hrdsud6flksjbei479jcadat0&response_type=code&scope=email+openid+profile&redirect_uri=https://main.d39j8o309sk3xb.amplifyapp.com/";
+            window.location.href = "https://marisol.auth.us-east-1.amazoncognito.com/login?client_id=hrdsud6flksjbei479jcadat0&response_type=code&scope=email+openid+profile&redirect_uri=https://admin.marisol.sk/";
+
           }}
         >
           <img
