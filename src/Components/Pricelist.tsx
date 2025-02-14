@@ -101,13 +101,13 @@ const Pricelist = () => {
           <table className="w-full border-collapse text-gray-500">
             <thead className="bg-cyan-500 text-white">
               <tr>
-                <th className="py-4 px-4 text-sm sm:text-base text-left">Zabezpečíme vám transfer</th>
+                <th className="py-4 px-4 text-sm sm:text-base text-left">Zabezpečíme vám transfer z letiska Alicante do apartmánu a naspäť</th>
                 <th className="py-4 px-4 text-sm sm:text-base">Cena</th>
               </tr>
             </thead>
             <tbody>
               <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold text-left">Jedna jazda z/na letisko Alicante do apartmánu. Cena je za auto (max 4 osoby).</td>
+                <td className="py-4 px-4 text-sm sm:text-base font-semibold text-left">Cena za jednu jazdu autom</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
               </tr>
               {/* <tr className="border-b">
