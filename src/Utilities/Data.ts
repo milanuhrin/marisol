@@ -64,8 +64,7 @@ export const menuItems = [
     name: '+421 902 217 449',
     icon: faPhone,
     action: () => {
-      window.location.href = 'tel:+421902217449';
+      window.open('tel:+421902217449', '_self');
     },
-  },
-
+  }
 ];
