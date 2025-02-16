@@ -82,7 +82,7 @@ export const Footer = () => {
             >
               <path d="M12 3l9 8-1.5 1.5L12 5.25 4.5 12.5 3 11l9-8zm0 4.5l6 5V21h-4v-5H10v5H6v-8.5l6-5z"></path>
             </svg>
-            <span>Urbanizacion Torre Del Moro, Torrevieja, Alicante</span>
+            <span>Urbanizacion Torre Del Moro, Torrevieja</span>
           </motion.div>
         </div>
       </motion.div>
