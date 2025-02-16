@@ -71,7 +71,8 @@ export const Footer = () => {
           </motion.div>
 
           {/* Address */}
-          <motion.div className="flex items-center space-x-2 text-sm" whileHover={{ scale: 1.1 }}>
+          <motion.div className="flex flex-col items-start space-x-2 text-sm" whileHover={{ scale: 1.1 }}>
+          <div className="flex items-center space-x-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -83,7 +84,9 @@ export const Footer = () => {
               <path d="M12 3l9 8-1.5 1.5L12 5.25 4.5 12.5 3 11l9-8zm0 4.5l6 5V21h-4v-5H10v5H6v-8.5l6-5z"></path>
             </svg>
             <span>Urbanizacion Torre Del Moro, Torrevieja</span>
-          </motion.div>
+          </div>
+          <span className="text-gray-500 text-xs">(30 min autom od letiska Alicante)</span>
+        </motion.div>
         </div>
       </motion.div>
     </motion.footer>
