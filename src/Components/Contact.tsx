@@ -17,7 +17,7 @@ export const Contact = () => {
       {/* Motion Section with animation */}
       <motion.section
         id="contact"
-        className="text-center py-8"
+        className="text-center py-8 flex flex-col items-center justify-center space-y-4"
         initial="offscreen"
         whileInView="onscreen"
         viewport={{ once: true, amount: 0.01 }}
@@ -25,7 +25,7 @@ export const Contact = () => {
       >
         {/* Title with consistent styling */}
         <div className="relative py-8 sm:py-4 sm:mt-[-20px] sm:relative sm:-top-4">
-          <TitleText>Napíšte nám</TitleText>
+          <TitleText>Kontaktujte nás</TitleText>
         </div>
 
         {/* Google Map Section */}
