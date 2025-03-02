@@ -25,8 +25,27 @@ export const Contact = () => {
       >
         {/* Title: Napíšte nám */}
         <div className="relative py-8 sm:py-4 sm:mt-[-20px] sm:relative sm:-top-4">
-          <TitleText>Napíšte nám</TitleText>
+          <TitleText>Kontaktujte nás na:</TitleText>
         </div>
+
+        {/* Phone Number - Clickable */}
+        <motion.a
+          href="tel:+421902217449"
+          className="flex items-center space-x-2 text-gray-700 text-lg font-semibold"
+          whileHover={{ scale: 1.1 }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            className="text-gray-600"
+          >
+            <path d="M6.62 10.79a15.91 15.91 0 006.59 6.59l2.2-2.2a1 1 0 011.06-.24c1.17.42 2.44.65 3.73.65.55 0 1 .45 1 1v3.56a1 1 0 01-1 1A19.92 19.92 0 012 4a1 1 0 011-1h3.57c.55 0 1 .45 1 1 0 1.29.22 2.56.65 3.73.14.36.05.77-.24 1.06l-2.36 2.36z"></path>
+          </svg>
+          <span>+421 902 217 449</span>
+        </motion.a>
 
         {/* Email Address - Clickable */}
         <motion.a
