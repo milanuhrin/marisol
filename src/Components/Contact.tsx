@@ -48,27 +48,6 @@ export const Contact = () => {
         </motion.a>
 
 
-        {/* WhatsApp - Clickable */}
-        <motion.a
-          href="https://wa.me/421902217449"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center space-x-2 text-green-600 text-lg font-semibold"
-          whileHover={{ scale: 1.1 }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            className="text-green-600"
-          >
-            <path d="M12 2a10 10 0 00-9 14.7L2 22l5.4-1.4A10 10 0 1012 2zm0 18a8 8 0 01-4-1.1l-.3-.2-3.2.8.9-3.1-.2-.3A8 8 0 1112 20zm3.3-5.7c-.2-.1-1.2-.6-1.4-.7s-.3-.1-.5.1-.5.7-.7.9-.3.2-.5.1a6 6 0 01-2.6-1.6 6 6 0 01-1.6-2.6c-.1-.2 0-.4.1-.5s.6-.7.7-.9.1-.3.1-.5V7.3c0-.2 0-.3-.2-.4s-.5-.6-.7-.8-.4-.2-.5-.2H6.1c-.2 0-.4 0-.6.2-.2.3-.8 1-1 2s.2 2.1.3 2.3a9 9 0 004.5 4.5c.6.3 1.2.5 2 .7a4 4 0 002-.2c.6-.2 1.3-.6 1.4-1s.2-1.2.2-1.3 0-.2-.2-.3z"></path>
-          </svg>
-          <span>Napíšte nám na WhatsApp</span>
-        </motion.a>
-
         {/* Email Address - Clickable */}
         <motion.a
           href="mailto:marisol.seaview@gmail.com"
@@ -86,6 +65,27 @@ export const Contact = () => {
             <path d="M22 6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6zM4 6h16v2.5l-8 5-8-5V6zm0 4l7.35 4.59a1 1 0 001.3 0L20 10v8H4v-8z"></path>
           </svg>
           <span>marisol.seaview@gmail.com</span>
+        </motion.a>
+
+        {/* WhatsApp - Clickable */}
+        <motion.a
+          href="https://wa.me/421902217449"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center space-x-2 text-green-600 text-lg font-semibold"
+          whileHover={{ scale: 1.1 }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 32 32"
+            width="24"
+            height="24"
+            fill="currentColor"
+            className="text-green-600"
+          >
+            <path d="M16 2.7C8.4 2.7 2.2 8.9 2.2 16.5c0 2.7.7 5.2 2.1 7.4L2 30l6.4-2.1c2.2 1.2 4.6 1.8 7.1 1.8 7.6 0 13.8-6.2 13.8-13.8S23.6 2.7 16 2.7zm0 25.1c-2.3 0-4.5-.6-6.4-1.7l-.5-.3-3.8 1.2 1.3-3.7-.3-.6c-1.2-1.9-1.8-4.2-1.8-6.5 0-6.6 5.4-12 12-12s12 5.4 12 12-5.4 12-12 12zm5-7.8c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.1-.8.1s-.9 1.1-1.2 1.5c-.2.3-.4.3-.8.2-1.5-.5-2.8-1.6-3.7-2.9-.4-.6-.7-1.3-1-2-.2-.3-.1-.6.2-.8.3-.3.6-.8.8-1.2.2-.4.1-.7 0-1-.1-.3-.8-1.8-1.1-2.4s-.6-.5-.8-.5H8.2c-.3 0-.7.1-1 .4-.3.3-1.3 1.3-1.3 3.1s1.3 3.5 1.5 3.8c.2.3 2.7 4.1 6.5 5.8 4 .2 6.2-2 6.5-2.2s1.8-1.4 1.8-2.7c.1-1.2-.2-1.7-.3-1.9z"></path>
+          </svg>
+          <span>Napíšte nám na WhatsApp</span>
         </motion.a>
 
         {/* Facebook Link */}
