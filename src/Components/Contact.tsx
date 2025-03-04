@@ -47,6 +47,28 @@ export const Contact = () => {
           <span>+421 902 217 449</span>
         </motion.a>
 
+
+        {/* WhatsApp - Clickable */}
+        <motion.a
+          href="https://wa.me/421902217449"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center space-x-2 text-green-600 text-lg font-semibold"
+          whileHover={{ scale: 1.1 }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            className="text-green-600"
+          >
+            <path d="M12 2a10 10 0 00-9 14.7L2 22l5.4-1.4A10 10 0 1012 2zm0 18a8 8 0 01-4-1.1l-.3-.2-3.2.8.9-3.1-.2-.3A8 8 0 1112 20zm3.3-5.7c-.2-.1-1.2-.6-1.4-.7s-.3-.1-.5.1-.5.7-.7.9-.3.2-.5.1a6 6 0 01-2.6-1.6 6 6 0 01-1.6-2.6c-.1-.2 0-.4.1-.5s.6-.7.7-.9.1-.3.1-.5V7.3c0-.2 0-.3-.2-.4s-.5-.6-.7-.8-.4-.2-.5-.2H6.1c-.2 0-.4 0-.6.2-.2.3-.8 1-1 2s.2 2.1.3 2.3a9 9 0 004.5 4.5c.6.3 1.2.5 2 .7a4 4 0 002-.2c.6-.2 1.3-.6 1.4-1s.2-1.2.2-1.3 0-.2-.2-.3z"></path>
+          </svg>
+          <span>Napíšte nám na WhatsApp</span>
+        </motion.a>
+
         {/* Email Address - Clickable */}
         <motion.a
           href="mailto:marisol.seaview@gmail.com"

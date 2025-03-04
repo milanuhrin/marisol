@@ -29,7 +29,7 @@ const Pricelist = () => {
               <tr>
                 <th className="py-4 px-4 text-sm sm:text-base">Obdobie</th>
                 <th className="py-4 px-4 text-sm sm:text-base">1 noc*</th>
-                <th className="py-4 px-4 text-sm sm:text-base">12+ nocí</th>
+                <th className="py-4 px-4 text-sm sm:text-base">10+ nocí</th>
                 <th className="py-4 px-4 text-sm sm:text-base">30+ nocí</th>
               </tr>
             </thead>
