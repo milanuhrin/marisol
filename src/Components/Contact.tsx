@@ -78,9 +78,9 @@ export const Contact = () => {
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
             alt="WhatsApp"
-            width="24"
-            height="24"
-            className="w-6 h-6"
+            width="30"
+            height="30"
+            className="w-[30px] h-[30px]" // Match FB & Instagram icon size
           />
           <span>Napíšte nám na WhatsApp</span>
         </motion.a>
