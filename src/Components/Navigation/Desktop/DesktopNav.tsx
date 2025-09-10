@@ -1,3 +1,4 @@
+// DesktopNav.tsx
 import { motion } from 'framer-motion'
 import { Link } from 'gatsby'
 import React from 'react'
@@ -5,6 +6,8 @@ import { menuItems } from 'Utilities/Data'
 import { container, desktopMenuItems } from 'Utilities/motionVariants'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClipboard, faAddressCard, faPhone } from '@fortawesome/free-solid-svg-icons'
+import { useI18n } from 'i18n/LanguageProvider';
+import { LanguageSwitcher } from 'Components/LanguageSwitcher';
 
 interface Props {}
 
@@ -41,8 +44,12 @@ export const DesktopNav = (props: Props) => {
                </motion.li>
             ))}
 
+            <motion.li variants={desktopMenuItems} className="pl-2">
+               <LanguageSwitcher />
+            </motion.li>
+
            {/* ✅ Clickable Logo on the RIGHT SIDE Redirects to AWS Cognito Login */}
-           {/* <motion.li className='ml-auto' variants={desktopMenuItems}>
+           <motion.li className='ml-auto' variants={desktopMenuItems}>
             <a 
                aria-label='Login Page' 
                href="https://marisol-admin.auth.eu-west-1.amazoncognito.com/login?client_id=211t8eala91e9pcrhr548o0mc9&response_type=code&scope=email+openid&redirect_uri=https://marisol.sk/admin"
@@ -53,7 +60,7 @@ export const DesktopNav = (props: Props) => {
                   className="h-10 w-auto"
                />
             </a>
-         </motion.li> */}
+         </motion.li>
          </motion.ul>
       </>
    )

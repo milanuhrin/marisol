@@ -118,6 +118,7 @@ const Pricelist = () => {
           </table>
         </div>
       </motion.div>
+
     </motion.section>
   );
 };

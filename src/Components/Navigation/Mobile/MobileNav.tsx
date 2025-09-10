@@ -1,13 +1,18 @@
+// MobileNav.tsx
 import { MenuIconToggle } from 'Components/Navigation/Mobile/MenuIconToggle';
 import { motion } from 'framer-motion';
 import React, { useEffect, useRef } from 'react';
-import { menuItems } from 'Utilities/Data';
 import {
   mobileMenuItems,
   mobileMenuListItem,
   sidebarVariants,
 } from 'Utilities/motionVariants';
 import { MobileNavItem } from './MobileNavItem';
+
+// i18n + data
+import { useI18n } from 'i18n/LanguageProvider';
+import { getMenuItems } from 'Utilities/Data';
+import { LanguageSwitcher } from 'Components/LanguageSwitcher';
 
 interface Props {
   isMenuOpen: boolean;
@@ -17,6 +22,8 @@ interface Props {
 export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
+  const { lang } = useI18n();
+  const menuItems = getMenuItems(lang);
 
   // Function to toggle the menu safely
   const handleMenuToggle = (e: React.MouseEvent) => {
@@ -24,27 +31,25 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Function to close menu when clicking outside, but ignore inputs
+  // Close menu when clicking outside (ignore inputs and the toggle button)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
 
-      // ✅ Ignore clicks inside input, textarea, or inside the menu itself
       if (
-        target.closest("input") ||
-        target.closest("textarea") ||
+        target.closest('input') ||
+        target.closest('textarea') ||
         menuRef.current?.contains(target) ||
         toggleButtonRef.current?.contains(target)
       ) {
         return;
       }
 
-      // Otherwise, close the menu
       setIsMenuOpen(false);
     };
 
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
   }, [setIsMenuOpen]);
 
   return (
@@ -62,7 +67,7 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
       <motion.div
         ref={menuRef}
         className={`absolute inset-y-0 text-gmailSilverText right-0 z-[20] flex h-[1000px] w-[250px] items-start bg-gradient-to-br from-[#242424] to-[#373737] ${
-          isMenuOpen ? "pointer-events-auto mobile-menu" : "pointer-events-none"
+          isMenuOpen ? 'pointer-events-auto mobile-menu' : 'pointer-events-none'
         }`}
         variants={sidebarVariants}
       >
@@ -71,9 +76,8 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
           className="absolute top-[1.5rem] left-1/2 transform -translate-x-1/2 cursor-pointer"
           variants={mobileMenuListItem}
           onClick={() => {
-            // window.location.href = "https://marisol.auth.us-east-1.amazoncognito.com/login?client_id=hrdsud6flksjbei479jcadat0&response_type=code&scope=email+openid+profile&redirect_uri=https://main.d39j8o309sk3xb.amplifyapp.com/";
-            window.location.href = "https://marisol.auth.us-east-1.amazoncognito.com/login?client_id=hrdsud6flksjbei479jcadat0&response_type=code&scope=email+openid+profile&redirect_uri=https://admin.marisol.sk/";
-
+            window.location.href =
+              'https://marisol.auth.us-east-1.amazoncognito.com/login?client_id=hrdsud6flksjbei479jcadat0&response_type=code&scope=email+openid+profile&redirect_uri=https://admin.marisol.sk/';
           }}
         >
           <img
@@ -92,7 +96,7 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
           variants={mobileMenuItems}
         >
           {/* Nav Items */}
-          {menuItems.map(({ name, link, icon }, i) => (
+          {menuItems.map(({ name, link, icon, action }, i) => (
             <MobileNavItem
               toggle={() => setIsMenuOpen(false)}
               link={link ?? ''}
@@ -102,6 +106,23 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
             />
           ))}
         </motion.div>
+
+        {/* ✅ Bottom bar: language flags (a sem vieš pridať aj tel. číslo, ak ho chceš mať vedľa vlajok) */}
+        <div className="absolute bottom-4 left-0 w-full px-4">
+          <div className="flex items-center justify-end">
+            {/* Ak chceš mať vedľa aj telefón:
+            <a
+              href="tel:+421902217449"
+              className="mr-3 text-white/90"
+              onClick={() => setIsMenuOpen(false)}
+              aria-label={lang === 'sk' ? 'Zavolať' : 'Call'}
+            >
+              +421 902 217 449
+            </a>
+            */}
+            <LanguageSwitcher />
+          </div>
+        </div>
       </motion.div>
     </motion.div>
   );

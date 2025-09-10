@@ -1,29 +1,65 @@
-import { motion } from 'framer-motion'
-import { Link } from 'gatsby'
-import * as React from 'react'
-import { mobileMenuListItem } from 'Utilities/motionVariants'
+// DesktopMenuItem.tsx
+import React from 'react';
+import { Link } from 'gatsby';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-interface Props {
-   text: string
-   link: string
-   toggleOpen: () => void
-}
+export type DesktopMenuItemProps = {
+  name: string;                    // už je v správnom jazyku
+  link?: string;                   // interný alebo externý
+  icon?: any;                      // FontAwesome icon (optional)
+  action?: () => void;             // napr. tel: call
+  className?: string;
+};
 
-export const MenuItem = (props: Props) => {
-   const { text, link, toggleOpen } = props
+export const DesktopMenuItem: React.FC<DesktopMenuItemProps> = ({
+  name,
+  link,
+  icon,
+  action,
+  className = '',
+}) => {
+  const base =
+    'text-silver hover:font-bold hover:text-cyan-500 hover:text-lg cursor-pointer transition duration-300';
 
-   return (
-      <motion.li
-         className='my-[1rem] font-bold text-mediumSilver'
-         variants={mobileMenuListItem}
-         whileTap={{ scale: 0.8 }}>
-         <Link
-            onClick={() => toggleOpen()}
-            className='flex w-[12rem] h-[2rem]'
-            to={link}
-            aria-label={text}>
-            {text}
-         </Link>
-      </motion.li>
-   )
-}
+  const content = (
+    <>
+      {icon && <FontAwesomeIcon icon={icon} className="mr-2" />}
+      <span>{name}</span>
+    </>
+  );
+
+  if (action) {
+    return (
+      <button
+        type="button"
+        onClick={action}
+        aria-label={name}
+        className={`${base} ${className}`}
+      >
+        {content}
+      </button>
+    );
+  }
+
+  if (link) {
+    if (link.startsWith('/')) {
+      return (
+        <Link to={link} aria-label={name} className={`${base} ${className}`}>
+          {content}
+        </Link>
+      );
+    }
+    return (
+      <a href={link} aria-label={name} className={`${base} ${className}`}>
+        {content}
+      </a>
+    );
+  }
+
+  // fallback: inertný text
+  return (
+    <span aria-label={name} className={`${base} ${className}`}>
+      {content}
+    </span>
+  );
+};
