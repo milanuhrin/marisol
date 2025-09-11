@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { TitleText } from './export';
 import { sectionVariants } from 'Utilities/motionVariants';
+import { useI18n } from 'i18n/LanguageProvider'; // ✅ i18n
 
 const Reservation = () => {
+  const { t, lang } = useI18n();
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -15,7 +18,7 @@ const Reservation = () => {
   });
 
   const [formStatus, setFormStatus] = useState('');
-  const [isLoading, setIsLoading] = useState(false); // 🔵 Show loading
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
@@ -30,12 +33,18 @@ const Reservation = () => {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setIsLoading(true);
-  
+
     try {
       const formattedCheckIn = formatDate(formData.checkIn);
       const formattedCheckOut = formatDate(formData.checkOut);
       const fullName = `${formData.firstName} ${formData.lastName}`;
-  
+
+      // Message localized
+      const emailMessage =
+        lang === 'sk'
+          ? `Dobrý deň,\n\nMám záujem o rezerváciu apartmánu:\n\nMeno a priezvisko: ${fullName}\nEmail: ${formData.email}\nCheck-in: ${formattedCheckIn}\nCheck-out: ${formattedCheckOut}\nPočet hostí: ${formData.guests}\n\nSpráva:\n${formData.message}`
+          : `Hello,\n\nI am interested in booking the apartment:\n\nName: ${fullName}\nEmail: ${formData.email}\nCheck-in: ${formattedCheckIn}\nCheck-out: ${formattedCheckOut}\nNumber of guests: ${formData.guests}\n\nMessage:\n${formData.message}`;
+
       const response = await fetch(
         'https://8jwwggkrye.execute-api.us-east-1.amazonaws.com/prod/send-email',
         {
@@ -44,17 +53,14 @@ const Reservation = () => {
           body: JSON.stringify({
             name: fullName,
             email: formData.email,
-            message: `Dobrý deň,\n\nMám záujem o rezerváciu apartmánu:\n\nMeno a priezvisko: ${fullName}\nEmail: ${formData.email}\nCheck-in: ${formattedCheckIn}\nCheck-out: ${formattedCheckOut}\nPočet hostí: ${formData.guests}\n\nSpráva:\n${formData.message}`,
+            message: emailMessage,
           }),
         }
       );
-  
+
       const responseData = await response.json();
-      console.log("🔵 API Response Data:", responseData); // 🔍 Debug response
-      console.log("🔵 Response Status:", response.status); // 🔍 Debug status code
-  
       if (response.ok) {
-        setFormStatus(`✅ Rezervácia bola úspešne odoslaná.`);
+        setFormStatus(t('reservation.success'));
         setFormData({
           firstName: '',
           lastName: '',
@@ -65,11 +71,11 @@ const Reservation = () => {
           message: '',
         });
       } else {
-        setFormStatus(`❌ Chyba: ${responseData.error || 'Skúste znova.'}`);
+        setFormStatus(`${t('reservation.error')}: ${responseData.error || t('reservation.try_again')}`);
       }
     } catch (error) {
       console.error('🚨 Error sending reservation email:', error);
-      setFormStatus('❌ Nepodarilo sa odoslať rezerváciu. Skontrolujte pripojenie.');
+      setFormStatus(t('reservation.network_error'));
     } finally {
       setIsLoading(false);
     }
@@ -85,7 +91,7 @@ const Reservation = () => {
       variants={sectionVariants}
     >
       <div className="py-8">
-        <TitleText>Predbežná rezervácia</TitleText>
+        <TitleText>{t('reservation.title')}</TitleText>
         <div style={{ marginBottom: '2rem' }}></div>
 
         <motion.div
@@ -98,7 +104,9 @@ const Reservation = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-left font-medium text-gray-700">Meno</label>
+                <label className="block text-sm text-left font-medium text-gray-700">
+                  {t('reservation.first_name')}
+                </label>
                 <input
                   type="text"
                   name="firstName"
@@ -109,7 +117,9 @@ const Reservation = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm text-left font-medium text-gray-700">Priezvisko</label>
+                <label className="block text-sm text-left font-medium text-gray-700">
+                  {t('reservation.last_name')}
+                </label>
                 <input
                   type="text"
                   name="lastName"
@@ -123,7 +133,9 @@ const Reservation = () => {
 
             <div className="grid grid-cols-4 gap-4">
               <div className="col-span-3">
-                <label className="block text-sm text-left font-medium text-gray-700">Email</label>
+                <label className="block text-sm text-left font-medium text-gray-700">
+                  {t('reservation.email')}
+                </label>
                 <input
                   type="email"
                   name="email"
@@ -135,7 +147,7 @@ const Reservation = () => {
               </div>
               <div className="col-span-1 flex flex-col">
                 <label className="block text-sm text-left font-medium text-gray-700 whitespace-nowrap">
-                  Počet hostí
+                  {t('reservation.guests')}
                 </label>
                 <input
                   type="number"
@@ -151,7 +163,7 @@ const Reservation = () => {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-left font-medium text-gray-700">Check-in</label>
+                <label className="block text-sm text-left font-medium text-gray-700">{t('reservation.check_in')}</label>
                 <input
                   type="date"
                   name="checkIn"
@@ -162,7 +174,7 @@ const Reservation = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm text-left font-medium text-gray-700">Check-out</label>
+                <label className="block text-sm text-left font-medium text-gray-700">{t('reservation.check_out')}</label>
                 <input
                   type="date"
                   name="checkOut"
@@ -175,12 +187,14 @@ const Reservation = () => {
             </div>
 
             <div>
-              <label className="block text-sm text-left font-medium text-gray-700">Správa</label>
+              <label className="block text-sm text-left font-medium text-gray-700">
+                {t('reservation.message')}
+              </label>
               <textarea
                 name="message"
                 value={formData.message}
                 onChange={handleInputChange}
-                placeholder="Napíšte akékoľvek ďalšie informácie alebo otázky k rezervácii..."
+                placeholder={t('reservation.placeholder')}
                 rows={4}
                 className="mt-1 p-2 w-full border border-gray-300 rounded-md text-gray-900 bg-white resize-none text-[16px] focus:outline-none focus:ring-2 focus:ring-cyan-500"
               ></textarea>
@@ -191,7 +205,7 @@ const Reservation = () => {
               className="w-full bg-cyan-500 text-white py-2 px-4 rounded-md hover:bg-cyan-600 transition"
               disabled={isLoading}
             >
-              {isLoading ? 'Odosielanie...' : 'Rezervovať'}
+              {isLoading ? t('reservation.sending') : t('reservation.submit')}
             </button>
           </form>
 

@@ -26,43 +26,6 @@ export const hero2ImageLayouts = [
   },
 ];
 
-export const menuItems = [
-  {
-    name: 'Domov',
-    link: '#home',
-  },
-  {
-    name: 'O apartmáne',
-    link: '#about',
-  },
-  {
-    name: 'Galéria',
-    link: '#gallery',
-  },
-  {
-    name: 'Cenník',
-    link: '#pricelist',
-  },
-  {
-    name: 'Obsadenosť',
-    link: '#availability',
-  },
-  {
-    name: 'Rezervácia',
-    link: '#reservation',
-  },
-  {
-    name: 'Kontakt',
-    link: '#contact',
-  },
-  {
-    name: '+421 902 217 449',
-    icon: faPhone,
-    action: () => {
-      window.open('tel:+421902217449', '_self');
-    },
-  },
-]
 export type Lang = 'sk' | 'en';
 
 type MenuItemBase = {
@@ -72,45 +35,46 @@ type MenuItemBase = {
   labels: { sk: string; en: string };
 };
 
-// definícia menu pre každý jazyk
+// Jediný zdroj pravdy pre menu (hash odkazy ako pôvodne)
 export const menuItemsBase: MenuItemBase[] = [
   {
-    link: '/',
-    icon: faClipboard,
+    link: '#home',
     labels: { sk: 'Domov', en: 'Home' },
   },
   {
-    link: '/about',
-    icon: faAddressCard,
+    link: '#about',
     labels: { sk: 'O apartmáne', en: 'About' },
   },
   {
-    link: '/gallery',
+    link: '#gallery',
     labels: { sk: 'Galéria', en: 'Gallery' },
   },
   {
-    link: '/pricing',
+    link: '#pricelist',
     labels: { sk: 'Cenník', en: 'Pricing' },
   },
   {
-    link: '/booking',
+    link: '#availability',
+    labels: { sk: 'Obsadenosť', en: 'Availability' },
+  },
+  {
+    link: '#reservation',
     labels: { sk: 'Rezervácia', en: 'Reservation' },
   },
   {
-    link: '/contact',
+    link: '#contact',
     labels: { sk: 'Kontakt', en: 'Contact' },
   },
   {
-    // príklad pre telefón
     action: () => {
       window.location.href = 'tel:+421902217449';
     },
     icon: faPhone,
-    labels: { sk: 'Zavolať', en: 'Call' },
+    labels: { sk: '+421 902 217 449', en: '+421 902 217 449' },
   },
 ];
 
-// helper ktorý vráti menuItems s aktuálnym názvom
+// Helper: vráti menu s preloženým názvom podľa jazyka
 export const getMenuItems = (lang: Lang) =>
   menuItemsBase.map(mi => ({
     ...mi,

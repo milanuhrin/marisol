@@ -7,10 +7,11 @@ import { SectionDividerWaveOneSide } from 'svg/SectionDividerWaveOneSide';
 import { hero2ImageLayouts } from 'Utilities/Data';
 import { cardVariants } from 'Utilities/motionVariants';
 import { useMediaQuery } from "react-responsive";
+import { useI18n } from 'i18n/LanguageProvider';
 
 const About = () => {
   const [activeTab, setActiveTab] = useState(0); // Added state for active tab
-
+  const { t } = useI18n(); 
   const data: {
     hero2: {
       edges: {
@@ -88,41 +89,40 @@ const About = () => {
   const isLargeScreen = useMediaQuery({ minWidth: 1024 });
   
   const largeScreenBenefits = [
-      { icon: "fa-water", text: "Výhľad na more" },
-      { icon: "fa-parking", text: "Parkovanie zdarma" },
-      { icon: "fa-snowflake", text: "Klimatizácia" },
-      { icon: "fa-baby", text: "Detská postieľka" },
-      { icon: "fa-glass-cheers", text: "Presklená terasa" },
-      { icon: "fa-lock", text: "Uzavretý areál" },
-      { icon: "fa-tshirt", text: "Žehlička" },
-      { icon: "fa-chair", text: "Detská stolička" },
-      { icon: "fa-sun", text: "Otvorená terasa" },
-      { icon: "fa-wifi", text: "Internet" },
-      { icon: "fa-wind", text: "Sušiak" },
-      { icon: "fa-puzzle-piece", text: "Hračky" },
-      { icon: "fa-utensils", text: "Jedálenský stôl" },
-      { icon: "fa-desktop", text: "Pracovné miesto" },
-      { icon: "fa-broom", text: "Vysávač" },
-      { icon: "fa-dice", text: "Spoločenské hry" },
+    { icon: 'fa-water', text: t('about.benefits.sea_view') },
+    { icon: 'fa-parking', text: t('about.benefits.free_parking') },
+    { icon: 'fa-snowflake', text: t('about.benefits.ac') },
+    { icon: 'fa-baby', text: t('about.benefits.baby_cot') },
+    { icon: 'fa-glass-cheers', text: t('about.benefits.glass_terrace') },
+    { icon: 'fa-lock', text: t('about.benefits.gated_area') },
+    { icon: 'fa-tshirt', text: t('about.benefits.iron') },
+    { icon: 'fa-chair', text: t('about.benefits.high_chair') },
+    { icon: 'fa-sun', text: t('about.benefits.open_terrace') },
+    { icon: 'fa-wifi', text: t('about.benefits.wifi') },
+    { icon: 'fa-wind', text: t('about.benefits.drying_rack') },
+    { icon: 'fa-puzzle-piece', text: t('about.benefits.toys') },
+    { icon: 'fa-utensils', text: t('about.benefits.dining_table') },
+    { icon: 'fa-desktop', text: t('about.benefits.workspace') },
+    { icon: 'fa-broom', text: t('about.benefits.vacuum') },
+    { icon: 'fa-dice', text: t('about.benefits.board_games') },
   ];
-  
   const smallScreenBenefits = [
-      { icon: "fa-water", text: "Výhľad na more" },
-      { icon: "fa-snowflake", text: "Klimatizácia" },
-      { icon: "fa-glass-cheers", text: "Presklená terasa" },
-      { icon: "fa-tshirt", text: "Žehlička" },
-      { icon: "fa-sun", text: "Otvorená terasa" },
-      { icon: "fa-wind", text: "Sušiak" },
-      { icon: "fa-utensils", text: "Jedálenský stôl" },
-      { icon: "fa-broom", text: "Vysávač" },
-      { icon: "fa-parking", text: "Parkovanie zdarma" },
-      { icon: "fa-baby", text: "Detská postieľka" },
-      { icon: "fa-lock", text: "Uzavretý areál" },
-      { icon: "fa-chair", text: "Detská stolička" },
-      { icon: "fa-wifi", text: "Internet" },
-      { icon: "fa-puzzle-piece", text: "Hračky" },
-      { icon: "fa-desktop", text: "Pracovné miesto" },
-      { icon: "fa-dice", text: "Spoločenské hry" },
+    { icon: 'fa-water', text: t('about.benefits.sea_view') },
+    { icon: 'fa-snowflake', text: t('about.benefits.ac') },
+    { icon: 'fa-glass-cheers', text: t('about.benefits.glass_terrace') },
+    { icon: 'fa-tshirt', text: t('about.benefits.iron') },
+    { icon: 'fa-sun', text: t('about.benefits.open_terrace') },
+    { icon: 'fa-wind', text: t('about.benefits.drying_rack') },
+    { icon: 'fa-utensils', text: t('about.benefits.dining_table') },
+    { icon: 'fa-broom', text: t('about.benefits.vacuum') },
+    { icon: 'fa-parking', text: t('about.benefits.free_parking') },
+    { icon: 'fa-baby', text: t('about.benefits.baby_cot') },
+    { icon: 'fa-lock', text: t('about.benefits.gated_area') },
+    { icon: 'fa-chair', text: t('about.benefits.high_chair') },
+    { icon: 'fa-wifi', text: t('about.benefits.wifi') },
+    { icon: 'fa-puzzle-piece', text: t('about.benefits.toys') },
+    { icon: 'fa-desktop', text: t('about.benefits.workspace') },
+    { icon: 'fa-dice', text: t('about.benefits.board_games') },
   ];
 
   const benefits = isLargeScreen ? largeScreenBenefits : smallScreenBenefits;
@@ -140,65 +140,66 @@ const About = () => {
 
   const sections = [
     {
-      title: "Spálňa 1",
-      image: featuresImages["spalna1.jpg"],
+      title: 'about.sections.bedroom1',
+      image: featuresImages['spalna1.jpg'],
       features: [
-        "manželská posteľ",
-        "skrine a nábytok",
-        "posteľné prádlo",
-        "vešiaky",
-        "televízor / Netflix",
+        'about.sections.bedroom1.feature.double_bed',
+        'about.sections.bedroom1.feature.wardrobe',
+        'about.sections.bedroom1.feature.bedding',
+        'about.sections.bedroom1.feature.hangers',
+        'about.sections.bedroom1.feature.tv_netflix',
       ],
     },
     {
-    title: "Spálňa 2",
-    image: featuresImages["spalna2.jpg"],
-    features: [
-      "2x jednolôžková posteľ",
-      "skrine a nábytok",
-      "pracovné miesto",
-      "posteľné prádlo",
-      "vešiaky",    ],
-    },
-    {
-      title: "Obývačka",
-      image: featuresImages["obyvacka.jpg"], // Replace with the actual image path
+      title: 'about.sections.bedroom2',
+      image: featuresImages['spalna2.jpg'],
       features: [
-        "rozkladacia pohovka",
-        "kreslá",
-        "konferenčné stolíky",
-        "barový stôl",
-        "knižnica a knihy",
-        "televízor / Netflix",
+        'about.sections.bedroom2.feature.twin_beds',
+        'about.sections.bedroom2.feature.wardrobe',
+        'about.sections.bedroom2.feature.workspace',
+        'about.sections.bedroom2.feature.bedding',
+        'about.sections.bedroom2.feature.hangers',
       ],
     },
     {
-      title: "Kúpeľňa",
-      image: featuresImages["kupelna.jpg"],
+      title: 'about.sections.livingroom',
+      image: featuresImages['obyvacka.jpg'],
       features: [
-        "sprchový kút",
-        "wc a umývadlo",
-        "kúpeľňový nábytok",
-        "fén",
-        "sprchový gél",
-        "tekuté mydlo",
-        "uteráky",
+        'about.sections.livingroom.feature.sofa_bed',
+        'about.sections.livingroom.feature.armchairs',
+        'about.sections.livingroom.feature.coffee_tables',
+        'about.sections.livingroom.feature.bar_table',
+        'about.sections.livingroom.feature.library_books',
+        'about.sections.livingroom.feature.tv_netflix',
       ],
     },
     {
-      title: "Kuchyňa",
-      image: featuresImages["kuchyna.jpg"],
+      title: 'about.sections.bathroom',
+      image: featuresImages['kupelna.jpg'],
       features: [
-          "chladnička",
-          "elektrická rúra",
-          "mikrovlnka",
-          "varná doska",
-          "práčka",
-          "príbory a taniere",
-          "poháre",
-          "hrnce",
-          "kávovar",
-          "varná kanvica",
+        'about.sections.bathroom.feature.shower',
+        'about.sections.bathroom.feature.toilet_sink',
+        'about.sections.bathroom.feature.storage',
+        'about.sections.bathroom.feature.hairdryer',
+        'about.sections.bathroom.feature.shower_gel',
+        'about.sections.bathroom.feature.soap',
+        'about.sections.bathroom.feature.towels',
+      ],
+    },
+    {
+      title: 'about.sections.kitchen',
+      image: featuresImages['kuchyna.jpg'],
+      features: [
+        'about.sections.kitchen.feature.fridge',
+        'about.sections.kitchen.feature.oven',
+        'about.sections.kitchen.feature.microwave',
+        'about.sections.kitchen.feature.hob',
+        'about.sections.kitchen.feature.washing_machine',
+        'about.sections.kitchen.feature.cutlery_dishes',
+        'about.sections.kitchen.feature.glasses',
+        'about.sections.kitchen.feature.pots',
+        'about.sections.kitchen.feature.coffee_machine',
+        'about.sections.kitchen.feature.kettle',
       ],
     },
   ];
@@ -215,16 +216,9 @@ const About = () => {
         variants={cardVariants}
         className="py-8"
       >
-        <TitleText>O apartmáne Marisol</TitleText>
+        <TitleText>{t('about.title')}</TitleText>
         <div className="px-12 lg:px-28 text-justify text-base font-medium leading-6 text-gray-500 mb-4 mt-8 max-w-screen-lg mx-auto">
-          Krásny východ slnka nad morom, príjemná dovolenková atmosféra či voňavá káva na terase - to
-          všetko môžete zažiť u nás, v apartmáne Marisol. Nachádza sa v jednej z najobľúbenejších
-          lokalít mesta Torrevieja, blízko známeho mesta Alicante v Španielsku. Vedľa parku a tiež
-          historického bodu mesta Torre del Moro. Mimo ruchu centra mesta a zároveň na krok od
-          reštaurácií, supermarketu, lekárne, autobusovej zastávky, no najmä dlhej piesočnej pláže La
-          Mata, ktorá je každoročne ocenená modrou vlajkou. Nezameniteľná liečivá mikroklíma, športové
-          vyžitie i večerná zábava sú predpokladom pre prežitie nezabudnuteľnej dovolenky, či už pre
-          páry, alebo rodiny.
+          {t('about.longText')}
         </div>
       </motion.div>
 
@@ -254,14 +248,14 @@ const About = () => {
           >
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-8 px-2 sm:gap-x-4 sm:text-left mt-4">
               {[
-                { icon: 'fa-user', text: '5 osôb' },
-                { icon: 'fa-bed', text: '2 spálne' },
-                { icon: 'fa-cocktail', text: 'presklená terasa' },
-                { icon: 'fa-bath', text: '1 kúpeľňa' },
-                { icon: 'fa-swimming-pool', text: 'bazén' },
-                { icon: 'fa-plane', text: 'letisko 35 min autom' },
-                { icon: 'fa-umbrella-beach', text: 'pláž 10 min pešo' },
-                { icon: 'fa-utensils', text: 'reštaurácie 5 min pešo' },
+                { icon: 'fa-user', text: t('about.facts.guests') },
+                { icon: 'fa-bed', text: t('about.facts.bedrooms') },
+                { icon: 'fa-cocktail', text: t('about.facts.glass_terrace') },
+                { icon: 'fa-bath', text: t('about.facts.bathrooms') },
+                { icon: 'fa-swimming-pool', text: t('about.facts.pool') },
+                { icon: 'fa-plane', text: t('about.facts.airport') },
+                { icon: 'fa-umbrella-beach', text: t('about.facts.beach') },
+                { icon: 'fa-utensils', text: t('about.facts.restaurants') },
               ].map((item, index) => (
                 <li key={index} className="flex items-center gap-6 text-base font-medium text-gray-500">
                   <span className="text-transparent bg-clip-text from-snakeGr1 to-snakeGr2 bg-gradient-to-r">
@@ -284,7 +278,7 @@ const About = () => {
       viewport={{ amount: 0.1, once: true }}
       variants={cardVariants}
     >
-      <h2 className="text-xl font-bold text-center mb-8 mt-8">Vybavenie apartmánu</h2>
+      <h2 className="text-xl font-bold text-center mb-8 mt-8">{t('about.equipment.title')}</h2>
 
       {/* Add Gray Line Above */}
       <div className="border-b border-gray-300 mb-6 px-4 sm:px-28"></div>
@@ -301,7 +295,7 @@ const About = () => {
                 : "text-gray-700 hover:text-cyan-500 hover:bg-gray-200"
             }`}
           >
-            {section.title}
+            {t(section.title)}
           </button>
         ))}
       </div>
@@ -309,13 +303,13 @@ const About = () => {
       {/* Content */}
       <div className="grid grid-cols-1 gap-6 sm:gap-8 sm:grid-cols-2 px-16 sm:px-28">
         <div>
-          <h3 className="text-xl font-bold mb-4">{sections[activeTab].title}</h3>
+          <h3 className="text-xl font-bold mb-4">{t(sections[activeTab].title)}</h3>
           <div className="pl-3 sm:pl-0">
             <ul className="space-y-3 text-gray-600">
               {sections[activeTab].features.map((feature, index) => (
                 <li key={index} className="flex items-center gap-2">
                   <i className="fas fa-check text-black text-xl"></i>
-                  {feature}
+                  {t(feature)}
                 </li>
               ))}
             </ul>
@@ -326,11 +320,11 @@ const About = () => {
           {sections[activeTab].image ? (
             <GatsbyImage
               image={sections[activeTab].image!}
-              alt={sections[activeTab].title}
+              alt={t(sections[activeTab].title)}
               className="rounded-lg shadow-lg object-cover sm:w-full"
             />
           ) : (
-            <p>No image available</p>
+            <p>{t('about.no_image')}</p>
           )}
         </div>
       </div>
@@ -340,7 +334,7 @@ const About = () => {
     </motion.div>
     {/* Add Benefits Section */}
     <motion.div className="py-8 max-w-screen-lg mx-auto">
-        <h2 className="text-xl font-bold text-center mb-8 ">Ponúkame nasledovné benefity</h2>
+        <h2 className="text-xl font-bold text-center mb-8 ">{t('about.benefits.title')}</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 px-12">
           {benefits.map((benefit, index) => (
             <div key={index} className="flex items-center space-x-4">
@@ -353,17 +347,17 @@ const About = () => {
 
 {/* Apartment Conditions */}
 <motion.div className="py-8 max-w-screen-lg mx-auto">
-  <h2 className="text-xl font-bold text-center mb-8">Ďalšie informácie</h2>
+  <h2 className="text-xl font-bold text-center mb-8">{t('about.more_info.title')}</h2>
 
   {/* Responsive Grid */}
   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 px-4">
     {/* Left Column */}
     <div className="flex flex-col space-y-2">
       {[
-        { label: "Check-in:", value: "15:00" },
-        { label: "Check-out:", value: "11:00" },
-        { label: "Záloha:", value: "20% pri potvrdení rezervácie" },
-        { label: "Doplatok:", value: "80% 14 dní pred pobytom" }
+        { label: t('about.more_info.checkin'), value: '15:00' },
+        { label: t('about.more_info.checkout'), value: '11:00' },
+        { label: t('about.more_info.deposit'), value: t('about.more_info.deposit_value') },
+        { label: t('about.more_info.balance'), value: t('about.more_info.balance_value') }
       ].map((item, index) => (
         <div key={index} className="flex justify-between w-full">
           <span className="font-bold text-gray-700 w-1/3 text-left ">{item.label}</span>
@@ -375,10 +369,9 @@ const About = () => {
     {/* Right Column */}
     <div className="flex flex-col space-y-2">
       {[
-        { label: "Domáce zvieratá:", value: "🚫" },
-        { label: "Fajčenie:", value: "🚫" },
-        // { label: "Párty:", value: "🚫" },
-        { label: "Bezbariérový prístup:", value: "🚫" }
+        { label: t('about.more_info.pets'), value: '🚫' },
+        { label: t('about.more_info.smoking'), value: '🚫' },
+        { label: t('about.more_info.accessible'), value: '🚫' }
       ].map((item, index) => (
         <div key={index} className="flex justify-between w-full">
           <span className="font-bold text-gray-700 w-1/2 text-left">{item.label}</span>
@@ -390,32 +383,34 @@ const About = () => {
 </motion.div>
     {/* Aktivity Subsection */}
       <div className="py-8 max-w-screen-lg mx-auto">
-        <h2 className="text-xl font-bold text-center ">Aktivity a atrakcie</h2>
+        <h2 className="text-xl font-bold text-center ">{t('about.activities.title')}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-8 mx-6 sm:mx-12 lg:mx-20 ">
           {[
-            { title: 'Bazén', image: 'pool.png', description: 'Okúpte sa v spoločnom bazéne po celý rok. Je priamo pred apartmánom. Pozostáva z dvoch častí - pre dospelých aj pre deti.' },
-            { title: 'Pláž', image: 'beach.jpg', description: 'V blízkosti apartmánu nájdete niekoľko pekných piesočnatých pláží, no určite najobľúbenejšou je pláž La Mata, ktorá získava každý rok modrú vlajku. Je široká a dlhá, tiahne sa až do vedľajšieho mesta. ' },
-            { title: 'Soľné jazerá', image: 'salt-lakes.png', description: 'Európsky unikát, ružové soľné jazerá, ktoré lákajú fotografov, no najmä vytvárajú ozdravnú mikroklímu, ktorú len tak niekde nenájdete. V minulosti dostalo mesto vďaka nim aj ocenenie WHO. Nezabudnite si odfotiť plameniaky, postávajúce priamo v jazerách.' },
-            { title: 'Historické miesta', image: 'old-town.png', description: 'Torrevieja bola v minulosti rybárska dedina, ktorá mnohopočetne narástla vďaka ťažbe soli. Svoje meno získala po starobylej strážnej veži, ktorú nájdete priamo v susednom Torre del Moro parku. Určite vás však potešia večerné prechádzky centrom Torreviejy, kde sa vám zapáči niekoľko historických miest.' },
-            { title: 'Safari Elche', image: 'safari.png', description: 'S deťmi, či bez nich, vyrazte do ZOO Safari Elche, ktoré sa nachádza 30 minút autom od apartmánu. O program budete mať postarané.' },
-            { title: 'Trhy', image: 'market.png', description: 'Obľúbenou atrakciou pre turistov i domácich sú jednoznačne pouličné trhy, ktoré sa konajú pravidelne, v konkrétny deň v týždni v jednotlivých častiach mesta. Kúpite tam najmä čerstvé ovocie a zeleninu, lokálne jedlá, ale i oblečenie.' },
-            { title: 'Aquapark', image: 'aquapark.png', description: 'Strávte aj celý deň v aquaparku Aquopolis Torrevieja. Je otvorený v letných mesiacoch a ponúka zábavu i relax. Nachádza sa 4 km od apartmánu.' },
-            { title: 'Vodné športy', image: 'wakepark.png', description: 'Pre milovníkov vodných športov je moderný wakepark Mosquito ideálnou voľbou. Nachádza sa len 6 km od apartmánu. Okrem toho môžete vyskúšať parasailing, flyboard, surfovanie, alebo pokojnejší paddle board.' },
-            { title: 'Beh a bicyklovanie', image: 'running.png', description: 'Ak aj vy milujete beh, prechádzky, či bicyklovanie, môžete vyraziť ešte pred raňajkami, na ktorúkoľvek stranu. Odporúčame však najmä krásny Molino Park na piesočných dunách, chodníky pri skalných útesoch, či pokojne jógu v susednom Torre Del Moro parku.' },
-            { title: 'Golf', image: 'golf.png', description: 'V okruhu 15km od apartmánu nájdete viac ako desiatku kvalitných golfových ihrísk. Vyskúšajte napríklad obľúbený Greenlands sport club, bude sa vám páčiť.' },            
-            // { title: 'Parasailing', image: 'parasailing.png', description: 'Zažite nezabudnuteľný adrenalínový zážitok z lietania nad morom.' },
-            // { title: 'Požičovňa lodí', image: 'boat-rental.png', description: 'Preskúmajte pobrežie a okolitý oceán vlastným tempom s prenajatou loďou.' },
+            { title: t('about.activities.pool.title'), image: 'pool.png', description: t('about.activities.pool.desc') },
+            { title: t('about.activities.beach.title'), image: 'beach.jpg', description: t('about.activities.beach.desc') },
+            { title: t('about.activities.salt_lakes.title'), image: 'salt-lakes.png', description: t('about.activities.salt_lakes.desc') },
+            { title: t('about.activities.history.title'), image: 'old-town.png', description: t('about.activities.history.desc') },
+            { title: t('about.activities.safari.title'), image: 'safari.png', description: t('about.activities.safari.desc') },
+            { title: t('about.activities.market.title'), image: 'market.png', description: t('about.activities.market.desc') },
+            { title: t('about.activities.aquapark.title'), image: 'aquapark.png', description: t('about.activities.aquapark.desc') },
+            { title: t('about.activities.watersports.title'), image: 'wakepark.png', description: t('about.activities.watersports.desc') },
+            { title: t('about.activities.running.title'), image: 'running.png', description: t('about.activities.running.desc') },
+            { title: t('about.activities.golf.title'), image: 'golf.png', description: t('about.activities.golf.desc') },
           ].map((activity, index) => (
             <div
               key={index}
               className="flex flex-col items-center text-justify p-4 bg-white rounded-lg shadow-md transition-transform hover:scale-105"
             >
               <div className="w-32 h-32">
-                <GatsbyImage
-                  image={activityImages[activity.image]!}
-                  alt={activity.title}
-                  className="w-full h-full object-cover rounded-lg"
-                />
+                {activityImages[activity.image] ? (
+                  <GatsbyImage
+                    image={activityImages[activity.image]!}
+                    alt={activity.title}
+                    className="w-full h-full object-cover rounded-lg"
+                  />
+                ) : (
+                  <p>{t('about.no_image')}</p>
+                )}
               </div>
               <h3 className="mt-4 text-lg font-bold text-gray-700">{activity.title}</h3>
               <p className="mt-2 text-sm text-gray-500">{activity.description}</p>

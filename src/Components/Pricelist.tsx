@@ -1,9 +1,12 @@
 import React from 'react';
 import { TitleText } from './export';
 import { motion } from 'framer-motion';
-import { sectionVariants } from 'Utilities/motionVariants'; // Import motion variants
+import { sectionVariants } from 'Utilities/motionVariants';
+import { useI18n } from 'i18n/LanguageProvider';
 
 const Pricelist = () => {
+  const { t } = useI18n();
+
   return (
     <motion.section
       id="pricelist"
@@ -15,7 +18,7 @@ const Pricelist = () => {
     >
       {/* Title */}
       <motion.div variants={sectionVariants}>
-        <TitleText>Cenník na rok 2025</TitleText>
+        <TitleText>{t('pricelist.title')}</TitleText>
       </motion.div>
 
       {/* First Table (Pricing) */}
@@ -27,51 +30,51 @@ const Pricelist = () => {
           <table className="w-full border-collapse text-gray-500">
             <thead className="bg-cyan-500 text-white">
               <tr>
-                <th className="py-4 px-4 text-sm sm:text-base">Obdobie</th>
-                <th className="py-4 px-4 text-sm sm:text-base">1 noc*</th>
-                <th className="py-4 px-4 text-sm sm:text-base">10+ nocí</th>
-                <th className="py-4 px-4 text-sm sm:text-base">30+ nocí</th>
+                <th className="py-4 px-4 text-sm sm:text-base">{t('pricelist.period')}</th>
+                <th className="py-4 px-4 text-sm sm:text-base">{t('pricelist.one_night')}</th>
+                <th className="py-4 px-4 text-sm sm:text-base">{t('pricelist.ten_nights')}</th>
+                <th className="py-4 px-4 text-sm sm:text-base">{t('pricelist.thirty_nights')}</th>
               </tr>
             </thead>
             <tbody>
               <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold">Január – Apríl</td>
+                <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.jan_apr')}</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">35 €</td>
               </tr>
               <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold">Máj</td>
+                <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.may')}</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
               </tr>
               <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold">Jún</td>
+                <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.jun')}</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">95 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
               </tr>
               <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold">Júl – August</td>
+                <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.jul_aug')}</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">125 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">115 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
               </tr>
               <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold">September</td>
+                <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.sep')}</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">95 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
               </tr>
               <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold">Október</td>
+                <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.oct')}</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
               </tr>
               <tr>
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold">November – December</td>
+                <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.nov_dec')}</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">35 €</td>
@@ -81,12 +84,12 @@ const Pricelist = () => {
         </div>
       </motion.div>
 
-      {/* Notes (Directly Below First Table) */}
+      {/* Notes */}
       <motion.div
         className="max-w-lg lg:max-w-[700px] mx-auto text-gray-600 mt-4 px-4 sm:px-6 text-sm sm:text-base"
         variants={sectionVariants}
       >
-        <p className="mb-1 text-left">* Apartmán je možné rezervovať minimálne na 3 noci.</p>
+        <p className="mb-1 text-left">{t('pricelist.note')}</p>
       </motion.div>
 
       {/* Space Between Tables */}
@@ -101,24 +104,19 @@ const Pricelist = () => {
           <table className="w-full border-collapse text-gray-500">
             <thead className="bg-cyan-500 text-white">
               <tr>
-                <th className="py-4 px-4 text-sm sm:text-base text-left">Zabezpečíme vám transfer z letiska Alicante do apartmánu a naspäť</th>
-                <th className="py-4 px-4 text-sm sm:text-base">Cena</th>
+                <th className="py-4 px-4 text-sm sm:text-base text-left">{t('pricelist.transfer_title')}</th>
+                <th className="py-4 px-4 text-sm sm:text-base">{t('pricelist.price')}</th>
               </tr>
             </thead>
             <tbody>
               <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold text-left">Cena za jeden smer (celé auto - max. 4 osoby)</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap"> max. 65 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base font-semibold text-left">{t('pricelist.transfer_desc')}</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">max. 65 €</td>
               </tr>
-              {/* <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold text-left">Z apartmánu na letisko Alicante</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
-              </tr> */}
             </tbody>
           </table>
         </div>
       </motion.div>
-
     </motion.section>
   );
 };

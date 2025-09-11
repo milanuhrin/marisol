@@ -1,7 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useI18n } from 'i18n/LanguageProvider';
 
 export const Footer = () => {
+  const { t } = useI18n();
   return (
     <motion.footer
       id="contact"
@@ -47,7 +49,7 @@ export const Footer = () => {
               <path d="M12 2C8.1 2 5 5.1 5 9c0 4.4 5 10 7 12 2-2 7-7.6 7-12 0-3.9-3.1-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z"></path>
             </svg>
             
-            <span className="text-gray-700 text-lg font-semibold">Navigovať:</span>
+            <span className="text-gray-700 text-lg font-semibold">{t('footer.navigate')}</span>
 
             {/* Google Maps */}
             <motion.a

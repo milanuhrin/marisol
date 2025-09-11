@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { TitleText } from './export';
 import { SectionDividerWaveOneSide } from 'svg/SectionDividerWaveOneSide';
 import { sectionVariants } from 'Utilities/motionVariants'; // Import motion variants
+import { useI18n } from 'i18n/LanguageProvider';
+
 
 // 🔹 CloudFront URL (Replace with your actual CloudFront domain)
 const IMAGE_BASE_URL = "https://dznnrbng6qb50.cloudfront.net/images/gallery"; 
@@ -28,6 +30,7 @@ const imageFileNames = [
 const images = imageFileNames.map(name => `${IMAGE_BASE_URL}/${name}`);
 
 const Gallery: React.FC = () => {
+  const { t } = useI18n(); 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [containerStyle, setContainerStyle] = useState({ width: 'auto', height: '600px' });
@@ -96,7 +99,7 @@ const updateContainerSize = () => {
       >
         {/* Title */}
         <motion.div className="py-8">
-          <TitleText>Galéria</TitleText>
+          <TitleText>{t('gallery.title')}</TitleText>
         </motion.div>
 
         {/* Gallery Container */}

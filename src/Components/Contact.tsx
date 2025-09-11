@@ -3,10 +3,11 @@ import { motion } from "framer-motion";
 import { TitleText } from "./TitleText"; // Import TitleText
 import { SectionDividerWaveOneSide } from "svg/SectionDividerWaveOneSide";
 import { sectionVariants } from "Utilities/motionVariants"; // Import motion variants
-
+import { useI18n } from 'i18n/LanguageProvider';
 const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 export const Contact = () => {
+  const { t } = useI18n();
   return (
     <section className="relative bg-[#e6f6ff]">
       {/* Section Divider at the top */}
@@ -25,7 +26,7 @@ export const Contact = () => {
       >
         {/* Title: Napíšte nám */}
         <div className="relative py-8 sm:py-4 sm:mt-[-20px] sm:relative sm:-top-4">
-          <TitleText>Kontaktujte nás na:</TitleText>
+          <TitleText>{t('contact.title')}</TitleText>
         </div>
 
         {/* Phone Number - Clickable */}
@@ -82,7 +83,7 @@ export const Contact = () => {
             height="30"
             className="w-[30px] h-[30px]" // Match FB & Instagram icon size
           />
-          <span>Napíšte nám na WhatsApp</span>
+          <span>{t('contact.whatsapp')}</span>
         </motion.a>
 
         {/* Facebook Link */}
@@ -103,7 +104,7 @@ export const Contact = () => {
           >
             <path d="M22 12a10 10 0 10-11.5 9.95v-7.05H7.9V12h2.6V9.6c0-2.6 1.6-4 3.9-4 1.1 0 2 .1 2.3.1v2.5h-1.6c-1.3 0-1.6.6-1.6 1.5V12h2.7l-.4 2.9h-2.3v7.05A10 10 0 0022 12z"></path>
           </svg>
-          <span>Sledujte nás na Facebooku</span>
+          <span>{t('contact.facebook')}</span>
         </motion.a>
 
         {/* Instagram Link */}
@@ -124,7 +125,7 @@ export const Contact = () => {
           >
             <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm0 2h10c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3zm10 1a1 1 0 00-1 1 1 1 0 002 0c0-.6-.4-1-1-1zm-5 2a5 5 0 100 10 5 5 0 000-10zm0 2c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3z"></path>
           </svg>
-          <span>Sledujte nás na Instagrame</span>
+          <span>{t('contact.instagram')}</span>
         </motion.a>
 
         {/* Google Map Section */}
@@ -133,7 +134,7 @@ export const Contact = () => {
           variants={sectionVariants}
         >
           <h3 className="text-lg font-medium text-gray-700 text-center mb-4">
-            Poloha apartmánu
+            {t('contact.location')}
           </h3>
           <div className="w-full rounded-lg overflow-hidden" style={{ height: "400px" }}>
             <iframe
