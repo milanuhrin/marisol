@@ -150,7 +150,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'pricelist.title': 'Cenník na rok 2025',
     'pricelist.period': 'Obdobie',
     'pricelist.one_night': '1 noc*',
-    'pricelist.ten_nights': '10+ nocí',
+    'pricelist.ten_nights': '11+ nocí',
     'pricelist.thirty_nights': '30+ nocí',
     'pricelist.jan_apr': 'Január – Apríl',
     'pricelist.may': 'Máj',
@@ -206,7 +206,7 @@ const translations: Record<Lang, Record<string, string>> = {
     // Headings & intro
     'about.title': 'About the apartment',
     'about.longText':
-      'A beautiful sunrise over the sea, a pleasant holiday atmosphere, or fragrant coffee on the terrace – all this you can experience with us at Marisol Apartment. It is located in one of the most popular areas of Torrevieja, near the well-known city of Alicante in Spain. Next to a park and also the historic landmark Torre del Moro. Away from the hustle and bustle of the city center, yet just steps from restaurants, a supermarket, a pharmacy, a bus stop, and above all the long sandy La Mata beach, which is awarded the Blue Flag every year. The unique healing microclimate, opportunities for sports, and evening entertainment are the perfect ingredients for an unforgettable holiday, whether for couples or families.',
+      'A beautiful sunrise over the sea, a pleasant holiday atmosphere, or fragrant coffee on the terrace – all this you can experience with us at Marisol Apartment. It is located in one of the most popular areas of Torrevieja, near the well-known city of Alicante in Spain. Next to a park and also the historic landmark Torre del Moro. Away from the hustle and bustle of the city center, yet just steps from restaurants, a supermarket, a pharmacy, a bus stop, and above all the long sandy Playa La Mata beach, which is awarded the Blue Flag every year. The unique healing microclimate, opportunities for sports, and evening entertainment are the perfect ingredients for an unforgettable holiday, whether for couples or families.',
 
     // Facts under hero image
     'about.facts.guests': '5 guests',
@@ -303,7 +303,7 @@ const translations: Record<Lang, Record<string, string>> = {
       'Enjoy the shared pool year‑round. It is right in front of the apartment and consists of two areas – for adults and for children.',
     'about.activities.beach.title': 'Beach',
     'about.activities.beach.desc':
-      'There are several lovely sandy beaches near the apartment, but the most popular is La Mata, awarded the Blue Flag every year. It is wide and long, stretching to the neighboring town.',
+      'There are several lovely sandy beaches near the apartment, but the most popular is Playa La Mata, awarded the Blue Flag every year. It is wide and long, stretching to the neighboring town.',
     'about.activities.salt_lakes.title': 'Salt lakes',
     'about.activities.salt_lakes.desc':
       'A European rarity: pink salt lakes that attract photographers and, above all, create a healing microclimate you won’t find just anywhere. The city was even recognized by WHO thanks to them. Don’t forget to take photos of the flamingos standing right in the lakes.',
@@ -338,7 +338,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'pricelist.title': 'Price list for 2025',
     'pricelist.period': 'Period',
     'pricelist.one_night': '1 night*',
-    'pricelist.ten_nights': '10+ nights',
+    'pricelist.ten_nights': '11+ nights',
     'pricelist.thirty_nights': '30+ nights',
     'pricelist.jan_apr': 'January – April',
     'pricelist.may': 'May',
@@ -347,7 +347,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'pricelist.sep': 'September',
     'pricelist.oct': 'October',
     'pricelist.nov_dec': 'November – December',
-    'pricelist.note': '* Minimum stay is 3 nights.',
+    'pricelist.note': '* Minimum stay is 11 nights.',
     'pricelist.transfer_title': 'We can arrange a transfer from Alicante airport to the apartment and back',
     'pricelist.price': 'Price',
     'pricelist.transfer_desc': 'One-way price (entire car – up to 4 people)',
