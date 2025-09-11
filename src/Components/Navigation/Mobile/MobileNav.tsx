@@ -66,11 +66,16 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
       {/* Sidebar Background Container */}
       <motion.div
         ref={menuRef}
-        className={`absolute inset-y-0 text-gmailSilverText right-0 z-[20] flex h-[1000px] w-[250px] items-start bg-gradient-to-br from-[#242424] to-[#373737] ${
+        className={`absolute inset-y-0 right-0 z-[20] flex h-[1000px] w-[250px] items-start bg-black text-white ${
           isMenuOpen ? 'pointer-events-auto mobile-menu' : 'pointer-events-none'
         }`}
         variants={sidebarVariants}
       >
+        {/* ✅ Vlajky hore vľavo */}
+        <div className="absolute top-4 left-4 z-[60]">
+          <LanguageSwitcher className="flex flex-col gap-1" />
+        </div>
+
         {/* ✅ Clickable Logo Redirects to Cognito Login */}
         <motion.div
           className="absolute top-[1.5rem] left-1/2 transform -translate-x-1/2 cursor-pointer"
@@ -106,23 +111,6 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
             />
           ))}
         </motion.div>
-
-        {/* ✅ Bottom bar: language flags (a sem vieš pridať aj tel. číslo, ak ho chceš mať vedľa vlajok) */}
-        <div className="absolute bottom-4 left-0 w-full px-4">
-          <div className="flex items-center justify-end">
-            {/* Ak chceš mať vedľa aj telefón:
-            <a
-              href="tel:+421902217449"
-              className="mr-3 text-white/90"
-              onClick={() => setIsMenuOpen(false)}
-              aria-label={lang === 'sk' ? 'Zavolať' : 'Call'}
-            >
-              +421 902 217 449
-            </a>
-            */}
-            <LanguageSwitcher />
-          </div>
-        </div>
       </motion.div>
     </motion.div>
   );
