@@ -1,3 +1,4 @@
+// Data.ts
 import { faClipboard, faAddressCard, faPhone } from '@fortawesome/free-solid-svg-icons';
 
 export const hero2Items = [
@@ -66,9 +67,7 @@ export const menuItemsBase: MenuItemBase[] = [
     labels: { sk: 'Kontakt', en: 'Contact' },
   },
   {
-    action: () => {
-      window.location.href = 'tel:+421902217449';
-    },
+    link: 'tel:+421902217449',
     icon: faPhone,
     labels: { sk: '+421 902 217 449', en: '+421 902 217 449' },
   },

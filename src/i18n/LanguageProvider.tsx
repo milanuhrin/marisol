@@ -145,6 +145,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // Gallery
     'gallery.title': 'Galéria',
+
     // Pricelist
     'pricelist.title': 'Cenník na rok 2025',
     'pricelist.period': 'Obdobie',
@@ -162,6 +163,16 @@ const translations: Record<Lang, Record<string, string>> = {
     'pricelist.transfer_title': 'Zabezpečíme vám transfer z letiska Alicante do apartmánu a naspäť',
     'pricelist.price': 'Cena',
     'pricelist.transfer_desc': 'Cena za jeden smer (celé auto - max. 4 osoby)',
+
+    // SK
+    'availability.title': 'Obsadenosť',
+    'availability.legend.past': 'minulosť',
+    'availability.legend.booked': 'obsadený',
+    'availability.legend.available': 'voľný',
+    'months.january':'Január','months.february':'Február','months.march':'Marec','months.april':'Apríl',
+    'months.may':'Máj','months.june':'Jún','months.july':'Júl','months.august':'August',
+    'months.september':'September','months.october':'Október','months.november':'November','months.december':'December',
+    'daysShort.mon':'Po','daysShort.tue':'Ut','daysShort.wed':'St','daysShort.thu':'Št','daysShort.fri':'Pi','daysShort.sat':'So','daysShort.sun':'Ne',
 
     // Reservation
     'reservation.title': 'Predbežná rezervácia',
@@ -340,6 +351,16 @@ const translations: Record<Lang, Record<string, string>> = {
     'pricelist.transfer_title': 'We can arrange a transfer from Alicante airport to the apartment and back',
     'pricelist.price': 'Price',
     'pricelist.transfer_desc': 'One-way price (entire car – up to 4 people)',
+
+    // EN
+    'availability.title': 'Availability',
+    'availability.legend.past': 'past',
+    'availability.legend.booked': 'booked',
+    'availability.legend.available': 'available',
+    'months.january':'January','months.february':'February','months.march':'March','months.april':'April',
+    'months.may':'May','months.june':'June','months.july':'July','months.august':'August',
+    'months.september':'September','months.october':'October','months.november':'November','months.december':'December',
+    'daysShort.mon':'Mon','daysShort.tue':'Tue','daysShort.wed':'Wed','daysShort.thu':'Thu','daysShort.fri':'Fri','daysShort.sat':'Sat','daysShort.sun':'Sun',
 
     // Reservation
     'reservation.title': 'Reservation request',

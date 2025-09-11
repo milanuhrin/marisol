@@ -22,6 +22,7 @@ export const MobileNavItem: React.FC<MobileNavItemProps> = ({
 }) => {
   const base =
     'text-white/90 hover:text-white transition-colors flex items-center gap-2 text-lg';
+  const isTel = typeof link === 'string' && /^tel:/i.test(link);
 
   const content = (
     <>
@@ -44,7 +45,24 @@ export const MobileNavItem: React.FC<MobileNavItemProps> = ({
   if (link) {
     return (
       <motion.div variants={mobileMenuListItem} className={className}>
-        <a href={link} aria-label={name} className={base} onClick={toggle}>
+        <a
+          href={link}
+          aria-label={name}
+          className={base}
+          // For tel: let the browser/OS handle the call; close menu just after
+          onClick={(e) => {
+            if (isTel) {
+              // do NOT preventDefault; trigger tel immediately
+              // close the menu on the next tick so the call prompt isn't blocked
+              setTimeout(() => toggle(), 0);
+            } else {
+              toggle();
+            }
+          }}
+          // No target/rel for tel:, keep default navigation for others
+          target={isTel ? undefined : '_self'}
+          rel={isTel ? undefined : 'noopener'}
+        >
           {content}
         </a>
       </motion.div>

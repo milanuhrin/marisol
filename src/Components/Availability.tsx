@@ -1,11 +1,14 @@
+// Availability.tsx
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { TitleText } from './export';
 import { sectionVariants } from 'Utilities/motionVariants'; // Import the footer variants
+import { useI18n } from 'i18n/LanguageProvider'; // ✅ i18n
 
 const API_URL = "https://eb8ya8rtoc.execute-api.us-east-1.amazonaws.com/main/availability"; // Backend API
 
-const Availability = () => {
+const Availability: React.FC = () => {
+  const { t } = useI18n(); // ✅ translations
   const [reservedDates, setReservedDates] = useState<string[]>([]);
 
   useEffect(() => {
@@ -28,21 +31,30 @@ const Availability = () => {
     fetchReservedDates();
   }, []);
 
+  // ✅ Localized month/day labels via i18n
   const months = [
-    'Január',
-    'Február',
-    'Marec',
-    'Apríl',
-    'Máj',
-    'Jún',
-    'Júl',
-    'August',
-    'September',
-    'Október',
-    'November',
-    'December',
+    t('months.january'),
+    t('months.february'),
+    t('months.march'),
+    t('months.april'),
+    t('months.may'),
+    t('months.june'),
+    t('months.july'),
+    t('months.august'),
+    t('months.september'),
+    t('months.october'),
+    t('months.november'),
+    t('months.december'),
   ];
-  const daysOfWeek = ['Po', 'Ut', 'St', 'Št', 'Pi', 'So', 'Ne'];
+  const daysOfWeek = [
+    t('daysShort.mon'),
+    t('daysShort.tue'),
+    t('daysShort.wed'),
+    t('daysShort.thu'),
+    t('daysShort.fri'),
+    t('daysShort.sat'),
+    t('daysShort.sun'),
+  ];
 
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
@@ -113,7 +125,7 @@ const Availability = () => {
       variants={sectionVariants}
     >
       <div className="py-8">
-        <TitleText>Obsadenosť</TitleText>
+        <TitleText>{t('availability.title')}</TitleText>
 
         {/* Add space between title and calendar */}
         <div style={{ marginBottom: '2rem' }}></div>
@@ -208,15 +220,15 @@ const Availability = () => {
         >
           <div className="legend-item">
             <div className="legend-box past-box"></div>
-            <span>minulosť</span>
+            <span>{t('availability.legend.past')}</span>
           </div>
           <div className="legend-item">
             <div className="legend-box reserved-box"></div>
-            <span>obsadený</span>
+            <span>{t('availability.legend.booked')}</span>
           </div>
           <div className="legend-item">
             <div className="legend-box available-box"></div>
-            <span>voľný</span>
+            <span>{t('availability.legend.available')}</span>
           </div>
         </motion.div>
       </div>
