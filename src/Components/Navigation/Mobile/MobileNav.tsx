@@ -63,6 +63,11 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
         <MenuIconToggle toggle={handleMenuToggle} />
       </button>
 
+      {/* Language Switcher - moved to top right in main top bar */}
+      <div className="flex gap-1">
+        <LanguageSwitcher className="flex flex-row gap-1" />
+      </div>
+
       {/* Sidebar Background Container */}
       <motion.div
         ref={menuRef}
@@ -71,12 +76,9 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
         }`}
         variants={sidebarVariants}
       >
-        {/* ✅ Vlajky hore vľavo */}
-        <div className="absolute top-4 left-4 z-[60]">
-          <LanguageSwitcher className="flex flex-col gap-1" />
-        </div>
+        {/* Removed LanguageSwitcher from sidebar */}
 
-        {/* ✅ Clickable Logo Redirects to Cognito Login */}
+        {/* Clickable Logo Redirects to Cognito Login */}
         <motion.div
           className="absolute top-[1.5rem] left-1/2 transform -translate-x-1/2 cursor-pointer"
           variants={mobileMenuListItem}

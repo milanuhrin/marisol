@@ -5,17 +5,16 @@ import { TitleText } from './export';
 import { sectionVariants } from 'Utilities/motionVariants'; // Import the footer variants
 import { useI18n } from 'i18n/LanguageProvider'; // ✅ i18n
 
-const RES_URL = "https://eb8ya8rtoc.execute-api.us-east-1.amazonaws.com/main/reservation"; // Backend reservation API
+const API_URL = "https://eb8ya8rtoc.execute-api.us-east-1.amazonaws.com/main/availability"; // Backend API
 
 const Availability: React.FC = () => {
   const { t } = useI18n(); // ✅ translations
   const [reservedDates, setReservedDates] = useState<string[]>([]);
-  const [reservations, setReservations] = useState<{ startDate: string; endDate: string }[]>([]);
 
   useEffect(() => {
     const fetchReservedDates = async () => {
       try {
-        const response = await fetch(RES_URL);
+        const response = await fetch(API_URL);
         const data = await response.json();
 
         if (data.success && data.availability) {
@@ -29,23 +28,7 @@ const Availability: React.FC = () => {
       }
     };
 
-    const fetchReservations = async () => {
-      try {
-        const response = await fetch(RES_URL);
-        const data = await response.json();
-
-        if (data.success && data.reservations) {
-          setReservations(data.reservations);
-        } else {
-          console.error("🚨 Unexpected reservation API response:", data);
-        }
-      } catch (error) {
-        console.error("❌ Error fetching reservations:", error);
-      }
-    };
-
     fetchReservedDates();
-    fetchReservations();
   }, []);
 
   // ✅ Localized month/day labels via i18n
@@ -127,67 +110,10 @@ const Availability: React.FC = () => {
     return days;
   };
 
-  const generateReservationCalendarDays = (month: number, year: number) => {
-    const days = [];
-    const firstDayOfMonth = new Date(year, month, 1).getDay();
-    const lastDayOfMonth = new Date(year, month + 1, 0).getDate();
-
-    const offset = (firstDayOfMonth + 6) % 7;
-
-    for (let i = 0; i < offset; i++) {
-      days.push(null);
-    }
-
-    for (let day = 1; day <= lastDayOfMonth; day++) {
-      const dateObj = new Date(year, month, day);
-      const dateString = dateObj.toLocaleDateString('sv-SE'); // Format: yyyy-MM-dd
-
-      const isPast = dateString < today;
-
-      // Determine reservation status for this day
-      let isStart = false;
-      let isEnd = false;
-      let isBetween = false;
-
-      for (const res of reservations) {
-        if (res.startDate === dateString && res.endDate === dateString) {
-          // Same day reservation
-          isStart = true;
-          isEnd = true;
-          break;
-        } else if (res.startDate === dateString) {
-          isStart = true;
-          break;
-        } else if (res.endDate === dateString) {
-          isEnd = true;
-          break;
-        } else if (res.startDate < dateString && res.endDate > dateString) {
-          isBetween = true;
-          break;
-        }
-      }
-
-      days.push({
-        date: dateString,
-        day,
-        isStart,
-        isEnd,
-        isBetween,
-        isPast,
-        isToday: dateString === today,
-      });
-    }
-
-    return days;
-  };
-
   const calendarDaysCurrent = generateCalendarDays(currentMonth, currentYear);
   const nextMonth = (currentMonth + 1) % 12;
   const nextMonthYear = currentMonth === 11 ? currentYear + 1 : currentYear;
   const calendarDaysNext = generateCalendarDays(nextMonth, nextMonthYear);
-
-  const reservationDaysCurrent = generateReservationCalendarDays(currentMonth, currentYear);
-  const reservationDaysNext = generateReservationCalendarDays(nextMonth, nextMonthYear);
 
   return (
     <motion.section
@@ -204,7 +130,7 @@ const Availability: React.FC = () => {
         {/* Add space between title and calendar */}
         <div style={{ marginBottom: '2rem' }}></div>
 
-        {/* New Reservation Calendar Wrapper */}
+        {/* Calendar Wrapper */}
         <motion.div
           className="calendar-wrapper"
           initial="offscreen"
@@ -212,16 +138,15 @@ const Availability: React.FC = () => {
           exit="exit"
           viewport={{ once: true, amount: 0.01 }}
           variants={sectionVariants}
-          style={{ marginTop: '3rem' }}
         >
-          {[reservationDaysCurrent, reservationDaysNext].map((calendarDays, index) => {
+          {[calendarDaysCurrent, calendarDaysNext].map((calendarDays, index) => {
             const month = index === 0 ? currentMonth : nextMonth;
             const year = index === 0 ? currentYear : nextMonthYear;
             const isLeftCalendar = index === 0;
 
             return (
               <motion.div
-                key={`res-${index}`}
+                key={index}
                 className="calendar-container"
                 initial="offscreen"
                 whileInView="onscreen"
@@ -262,16 +187,12 @@ const Availability: React.FC = () => {
                       <motion.div
                         key={dayIndex}
                         className={`calendar-day ${
-                          day.isPast
+                          day.isReservedPast
+                            ? 'reserved-past'
+                            : day.isReserved
+                            ? 'reserved'
+                            : day.isPast
                             ? 'past'
-                            : day.isStart && day.isEnd
-                            ? 'full-reserved'
-                            : day.isStart
-                            ? 'half-start'
-                            : day.isEnd
-                            ? 'half-end'
-                            : day.isBetween
-                            ? 'full-reserved'
                             : 'available'
                         }`}
                         whileHover={{ scale: 1.08 }}
@@ -310,7 +231,6 @@ const Availability: React.FC = () => {
             <span>{t('availability.legend.available')}</span>
           </div>
         </motion.div>
-
       </div>
 
       {/* Add CSS styling */}
@@ -391,21 +311,6 @@ const Availability: React.FC = () => {
         .available {
           background-color: #d4edda;
           color: #155724;
-        }
-
-        .half-start {
-          background: linear-gradient(135deg, #d4edda 50%, #f8d7da 50%);
-          color: #155724;
-        }
-
-        .half-end {
-          background: linear-gradient(135deg, #f8d7da 50%, #d4edda 50%);
-          color: #155724;
-        }
-
-        .full-reserved {
-          background-color: #f8d7da;
-          color: #721c24;
         }
 
         .legend {
