@@ -39,32 +39,32 @@ const Pricelist = () => {
             <tbody>
               <tr className="border-b">
                 <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.jan_apr')}</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">70 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">60 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">35 €</td>
               </tr>
               <tr className="border-b">
                 <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.may')}</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">45 €</td>
               </tr>
               <tr className="border-b">
                 <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.jun')}</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">105 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">95 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
               </tr>
               <tr className="border-b">
                 <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.jul_aug')}</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">125 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">115 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">145 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">135 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
               </tr>
               <tr className="border-b">
                 <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.sep')}</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">105 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">95 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
               </tr>
               <tr className="border-b">
@@ -75,8 +75,8 @@ const Pricelist = () => {
               </tr>
               <tr>
                 <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.nov_dec')}</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">65 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">70 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">60 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">35 €</td>
               </tr>
             </tbody>

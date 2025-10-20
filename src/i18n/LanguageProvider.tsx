@@ -147,7 +147,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'gallery.title': 'Galéria',
 
     // Pricelist
-    'pricelist.title': 'Cenník na rok 2025',
+    'pricelist.title': 'Cenník na rok 2026',
     'pricelist.period': 'Obdobie',
     'pricelist.one_night': '1 noc*',
     'pricelist.ten_nights': '11+ nocí',
@@ -335,7 +335,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'gallery.title': 'Gallery',
 
     // Pricelist
-    'pricelist.title': 'Price list for 2025',
+    'pricelist.title': 'Price list for 2026',
     'pricelist.period': 'Period',
     'pricelist.one_night': '1 night*',
     'pricelist.ten_nights': '11+ nights',
