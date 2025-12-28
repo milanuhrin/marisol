@@ -47,7 +47,7 @@ const Pricelist = () => {
                 <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.may')}</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
                 <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">45 €</td>
+                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">55 €</td>
               </tr>
               <tr className="border-b">
                 <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.jun')}</td>

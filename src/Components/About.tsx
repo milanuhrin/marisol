@@ -131,7 +131,7 @@ const About = () => {
     { label: '≈', value: '15:00' },
     { label: 'Check-out', value: '11:00' },
     { label: 'Záloha', value: '20% pri potvrdení rezervácie' },
-    { label: 'Doplatok', value: '80% 14 dní pred pobytom' },
+    { label: 'Doplatok', value: '80% 7 dní pred pobytom' },
     { label: 'Domáce zvieratá', value: '🚫' },
     { label: 'Fajčenie', value: '🚫' },
     { label: 'Párty', value: '🚫' },
