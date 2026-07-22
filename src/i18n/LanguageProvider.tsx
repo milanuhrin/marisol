@@ -145,6 +145,15 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // Gallery
     'gallery.title': 'Galéria',
+    'gallery.enlarge': 'Zväčšiť',
+    'gallery.image_alt': 'Fotografia apartmánu Marisol',
+
+    // Testimonials
+    'testimonials.title': 'Čo hovoria naši hostia',
+    'testimonials.summary': '100 % odporúča · 14 recenzií na Facebooku',
+    'testimonials.open_facebook': 'Zobraziť všetky recenzie',
+    'testimonials.show_more': 'Zobraziť viac',
+    'testimonials.show_less': 'Zobraziť menej',
 
     // Pricelist
     'pricelist.title': 'Cenník na rok 2026',
@@ -333,6 +342,15 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // Gallery
     'gallery.title': 'Gallery',
+    'gallery.enlarge': 'Enlarge',
+    'gallery.image_alt': 'Marisol apartment photo',
+
+    // Testimonials
+    'testimonials.title': 'What our guests say',
+    'testimonials.summary': '100% recommend · 14 reviews on Facebook',
+    'testimonials.open_facebook': 'View all reviews',
+    'testimonials.show_more': 'Show more',
+    'testimonials.show_less': 'Show less',
 
     // Pricelist
     'pricelist.title': 'Price list for 2026',

@@ -9,6 +9,7 @@ import Pricelist from "Components/Pricelist";
 import Reservation from "Components/Reservation";
 import Contact from "Components/Contact";
 import SEO from "Components/SEO";
+import Testimonials from "Components/Testimonials";
 
 const IndexPage = () => {
   const [isClient, setIsClient] = useState(false);
@@ -36,6 +37,7 @@ const IndexPage = () => {
                 <Landing />
                 <About />
                 <Gallery />
+                <Testimonials />
                 <Pricelist />
                 <Availability />
                 <Reservation />
