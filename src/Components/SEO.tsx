@@ -1,7 +1,17 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 
-const SEO = ({ title, description, image, article }: { title?: string; description?: string; image?: string; article?: boolean }) => {
+const SEO = ({
+  title,
+  description,
+  image,
+  article,
+}: {
+  title?: string;
+  description?: string;
+  image?: string;
+  article?: boolean;
+}) => {
   const { site } = useStaticQuery(graphql`
     query SEO {
       site {
@@ -27,13 +37,16 @@ const SEO = ({ title, description, image, article }: { title?: string; descripti
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
-    image: image?.startsWith("http") ? image : `${siteUrl}${image || defaultImage}`,
+    image: image?.startsWith("http")
+      ? image
+      : `${siteUrl}${image || defaultImage}`,
     url: siteUrl,
   };
 
   return (
     <>
       <title>{seo.title}</title>
+      <link rel="icon" href="/marisol.ico" sizes="any" />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
 

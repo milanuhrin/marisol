@@ -1,40 +1,30 @@
 // Availability.tsx
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { TitleText } from './export';
-import { sectionVariants } from 'Utilities/motionVariants'; // Import the footer variants
-import { useI18n } from 'i18n/LanguageProvider'; // ✅ i18n
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { TitleText } from "./export";
+import { sectionVariants } from "Utilities/motionVariants"; // Import the footer variants
+import { useI18n } from "i18n/LanguageProvider"; // ✅ i18n
 
-const RES_URL = "https://eb8ya8rtoc.execute-api.us-east-1.amazonaws.com/main/reservation"; // Backend reservation API
+const RES_URL =
+  "https://eb8ya8rtoc.execute-api.us-east-1.amazonaws.com/main/reservation"; // Backend reservation API
 
 const Availability: React.FC = () => {
   const { t } = useI18n(); // ✅ translations
-  const [reservedDates, setReservedDates] = useState<string[]>([]);
-  const [reservations, setReservations] = useState<{ startDate: string; endDate: string }[]>([]);
+  const [reservations, setReservations] = useState<
+    { startDate: string; endDate: string }[]
+  >([]);
 
   useEffect(() => {
-    const fetchReservedDates = async () => {
-      try {
-        const response = await fetch(RES_URL);
-        const data = await response.json();
-
-        if (data.success && data.availability) {
-          const dates = data.availability.map((item: { date: any; }) => item.date);
-          setReservedDates(dates); // Store in state
-        } else {
-          console.error("🚨 Unexpected API response:", data);
-        }
-      } catch (error) {
-        console.error("❌ Error fetching reserved dates:", error);
-      }
-    };
-
     const fetchReservations = async () => {
       try {
         const response = await fetch(RES_URL);
+        if (!response.ok) {
+          throw new Error(`Reservation API returned ${response.status}`);
+        }
+
         const data = await response.json();
 
-        if (data.success && data.reservations) {
+        if (data.success && Array.isArray(data.reservations)) {
           setReservations(data.reservations);
         } else {
           console.error("🚨 Unexpected reservation API response:", data);
@@ -44,42 +34,41 @@ const Availability: React.FC = () => {
       }
     };
 
-    fetchReservedDates();
     fetchReservations();
   }, []);
 
   // ✅ Localized month/day labels via i18n
   const months = [
-    t('months.january'),
-    t('months.february'),
-    t('months.march'),
-    t('months.april'),
-    t('months.may'),
-    t('months.june'),
-    t('months.july'),
-    t('months.august'),
-    t('months.september'),
-    t('months.october'),
-    t('months.november'),
-    t('months.december'),
+    t("months.january"),
+    t("months.february"),
+    t("months.march"),
+    t("months.april"),
+    t("months.may"),
+    t("months.june"),
+    t("months.july"),
+    t("months.august"),
+    t("months.september"),
+    t("months.october"),
+    t("months.november"),
+    t("months.december"),
   ];
   const daysOfWeek = [
-    t('daysShort.mon'),
-    t('daysShort.tue'),
-    t('daysShort.wed'),
-    t('daysShort.thu'),
-    t('daysShort.fri'),
-    t('daysShort.sat'),
-    t('daysShort.sun'),
+    t("daysShort.mon"),
+    t("daysShort.tue"),
+    t("daysShort.wed"),
+    t("daysShort.thu"),
+    t("daysShort.fri"),
+    t("daysShort.sat"),
+    t("daysShort.sun"),
   ];
 
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split("T")[0];
 
   const changeMonth = (direction: string) => {
-    if (direction === 'prev') {
+    if (direction === "prev") {
       if (currentMonth === 0) {
         setCurrentMonth(11);
         setCurrentYear((prev) => prev - 1);
@@ -96,37 +85,6 @@ const Availability: React.FC = () => {
     }
   };
 
-  const generateCalendarDays = (month: number, year: number) => {
-    const days = [];
-    const firstDayOfMonth = new Date(year, month, 1).getDay();
-    const lastDayOfMonth = new Date(year, month + 1, 0).getDate();
-
-    const offset = (firstDayOfMonth + 6) % 7;
-
-    for (let i = 0; i < offset; i++) {
-      days.push(null);
-    }
-
-    for (let day = 1; day <= lastDayOfMonth; day++) {
-      const dateObj = new Date(year, month, day);
-      const dateString = dateObj.toLocaleDateString('sv-SE'); // Format: yyyy-MM-dd
-
-      const isPast = dateString < today;
-      const isReserved = reservedDates.includes(dateString);
-
-      days.push({
-        date: dateString,
-        day,
-        isReserved,
-        isToday: dateString === today,
-        isPast,
-        isReservedPast: isReserved && isPast,
-      });
-    }
-
-    return days;
-  };
-
   const generateReservationCalendarDays = (month: number, year: number) => {
     const days = [];
     const firstDayOfMonth = new Date(year, month, 1).getDay();
@@ -140,7 +98,7 @@ const Availability: React.FC = () => {
 
     for (let day = 1; day <= lastDayOfMonth; day++) {
       const dateObj = new Date(year, month, day);
-      const dateString = dateObj.toLocaleDateString('sv-SE'); // Format: yyyy-MM-dd
+      const dateString = dateObj.toLocaleDateString("sv-SE"); // Format: yyyy-MM-dd
 
       const isPast = dateString < today;
 
@@ -181,28 +139,32 @@ const Availability: React.FC = () => {
     return days;
   };
 
-  const calendarDaysCurrent = generateCalendarDays(currentMonth, currentYear);
   const nextMonth = (currentMonth + 1) % 12;
   const nextMonthYear = currentMonth === 11 ? currentYear + 1 : currentYear;
-  const calendarDaysNext = generateCalendarDays(nextMonth, nextMonthYear);
 
-  const reservationDaysCurrent = generateReservationCalendarDays(currentMonth, currentYear);
-  const reservationDaysNext = generateReservationCalendarDays(nextMonth, nextMonthYear);
+  const reservationDaysCurrent = generateReservationCalendarDays(
+    currentMonth,
+    currentYear
+  );
+  const reservationDaysNext = generateReservationCalendarDays(
+    nextMonth,
+    nextMonthYear
+  );
 
   return (
     <motion.section
       id="availability"
-      className="text-center py-8"
+      className="py-8 text-center"
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: true, amount: 0.01 }}
       variants={sectionVariants}
     >
       <div className="py-8">
-        <TitleText>{t('availability.title')}</TitleText>
+        <TitleText>{t("availability.title")}</TitleText>
 
         {/* Add space between title and calendar */}
-        <div style={{ marginBottom: '2rem' }}></div>
+        <div style={{ marginBottom: "2rem" }}></div>
 
         {/* New Reservation Calendar Wrapper */}
         <motion.div
@@ -212,80 +174,84 @@ const Availability: React.FC = () => {
           exit="exit"
           viewport={{ once: true, amount: 0.01 }}
           variants={sectionVariants}
-          style={{ marginTop: '3rem' }}
+          style={{ marginTop: "3rem" }}
         >
-          {[reservationDaysCurrent, reservationDaysNext].map((calendarDays, index) => {
-            const month = index === 0 ? currentMonth : nextMonth;
-            const year = index === 0 ? currentYear : nextMonthYear;
-            const isLeftCalendar = index === 0;
+          {[reservationDaysCurrent, reservationDaysNext].map(
+            (calendarDays, index) => {
+              const month = index === 0 ? currentMonth : nextMonth;
+              const year = index === 0 ? currentYear : nextMonthYear;
+              const isLeftCalendar = index === 0;
 
-            return (
-              <motion.div
-                key={`res-${index}`}
-                className="calendar-container"
-                initial="offscreen"
-                whileInView="onscreen"
-                exit="exit"
-                viewport={{ once: true, amount: 0.01 }}
-                variants={sectionVariants}
-              >
-                {/* Header with Arrows */}
-                <div className="calendar-header">
-                  {isLeftCalendar && (
-                    <button
-                      onClick={() => changeMonth('prev')}
-                      className="arrow-btn left-arrow"
-                    >
-                      &#10094;
-                    </button>
-                  )}
-                  <span>{months[month]} {year}</span>
-                  {!isLeftCalendar && (
-                    <button
-                      onClick={() => changeMonth('next')}
-                      className="arrow-btn right-arrow"
-                    >
-                      &#10095;
-                    </button>
-                  )}
-                </div>
-
-                {/* Day Grid */}
-                <div className="day-grid">
-                  {daysOfWeek.map((day, index) => (
-                    <div key={index} className="day-name">
-                      {day}
-                    </div>
-                  ))}
-                  {calendarDays.map((day, dayIndex) =>
-                    day ? (
-                      <motion.div
-                        key={dayIndex}
-                        className={`calendar-day ${
-                          day.isPast
-                            ? 'past'
-                            : day.isStart && day.isEnd
-                            ? 'full-reserved'
-                            : day.isStart
-                            ? 'half-start'
-                            : day.isEnd
-                            ? 'half-end'
-                            : day.isBetween
-                            ? 'full-reserved'
-                            : 'available'
-                        }`}
-                        whileHover={{ scale: 1.08 }}
+              return (
+                <motion.div
+                  key={`res-${index}`}
+                  className="calendar-container"
+                  initial="offscreen"
+                  whileInView="onscreen"
+                  exit="exit"
+                  viewport={{ once: true, amount: 0.01 }}
+                  variants={sectionVariants}
+                >
+                  {/* Header with Arrows */}
+                  <div className="calendar-header">
+                    {isLeftCalendar && (
+                      <button
+                        onClick={() => changeMonth("prev")}
+                        className="arrow-btn left-arrow"
                       >
-                        {day.day}
-                      </motion.div>
-                    ) : (
-                      <div key={dayIndex}></div>
-                    )
-                  )}
-                </div>
-              </motion.div>
-            );
-          })}
+                        &#10094;
+                      </button>
+                    )}
+                    <span>
+                      {months[month]} {year}
+                    </span>
+                    {!isLeftCalendar && (
+                      <button
+                        onClick={() => changeMonth("next")}
+                        className="arrow-btn right-arrow"
+                      >
+                        &#10095;
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Day Grid */}
+                  <div className="day-grid">
+                    {daysOfWeek.map((day, index) => (
+                      <div key={index} className="day-name">
+                        {day}
+                      </div>
+                    ))}
+                    {calendarDays.map((day, dayIndex) =>
+                      day ? (
+                        <motion.div
+                          key={dayIndex}
+                          className={`calendar-day ${
+                            day.isPast
+                              ? "past"
+                              : day.isStart && day.isEnd
+                              ? "full-reserved"
+                              : day.isStart
+                              ? "half-start"
+                              : day.isEnd
+                              ? "half-end"
+                              : day.isBetween
+                              ? "full-reserved"
+                              : "available"
+                          }`}
+                          whileHover={{ scale: 1.08 }}
+                        >
+                          {day.day}
+                        </motion.div>
+                      ) : (
+                        <div key={dayIndex}></div>
+                      )
+                    )}
+                  </div>
+                </motion.div>
+              );
+            }
+          )}
         </motion.div>
 
         {/* Legend */}
@@ -299,18 +265,17 @@ const Availability: React.FC = () => {
         >
           <div className="legend-item">
             <div className="legend-box past-box"></div>
-            <span>{t('availability.legend.past')}</span>
+            <span>{t("availability.legend.past")}</span>
           </div>
           <div className="legend-item">
             <div className="legend-box reserved-box"></div>
-            <span>{t('availability.legend.booked')}</span>
+            <span>{t("availability.legend.booked")}</span>
           </div>
           <div className="legend-item">
             <div className="legend-box available-box"></div>
-            <span>{t('availability.legend.available')}</span>
+            <span>{t("availability.legend.available")}</span>
           </div>
         </motion.div>
-
       </div>
 
       {/* Add CSS styling */}

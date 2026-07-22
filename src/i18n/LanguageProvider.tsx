@@ -150,10 +150,11 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // Testimonials
     'testimonials.title': 'Čo hovoria naši hostia',
-    'testimonials.summary': '100 % odporúča · 14 recenzií na Facebooku',
+    'testimonials.summary': '17 recenzií na Facebook / Airbnb',
     'testimonials.open_facebook': 'Zobraziť všetky recenzie',
     'testimonials.show_more': 'Zobraziť viac',
     'testimonials.show_less': 'Zobraziť menej',
+    'testimonials.stars': 'hviezdičiek',
 
     // Pricelist
     'pricelist.title': 'Cenník na rok 2026',
@@ -347,10 +348,11 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // Testimonials
     'testimonials.title': 'What our guests say',
-    'testimonials.summary': '100% recommend · 14 reviews on Facebook',
+    'testimonials.summary': '17 reviews on Facebook / Airbnb',
     'testimonials.open_facebook': 'View all reviews',
     'testimonials.show_more': 'Show more',
     'testimonials.show_less': 'Show less',
+    'testimonials.stars': 'stars',
 
     // Pricelist
     'pricelist.title': 'Price list for 2026',

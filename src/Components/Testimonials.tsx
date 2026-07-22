@@ -16,33 +16,59 @@ const reviews = [
   {
     name: "Diana M.",
     date: "Júl 2026",
+    platform: "Facebook",
     expandable: false,
     text: "Ubytovanie v Marisol Seaview apartment vrelo odporúčam každému, je to naozaj nádherné miesto, ubytovanie nemalo žiadnu chybu, absolútna topka, bazén tiež vynikajúci a komunikácia s prenajímateľom bola tiež výborná. Určite sa radi vrátime na toto čarovné miesto ❤️",
   },
   {
     name: "We We",
     date: "Jún 2026",
+    platform: "Facebook",
     text: "Krásny, super zariadený apartmán. Boli sme tu aj s dvoma malými deťmi a veľmi sa nám tu páčilo. Komunikácia s pani majiteľkou aj s pani priamo na mieste na 1*. Sú veľmi ochotné a vedia perfektne poradiť, či už potrebujete poradiť s výletom alebo požičaním auta, taktiež aj v prípade nejakej núdze, keď sme napríklad potrebovali lekára. Ďakujeme 🤩🙂",
   },
   {
     name: "Lukáš N.",
     date: "Marec 2026",
+    platform: "Facebook",
     text: "Krásne spracovaná webová stránka, výborná komunikácia, ktorá ma ešte pred pobytom ubezpečila v tom, že pobyt v apartmáne Marisol bude bezproblémový. Jasné pokyny pred príchodom na ubytovanie, v apartmáne sme našli všetko potrebné – vybavenie kuchyne, 2× TV, kapsule do práčky, hygienické potreby, kapsule Dolce Gusto, koreniny... naozaj všetko, čo potrebujete. S manželkou, ktorá je detská animátorka a umelec SMEJLINKA, sme veľmi pozitívne ocenili rôzne spoločenské hry a hračky, ktoré boli v apartmáne. Rovnako tiež hračky do piesku a stoličky na pláž. Môžem len odporúčať všetkými desiatimi. Keď sa niekedy vrátime, veľmi radi sa opäť ubytujeme v apartmáne Marisol. Ďakujeme veľmi pekne.",
   },
   {
     name: "Monika B.",
     date: "Február 2026",
+    platform: "Facebook",
     text: "Beautiful and spacious apartment, great layout, office area in the second bedroom, and some sea views too. It has everything you could need. I stayed for 3 weeks, and will likely come back next year. Fast WiFi, 2 smart TVs. It's in a great area, within walking distance to the beach, many restaurants and supermarkets. The bus stop is a 2 min walk. Michaela was amazing to deal with as well. Highly recommend. 💛",
+  },
+  {
+    name: "Jeanette",
+    date: "Október 2025",
+    platform: "Airbnb",
+    rating: 5,
+    text: "Very nice and well planned apartment. Plenty of good equipment and everything you needed was there. Clean and fresh and tidy. Extra plus because the bed was clean and fresh! Everything worked out perfectly! Very friendly host who responded quickly. Walking distance to swimming, bus and grocery store, restaurants etc. Can't be better! Would love to come back! ⭐️💛⭐️",
   },
   {
     name: "Anna L.",
     date: "Október 2025",
+    platform: "Facebook",
     text: "Apartmán je krásny, čistý, útulne zariadený, priestranný a veľmi dobre vybavený. Vrátane kníh, hier, aj slnečníkov a stoličiek na pláž. Bazén vo vnútrobloku je veľké plus. Blízko sú reštaurácie, do 10 minút veľké potraviny, kde majú plody mora od výmyslu sveta. Naproti je park, z ktorého sme pozorovali východy Slnka. Chodievali sme najmä na pláž La Mata – piesková s pozvoľným vstupom do mora. V okolí je množstvo miest na spoznávanie a výlety. A skvelé je aj to, že sa tu neskoro stmieva. Odporúčam aj komunikáciu, na 1*.",
+  },
+  {
+    name: "Sandra",
+    date: "August 2025",
+    platform: "Airbnb",
+    rating: 5,
+    text: "We had a fantastic stay at this property! The location was perfect — just a short walk to many great restaurants and with easy access to local shops. The beach was only a few minutes drive, which made it ideal for relaxing days by the sea. The accommodation was comfortable, clean, and well-equipped, making our stay very enjoyable. We would definitely recommend it to anyone visiting the area and would love to return!",
   },
   {
     name: "Alena R.",
     date: "Jún 2025",
+    platform: "Facebook",
     text: "Začiatkom júna sme strávili týždeň na tomto nádhernom mieste. Apartmán má výbornú polohu, blízko k moru. Pláže čisté, obchody, bary a reštaurácie všade naokolo. Apartmán je ale v pokojnom rezorte na kľúč, cítili sme sa naozaj komfortne a bezpečne. V areáli je aj udržiavaný bazén na plávanie, aj pre detičky. Okolo bazéna krásne olivovníky... milujem 😍. Vybavenie v apartmáne úplne postačuje na varenie, umývačka potešila. Všade čisto a voňavo. Majitelia maximálne príjemní a ústretoví, zabezpečili nám aj taxi z letiska. Oddýchli sme si neskutočne, radi sa budeme na toto úžasné miesto vracať ❤️🙏🏻",
+  },
+  {
+    name: "Isabell .P",
+    date: "Marec 2025",
+    platform: "Facebook",
+    text: "We had a great stay! The apartment was a perfect base for relaxing and still being close to other cities for day trips. It was very clean and had great amenities (coffee machine, washing machine...). It has a good location – close to the beach (about 15 min walking) and there is also a swimming pool in the apartment complex. I would definitely recommend and stay here again! ☺️",
   },
 ];
 
@@ -82,6 +108,7 @@ const Testimonials = () => {
         >
           {reviews.map((review, index) => {
             const isExpanded = expandedReview === index;
+            const isAirbnb = review.platform === "Airbnb";
 
             return (
               <SwiperSlide key={`${review.name}-${review.date}`}>
@@ -97,14 +124,32 @@ const Testimonials = () => {
                       </span>
                       <div>
                         <p className="font-bold text-gray-700">{review.name}</p>
-                        <p className="text-sm text-gray-400">{review.date}</p>
+                        <div className="flex flex-wrap items-center gap-x-2 text-sm">
+                          <span className="text-gray-400">{review.date}</span>
+                          {review.rating && (
+                            <span
+                              className="tracking-wide text-amber-400"
+                              aria-label={`${review.rating} ${t(
+                                "testimonials.stars"
+                              )}`}
+                            >
+                              {"★".repeat(review.rating)}
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
                     <span
-                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#1877f2] text-sm text-white"
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm text-white ${
+                        isAirbnb ? "bg-[#ff385c]" : "bg-[#1877f2]"
+                      }`}
                       aria-hidden="true"
                     >
-                      <i className="fab fa-facebook-f" />
+                      <i
+                        className={`fab ${
+                          isAirbnb ? "fa-airbnb" : "fa-facebook-f"
+                        }`}
+                      />
                     </span>
                   </div>
 
@@ -152,18 +197,22 @@ const Testimonials = () => {
                   )}
 
                   <div className="mt-auto flex items-center justify-center border-t border-gray-100 pt-4 text-sm font-semibold">
-                    <a
-                      href={FACEBOOK_REVIEWS_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${review.name} – ${t(
-                        "testimonials.open_facebook"
-                      )}`}
-                      className="shrink-0 text-[#1877f2] hover:underline focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
-                    >
-                      {t("testimonials.open_facebook")}{" "}
-                      <span aria-hidden="true">↗</span>
-                    </a>
+                    {isAirbnb ? (
+                      <span className="text-[#ff385c]">Airbnb</span>
+                    ) : (
+                      <a
+                        href={FACEBOOK_REVIEWS_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${review.name} – ${t(
+                          "testimonials.open_facebook"
+                        )}`}
+                        className="shrink-0 text-[#1877f2] hover:underline focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                      >
+                        {t("testimonials.open_facebook")}{" "}
+                        <span aria-hidden="true">↗</span>
+                      </a>
+                    )}
                   </div>
                 </motion.article>
               </SwiperSlide>
