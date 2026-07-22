@@ -1,10 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Mousewheel, Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import { TitleText } from "./TitleText";
 import { useI18n } from "i18n/LanguageProvider";
 import { sectionVariants } from "Utilities/motionVariants";
@@ -75,6 +70,45 @@ const reviews = [
 const Testimonials = () => {
   const { t } = useI18n();
   const [expandedReview, setExpandedReview] = useState<number | null>(null);
+  const [activeReview, setActiveReview] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const dragRef = useRef({ active: false, startX: 0, scrollLeft: 0 });
+
+  const getClosestReview = () => {
+    const track = trackRef.current;
+    if (!track) return 0;
+
+    return Array.from(track.children).reduce(
+      (closest, child, index) =>
+        Math.abs(
+          (child as HTMLElement).offsetLeft -
+            track.offsetLeft -
+            track.scrollLeft
+        ) <
+        closest.distance
+          ? {
+              index,
+              distance: Math.abs(
+                (child as HTMLElement).offsetLeft -
+                  track.offsetLeft -
+                  track.scrollLeft
+              ),
+            }
+          : closest,
+      { index: 0, distance: Number.POSITIVE_INFINITY }
+    ).index;
+  };
+
+  const scrollToReview = (index: number) => {
+    const track = trackRef.current;
+    const target = track?.children[index] as HTMLElement | undefined;
+    if (!track || !target) return;
+    track.scrollTo({
+      left: target.offsetLeft - track.offsetLeft,
+      behavior: "smooth",
+    });
+    setActiveReview(index);
+  };
 
   return (
     <motion.section
@@ -90,20 +124,42 @@ const Testimonials = () => {
         {t("testimonials.summary")}
       </p>
 
-      <div className="testimonials-carousel mx-auto mt-10 max-w-screen-lg px-1 pb-10">
-        <Swiper
-          modules={[Mousewheel, Navigation, Pagination]}
-          navigation
-          pagination={{ clickable: true }}
-          mousewheel={{ forceToAxis: true }}
-          grabCursor
-          simulateTouch
-          allowTouchMove
-          spaceBetween={24}
-          slidesPerView={1}
-          breakpoints={{
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
+      <div className="testimonials-carousel mx-auto mt-10 max-w-screen-lg pb-10">
+        <button
+          type="button"
+          className="testimonials-arrow testimonials-arrow-prev"
+          onClick={() => scrollToReview(Math.max(0, activeReview - 1))}
+          aria-label={t("testimonials.previous")}
+          disabled={activeReview === 0}
+        >
+          ‹
+        </button>
+        <div
+          ref={trackRef}
+          className="testimonials-track"
+          onScroll={() => setActiveReview(getClosestReview())}
+          onPointerDown={(event) => {
+            if ((event.target as HTMLElement).closest("a, button")) return;
+            dragRef.current = {
+              active: true,
+              startX: event.clientX,
+              scrollLeft: event.currentTarget.scrollLeft,
+            };
+            event.currentTarget.setPointerCapture(event.pointerId);
+          }}
+          onPointerMove={(event) => {
+            if (!dragRef.current.active) return;
+            event.currentTarget.scrollLeft =
+              dragRef.current.scrollLeft -
+              (event.clientX - dragRef.current.startX);
+          }}
+          onPointerUp={(event) => {
+            dragRef.current.active = false;
+            event.currentTarget.releasePointerCapture(event.pointerId);
+            scrollToReview(getClosestReview());
+          }}
+          onPointerCancel={() => {
+            dragRef.current.active = false;
           }}
         >
           {reviews.map((review, index) => {
@@ -111,7 +167,10 @@ const Testimonials = () => {
             const isAirbnb = review.platform === "Airbnb";
 
             return (
-              <SwiperSlide key={`${review.name}-${review.date}`}>
+              <div
+                className="testimonial-slide"
+                key={`${review.name}-${review.date}`}
+              >
                 <motion.article
                   className="group flex h-full flex-col rounded-2xl border border-cyan-100 bg-white p-6 text-left shadow-md transition-shadow duration-300 hover:shadow-xl sm:p-7"
                   whileHover={{ y: -4 }}
@@ -215,10 +274,33 @@ const Testimonials = () => {
                     )}
                   </div>
                 </motion.article>
-              </SwiperSlide>
+              </div>
             );
           })}
-        </Swiper>
+        </div>
+        <button
+          type="button"
+          className="testimonials-arrow testimonials-arrow-next"
+          onClick={() =>
+            scrollToReview(Math.min(reviews.length - 1, activeReview + 1))
+          }
+          aria-label={t("testimonials.next")}
+          disabled={activeReview === reviews.length - 1}
+        >
+          ›
+        </button>
+        <div className="testimonials-dots" aria-label={t("testimonials.navigation")}>
+          {reviews.map((review, index) => (
+            <button
+              type="button"
+              key={`${review.name}-dot`}
+              className={index === activeReview ? "is-active" : ""}
+              onClick={() => scrollToReview(index)}
+              aria-label={`${t("testimonials.go_to")} ${index + 1}`}
+              aria-current={index === activeReview ? "true" : undefined}
+            />
+          ))}
+        </div>
       </div>
     </motion.section>
   );

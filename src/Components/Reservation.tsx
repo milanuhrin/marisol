@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, FormEvent, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { TitleText } from './export';
 import { sectionVariants } from 'Utilities/motionVariants';
@@ -15,12 +15,21 @@ const Reservation = () => {
     checkOut: '',
     guests: 1,
     message: '',
+    website: '',
   });
 
   const [formStatus, setFormStatus] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleInputChange = (e: { target: { name: any; value: any } }) => {
+  const today = useMemo(() => {
+    const now = new Date();
+    const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+    return localDate.toISOString().slice(0, 10);
+  }, []);
+
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -30,20 +39,40 @@ const Reservation = () => {
     return `${day}-${month}-${year}`;
   };
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setFormStatus('');
+
+    if (formData.website) {
+      setFormStatus(t('reservation.success'));
+      return;
+    }
+
+    if (formData.checkIn < today || formData.checkOut <= formData.checkIn) {
+      setFormStatus(t('reservation.invalid_dates'));
+      return;
+    }
+
+    const guests = Number(formData.guests);
+    if (!Number.isInteger(guests) || guests < 1 || guests > 5) {
+      setFormStatus(t('reservation.invalid_guests'));
+      return;
+    }
+
     setIsLoading(true);
 
     try {
       const formattedCheckIn = formatDate(formData.checkIn);
       const formattedCheckOut = formatDate(formData.checkOut);
-      const fullName = `${formData.firstName} ${formData.lastName}`;
+      const fullName = `${formData.firstName.trim()} ${formData.lastName.trim()}`;
+      const email = formData.email.trim();
+      const message = formData.message.trim();
 
       // Message localized
       const emailMessage =
         lang === 'sk'
-          ? `Dobrý deň,\n\nMám záujem o rezerváciu apartmánu:\n\nMeno a priezvisko: ${fullName}\nEmail: ${formData.email}\nCheck-in: ${formattedCheckIn}\nCheck-out: ${formattedCheckOut}\nPočet hostí: ${formData.guests}\n\nSpráva:\n${formData.message}`
-          : `Hello,\n\nI am interested in booking the apartment:\n\nName: ${fullName}\nEmail: ${formData.email}\nCheck-in: ${formattedCheckIn}\nCheck-out: ${formattedCheckOut}\nNumber of guests: ${formData.guests}\n\nMessage:\n${formData.message}`;
+          ? `Dobrý deň,\n\nMám záujem o rezerváciu apartmánu:\n\nMeno a priezvisko: ${fullName}\nEmail: ${email}\nCheck-in: ${formattedCheckIn}\nCheck-out: ${formattedCheckOut}\nPočet hostí: ${guests}\n\nSpráva:\n${message}`
+          : `Hello,\n\nI am interested in booking the apartment:\n\nName: ${fullName}\nEmail: ${email}\nCheck-in: ${formattedCheckIn}\nCheck-out: ${formattedCheckOut}\nNumber of guests: ${guests}\n\nMessage:\n${message}`;
 
       const response = await fetch(
         'https://8jwwggkrye.execute-api.us-east-1.amazonaws.com/prod/send-email',
@@ -52,13 +81,13 @@ const Reservation = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             name: fullName,
-            email: formData.email,
+            email,
             message: emailMessage,
           }),
         }
       );
 
-      const responseData = await response.json();
+      const responseData = await response.json().catch(() => ({}));
       if (response.ok) {
         setFormStatus(t('reservation.success'));
         setFormData({
@@ -69,6 +98,7 @@ const Reservation = () => {
           checkOut: '',
           guests: 1,
           message: '',
+          website: '',
         });
       } else {
         setFormStatus(`${t('reservation.error')}: ${responseData.error || t('reservation.try_again')}`);
@@ -102,6 +132,18 @@ const Reservation = () => {
           variants={sectionVariants}
         >
           <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="absolute left-[-10000px]" aria-hidden="true">
+              <label htmlFor="reservation-website">Website</label>
+              <input
+                id="reservation-website"
+                type="text"
+                name="website"
+                value={formData.website}
+                onChange={handleInputChange}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm text-left font-medium text-gray-700">
@@ -113,6 +155,8 @@ const Reservation = () => {
                   value={formData.firstName}
                   onChange={handleInputChange}
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                  maxLength={80}
+                  autoComplete="given-name"
                   required
                 />
               </div>
@@ -126,6 +170,8 @@ const Reservation = () => {
                   value={formData.lastName}
                   onChange={handleInputChange}
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                  maxLength={80}
+                  autoComplete="family-name"
                   required
                 />
               </div>
@@ -142,6 +188,8 @@ const Reservation = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                  maxLength={254}
+                  autoComplete="email"
                   required
                 />
               </div>
@@ -155,6 +203,7 @@ const Reservation = () => {
                   value={formData.guests}
                   onChange={handleInputChange}
                   min="1"
+                  max="5"
                   className="mt-1 p-2 border border-gray-300 rounded-md text-center min-w-[80px]"
                   required
                 />
@@ -170,6 +219,7 @@ const Reservation = () => {
                   value={formData.checkIn}
                   onChange={handleInputChange}
                   className="mt-1 p-2 w-full h-10 border border-gray-300 rounded-md bg-white text-gray-900 appearance-none"
+                  min={today}
                   required
                 />
               </div>
@@ -181,6 +231,7 @@ const Reservation = () => {
                   value={formData.checkOut}
                   onChange={handleInputChange}
                   className="mt-1 p-2 w-full h-10 border border-gray-300 rounded-md bg-white text-gray-900 appearance-none"
+                  min={formData.checkIn || today}
                   required
                 />
               </div>
@@ -196,20 +247,21 @@ const Reservation = () => {
                 onChange={handleInputChange}
                 placeholder={t('reservation.placeholder')}
                 rows={4}
+                maxLength={2000}
                 className="mt-1 p-2 w-full border border-gray-300 rounded-md text-gray-900 bg-white resize-none text-[16px] focus:outline-none focus:ring-2 focus:ring-cyan-500"
               ></textarea>
             </div>
 
             <button
               type="submit"
-              className="w-full bg-cyan-500 text-white py-2 px-4 rounded-md hover:bg-cyan-600 transition"
+              className="w-full bg-cyan-500 text-white py-2 px-4 rounded-md hover:bg-cyan-600 transition disabled:cursor-not-allowed disabled:opacity-60"
               disabled={isLoading}
             >
               {isLoading ? t('reservation.sending') : t('reservation.submit')}
             </button>
           </form>
 
-          {formStatus && <p className="mt-4 text-sm text-center text-gray-600">{formStatus}</p>}
+          {formStatus && <p className="mt-4 text-sm text-center text-gray-600" role="status" aria-live="polite">{formStatus}</p>}
         </motion.div>
       </div>
     </motion.section>

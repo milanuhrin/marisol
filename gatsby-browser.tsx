@@ -1,6 +1,5 @@
 // gatsby-browser.js
 import React, { ReactNode, useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
 import { LanguageProvider } from './src/i18n/LanguageProvider';
 import type { GatsbyBrowser } from 'gatsby';
 
@@ -43,11 +42,9 @@ const AppWrapper: React.FC<{ children: ReactNode }> = ({ children }) => {
   return <>{children}</>;
 };
 
-// ✅ Wrap Gatsby's root element inside BrowserRouter + AppWrapper
+// Wrap Gatsby's root element with shared language and URL behavior.
 export const wrapRootElement: GatsbyBrowser['wrapRootElement'] = ({ element }: WrapRootElementProps) => (
-  <BrowserRouter>
-    <LanguageProvider>
-      <AppWrapper>{element}</AppWrapper>
-    </LanguageProvider>
-  </BrowserRouter>
+  <LanguageProvider>
+    <AppWrapper>{element}</AppWrapper>
+  </LanguageProvider>
 );

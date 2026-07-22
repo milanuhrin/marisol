@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { isBrowser } from "../Utilities/helpers";
+import React from "react";
 import { Footer, Landing } from "Components/export";
 import "../../global.css";
 import About from "Components/About";
@@ -12,42 +11,18 @@ import SEO from "Components/SEO";
 import Testimonials from "Components/Testimonials";
 
 const IndexPage = () => {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true); // Ensures client-side rendering
-  }, []);
-
-  if (!isClient) {
-    return null; // Prevents SSR issues
-  }
-
-  // ✅ Dynamically import `react-router-dom` only in the browser
-  const { BrowserRouter, Routes, Route } = require("react-router-dom");
-
   return (
     <>
       <SEO />
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Landing />
-                <About />
-                <Gallery />
-                <Testimonials />
-                <Pricelist />
-                <Availability />
-                <Reservation />
-                <Contact />
-                <Footer />
-              </>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+      <Landing />
+      <About />
+      <Gallery />
+      <Testimonials />
+      <Pricelist />
+      <Availability />
+      <Reservation />
+      <Contact />
+      <Footer />
     </>
   );
 };

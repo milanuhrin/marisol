@@ -25,7 +25,6 @@ module.exports = {
         cloudfrontDistributionId: 'E255DY8HXE81HK',
         acl: null,
         exclude: ["images/*", "images/**/*"],
-        include: ["admin/**"],
         removeNonexistentObjects: false,
       },
     },

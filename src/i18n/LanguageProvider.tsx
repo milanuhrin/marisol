@@ -155,6 +155,10 @@ const translations: Record<Lang, Record<string, string>> = {
     'testimonials.show_more': 'Zobraziť viac',
     'testimonials.show_less': 'Zobraziť menej',
     'testimonials.stars': 'hviezdičiek',
+    'testimonials.previous': 'Predchádzajúca recenzia',
+    'testimonials.next': 'Nasledujúca recenzia',
+    'testimonials.navigation': 'Navigácia recenzií',
+    'testimonials.go_to': 'Prejsť na recenziu',
 
     // Pricelist
     'pricelist.title': 'Cenník na rok 2026',
@@ -200,6 +204,8 @@ const translations: Record<Lang, Record<string, string>> = {
     'reservation.error': '❌ Chyba',
     'reservation.try_again': 'Skúste znova.',
     'reservation.network_error': '❌ Nepodarilo sa odoslať rezerváciu. Skontrolujte pripojenie.',
+    'reservation.invalid_dates': '❌ Dátum odchodu musí byť neskôr ako dátum príchodu a príchod nemôže byť v minulosti.',
+    'reservation.invalid_guests': '❌ Počet hostí musí byť od 1 do 5.',
 
     // Contact
     'contact.title': 'Kontaktujte nás na:',
@@ -353,6 +359,10 @@ const translations: Record<Lang, Record<string, string>> = {
     'testimonials.show_more': 'Show more',
     'testimonials.show_less': 'Show less',
     'testimonials.stars': 'stars',
+    'testimonials.previous': 'Previous review',
+    'testimonials.next': 'Next review',
+    'testimonials.navigation': 'Review navigation',
+    'testimonials.go_to': 'Go to review',
 
     // Pricelist
     'pricelist.title': 'Price list for 2026',
@@ -398,6 +408,8 @@ const translations: Record<Lang, Record<string, string>> = {
     'reservation.error': '❌ Error',
     'reservation.try_again': 'Please try again.',
     'reservation.network_error': '❌ Failed to send reservation. Check your connection.',
+    'reservation.invalid_dates': '❌ Check-out must be after check-in and check-in cannot be in the past.',
+    'reservation.invalid_guests': '❌ The number of guests must be between 1 and 5.',
 
     // Contact
     'contact.title': 'Contact us:',
