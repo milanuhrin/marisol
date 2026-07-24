@@ -4,7 +4,7 @@ module.exports = {
     description: 'Apartmán s výhľadom na more',
     titleTemplate: "%s | Marisol Apartment",
     siteUrl: 'https://marisol.sk',
-    favicon: "/favicon.ico",
+    favicon: "/marisol-favicon-v3.ico",
     image: "/images/landing/landing_01.jpg"
   },
   plugins: [

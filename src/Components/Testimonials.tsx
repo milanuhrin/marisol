@@ -139,6 +139,7 @@ const Testimonials = () => {
           className="testimonials-track"
           onScroll={() => setActiveReview(getClosestReview())}
           onPointerDown={(event) => {
+            if (event.pointerType !== "mouse") return;
             if ((event.target as HTMLElement).closest("a, button")) return;
             dragRef.current = {
               active: true,
@@ -148,14 +149,18 @@ const Testimonials = () => {
             event.currentTarget.setPointerCapture(event.pointerId);
           }}
           onPointerMove={(event) => {
+            if (event.pointerType !== "mouse") return;
             if (!dragRef.current.active) return;
             event.currentTarget.scrollLeft =
               dragRef.current.scrollLeft -
               (event.clientX - dragRef.current.startX);
           }}
           onPointerUp={(event) => {
+            if (event.pointerType !== "mouse") return;
             dragRef.current.active = false;
-            event.currentTarget.releasePointerCapture(event.pointerId);
+            if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+              event.currentTarget.releasePointerCapture(event.pointerId);
+            }
             scrollToReview(getClosestReview());
           }}
           onPointerCancel={() => {

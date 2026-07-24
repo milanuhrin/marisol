@@ -46,7 +46,11 @@ const SEO = ({
   return (
     <>
       <title>{seo.title}</title>
-      <link rel="icon" href="/marisol.ico" sizes="any" />
+      <link
+        rel="icon"
+        href="/marisol-favicon-v3.ico"
+        type="image/x-icon"
+      />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
 
