@@ -213,7 +213,7 @@ const About = () => {
         whileInView="onscreen"
         viewport={{ amount: 0, once: true }}
         variants={cardVariants}
-        className="py-8"
+        className="pb-8"
       >
         <TitleText>{t('about.title')}</TitleText>
         <div className="px-12 lg:px-28 text-justify text-base font-medium leading-6 text-gray-500 mb-4 mt-8 max-w-screen-lg mx-auto">
@@ -349,7 +349,7 @@ const About = () => {
   <h2 className="text-xl font-bold text-center mb-8">{t('about.more_info.title')}</h2>
 
   {/* Responsive Grid */}
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 px-4">
+  <div className="grid grid-cols-1 gap-x-6 gap-y-4 px-12 md:grid-cols-2">
     {/* Left Column */}
     <div className="flex flex-col space-y-2">
       {[

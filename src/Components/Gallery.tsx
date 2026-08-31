@@ -146,7 +146,7 @@ const Gallery: React.FC = () => {
         variants={sectionVariants}
       >
         {/* Title */}
-        <motion.div className="py-8">
+        <motion.div className="pb-8">
           <TitleText>{t("gallery.title")}</TitleText>
         </motion.div>
 

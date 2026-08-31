@@ -25,7 +25,7 @@ export const Contact = () => {
         variants={sectionVariants}
       >
         {/* Title: Napíšte nám */}
-        <div className="relative py-8 sm:py-4 sm:mt-[-20px] sm:relative sm:-top-4">
+        <div className="relative">
           <TitleText>{t('contact.title')}</TitleText>
         </div>
 

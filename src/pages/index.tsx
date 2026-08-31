@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Footer, Landing } from "Components/export";
 import "../../global.css";
 import About from "Components/About";
@@ -10,8 +10,13 @@ import Contact from "Components/Contact";
 import SEO from "Components/SEO";
 import Testimonials from "Components/Testimonials";
 import RenviaPromo from "Components/RenviaPromo";
+import { BookingDates, EMPTY_BOOKING_DATES } from "Utilities/booking";
 
 const IndexPage = () => {
+  const [bookingDates, setBookingDates] = useState<BookingDates>({
+    ...EMPTY_BOOKING_DATES,
+  });
+
   return (
     <>
       <SEO />
@@ -20,8 +25,14 @@ const IndexPage = () => {
       <Gallery />
       <Testimonials />
       <Pricelist />
-      <Availability />
-      <Reservation />
+      <Availability
+        selectedDates={bookingDates}
+        onDatesChange={setBookingDates}
+      />
+      <Reservation
+        selectedDates={bookingDates}
+        onDatesCleared={() => setBookingDates({ ...EMPTY_BOOKING_DATES })}
+      />
       <Contact />
       <Footer />
       <RenviaPromo />

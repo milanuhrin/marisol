@@ -113,7 +113,7 @@ const Testimonials = () => {
   return (
     <motion.section
       id="testimonials"
-      className="scroll-mt-12 bg-gradient-to-b from-white to-[#e6f6ff] px-4 py-16 text-center sm:px-6"
+      className="scroll-mt-12 bg-gradient-to-b from-white to-[#e6f6ff] px-4 py-8 text-center sm:px-6"
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: true, amount: 0.01 }}

@@ -4,15 +4,41 @@ import { motion } from "framer-motion";
 import { TitleText } from "./export";
 import { sectionVariants } from "Utilities/motionVariants"; // Import the footer variants
 import { useI18n } from "i18n/LanguageProvider"; // ✅ i18n
+import {
+  BookingDates,
+  EMPTY_BOOKING_DATES,
+  formatDisplayDate,
+  getStayNights,
+  MINIMUM_STAY_NIGHTS,
+  toLocalDateString,
+} from "Utilities/booking";
+import { calculateStayPrice, formatPrice } from "Utilities/pricing";
 
 const RES_URL =
   "https://eb8ya8rtoc.execute-api.us-east-1.amazonaws.com/main/reservation"; // Backend reservation API
 
-const Availability: React.FC = () => {
-  const { t } = useI18n(); // ✅ translations
+type ReservationPeriod = {
+  startDate: string;
+  endDate: string;
+};
+
+type AvailabilityProps = {
+  selectedDates: BookingDates;
+  onDatesChange: (dates: BookingDates) => void;
+};
+
+const Availability: React.FC<AvailabilityProps> = ({
+  selectedDates,
+  onDatesChange,
+}) => {
+  const { t, lang } = useI18n(); // ✅ translations
   const [reservations, setReservations] = useState<
-    { startDate: string; endDate: string }[]
+    ReservationPeriod[]
   >([]);
+  const [selectionError, setSelectionError] = useState("");
+  const [reservationStatus, setReservationStatus] = useState<
+    "loading" | "ready" | "error"
+  >("loading");
 
   useEffect(() => {
     const fetchReservations = async () => {
@@ -26,10 +52,13 @@ const Availability: React.FC = () => {
 
         if (data.success && Array.isArray(data.reservations)) {
           setReservations(data.reservations);
+          setReservationStatus("ready");
         } else {
+          setReservationStatus("error");
           console.error("🚨 Unexpected reservation API response:", data);
         }
       } catch (error) {
+        setReservationStatus("error");
         console.error("❌ Error fetching reservations:", error);
       }
     };
@@ -65,7 +94,71 @@ const Availability: React.FC = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
-  const today = new Date().toISOString().split("T")[0];
+  const today = toLocalDateString(new Date());
+
+  const isAvailableForCheckIn = (date: string) =>
+    !reservations.some(
+      (reservation) =>
+        reservation.startDate <= date && date < reservation.endDate
+    );
+
+  const isStayAvailable = (checkIn: string, checkOut: string) =>
+    !reservations.some(
+      (reservation) =>
+        checkIn < reservation.endDate && checkOut > reservation.startDate
+    );
+
+  const formatNights = (nights: number) => {
+    const translationKey =
+      nights === 1
+        ? "availability.selection.night_one"
+        : lang === "sk" && nights < 5
+        ? "availability.selection.night_few"
+        : "availability.selection.nights";
+
+    return `${nights} ${t(translationKey)}`;
+  };
+
+  const handleDateClick = (date: string) => {
+    if (reservationStatus !== "ready") return;
+
+    const hasIncompleteSelection =
+      selectedDates.checkIn && !selectedDates.checkOut;
+
+    if (date === selectedDates.checkIn) {
+      setSelectionError("");
+      onDatesChange({ ...EMPTY_BOOKING_DATES });
+      return;
+    }
+
+    if (!hasIncompleteSelection || date <= selectedDates.checkIn) {
+      if (!isAvailableForCheckIn(date)) return;
+
+      setSelectionError("");
+      onDatesChange({ checkIn: date, checkOut: "" });
+      return;
+    }
+
+    if (getStayNights(selectedDates.checkIn, date) < MINIMUM_STAY_NIGHTS) {
+      setSelectionError(t("availability.selection.minimum_stay"));
+      return;
+    }
+
+    if (!isStayAvailable(selectedDates.checkIn, date)) {
+      setSelectionError(t("availability.selection.unavailable"));
+      return;
+    }
+
+    setSelectionError("");
+    onDatesChange({ checkIn: selectedDates.checkIn, checkOut: date });
+  };
+
+  const continueToReservation = () => {
+    document.getElementById("reservation")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
 
   const changeMonth = (direction: string) => {
     if (direction === "prev") {
@@ -98,7 +191,7 @@ const Availability: React.FC = () => {
 
     for (let day = 1; day <= lastDayOfMonth; day++) {
       const dateObj = new Date(year, month, day);
-      const dateString = dateObj.toLocaleDateString("sv-SE"); // Format: yyyy-MM-dd
+      const dateString = toLocalDateString(dateObj);
 
       const isPast = dateString < today;
 
@@ -150,6 +243,10 @@ const Availability: React.FC = () => {
     nextMonth,
     nextMonthYear
   );
+  const selectedStayPrice = calculateStayPrice(
+    selectedDates.checkIn,
+    selectedDates.checkOut
+  );
 
   return (
     <motion.section
@@ -160,11 +257,17 @@ const Availability: React.FC = () => {
       viewport={{ once: true, amount: 0.01 }}
       variants={sectionVariants}
     >
-      <div className="py-8">
+      <div>
         <TitleText>{t("availability.title")}</TitleText>
 
         {/* Add space between title and calendar */}
         <div style={{ marginBottom: "2rem" }}></div>
+
+        <p className="mx-auto max-w-lg px-4 text-sm text-gray-500 sm:text-base">
+          {selectedDates.checkIn && !selectedDates.checkOut
+            ? t("availability.selection.choose_checkout")
+            : t("availability.selection.instruction")}
+        </p>
 
         {/* New Reservation Calendar Wrapper */}
         <motion.div
@@ -196,8 +299,10 @@ const Availability: React.FC = () => {
                   <div className="calendar-header">
                     {isLeftCalendar && (
                       <button
+                        type="button"
                         onClick={() => changeMonth("prev")}
                         className="arrow-btn left-arrow"
+                        aria-label={t("availability.previous_month")}
                       >
                         &#10094;
                       </button>
@@ -207,8 +312,10 @@ const Availability: React.FC = () => {
                     </span>
                     {!isLeftCalendar && (
                       <button
+                        type="button"
                         onClick={() => changeMonth("next")}
                         className="arrow-btn right-arrow"
+                        aria-label={t("availability.next_month")}
                       >
                         &#10095;
                       </button>
@@ -222,31 +329,64 @@ const Availability: React.FC = () => {
                         {day}
                       </div>
                     ))}
-                    {calendarDays.map((day, dayIndex) =>
-                      day ? (
-                        <motion.div
-                          key={dayIndex}
-                          className={`calendar-day ${
-                            day.isPast
-                              ? "past"
-                              : day.isStart && day.isEnd
-                              ? "full-reserved"
-                              : day.isStart
-                              ? "half-start"
-                              : day.isEnd
-                              ? "half-end"
-                              : day.isBetween
-                              ? "full-reserved"
-                              : "available"
-                          }`}
-                          whileHover={{ scale: 1.08 }}
+                    {calendarDays.map((day, dayIndex) => {
+                      if (!day) return <div key={dayIndex}></div>;
+
+                      const baseStatus = day.isPast
+                        ? "past"
+                        : day.isStart && day.isEnd
+                        ? "full-reserved"
+                        : day.isStart
+                        ? "half-start"
+                        : day.isEnd
+                        ? "half-end"
+                        : day.isBetween
+                        ? "full-reserved"
+                        : "available";
+                      const isSelectedStart =
+                        day.date === selectedDates.checkIn;
+                      const isSelectedEnd =
+                        day.date === selectedDates.checkOut;
+                      const isSelectedRange = Boolean(
+                        selectedDates.checkIn &&
+                          selectedDates.checkOut &&
+                          day.date > selectedDates.checkIn &&
+                          day.date < selectedDates.checkOut
+                      );
+                      const isSelectingCheckOut = Boolean(
+                        selectedDates.checkIn && !selectedDates.checkOut
+                      );
+                      const isDisabled =
+                        reservationStatus !== "ready" ||
+                        day.isPast ||
+                        (isSelectingCheckOut
+                          ? day.date <= selectedDates.checkIn
+                            ? !isAvailableForCheckIn(day.date)
+                            : day.isBetween || (day.isStart && day.isEnd)
+                          : !isAvailableForCheckIn(day.date));
+                      const selectedStatus = isSelectedStart
+                        ? "selected-start"
+                        : isSelectedEnd
+                        ? "selected-end"
+                        : isSelectedRange
+                        ? "selected-range"
+                        : "";
+
+                      return (
+                        <motion.button
+                          key={day.date}
+                          type="button"
+                          className={`calendar-day ${baseStatus} ${selectedStatus}`}
+                          onClick={() => handleDateClick(day.date)}
+                          disabled={isDisabled}
+                          aria-pressed={isSelectedStart || isSelectedEnd}
+                          aria-label={`${day.day}. ${months[month]} ${year}`}
+                          whileHover={isDisabled ? undefined : { scale: 1.08 }}
                         >
                           {day.day}
-                        </motion.div>
-                      ) : (
-                        <div key={dayIndex}></div>
-                      )
-                    )}
+                        </motion.button>
+                      );
+                    })}
                   </div>
                 </motion.div>
               );
@@ -275,7 +415,73 @@ const Availability: React.FC = () => {
             <div className="legend-box available-box"></div>
             <span>{t("availability.legend.available")}</span>
           </div>
+          <div className="legend-item">
+            <div className="legend-box selected-box"></div>
+            <span>{t("availability.legend.selected")}</span>
+          </div>
         </motion.div>
+
+        <div
+          className="mx-auto mt-5 w-full max-w-[820px]"
+          aria-live="polite"
+        >
+          {reservationStatus === "loading" && (
+            <p className="text-sm text-gray-500">
+              {t("availability.selection.loading")}
+            </p>
+          )}
+
+          {reservationStatus === "error" && (
+            <p className="text-sm font-medium text-red-600">
+              {t("availability.selection.load_error")}
+            </p>
+          )}
+
+          {selectionError && (
+            <p className="text-sm font-medium text-red-600">{selectionError}</p>
+          )}
+
+          {!selectionError && selectedDates.checkIn && !selectedDates.checkOut && (
+            <p className="text-sm font-medium text-cyan-800">
+              {t("availability.selection.check_in")}: {formatDisplayDate(selectedDates.checkIn)}
+            </p>
+          )}
+
+          {!selectionError &&
+            selectedDates.checkIn &&
+            selectedDates.checkOut &&
+            selectedStayPrice !== null && (
+            <div className="grid items-center gap-3 rounded-xl border border-cyan-200 bg-cyan-50 px-4 py-3 text-sm sm:grid-cols-[minmax(0,1fr)_auto_auto] sm:text-left lg:px-6">
+              <p className="text-center font-medium leading-5 text-cyan-900 sm:text-left">
+                <span className="block font-bold text-cyan-700 sm:inline sm:font-semibold">
+                  {t("availability.selection.selected")}:
+                </span>{" "}
+                <span className="block whitespace-nowrap font-extrabold text-cyan-950 sm:inline sm:whitespace-normal sm:font-bold">
+                  {formatDisplayDate(selectedDates.checkIn)} –{" "}
+                  {formatDisplayDate(selectedDates.checkOut)}
+                  <span className="ml-1 font-bold text-cyan-700">
+                    ({formatNights(getStayNights(selectedDates.checkIn, selectedDates.checkOut))})
+                  </span>
+                </span>
+              </p>
+              <div className="rounded-lg border border-cyan-200 bg-white px-4 py-2 text-center">
+                <span className="block text-xs font-medium text-cyan-700">
+                  {t("availability.selection.price")}
+                </span>
+                <strong className="block text-lg font-bold leading-5 text-cyan-900">
+                  {formatPrice(selectedStayPrice, lang)}
+                </strong>
+              </div>
+              <button
+                type="button"
+                onClick={continueToReservation}
+                className="inline-flex min-h-[44px] w-full shrink-0 items-center justify-center rounded-lg bg-cyan-500 px-4 py-2 font-semibold text-white transition hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 sm:w-auto"
+              >
+                {t("availability.selection.continue")} →
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Add CSS styling */}
@@ -334,6 +540,18 @@ const Availability: React.FC = () => {
           justify-content: center;
           border-radius: 3px;
           text-align: center;
+          cursor: pointer;
+          font: inherit;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .calendar-day:focus-visible {
+          outline: 2px solid #06b6d4;
+          outline-offset: 2px;
+        }
+
+        .calendar-day:disabled {
+          cursor: default;
         }
 
         .reserved-past {
@@ -373,6 +591,23 @@ const Availability: React.FC = () => {
           color: #721c24;
         }
 
+        .calendar-day.selected-range {
+          background: #cffafe;
+          color: #155e75;
+          border-color: #67e8f9;
+          text-decoration: none;
+        }
+
+        .calendar-day.selected-start,
+        .calendar-day.selected-end {
+          background: #06b6d4;
+          color: #ffffff;
+          border-color: #0891b2;
+          box-shadow: inset 0 0 0 2px #0e7490;
+          font-weight: 700;
+          text-decoration: none;
+        }
+
         .legend {
           display: flex;
           justify-content: center;
@@ -403,6 +638,10 @@ const Availability: React.FC = () => {
           background-color: #d4edda;
         }
 
+        .selected-box {
+          background-color: #06b6d4;
+        }
+
         @media (max-width: 768px) {
       .calendar-wrapper {
         flex-direction: column;
@@ -428,6 +667,7 @@ const Availability: React.FC = () => {
       }
 
       .legend {
+        flex-wrap: wrap;
         gap: 0.5rem; /* Adjust spacing in legend */
       }
 

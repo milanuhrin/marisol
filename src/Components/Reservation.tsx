@@ -1,10 +1,95 @@
-import React, { ChangeEvent, FormEvent, useMemo, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { TitleText } from './export';
 import { sectionVariants } from 'Utilities/motionVariants';
 import { useI18n } from 'i18n/LanguageProvider'; // ✅ i18n
+import {
+  BookingDates,
+  EMPTY_BOOKING_DATES,
+  formatDisplayDate,
+  getStayNights,
+  MINIMUM_STAY_NIGHTS,
+  toLocalDateString,
+} from 'Utilities/booking';
+import { calculateStayPrice, formatPrice } from 'Utilities/pricing';
 
-const Reservation = () => {
+type DatePickerFieldProps = {
+  label: string;
+  name: 'checkIn' | 'checkOut';
+  value: string;
+  min: string;
+  placeholder: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+};
+
+const DatePickerField = ({
+  label,
+  name,
+  value,
+  min,
+  placeholder,
+  onChange,
+}: DatePickerFieldProps) => {
+  const inputId = `reservation-${name}`;
+
+  const openPicker = (event: React.MouseEvent<HTMLInputElement>) => {
+    const input = event.currentTarget as HTMLInputElement & {
+      showPicker?: () => void;
+    };
+    input.showPicker?.();
+  };
+
+  return (
+    <div>
+      <label
+        htmlFor={inputId}
+        className="block text-left text-sm font-medium text-gray-700"
+      >
+        {label}
+      </label>
+      <div className="relative mt-1 h-10 rounded-md border border-gray-300 bg-white focus-within:border-cyan-500 focus-within:ring-2 focus-within:ring-cyan-500">
+        <div
+          className={`pointer-events-none flex h-full items-center justify-between px-2 text-left text-base ${
+            value ? 'text-gray-900' : 'text-gray-500'
+          }`}
+          aria-hidden="true"
+        >
+          <span>{value ? formatDisplayDate(value) : placeholder}</span>
+          <svg
+            viewBox="0 0 24 24"
+            className="h-4 w-4 shrink-0 text-gray-900"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z" />
+          </svg>
+        </div>
+        <input
+          id={inputId}
+          type="date"
+          name={name}
+          value={value}
+          onChange={onChange}
+          onClick={openPicker}
+          className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+          min={min}
+          required
+        />
+      </div>
+    </div>
+  );
+};
+
+type ReservationProps = {
+  selectedDates?: BookingDates;
+  onDatesCleared?: () => void;
+};
+
+const Reservation = ({
+  selectedDates = EMPTY_BOOKING_DATES,
+  onDatesCleared,
+}: ReservationProps) => {
   const { t, lang } = useI18n();
 
   const [formData, setFormData] = useState({
@@ -22,21 +107,46 @@ const Reservation = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const today = useMemo(() => {
-    const now = new Date();
-    const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
-    return localDate.toISOString().slice(0, 10);
+    return toLocalDateString(new Date());
   }, []);
+
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      checkIn: selectedDates.checkIn,
+      checkOut: selectedDates.checkOut,
+    }));
+    setFormStatus('');
+  }, [selectedDates.checkIn, selectedDates.checkOut]);
+
+  const minimumCheckOut = useMemo(() => {
+    if (!formData.checkIn) return today;
+
+    const date = new Date(`${formData.checkIn}T12:00:00`);
+    date.setDate(date.getDate() + MINIMUM_STAY_NIGHTS);
+    return toLocalDateString(date);
+  }, [formData.checkIn, today]);
+
+  const stayPrice = useMemo(
+    () => calculateStayPrice(formData.checkIn, formData.checkOut),
+    [formData.checkIn, formData.checkOut]
+  );
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+    setFormData((prev) => {
+      if (
+        name === 'checkIn' &&
+        prev.checkOut &&
+        getStayNights(value, prev.checkOut) < MINIMUM_STAY_NIGHTS
+      ) {
+        return { ...prev, checkIn: value, checkOut: '' };
+      }
 
-  const formatDate = (dateString: string) => {
-    const [year, month, day] = dateString.split('-');
-    return `${day}-${month}-${year}`;
+      return { ...prev, [name]: value };
+    });
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -53,6 +163,20 @@ const Reservation = () => {
       return;
     }
 
+    if (getStayNights(formData.checkIn, formData.checkOut) < MINIMUM_STAY_NIGHTS) {
+      setFormStatus(t('reservation.invalid_minimum_stay'));
+      return;
+    }
+
+    const totalStayPrice = calculateStayPrice(
+      formData.checkIn,
+      formData.checkOut
+    );
+    if (totalStayPrice === null) {
+      setFormStatus(t('reservation.invalid_dates'));
+      return;
+    }
+
     const guests = Number(formData.guests);
     if (!Number.isInteger(guests) || guests < 1 || guests > 5) {
       setFormStatus(t('reservation.invalid_guests'));
@@ -62,17 +186,18 @@ const Reservation = () => {
     setIsLoading(true);
 
     try {
-      const formattedCheckIn = formatDate(formData.checkIn);
-      const formattedCheckOut = formatDate(formData.checkOut);
+      const formattedCheckIn = formatDisplayDate(formData.checkIn);
+      const formattedCheckOut = formatDisplayDate(formData.checkOut);
       const fullName = `${formData.firstName.trim()} ${formData.lastName.trim()}`;
       const email = formData.email.trim();
       const message = formData.message.trim();
+      const formattedStayPrice = formatPrice(totalStayPrice, lang);
 
       // Message localized
       const emailMessage =
         lang === 'sk'
-          ? `Dobrý deň,\n\nMám záujem o rezerváciu apartmánu:\n\nMeno a priezvisko: ${fullName}\nEmail: ${email}\nCheck-in: ${formattedCheckIn}\nCheck-out: ${formattedCheckOut}\nPočet hostí: ${guests}\n\nSpráva:\n${message}`
-          : `Hello,\n\nI am interested in booking the apartment:\n\nName: ${fullName}\nEmail: ${email}\nCheck-in: ${formattedCheckIn}\nCheck-out: ${formattedCheckOut}\nNumber of guests: ${guests}\n\nMessage:\n${message}`;
+          ? `Dobrý deň,\n\nMám záujem o rezerváciu apartmánu:\n\nMeno a priezvisko: ${fullName}\nEmail: ${email}\nCheck-in: ${formattedCheckIn}\nCheck-out: ${formattedCheckOut}\nPočet hostí: ${guests}\nCena pobytu: ${formattedStayPrice}\n\nSpráva:\n${message}`
+          : `Hello,\n\nI am interested in booking the apartment:\n\nName: ${fullName}\nEmail: ${email}\nCheck-in: ${formattedCheckIn}\nCheck-out: ${formattedCheckOut}\nNumber of guests: ${guests}\nStay price: ${formattedStayPrice}\n\nMessage:\n${message}`;
 
       const response = await fetch(
         'https://8jwwggkrye.execute-api.us-east-1.amazonaws.com/prod/send-email',
@@ -100,6 +225,7 @@ const Reservation = () => {
           message: '',
           website: '',
         });
+        onDatesCleared?.();
       } else {
         setFormStatus(`${t('reservation.error')}: ${responseData.error || t('reservation.try_again')}`);
       }
@@ -114,13 +240,13 @@ const Reservation = () => {
   return (
     <motion.section
       id="reservation"
-      className="text-center py-8"
+      className="scroll-mt-44 text-center py-8"
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: true, amount: 0.01 }}
       variants={sectionVariants}
     >
-      <div className="py-8">
+      <div>
         <TitleText>{t('reservation.title')}</TitleText>
         <div style={{ marginBottom: '2rem' }}></div>
 
@@ -211,30 +337,46 @@ const Reservation = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm text-left font-medium text-gray-700">{t('reservation.check_in')}</label>
-                <input
-                  type="date"
-                  name="checkIn"
-                  value={formData.checkIn}
-                  onChange={handleInputChange}
-                  className="mt-1 p-2 w-full h-10 border border-gray-300 rounded-md bg-white text-gray-900 appearance-none"
-                  min={today}
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-left font-medium text-gray-700">{t('reservation.check_out')}</label>
-                <input
-                  type="date"
-                  name="checkOut"
-                  value={formData.checkOut}
-                  onChange={handleInputChange}
-                  className="mt-1 p-2 w-full h-10 border border-gray-300 rounded-md bg-white text-gray-900 appearance-none"
-                  min={formData.checkIn || today}
-                  required
-                />
-              </div>
+              <DatePickerField
+                label={t('reservation.check_in')}
+                name="checkIn"
+                value={formData.checkIn}
+                onChange={handleInputChange}
+                min={today}
+                placeholder={lang === 'sk' ? 'dd.mm.rrrr' : 'dd.mm.yyyy'}
+              />
+              <DatePickerField
+                label={t('reservation.check_out')}
+                name="checkOut"
+                value={formData.checkOut}
+                onChange={handleInputChange}
+                min={minimumCheckOut}
+                placeholder={lang === 'sk' ? 'dd.mm.rrrr' : 'dd.mm.yyyy'}
+              />
+            </div>
+
+            <div>
+              <p className="block text-left text-sm font-medium text-gray-700">
+                {t('reservation.price')}
+              </p>
+              <output
+                className={`mt-1 flex min-h-[48px] w-full items-center justify-center rounded-md border px-3 ${
+                  stayPrice === null
+                    ? 'border-gray-300 bg-gray-50 text-gray-400'
+                    : 'border-cyan-200 bg-cyan-50 text-cyan-900'
+                }`}
+                aria-live="polite"
+              >
+                {stayPrice === null ? (
+                  <span className="text-base font-medium">
+                    {t('reservation.price_placeholder')}
+                  </span>
+                ) : (
+                  <strong className="text-lg font-bold leading-5">
+                    {formatPrice(stayPrice, lang)}
+                  </strong>
+                )}
+              </output>
             </div>
 
             <div>

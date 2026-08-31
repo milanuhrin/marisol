@@ -3,6 +3,7 @@ import { TitleText } from './export';
 import { motion } from 'framer-motion';
 import { sectionVariants } from 'Utilities/motionVariants';
 import { useI18n } from 'i18n/LanguageProvider';
+import { formatNightlyRate, PRICING_PERIODS } from 'Utilities/pricing';
 
 const Pricelist = () => {
   const { t } = useI18n();
@@ -37,48 +38,25 @@ const Pricelist = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.jan_apr')}</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">70 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">60 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">35 €</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.may')}</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">55 €</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.jun')}</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">105 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">95 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.jul_aug')}</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">145 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">135 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.sep')}</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">105 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">95 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.oct')}</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">85 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">75 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">- €</td>
-              </tr>
-              <tr>
-                <td className="py-4 px-4 text-sm sm:text-base font-semibold">{t('pricelist.nov_dec')}</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">70 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">60 €</td>
-                <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">35 €</td>
-              </tr>
+              {PRICING_PERIODS.map((period, index) => (
+                <tr
+                  key={period.translationKey}
+                  className={index < PRICING_PERIODS.length - 1 ? 'border-b' : ''}
+                >
+                  <td className="py-4 px-4 text-sm sm:text-base font-semibold">
+                    {t(period.translationKey)}
+                  </td>
+                  <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">
+                    {formatNightlyRate(period.rates.standard)}
+                  </td>
+                  <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">
+                    {formatNightlyRate(period.rates.extended)}
+                  </td>
+                  <td className="py-4 px-4 text-sm sm:text-base whitespace-nowrap">
+                    {formatNightlyRate(period.rates.monthly)}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
