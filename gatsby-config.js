@@ -1,11 +1,10 @@
 module.exports = {
   siteMetadata: {
-    title: 'Marisol Seaview Apartment',
-    description: 'Apartmán s výhľadom na more',
+    title: 'Apartmán Marisol Seaview Torrevieja | La Mata',
+    description: 'Apartmán pri mori v Torrevieji pre 5 hostí, s bazénom, terasou a parkovaním.',
     titleTemplate: "%s | Marisol Apartment",
     siteUrl: 'https://marisol.sk',
-    favicon: "/marisol-favicon-v3.ico",
-    image: "/images/landing/landing_01.jpg"
+    favicon: "/marisol-favicon-v3.ico"
   },
   plugins: [
     'gatsby-plugin-react-helmet',

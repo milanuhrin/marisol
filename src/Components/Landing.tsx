@@ -2,6 +2,7 @@ import { SectionDivider } from 'Components/export';
 import { AnimatePresence, motion } from 'framer-motion';
 import { graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
+import { useI18n } from 'i18n/LanguageProvider';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Navigation } from './Navigation/Navigation';
 
@@ -27,6 +28,7 @@ type LandingQueryData = {
 
 export const Landing = (props: Props) => {
   const { containerStyles } = props;
+  const { t } = useI18n();
   const data: LandingQueryData = useStaticQuery(graphql`
     query LandingImages {
       landingImages: allFile(
@@ -119,6 +121,8 @@ export const Landing = (props: Props) => {
         }}
         id='home'
       >
+        <h1 className="sr-only">{t('seo.h1')}</h1>
+
         {/* Image container */}
         <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
           <AnimatePresence>

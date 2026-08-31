@@ -16,6 +16,7 @@ const I18nCtx = createContext<Ctx | null>(null);
 const translations: Record<Lang, Record<string, string>> = {
   sk: {
     // Headings & intro
+    'seo.h1': 'Apartmán Marisol Seaview v Torrevieja pri pláži La Mata',
     'about.title': 'O apartmáne',
     'about.longText':
       'Krásny východ slnka nad morom, príjemná dovolenková atmosféra či voňavá káva na terase - to všetko môžete zažiť u nás, v apartmáne Marisol. Nachádza sa v jednej z najobľúbenejších lokalít mesta Torrevieja, blízko známeho mesta Alicante v Španielsku. Vedľa parku a tiež historického bodu mesta Torre del Moro. Mimo ruchu centra mesta a zároveň na krok od reštaurácií, supermarketu, lekárne, autobusovej zastávky, no najmä dlhej piesočnej pláže La Mata, ktorá je každoročne ocenená modrou vlajkou. Nezameniteľná liečivá mikroklíma, športové vyžitie i večerná zábava sú predpokladom pre prežitie nezabudnuteľnej dovolenky, či už pre páry, alebo rodiny.',
@@ -246,6 +247,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
   en: {
     // Headings & intro
+    'seo.h1': 'Marisol Seaview Apartment in Torrevieja near La Mata Beach',
     'about.title': 'About the apartment',
     'about.longText':
       'A beautiful sunrise over the sea, a pleasant holiday atmosphere, or fragrant coffee on the terrace – all this you can experience with us at Marisol Apartment. It is located in one of the most popular areas of Torrevieja, near the well-known city of Alicante in Spain. Next to a park and also the historic landmark Torre del Moro. Away from the hustle and bustle of the city center, yet just steps from restaurants, a supermarket, a pharmacy, a bus stop, and above all the long sandy Playa La Mata beach, which is awarded the Blue Flag every year. The unique healing microclimate, opportunities for sports, and evening entertainment are the perfect ingredients for an unforgettable holiday, whether for couples or families.',
@@ -477,13 +479,19 @@ const translations: Record<Lang, Record<string, string>> = {
 };
 
 /** Provider */
-export const LanguageProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
-  const [lang, setLang] = useState<Lang>('sk');
+type LanguageProviderProps = React.PropsWithChildren<{
+  initialLang?: Lang;
+}>;
+
+export const LanguageProvider: React.FC<LanguageProviderProps> = ({
+  children,
+  initialLang = 'sk',
+}) => {
+  const [lang, setLang] = useState<Lang>(initialLang);
 
   useEffect(() => {
-    const saved = (typeof window !== 'undefined' && window.localStorage.getItem('lang')) as Lang | null;
-    if (saved === 'sk' || saved === 'en') setLang(saved);
-  }, []);
+    setLang(initialLang);
+  }, [initialLang]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') window.localStorage.setItem('lang', lang);

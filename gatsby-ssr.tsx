@@ -1,18 +1,17 @@
 // gatsby-ssr.tsx
 import React from "react";
 import type { GatsbySSR } from "gatsby";
-import { LanguageProvider } from "./src/i18n/LanguageProvider";
 
 export const wrapRootElement: GatsbySSR["wrapRootElement"] = ({ element }) => {
-  // Bez BrowserRouter v SSR, iba i18n provider
-  return <LanguageProvider>{element}</LanguageProvider>;
+  return <>{element}</>;
 };
 
 export const onRenderBody: GatsbySSR["onRenderBody"] = ({
+  pathname,
   setHtmlAttributes,
   setHeadComponents,
 }) => {
-  setHtmlAttributes({ lang: "sk" });
+  setHtmlAttributes({ lang: pathname.startsWith("/en") ? "en" : "sk" });
 
   // Google Analytics
   setHeadComponents([

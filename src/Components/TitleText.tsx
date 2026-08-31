@@ -8,10 +8,10 @@ export const TitleText = ({
   children: React.ReactNode;
 }) => {
   return (
-    <h1
+    <h2
       className={`${headerStyle} from-snakeGr1 to-snakeGr2 bg-gradient-to-r bg-clip-text text-3xl font-extrabold text-transparent`}
     >
       {children}
-    </h1>
+    </h2>
   );
 };
