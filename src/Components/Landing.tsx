@@ -40,7 +40,7 @@ export const Landing = (props: Props) => {
     <>
       <Navigation />
       <motion.section
-        className={`${containerStyles} relative z-10 w-full h-screen`}
+        className={`${containerStyles} relative z-10 mx-auto aspect-[4/5] w-full max-w-screen-lg sm:aspect-[3/2]`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{
@@ -50,7 +50,7 @@ export const Landing = (props: Props) => {
         id='home'
       >
         {/* Image container */}
-        <div className="absolute inset-0 w-full h-[90vh] z-0 overflow-hidden">
+        <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
           {images.map((image, index) => (
             <motion.div
               key={index}
@@ -78,18 +78,18 @@ export const Landing = (props: Props) => {
 
         {/* Logo */}
         {logo && (
-          <div className="absolute transform -translate-y-1/2 z-50" style={{ top: '50%', right: '8%' }}>
+          <div className="absolute right-[6%] top-1/2 z-50 -translate-y-1/2">
             <img
               src={logo}
               alt="Logo"
-              className="w-60 md:w-96 lg:w-144"
+              className="h-auto w-44 sm:w-56 lg:w-64"
               loading="lazy"
             />
           </div>
         )}
 
         {/* Divider */}
-        <div className="absolute bottom-[10%] left-0 w-full h-[30px] z-30 pointer-events-none">
+        <div className="pointer-events-none absolute bottom-0 left-0 z-30 h-[30px] w-full">
           <SectionDivider fill="white" />
         </div>
       </motion.section>
