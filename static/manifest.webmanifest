@@ -1,0 +1,25 @@
+{
+  "id": "/",
+  "name": "Marisol",
+  "short_name": "Marisol",
+  "description": "Marisol Seaview Apartment in Torrevieja",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1f1f1f",
+  "icons": [
+    {
+      "src": "/marisol-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/marisol-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

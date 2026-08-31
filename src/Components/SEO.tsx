@@ -41,7 +41,7 @@ const SEO = ({
   pathname = '/',
 }: SEOProps) => {
   const data: SEOQueryData = useStaticQuery(graphql`
-    query SEO {
+    query MarisolSEO {
       site {
         siteMetadata {
           defaultTitle: title
@@ -235,12 +235,27 @@ const SEO = ({
       <html lang={lang} />
       <title>{seoTitle}</title>
       <link rel="icon" href="/marisol-favicon-v3.ico" type="image/x-icon" />
+      <link rel="manifest" href="/manifest.webmanifest" />
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="/apple-touch-icon.png"
+      />
       <link rel="canonical" href={canonicalUrl} />
       <link rel="alternate" hrefLang="sk" href={slovakUrl} />
       <link rel="alternate" hrefLang="en" href={englishUrl} />
       <link rel="alternate" hrefLang="x-default" href={slovakUrl} />
       <meta name="description" content={seoDescription} />
       <meta name="robots" content="index,follow" />
+      <meta name="application-name" content="Marisol" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-title" content="Marisol" />
+      <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent"
+      />
+      <meta name="theme-color" content="#1f1f1f" />
 
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="Marisol Seaview Apartment" />

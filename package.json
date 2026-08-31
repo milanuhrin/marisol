@@ -10,11 +10,11 @@
    "scripts": {
       "dev": "gatsby develop -H 0.0.0.0",
       "start": "gatsby develop -H 0.0.0.0",
-      "build": "gatsby build",
+      "build": "npm run clean && gatsby build",
       "serve": "gatsby serve",
-      "clean": "gatsby clean",
+      "clean": "node scripts/clean-gatsby-cache.js",
       "deploy": "gatsby-plugin-s3 deploy --yes",
-      "bd": "gatsby build && gatsby-plugin-s3 deploy --yes",
+      "bd": "npm run build && gatsby-plugin-s3 deploy --yes",
       "prepare": "husky install",
       "server": "nodemon server.js --ignore src/ --ignore public/ --ignore node_modules/ --verbose",
       "dev:all": "concurrently \"npm run dev\" \"npm run server\""
