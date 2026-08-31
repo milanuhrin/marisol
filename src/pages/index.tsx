@@ -9,6 +9,7 @@ import Reservation from "Components/Reservation";
 import Contact from "Components/Contact";
 import SEO from "Components/SEO";
 import Testimonials from "Components/Testimonials";
+import RenviaPromo from "Components/RenviaPromo";
 
 const IndexPage = () => {
   return (
@@ -23,6 +24,7 @@ const IndexPage = () => {
       <Reservation />
       <Contact />
       <Footer />
+      <RenviaPromo />
     </>
   );
 };

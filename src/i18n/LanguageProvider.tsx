@@ -207,6 +207,13 @@ const translations: Record<Lang, Record<string, string>> = {
     'reservation.invalid_dates': '❌ Dátum odchodu musí byť neskôr ako dátum príchodu a príchod nemôže byť v minulosti.',
     'reservation.invalid_guests': '❌ Počet hostí musí byť od 1 do 5.',
 
+    // Renvia promo
+    'renviaPromo.title': 'Je rozumné rozumieť svojej investícii.',
+    'renviaPromo.description':
+      'Financie, rezervácie, náklady a zmluvy spravujeme v aplikácii RENVIA.',
+    'renviaPromo.cta': 'Prejsť na RENVIA',
+    'renviaPromo.ctaShort': 'Viac',
+
     // Contact
     'contact.title': 'Kontaktujte nás na:',
     'contact.whatsapp': 'Napíšte nám na WhatsApp',
@@ -410,6 +417,13 @@ const translations: Record<Lang, Record<string, string>> = {
     'reservation.network_error': '❌ Failed to send reservation. Check your connection.',
     'reservation.invalid_dates': '❌ Check-out must be after check-in and check-in cannot be in the past.',
     'reservation.invalid_guests': '❌ The number of guests must be between 1 and 5.',
+
+    // Renvia promo
+    'renviaPromo.title': 'It makes sense to understand your investment.',
+    'renviaPromo.description':
+      'We manage finances, bookings, costs and contracts with RENVIA.',
+    'renviaPromo.cta': 'Go to RENVIA',
+    'renviaPromo.ctaShort': 'More',
 
     // Contact
     'contact.title': 'Contact us:',
