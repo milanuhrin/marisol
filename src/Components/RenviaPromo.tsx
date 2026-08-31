@@ -35,10 +35,10 @@ const RenviaPromo = () => {
   return (
     <section
       aria-label={t('renviaPromo.title')}
-      className="w-full bg-[#e6f6ff] px-4 pb-6 pt-2 sm:pb-8"
+      className="w-full bg-[#e6f6ff] px-4 pb-6 pt-2 lg:pb-8"
     >
       <motion.div
-        className="relative mx-auto w-full max-w-screen-lg overflow-hidden rounded-xl border border-[#303a51] bg-[#111622] px-4 py-2.5 text-left shadow-[0_8px_24px_rgba(14,22,39,0.14)] sm:rounded-2xl sm:px-6 sm:py-4"
+        className="relative mx-auto w-full max-w-screen-lg overflow-hidden rounded-xl border border-[#303a51] bg-[#111622] px-4 py-2.5 text-left shadow-[0_8px_24px_rgba(14,22,39,0.14)] lg:rounded-2xl lg:px-6 lg:py-4"
         initial="offscreen"
         whileInView="onscreen"
         viewport={{ once: true, amount: 0.2 }}
@@ -46,7 +46,7 @@ const RenviaPromo = () => {
       >
         <div className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-[#7f9fff] to-transparent opacity-50" />
 
-        <div className="relative z-10 sm:hidden">
+        <div className="relative z-10 lg:hidden">
           <div className="flex items-center gap-2">
             <div className="h-9 w-9 shrink-0 rounded-lg shadow-[0_0_14px_rgba(127,159,255,0.14)]">
               <RenviaMark />
@@ -83,7 +83,7 @@ const RenviaPromo = () => {
           </div>
         </div>
 
-        <div className="relative z-10 hidden items-center gap-4 sm:grid sm:grid-cols-[auto_minmax(0,1fr)_auto]">
+        <div className="relative z-10 hidden items-center gap-4 lg:grid lg:grid-cols-[auto_minmax(0,1fr)_auto]">
           <div className="flex shrink-0 items-center gap-2.5">
             <div className="h-10 w-10 rounded-lg shadow-[0_0_14px_rgba(127,159,255,0.14)]">
               <RenviaMark />

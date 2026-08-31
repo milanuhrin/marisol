@@ -54,7 +54,7 @@ export const MobileNav = ({ isMenuOpen, setIsMenuOpen }: Props) => {
 
   return (
     <motion.div
-      className="relative flex w-full items-center justify-between py-3 px-6 sm:hidden"
+      className="relative flex w-full items-center justify-between py-3 px-6 lg:hidden"
       initial={false}
       animate={isMenuOpen ? 'open' : 'closed'}
     >

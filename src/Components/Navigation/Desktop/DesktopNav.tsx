@@ -20,7 +20,7 @@ export const DesktopNav = (props: Props) => {
         initial={'hidden'}
         animate={'show'}
         variants={container}
-        className="z-20 hidden w-full items-center whitespace-nowrap px-3 sm:flex sm:justify-center sm:space-x-6"
+        className="z-20 hidden w-full items-center whitespace-nowrap px-3 lg:flex lg:justify-center lg:space-x-6"
       >
         {/* ✅ Navigation Menu Items (LEFT SIDE) */}
         {items.map((item, i) => (
