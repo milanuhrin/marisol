@@ -1,5 +1,5 @@
 import { SectionDivider } from 'Components/export';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import { useI18n } from 'i18n/LanguageProvider';
@@ -29,6 +29,7 @@ type LandingQueryData = {
 export const Landing = (props: Props) => {
   const { containerStyles } = props;
   const { t } = useI18n();
+  const shouldReduceMotion = useReducedMotion();
   const data: LandingQueryData = useStaticQuery(graphql`
     query LandingImages {
       landingImages: allFile(
@@ -80,14 +81,14 @@ export const Landing = (props: Props) => {
 
   // Rotate one mounted image instead of keeping all five in the viewport.
   useEffect(() => {
-    if (images.length < 2) return;
+    if (images.length < 2 || shouldReduceMotion) return;
 
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [images.length, shouldReduceMotion]);
 
   // Warm the browser cache for only the next responsive image after the
   // current hero has had time to load.
@@ -96,10 +97,13 @@ export const Landing = (props: Props) => {
 
     const preloadTimer = window.setTimeout(() => {
       const nextIndex = (currentImageIndex + 1) % images.length;
-      const nextImageData = images[nextIndex].images.fallback;
+      const nextImageData = images[nextIndex]?.images.fallback;
+
+      if (!nextImageData?.src) return;
+
       const nextImage = new Image();
-      nextImage.sizes = nextImageData.sizes;
-      nextImage.srcset = nextImageData.srcSet;
+      if (nextImageData.sizes) nextImage.sizes = nextImageData.sizes;
+      if (nextImageData.srcSet) nextImage.srcset = nextImageData.srcSet;
       nextImage.src = nextImageData.src;
     }, 1500);
 
@@ -113,11 +117,14 @@ export const Landing = (props: Props) => {
       <Navigation />
       <motion.section
         className={`${containerStyles} relative z-10 mx-auto aspect-[4/5] w-full max-w-screen-lg sm:aspect-[3/2]`}
-        initial={{ opacity: 0 }}
+        initial={shouldReduceMotion ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{
-          opacity: { duration: 1 },
-          scale: { duration: 5, ease: 'linear' },
+          opacity: { duration: shouldReduceMotion ? 0 : 1 },
+          scale: {
+            duration: shouldReduceMotion ? 0 : 5,
+            ease: 'linear',
+          },
         }}
         id='home'
       >
@@ -129,12 +136,18 @@ export const Landing = (props: Props) => {
             {currentImage && (
               <motion.div
                 key={currentImageIndex}
-                initial={{ opacity: 0, scale: 1 }}
-                animate={{ opacity: 1, scale: 1.15 }}
-                exit={{ opacity: 0 }}
+                initial={shouldReduceMotion ? false : { opacity: 0, scale: 1 }}
+                animate={{
+                  opacity: 1,
+                  scale: shouldReduceMotion ? 1 : 1.15,
+                }}
+                exit={{ opacity: shouldReduceMotion ? 1 : 0 }}
                 transition={{
-                  opacity: { duration: 2 },
-                  scale: { duration: 7, ease: 'linear' },
+                  opacity: { duration: shouldReduceMotion ? 0 : 2 },
+                  scale: {
+                    duration: shouldReduceMotion ? 0 : 7,
+                    ease: 'linear',
+                  },
                 }}
                 className="absolute inset-0 flex h-full w-full items-center justify-center"
               >

@@ -25,7 +25,13 @@ const scrollToHash = () => {
       const hash = window.location.hash.replace("#", ""); // Get the ID without #
       const targetElement = document.getElementById(hash);
       if (targetElement) {
-        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+        const shouldReduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+        targetElement.scrollIntoView({
+          behavior: shouldReduceMotion ? "auto" : "smooth",
+          block: "start",
+        });
       }
     }, 300); // Small delay to allow Gatsby to render the element
   }

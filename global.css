@@ -3,6 +3,21 @@
 @tailwind utilities;
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
 @layer components {
   .padding-X-2-18rem {
     @apply px-[2rem] sm:px-[3.5rem] lg:px-[8rem] xl:px-[13rem] 2xl:px-[18rem];

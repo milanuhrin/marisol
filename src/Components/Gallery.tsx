@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { TitleText } from "./export";
 import { SectionDividerWaveOneSide } from "svg/SectionDividerWaveOneSide";
 import { sectionVariants } from "Utilities/motionVariants"; // Import motion variants
@@ -61,6 +61,7 @@ const images = imageFileNames.map((name) => `${IMAGE_BASE_URL}/${name}`);
 
 const Gallery: React.FC = () => {
   const { t } = useI18n();
+  const shouldReduceMotion = useReducedMotion();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [containerStyle, setContainerStyle] = useState({
@@ -70,14 +71,14 @@ const Gallery: React.FC = () => {
   const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    if (!isOpen) {
+    if (!isOpen && !shouldReduceMotion) {
       const interval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
       }, 3000);
 
       return () => clearInterval(interval);
     }
-  }, [isOpen]);
+  }, [isOpen, shouldReduceMotion]);
 
   // Preload only the neighboring photos so navigation stays quick without
   // mounting the complete gallery in the page.
@@ -163,8 +164,8 @@ const Gallery: React.FC = () => {
             type="button"
             className="gallery-item active cursor-pointer border-0 bg-transparent p-0"
             onClick={() => openLightbox(currentIndex)}
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
+            whileHover={shouldReduceMotion ? undefined : { scale: 1.05 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
             aria-label={`${t("gallery.enlarge")} ${currentIndex + 1}`}
           >
             <img
@@ -176,7 +177,7 @@ const Gallery: React.FC = () => {
             />
             <motion.div
               className="gallery-overlay absolute inset-0 flex cursor-pointer items-center justify-center bg-black bg-opacity-50"
-              whileHover={{ opacity: 1 }}
+              whileHover={shouldReduceMotion ? undefined : { opacity: 1 }}
             >
               <div className="flex items-center gap-2 text-white">
                 <i className="fa fa-search-plus text-xl" aria-hidden="true"></i>

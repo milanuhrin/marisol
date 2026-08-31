@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { TitleText } from "./TitleText";
 import { useI18n } from "i18n/LanguageProvider";
 import { sectionVariants } from "Utilities/motionVariants";
@@ -69,6 +69,7 @@ const reviews = [
 
 const Testimonials = () => {
   const { t } = useI18n();
+  const shouldReduceMotion = useReducedMotion();
   const [expandedReview, setExpandedReview] = useState<number | null>(null);
   const [activeReview, setActiveReview] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -105,7 +106,7 @@ const Testimonials = () => {
     if (!track || !target) return;
     track.scrollTo({
       left: target.offsetLeft - track.offsetLeft,
-      behavior: "smooth",
+      behavior: shouldReduceMotion ? "auto" : "smooth",
     });
     setActiveReview(index);
   };

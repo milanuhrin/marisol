@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
-import React from 'react'
+import { motion } from 'framer-motion';
+import React from 'react';
 
 const Path = (props: any) => (
    <motion.path
@@ -9,11 +9,11 @@ const Path = (props: any) => (
       strokeLinecap='round'
       {...props}
    />
-)
+);
 
-export const MenuIconToggle = ({ toggle }: any) => (
-   <motion.div onClick={toggle} className='z-50 max-w-[2.25rem] '>
-      <svg width='100%' viewBox='0 0 23 19'>
+export const MenuIconToggle = () => (
+   <span className="pointer-events-none z-50 block w-9" aria-hidden="true">
+      <svg width="100%" viewBox="0 0 23 19" focusable="false">
          <Path
             variants={{
                closed: { d: 'M 2 2.5 L 20 2.5' },
@@ -35,5 +35,5 @@ export const MenuIconToggle = ({ toggle }: any) => (
             }}
          />
       </svg>
-   </motion.div>
-)
+   </span>
+);

@@ -15,6 +15,11 @@ const I18nCtx = createContext<Ctx | null>(null);
 /** ---- Translations ---- */
 const translations: Record<Lang, Record<string, string>> = {
   sk: {
+    // Navigation
+    'navigation.open_menu': 'Otvoriť hlavné menu',
+    'navigation.close_menu': 'Zavrieť hlavné menu',
+    'navigation.mobile_label': 'Hlavná navigácia',
+
     // Headings & intro
     'seo.h1': 'Apartmán Marisol Seaview v Torrevieja pri pláži La Mata',
     'about.title': 'O apartmáne',
@@ -187,6 +192,15 @@ const translations: Record<Lang, Record<string, string>> = {
     'availability.legend.selected': 'vybrané',
     'availability.previous_month': 'Predchádzajúci mesiac',
     'availability.next_month': 'Nasledujúci mesiac',
+    'availability.date_status.past': 'dátum v minulosti',
+    'availability.date_status.booked': 'obsadený termín',
+    'availability.date_status.available': 'voľný termín',
+    'availability.date_status.selected_check_in': 'vybraný dátum príchodu',
+    'availability.date_status.selected_check_out': 'vybraný dátum odchodu',
+    'availability.date_status.selected_range': 'súčasť vybraného pobytu',
+    'availability.date_status.loading': 'načítava sa dostupnosť',
+    'availability.date_status.unavailable': 'dostupnosť nie je známa',
+    'availability.date_status.today': 'dnes',
     'availability.selection.instruction': 'Vyberte voľný dátum príchodu a potom dátum odchodu a zistite cenu pobytu.',
     'availability.selection.choose_checkout': 'Teraz vyberte dátum odchodu.',
     'availability.selection.check_in': 'Vybraný príchod',
@@ -204,6 +218,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'months.may':'Máj','months.june':'Jún','months.july':'Júl','months.august':'August',
     'months.september':'September','months.october':'Október','months.november':'November','months.december':'December',
     'daysShort.mon':'Po','daysShort.tue':'Ut','daysShort.wed':'St','daysShort.thu':'Št','daysShort.fri':'Pi','daysShort.sat':'So','daysShort.sun':'Ne',
+    'daysLong.0':'Pondelok','daysLong.1':'Utorok','daysLong.2':'Streda','daysLong.3':'Štvrtok','daysLong.4':'Piatok','daysLong.5':'Sobota','daysLong.6':'Nedeľa',
 
     // Reservation
     'reservation.title': 'Predbežná rezervácia',
@@ -246,6 +261,11 @@ const translations: Record<Lang, Record<string, string>> = {
   },
 
   en: {
+    // Navigation
+    'navigation.open_menu': 'Open main menu',
+    'navigation.close_menu': 'Close main menu',
+    'navigation.mobile_label': 'Main navigation',
+
     // Headings & intro
     'seo.h1': 'Marisol Seaview Apartment in Torrevieja near La Mata Beach',
     'about.title': 'About the apartment',
@@ -418,6 +438,15 @@ const translations: Record<Lang, Record<string, string>> = {
     'availability.legend.selected': 'selected',
     'availability.previous_month': 'Previous month',
     'availability.next_month': 'Next month',
+    'availability.date_status.past': 'past date',
+    'availability.date_status.booked': 'booked date',
+    'availability.date_status.available': 'available date',
+    'availability.date_status.selected_check_in': 'selected check-in date',
+    'availability.date_status.selected_check_out': 'selected check-out date',
+    'availability.date_status.selected_range': 'part of the selected stay',
+    'availability.date_status.loading': 'availability is loading',
+    'availability.date_status.unavailable': 'availability is unknown',
+    'availability.date_status.today': 'today',
     'availability.selection.instruction': 'Select an available check-in and check-out date to see the price of your stay.',
     'availability.selection.choose_checkout': 'Now select your check-out date.',
     'availability.selection.check_in': 'Selected check-in',
@@ -435,6 +464,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'months.may':'May','months.june':'June','months.july':'July','months.august':'August',
     'months.september':'September','months.october':'October','months.november':'November','months.december':'December',
     'daysShort.mon':'Mon','daysShort.tue':'Tue','daysShort.wed':'Wed','daysShort.thu':'Thu','daysShort.fri':'Fri','daysShort.sat':'Sat','daysShort.sun':'Sun',
+    'daysLong.0':'Monday','daysLong.1':'Tuesday','daysLong.2':'Wednesday','daysLong.3':'Thursday','daysLong.4':'Friday','daysLong.5':'Saturday','daysLong.6':'Sunday',
 
     // Reservation
     'reservation.title': 'Reservation request',

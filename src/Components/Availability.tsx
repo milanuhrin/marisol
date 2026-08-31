@@ -1,6 +1,6 @@
 // Availability.tsx
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { TitleText } from "./export";
 import { sectionVariants } from "Utilities/motionVariants"; // Import the footer variants
 import { useI18n } from "i18n/LanguageProvider"; // ✅ i18n
@@ -32,6 +32,7 @@ const Availability: React.FC<AvailabilityProps> = ({
   onDatesChange,
 }) => {
   const { t, lang } = useI18n(); // ✅ translations
+  const shouldReduceMotion = useReducedMotion();
   const [reservations, setReservations] = useState<
     ReservationPeriod[]
   >([]);
@@ -155,7 +156,7 @@ const Availability: React.FC<AvailabilityProps> = ({
 
   const continueToReservation = () => {
     document.getElementById("reservation")?.scrollIntoView({
-      behavior: "smooth",
+      behavior: shouldReduceMotion ? "auto" : "smooth",
       block: "start",
     });
   };
@@ -271,6 +272,7 @@ const Availability: React.FC<AvailabilityProps> = ({
 
         {/* New Reservation Calendar Wrapper */}
         <motion.div
+          id="availability-calendars"
           className="calendar-wrapper"
           initial="offscreen"
           whileInView="onscreen"
@@ -284,6 +286,7 @@ const Availability: React.FC<AvailabilityProps> = ({
               const month = index === 0 ? currentMonth : nextMonth;
               const year = index === 0 ? currentYear : nextMonthYear;
               const isLeftCalendar = index === 0;
+              const calendarHeadingId = `availability-${year}-${month}-heading`;
 
               return (
                 <motion.div
@@ -303,11 +306,12 @@ const Availability: React.FC<AvailabilityProps> = ({
                         onClick={() => changeMonth("prev")}
                         className="arrow-btn left-arrow"
                         aria-label={t("availability.previous_month")}
+                        aria-controls="availability-calendars"
                       >
                         &#10094;
                       </button>
                     )}
-                    <span>
+                    <span id={calendarHeadingId} aria-live="polite">
                       {months[month]} {year}
                     </span>
                     {!isLeftCalendar && (
@@ -316,6 +320,7 @@ const Availability: React.FC<AvailabilityProps> = ({
                         onClick={() => changeMonth("next")}
                         className="arrow-btn right-arrow"
                         aria-label={t("availability.next_month")}
+                        aria-controls="availability-calendars"
                       >
                         &#10095;
                       </button>
@@ -323,14 +328,24 @@ const Availability: React.FC<AvailabilityProps> = ({
                   </div>
 
                   {/* Day Grid */}
-                  <div className="day-grid">
+                  <div
+                    className="day-grid"
+                    role="group"
+                    aria-labelledby={calendarHeadingId}
+                  >
                     {daysOfWeek.map((day, index) => (
-                      <div key={index} className="day-name">
+                      <div
+                        key={index}
+                        className="day-name"
+                        aria-label={t(`daysLong.${index}`)}
+                      >
                         {day}
                       </div>
                     ))}
                     {calendarDays.map((day, dayIndex) => {
-                      if (!day) return <div key={dayIndex}></div>;
+                      if (!day) {
+                        return <div key={dayIndex} aria-hidden="true"></div>;
+                      }
 
                       const baseStatus = day.isPast
                         ? "past"
@@ -371,6 +386,28 @@ const Availability: React.FC<AvailabilityProps> = ({
                         : isSelectedRange
                         ? "selected-range"
                         : "";
+                      const accessibleStatus = isSelectedStart
+                        ? t("availability.date_status.selected_check_in")
+                        : isSelectedEnd
+                        ? t("availability.date_status.selected_check_out")
+                        : isSelectedRange
+                        ? t("availability.date_status.selected_range")
+                        : reservationStatus === "loading"
+                        ? t("availability.date_status.loading")
+                        : reservationStatus === "error"
+                        ? t("availability.date_status.unavailable")
+                        : day.isPast
+                        ? t("availability.date_status.past")
+                        : isDisabled
+                        ? t("availability.date_status.booked")
+                        : t("availability.date_status.available");
+                      const accessibleDate = [
+                        formatDisplayDate(day.date),
+                        day.isToday ? t("availability.date_status.today") : "",
+                        accessibleStatus,
+                      ]
+                        .filter(Boolean)
+                        .join(", ");
 
                       return (
                         <motion.button
@@ -380,8 +417,13 @@ const Availability: React.FC<AvailabilityProps> = ({
                           onClick={() => handleDateClick(day.date)}
                           disabled={isDisabled}
                           aria-pressed={isSelectedStart || isSelectedEnd}
-                          aria-label={`${day.day}. ${months[month]} ${year}`}
-                          whileHover={isDisabled ? undefined : { scale: 1.08 }}
+                          aria-current={day.isToday ? "date" : undefined}
+                          aria-label={accessibleDate}
+                          whileHover={
+                            isDisabled || shouldReduceMotion
+                              ? undefined
+                              : { scale: 1.08 }
+                          }
                         >
                           {day.day}
                         </motion.button>
@@ -516,6 +558,17 @@ const Availability: React.FC<AvailabilityProps> = ({
           border: none;
           font-size: 1.5rem;
           cursor: pointer;
+          width: 44px;
+          height: 44px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 6px;
+        }
+
+        .arrow-btn:focus-visible {
+          outline: 2px solid #06b6d4;
+          outline-offset: 2px;
         }
 
         .left-arrow {
@@ -542,6 +595,8 @@ const Availability: React.FC<AvailabilityProps> = ({
           text-align: center;
           cursor: pointer;
           font: inherit;
+          position: relative;
+          border: 1px solid transparent;
           transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
@@ -588,6 +643,13 @@ const Availability: React.FC<AvailabilityProps> = ({
 
         .full-reserved {
           background-color: #f8d7da;
+          background-image: repeating-linear-gradient(
+            135deg,
+            transparent 0,
+            transparent 5px,
+            rgba(114, 28, 36, 0.16) 5px,
+            rgba(114, 28, 36, 0.16) 8px
+          );
           color: #721c24;
         }
 
@@ -596,6 +658,8 @@ const Availability: React.FC<AvailabilityProps> = ({
           color: #155e75;
           border-color: #67e8f9;
           text-decoration: none;
+          box-shadow: inset 0 -3px 0 #0891b2;
+          font-weight: 600;
         }
 
         .calendar-day.selected-start,
@@ -632,6 +696,13 @@ const Availability: React.FC<AvailabilityProps> = ({
 
         .reserved-box {
           background-color: #f8d7da;
+          background-image: repeating-linear-gradient(
+            135deg,
+            transparent 0,
+            transparent 4px,
+            rgba(114, 28, 36, 0.22) 4px,
+            rgba(114, 28, 36, 0.22) 7px
+          );
         }
 
         .available-box {
@@ -640,6 +711,7 @@ const Availability: React.FC<AvailabilityProps> = ({
 
         .selected-box {
           background-color: #06b6d4;
+          box-shadow: inset 0 0 0 2px #0e7490;
         }
 
         @media (max-width: 768px) {
