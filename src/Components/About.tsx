@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { graphql, useStaticQuery } from 'gatsby';
 import { getImage, GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import { TitleText } from './export';
-import { SectionDividerWaveOneSide } from 'svg/SectionDividerWaveOneSide';
 import { hero2ImageLayouts } from 'Utilities/Data';
 import { cardVariants } from 'Utilities/motionVariants';
 import { useMediaQuery } from "react-responsive";
@@ -418,9 +417,6 @@ const About = () => {
           ))}
         </div>
       </div>
-
-      {/* Add Divider */}
-      <SectionDividerWaveOneSide fill="#e6f6ff" />
     </section>
   );
 };

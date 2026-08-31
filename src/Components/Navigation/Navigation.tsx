@@ -37,7 +37,7 @@ export const Navigation = () => {
             backgroundColor: backgroundColorTransition,
             height: paddingTransition,
           }}
-          className={` fixed top-0 z-30 flex h-[4rem] w-full items-center sm:justify-end sm:py-[1rem] lg:space-x-16`}
+          className="fixed inset-x-0 top-0 z-30 mx-auto flex h-[4rem] w-full max-w-screen-lg items-center sm:justify-end sm:py-[1rem]"
           initial={['initialColor']}
           animate={['finalColor']}
           variants={appear('backOut')}
