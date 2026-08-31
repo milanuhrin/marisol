@@ -1,40 +1,110 @@
 import { SectionDivider } from 'Components/export';
-import { motion } from 'framer-motion';
-import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { graphql, useStaticQuery } from 'gatsby';
+import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Navigation } from './Navigation/Navigation';
 
 interface Props {
   containerStyles?: string;
 }
 
+type LandingQueryData = {
+  landingImages: {
+    nodes: {
+      relativePath: string;
+      childImageSharp: {
+        gatsbyImageData: IGatsbyImageData;
+      };
+    }[];
+  };
+  logo: {
+    childImageSharp: {
+      gatsbyImageData: IGatsbyImageData;
+    };
+  };
+};
+
 export const Landing = (props: Props) => {
   const { containerStyles } = props;
+  const data: LandingQueryData = useStaticQuery(graphql`
+    query LandingImages {
+      landingImages: allFile(
+        filter: {
+          relativeDirectory: { eq: "weblanding" }
+          name: { regex: "/^landing_/" }
+          extension: { eq: "webp" }
+        }
+      ) {
+        nodes {
+          relativePath
+          childImageSharp {
+            gatsbyImageData(
+              layout: FULL_WIDTH
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+              quality: 78
+              breakpoints: [375, 667, 1024, 1536, 2048]
+            )
+          }
+        }
+      }
+      logo: file(relativePath: { eq: "weblanding/logo.png" }) {
+        childImageSharp {
+          gatsbyImageData(
+            width: 512
+            layout: CONSTRAINED
+            placeholder: NONE
+            formats: [AUTO, WEBP]
+            quality: 90
+          )
+        }
+      }
+    }
+  `);
 
-  // Store images in S3 (CloudFront URLs)
-  const images = [
-    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_01.webp",
-    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_02.webp",
-    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_03.webp",
-    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_04.webp",
-    "https://dznnrbng6qb50.cloudfront.net/images/landing/landing_05.webp"
-  ];
-
-  const logo = "https://dznnrbng6qb50.cloudfront.net/images/landing/logo.png";
+  const images = useMemo(
+    () =>
+      data.landingImages.nodes
+        .slice()
+        .sort((a, b) => a.relativePath.localeCompare(b.relativePath))
+        .map((node) => getImage(node))
+        .filter((image): image is IGatsbyImageData => Boolean(image)),
+    [data.landingImages.nodes]
+  );
+  const logo = getImage(data.logo);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Prefetch the next image
+  // Rotate one mounted image instead of keeping all five in the viewport.
   useEffect(() => {
-    const nextIndex = (currentImageIndex + 1) % images.length;
-    const nextImage = new Image();
-    nextImage.src = images[nextIndex];
+    if (images.length < 2) return;
 
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000); // Rotate images every 5 seconds
+    }, 5000);
 
     return () => clearInterval(interval);
-  }, [currentImageIndex, images.length]);
+  }, [images.length]);
+
+  // Warm the browser cache for only the next responsive image after the
+  // current hero has had time to load.
+  useEffect(() => {
+    if (images.length < 2) return;
+
+    const preloadTimer = window.setTimeout(() => {
+      const nextIndex = (currentImageIndex + 1) % images.length;
+      const nextImageData = images[nextIndex].images.fallback;
+      const nextImage = new Image();
+      nextImage.sizes = nextImageData.sizes;
+      nextImage.srcset = nextImageData.srcSet;
+      nextImage.src = nextImageData.src;
+    }, 1500);
+
+    return () => window.clearTimeout(preloadTimer);
+  }, [currentImageIndex, images]);
+
+  const currentImage = images[currentImageIndex];
 
   return (
     <>
@@ -51,39 +121,40 @@ export const Landing = (props: Props) => {
       >
         {/* Image container */}
         <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
-          {images.map((image, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 1 }}
-              animate={{
-                opacity: currentImageIndex === index ? 1 : 0,
-                scale: currentImageIndex === index ? 1.15 : 1, // Zoom effect
-              }}
-              transition={{
-                opacity: { duration: 2 },
-                scale: { duration: 7, ease: 'linear' },
-              }}
-              className="absolute inset-0 w-full h-full flex justify-center items-center"
-            >
-              {/* Lazy Load Image */}
-              <img
-                src={image}
-                alt={`Landing background ${index + 1}`}
-                className="w-full h-full object-cover"
-                loading={currentImageIndex === index ? "eager" : "lazy"}
-              />
-            </motion.div>
-          ))}
+          <AnimatePresence>
+            {currentImage && (
+              <motion.div
+                key={currentImageIndex}
+                initial={{ opacity: 0, scale: 1 }}
+                animate={{ opacity: 1, scale: 1.15 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  opacity: { duration: 2 },
+                  scale: { duration: 7, ease: 'linear' },
+                }}
+                className="absolute inset-0 flex h-full w-full items-center justify-center"
+              >
+                <GatsbyImage
+                  image={currentImage}
+                  alt={`Marisol Seaview Apartment – fotografia ${currentImageIndex + 1}`}
+                  className="h-full w-full"
+                  imgClassName="h-full w-full object-cover"
+                  loading={currentImageIndex === 0 ? 'eager' : 'lazy'}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Logo */}
         {logo && (
           <div className="absolute right-[6%] top-1/2 z-50 -translate-y-1/2">
-            <img
-              src={logo}
-              alt="Logo"
+            <GatsbyImage
+              image={logo}
+              alt="Marisol Seaview Apartment"
               className="h-auto w-44 sm:w-56 lg:w-64"
-              loading="lazy"
+              imgClassName="object-contain"
+              loading="eager"
             />
           </div>
         )}
