@@ -25,6 +25,8 @@ module.exports = {
         acl: null,
         exclude: ["images/*", "images/**/*"],
         removeNonexistentObjects: false,
+        // Hosting is already configured in AWS; deployments only sync files.
+        enableS3StaticWebsiteHosting: false,
       },
     },
     {
