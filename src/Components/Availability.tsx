@@ -643,13 +643,6 @@ const Availability: React.FC<AvailabilityProps> = ({
 
         .full-reserved {
           background-color: #f8d7da;
-          background-image: repeating-linear-gradient(
-            135deg,
-            transparent 0,
-            transparent 5px,
-            rgba(114, 28, 36, 0.16) 5px,
-            rgba(114, 28, 36, 0.16) 8px
-          );
           color: #721c24;
         }
 
@@ -696,13 +689,6 @@ const Availability: React.FC<AvailabilityProps> = ({
 
         .reserved-box {
           background-color: #f8d7da;
-          background-image: repeating-linear-gradient(
-            135deg,
-            transparent 0,
-            transparent 4px,
-            rgba(114, 28, 36, 0.22) 4px,
-            rgba(114, 28, 36, 0.22) 7px
-          );
         }
 
         .available-box {
