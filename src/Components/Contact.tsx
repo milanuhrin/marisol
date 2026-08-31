@@ -10,8 +10,25 @@ export const Contact = () => {
   const { t } = useI18n();
   return (
     <section className="relative bg-[#e6f6ff]">
-      {/* Section Divider at the top */}
-      <div className="absolute w-full top-0 transform rotate-180 z-10">
+      {/* Mobile divider: a real block after the reservation form. */}
+      <div
+        aria-hidden="true"
+        className="h-[60px] w-full overflow-hidden bg-white lg:hidden"
+      >
+        <svg
+          viewBox="0 0 1200 100"
+          preserveAspectRatio="none"
+          className="block h-full w-full"
+        >
+          <path
+            d="M0,12 C180,2 330,92 525,78 C715,64 850,18 1010,38 C1090,48 1150,65 1200,58 L1200,100 L0,100 Z"
+            fill="#e6f6ff"
+          />
+        </svg>
+      </div>
+
+      {/* Keep the established desktop divider unchanged. */}
+      <div className="absolute top-0 z-10 hidden w-full rotate-180 lg:block">
         <SectionDividerWaveOneSide fill="#e6f6ff" />
       </div>
 

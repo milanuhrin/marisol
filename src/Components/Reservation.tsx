@@ -1,7 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { TitleText } from './export';
-import { sectionVariants } from 'Utilities/motionVariants';
 import { useI18n } from 'i18n/LanguageProvider'; // ✅ i18n
 import {
   BookingDates,
@@ -240,22 +239,18 @@ const Reservation = ({
   return (
     <motion.section
       id="reservation"
-      className="scroll-mt-44 text-center py-8"
-      initial="offscreen"
-      whileInView="onscreen"
+      className="scroll-mt-12 pt-8 pb-0 text-center lg:py-8"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.01 }}
-      variants={sectionVariants}
+      transition={{ duration: 0.35 }}
     >
       <div>
         <TitleText>{t('reservation.title')}</TitleText>
         <div style={{ marginBottom: '2rem' }}></div>
 
         <motion.div
-          className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-300"
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: true, amount: 0.01 }}
-          variants={sectionVariants}
+          className="relative z-20 max-w-md mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-300"
         >
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="absolute left-[-10000px]" aria-hidden="true">

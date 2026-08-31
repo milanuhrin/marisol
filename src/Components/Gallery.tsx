@@ -134,7 +134,7 @@ const Gallery: React.FC = () => {
     setCurrentIndex((currentIndex - 1 + images.length) % images.length);
 
   return (
-    <div id="gallery" className="relative">
+    <div id="gallery" className="relative scroll-mt-12">
       <div className="z-10 mx-auto max-w-screen-lg transform">
         <SectionDividerWaveOneSide fill="#f0f0f0" />
       </div>

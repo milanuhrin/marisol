@@ -11,7 +11,7 @@ const Pricelist = () => {
   return (
     <motion.section
       id="pricelist"
-      className="text-center py-8 scroll-mt-8"
+      className="scroll-mt-12 text-center py-8"
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: true, amount: 0.01 }}

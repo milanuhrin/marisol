@@ -6,7 +6,6 @@ export const Footer = () => {
   const { t } = useI18n();
   return (
     <motion.footer
-      id="contact"
       className="relative flex flex-col items-center justify-center py-10 bg-[#e6f6ff] "
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}

@@ -252,7 +252,7 @@ const Availability: React.FC<AvailabilityProps> = ({
   return (
     <motion.section
       id="availability"
-      className="py-8 text-center"
+      className="scroll-mt-12 py-8 text-center"
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: true, amount: 0.01 }}
