@@ -14,7 +14,7 @@ export const PRICING_PERIODS: PricingPeriod[] = [
   {
     translationKey: 'pricelist.jan_apr',
     months: [0, 1, 2, 3],
-    rates: { standard: 70, extended: 60, monthly: 35 },
+    rates: { standard: 70, extended: 60, monthly: 40 },
   },
   {
     translationKey: 'pricelist.may',
@@ -44,7 +44,7 @@ export const PRICING_PERIODS: PricingPeriod[] = [
   {
     translationKey: 'pricelist.nov_dec',
     months: [10, 11],
-    rates: { standard: 70, extended: 60, monthly: 35 },
+    rates: { standard: 70, extended: 60, monthly: 40 },
   },
 ];
 

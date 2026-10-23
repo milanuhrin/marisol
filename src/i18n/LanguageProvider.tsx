@@ -167,7 +167,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'testimonials.go_to': 'Prejsť na recenziu',
 
     // Pricelist
-    'pricelist.title': 'Cenník na rok 2026',
+    'pricelist.title': 'Cenník platný od 1.10.2026',
     'pricelist.period': 'Obdobie',
     'pricelist.one_night': '1 noc*',
     'pricelist.ten_nights': '11+ nocí',
